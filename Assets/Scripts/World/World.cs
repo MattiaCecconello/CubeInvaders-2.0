@@ -399,6 +399,14 @@ public class World : MonoBehaviour
     }
 
     /// <summary>
+    /// Enemy rotate cube
+    /// </summary>
+    public void RotateByEnemy(int numberRotations, float rotationTime)
+    {
+        new WorldEnemyRotator(this).StartRandomize(numberRotations, rotationTime);
+    }
+
+    /// <summary>
     /// Returns the position in the world of the cell at these coordinates
     /// <param name="distanceFromWorld">distance from the cell position</param>
     /// </summary>
