@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
+using redd096;
 
 public class PlayerPlaceTurret : PlayerState
 {
     Coordinates coordinates;
+    bool pressedSelectCell;
 
-    public PlayerPlaceTurret(redd096.StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
+    public PlayerPlaceTurret(StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
     {
         this.coordinates = coordinates;
     }
@@ -22,8 +23,21 @@ public class PlayerPlaceTurret : PlayerState
     {
         base.Execution();
 
-        //select cell (in execution to use dead zone analogs)
-        SelectCell(controls.Gameplay.SelectCell.ReadValue<Vector2>());
+        //check if confirm turret
+        if (InputRedd096.GetButtonDown("Confirm Turret"))
+        {
+            PlaceTurret();
+            return;
+        }
+        //or deny turret
+        else if (InputRedd096.GetButtonDown("Deny Turret"))
+        {
+            StopPlaceTurret();
+            return;
+        }
+
+        //else select cell
+        SelectCell(InputRedd096.GetValue<Vector2>("Select Cell"));
     }
 
     public override void Exit()
@@ -34,64 +48,7 @@ public class PlayerPlaceTurret : PlayerState
         GameManager.instance.world.Cells[coordinates].HidePreview();
     }
 
-    #region inputs
-
-    bool pressedPlaceTurret;
-    bool pressedStopPlaceTurret;
-    bool pressedSelectCell;
-
-    protected override void AddInputs()
-    {
-        base.AddInputs();
-
-        controls.Gameplay.ConfirmTurret.started += PressedPlaceTurret;
-        controls.Gameplay.ConfirmTurret.canceled += PlaceTurret;
-        controls.Gameplay.DenyTurret.started += PressedStopPlaceTurret;
-        controls.Gameplay.DenyTurret.canceled += StopPlaceTurret;
-    }
-
-    protected override void RemoveInputs()
-    {
-        base.RemoveInputs();
-
-        controls.Gameplay.ConfirmTurret.started -= PressedPlaceTurret;
-        controls.Gameplay.ConfirmTurret.canceled -= PlaceTurret;
-        controls.Gameplay.DenyTurret.started -= PressedStopPlaceTurret;
-        controls.Gameplay.DenyTurret.canceled -= StopPlaceTurret;
-    }
-
-    void PressedPlaceTurret(InputAction.CallbackContext ctx)
-    {
-        pressedPlaceTurret = true;
-    }
-
-    void PlaceTurret(InputAction.CallbackContext ctx)
-    {
-        //do only on click
-        if (CheckClick(ref pressedPlaceTurret) == false)
-            return;
-
-        //place turret
-        GameManager.instance.world.Cells[coordinates].Interact();
-
-        //back to strategic state
-        player.SetState(new PlayerStrategic(player, coordinates));
-    }
-
-    void PressedStopPlaceTurret(InputAction.CallbackContext ctx)
-    {
-        pressedStopPlaceTurret = true;
-    }
-
-    void StopPlaceTurret(InputAction.CallbackContext ctx)
-    {
-        //do only on click
-        if (CheckClick(ref pressedStopPlaceTurret) == false)
-            return;
-
-        //back to strategic state
-        player.SetState(new PlayerStrategic(player, coordinates));
-    }
+    #region private API
 
     void SelectCell(Vector2 movement)
     {
@@ -138,4 +95,19 @@ public class PlayerPlaceTurret : PlayerState
     }
 
     #endregion
+
+    void PlaceTurret()
+    {
+        //place turret
+        GameManager.instance.world.Cells[coordinates].Interact();
+
+        //back to strategic state
+        player.SetState(new PlayerStrategic(player, coordinates));
+    }
+
+    void StopPlaceTurret()
+    {
+        //back to strategic state
+        player.SetState(new PlayerStrategic(player, coordinates));
+    }
 }

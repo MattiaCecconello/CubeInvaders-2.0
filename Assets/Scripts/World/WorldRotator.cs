@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using redd096;
-using UnityEngine.InputSystem;
 
 public class WorldRotator
 {
@@ -140,7 +139,7 @@ public class WorldRotator
     protected virtual bool SkipAnimation(float delta)
     {
         //if player pressed input to skip, if some time already passed, then skip animation
-        if (Keyboard.current.anyKey.wasPressedThisFrame && delta > 0.1f 
+        if (InputRedd096.GetButtonDown("Skip Animation") && delta > 0.1f 
             && PlayerWaitRotation.canSkipAnimation) //check rotation state already subscribed to onEndRotation event
         {
             Debug.Log("skip animation");

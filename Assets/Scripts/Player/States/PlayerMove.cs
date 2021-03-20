@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
+using redd096;
 
 public class PlayerMove : PlayerState
 {
     protected Coordinates coordinates;
 
-    public PlayerMove(redd096.StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
+    public PlayerMove(StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
     {
         //get previous coordinates
         this.coordinates = coordinates;
@@ -30,35 +30,17 @@ public class PlayerMove : PlayerState
         //set invert Y
         player.VirtualCam.m_YAxis.m_InvertInput = player.invertY;
 
-        //set max speed
-        if (player.Controls.Gameplay.MoveCamera.activeControl != null)
-        {
-            //if delta (so mouse movement) don't use deltaTime
-            if (player.Controls.Gameplay.MoveCamera.activeControl.name == "delta")
-            {
-                player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
-                player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
-            }
-            //normally, use deltaTime
-            else
-            {
-                player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX * Time.deltaTime;
-                player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY * Time.deltaTime;
-            }
-        }
-
         //move camera
-        player.VirtualCam.m_XAxis.m_InputAxisValue = player.Controls.Gameplay.MoveCamera.ReadValue<Vector2>().x;
-        player.VirtualCam.m_YAxis.m_InputAxisValue = player.Controls.Gameplay.MoveCamera.ReadValue<Vector2>().y;
+        MoveCamera(InputRedd096.GetActiveControlName("Move Camera"), InputRedd096.GetValue<Vector2>("Move Camera"));
 
         //when move camera, check if changed face
         CheckChangedFace();
 
         //rotate cube or select cell (check if keeping pressed to rotate)
-        if(controls.Gameplay.KeepPressedToRotate.phase == InputActionPhase.Started)
-            RotateCube(controls.Gameplay.RotateCube.ReadValue<Vector2>());
+        if (InputRedd096.GetButton("Keep Pressed To Rotate"))
+            RotateCube(InputRedd096.GetValue<Vector2>("Rotate Cube"));
         else
-            SelectCell(controls.Gameplay.SelectCell.ReadValue<Vector2>());
+            SelectCell(InputRedd096.GetValue<Vector2>("Select Cell"));
     }
 
     public override void Exit()
@@ -73,6 +55,27 @@ public class PlayerMove : PlayerState
 
     bool pressedSelectCell;
     bool pressedRotateCube;
+
+    void MoveCamera(string activeControlName, Vector2 input)
+    {
+        //set max speed
+        if (activeControlName == "delta")
+        {
+            //if delta (so mouse movement) don't use deltaTime
+            player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
+            player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
+        }
+        else
+        {
+            //normally, use deltaTime
+            player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX * Time.deltaTime;
+            player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY * Time.deltaTime;
+        }
+
+        //move camera
+        player.VirtualCam.m_XAxis.m_InputAxisValue = input.x;
+        player.VirtualCam.m_YAxis.m_InputAxisValue = input.y;
+    }
 
     void CheckChangedFace()
     {        

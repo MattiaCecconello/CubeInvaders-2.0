@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using redd096;
 using Cinemachine;
-using UnityEngine.InputSystem;
 
 [AddComponentMenu("Cube Invaders/Player")]
 public class Player : StateMachine
@@ -27,8 +26,8 @@ public class Player : StateMachine
     [SerializeField] float gamepadSpeedX = 150;
     [SerializeField] float gamepadSpeedY = 1;
     public bool invertY = false;
-    public float speedX => playerInput.currentControlScheme == Controls.KeyboardAndMouseScheme.name ? mouseSpeedX : gamepadSpeedX;
-    public float speedY => playerInput.currentControlScheme == Controls.KeyboardAndMouseScheme.name ? mouseSpeedY : gamepadSpeedY;
+    public float speedX => InputRedd096.IsCurrentControlScheme("KeyboardAndMouse") ? mouseSpeedX : gamepadSpeedX;
+    public float speedY => InputRedd096.IsCurrentControlScheme("KeyboardAndMouse") ? mouseSpeedY : gamepadSpeedY;
 
     [Header("Player")]
     [Range(0.1f, 0.9f)] public float deadZoneAnalogs = 0.6f;
@@ -37,8 +36,6 @@ public class Player : StateMachine
     [SerializeField] string currentState;
 
     public CinemachineFreeLook VirtualCam { get; private set; }
-    public NewControls Controls { get; private set; }
-    public PlayerInput playerInput { get; private set; }
 
     float currentResources;
     public float CurrentResources
@@ -59,10 +56,8 @@ public class Player : StateMachine
 
     void Start()
     {
-        //get virtual cam and player controls
+        //get virtual cam
         VirtualCam = FindObjectOfType<CinemachineFreeLook>();
-        Controls = new NewControls();
-        playerInput = GetComponent<PlayerInput>();
 
         //by default deactive cinemachine
         VirtualCam.enabled = false;
@@ -71,19 +66,42 @@ public class Player : StateMachine
         SetState(new PlayerPause(this));
         Utility.LockMouse(CursorLockMode.Locked);
 
-        AddInputs();
         AddEvents();
     }
 
     void OnDestroy()
     {
-        RemoveInputs();
         RemoveEvents();
     }
 
     void Update()
     {
         state?.Execution();
+
+        if (InputRedd096.GetButtonDown("Pause Button"))
+        {
+            //if state is place turret && press escape, doesn't pause (we use it to exit from this state)
+            if (state.GetType() == typeof(PlayerPlaceTurret) && InputRedd096.IsSameInput(InputRedd096.GetActiveControlName("Pause Button"), InputRedd096.GetActiveControlName("Deny Turret")))
+                return;
+
+            //if not ended game && time is running && is not end assault phase (showing panel to end level)
+            if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
+            {
+                SceneLoader.instance.PauseGame();
+            }
+        }
+        else if(InputRedd096.GetButtonDown("Resume Button"))
+        {
+            //only if pause state
+            if (state.GetType() != typeof(PlayerPause))
+                return;
+
+            //if not ended game && time is paused && is not end assault phase (showing panel to end level)
+            if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
+            {
+                SceneLoader.instance.ResumeGame();
+            }
+        }
     }
 
     public override void SetState(State stateToSet)
@@ -93,68 +111,6 @@ public class Player : StateMachine
         //for debug
         currentState = state?.ToString();
     }
-
-    #region inputs (pause and resume)
-
-    //used because pause and resume are called at same frame. Like this we wait when release button
-    bool alreadyPressed;
-
-    void AddInputs()
-    {
-        Controls.Enable();
-        Controls.Gameplay.PauseButton.started += PauseGame;
-        Controls.Gameplay.PauseButton.canceled += ResetAlreadyPaused;
-        Controls.Gameplay.ResumeButton.started += ResumeGame;
-        Controls.Gameplay.ResumeButton.canceled += ResetAlreadyPaused;
-    }
-
-    void RemoveInputs()
-    {
-        Controls.Disable();
-        Controls.Gameplay.PauseButton.started -= PauseGame;
-        Controls.Gameplay.PauseButton.canceled -= ResetAlreadyPaused;
-        Controls.Gameplay.ResumeButton.started -= ResumeGame;
-        Controls.Gameplay.ResumeButton.canceled -= ResetAlreadyPaused;
-    }
-
-    void PauseGame(InputAction.CallbackContext ctx)
-    {
-        //do only if not already pressed button
-        if (alreadyPressed)
-            return;
-
-        //if state is place turret && press escape, doesn't pause (we use it to exit from this state)
-        if (state.GetType() == typeof(PlayerPlaceTurret) && Controls.Gameplay.PauseButton.activeControl.name == Controls.Gameplay.DenyTurret.activeControl.name)
-            return;
-
-        //if not ended game && game is running && is not end assault phase (showing panel to end level)
-        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
-        {
-            SceneLoader.instance.PauseGame();
-            alreadyPressed = true;
-        }
-    }
-
-    void ResumeGame(InputAction.CallbackContext ctx)
-    {
-        //do only if not already pressed button
-        if (alreadyPressed)
-            return;
-
-        //if not ended game && game is paused && is not end assault phase (showing panel to end level)
-        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
-        {
-            SceneLoader.instance.ResumeGame();
-            alreadyPressed = true;
-        }
-    }
-
-    void ResetAlreadyPaused(InputAction.CallbackContext ctx)
-    {
-        alreadyPressed = false;
-    }
-
-    #endregion
 
     #region events
 
@@ -227,9 +183,6 @@ public class Player : StateMachine
 
     void OnEndGame(bool win)
     {
-        //stop control pause menu
-        Controls.Disable();
-
         //set pause state and show mouse
         SetState(new PlayerPause(this));
         Utility.LockMouse(CursorLockMode.None);
