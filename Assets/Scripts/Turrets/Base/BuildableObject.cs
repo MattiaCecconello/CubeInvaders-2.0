@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BuildableObject : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class BuildableObject : MonoBehaviour
         get
         {
             //if not preview and is active, return true - else, return false
-            //added Time.time > timer enemies effect
-            return !IsPreview && isActive && Time.time > TimerObjectDeactivated;
+            return !IsPreview && isActive;
         }
     }
 
@@ -98,6 +98,7 @@ public class BuildableObject : MonoBehaviour
 
     public System.Action<float> onDeactivateStart;
     public float TimerObjectDeactivated { get; private set; }    //timer setted by enemies effect, to deactivate this object
+    Coroutine deactiveCoroutine;
 
     public void Deactivate(float durationEffect)
     {
@@ -106,6 +107,25 @@ public class BuildableObject : MonoBehaviour
 
         //call event
         onDeactivateStart?.Invoke(durationEffect);
+
+        //start coroutine
+        if (deactiveCoroutine != null)
+            StopCoroutine(deactiveCoroutine);
+
+        deactiveCoroutine = StartCoroutine(DeactiveCoroutine());
+    }
+
+    IEnumerator DeactiveCoroutine()
+    {
+        //deactive turret
+        DeactivateTurret();
+
+        //wait
+        while (Time.time < TimerObjectDeactivated)
+            yield return null;
+
+        //reactive
+        ActivateTurret();
     }
 
     #endregion

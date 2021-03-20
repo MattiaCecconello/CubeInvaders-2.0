@@ -18,11 +18,11 @@ public class TurretShield : Turret
     bool isRotating;
 
     /*
-    V quando viene istanziata si crea lo scudo disattivato
-    V e si resetta (ancora la torretta è una preview, non è attiva)
+    V quando viene istanziata si crea lo scudo e si resetta (size a zero e vita massima dello scudo), perché ancora la torretta è una preview, non è attiva
+    V e ci si registra agli eventi
 
     V quando si attiva, si aggiunge alla coda
-    V e si prova ad attivare lo scudo
+    V prova ad attivare lo scudo (controlla se è la prossima in coda e non ha lo scudo rotto)
 
     V quando si disattiva, resetta lo scudo nel caso si riattivasse la torretta
     V e si toglie dalla coda
@@ -37,15 +37,16 @@ public class TurretShield : Turret
     V quando finisce di ruotare, si mette nella nuova coda
     V check se il primo della coda può attivare lo scudo, altrimenti lo rimpiazziamo
     V check se attivare lo scudo
+    V i check scritti sopra vanno fatti solo se la torretta è ancora attiva (non è stata disattivata da una skill o dall'assenza di un generatore)
     V e si resetta che la torretta non sta più ruotando, quindi controlla se qualcuno esce dalla coda
 
     V quando una torretta esce dalla coda, check se attivare lo scudo
-    V il check va fatto solo se non stiamo ruotando (questa torretta è uscita dalla coda)
-    V il check va fatto solo se siamo attivi (questa torretta è uscita quando è stata venduta)
+    V il check va fatto solo se non stiamo ruotando (altrimenti questa torretta è uscita dalla coda)
+    V il check va fatto solo se siamo attivi (altrimenti questa torretta è uscita quando è stata venduta, o è disattivata da una skill o dall'assenza di un generatore)
 
     V quando viene distrutto lo scudo, viene spostato in fondo alla coda
     V disattiva lo scudo
-    V lo scudo non potrà più essere utilizzato per questa wave (by default for current health <= 0)
+    V lo scudo non potrà più essere utilizzato per questa wave - by default cause when try to activate, check if is broken (current health <= 0) -
     */
 
     void Start()
@@ -105,12 +106,15 @@ public class TurretShield : Turret
     {
         base.OnEndRotation();
 
-        //add to queue and try to replace the first in the queue
-        AddToQueue();
-        TryReplaceFirstInQueue();
+        if (IsActive)
+        {
+            //add to queue and try to replace the first in the queue
+            AddToQueue();
+            TryReplaceFirstInQueue();
 
-        //try activate the shield
-        TryActivateShield();
+            //try activate the shield
+            TryActivateShield();
+        }
 
         //set isRotating
         isRotating = false;
