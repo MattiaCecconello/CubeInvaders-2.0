@@ -68,7 +68,11 @@
         /// </summary>
         public static bool IsSameInput(string inputName1, string inputName2)
         {
-            return InputManagerRedd096.instance.inputActionAsset.FindAction(inputName1).activeControl.name == InputManagerRedd096.instance.inputActionAsset.FindAction(inputName2).activeControl.name;
+            //if both with active control != null, else obviously is not same input
+            if (InputManagerRedd096.instance.inputActionAsset.FindAction(inputName1).activeControl != null && InputManagerRedd096.instance.inputActionAsset.FindAction(inputName2).activeControl != null)
+                return InputManagerRedd096.instance.inputActionAsset.FindAction(inputName1).activeControl.name == InputManagerRedd096.instance.inputActionAsset.FindAction(inputName2).activeControl.name;
+
+            return false;
         }
 
         /// <summary>

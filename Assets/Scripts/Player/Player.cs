@@ -76,32 +76,17 @@ public class Player : StateMachine
 
     void Update()
     {
+        //if pause game, do not do anything
+        if(PauseGame(InputRedd096.GetButtonDown("Pause Button")))
+        {
+            return;
+        }
+
+        //else check if resume game
+        ResumeGame(InputRedd096.GetButtonDown("Resume Button"));
+
+        //and update state
         state?.Execution();
-
-        if (InputRedd096.GetButtonDown("Pause Button"))
-        {
-            //if state is place turret && press escape, doesn't pause (we use it to exit from this state)
-            if (state.GetType() == typeof(PlayerPlaceTurret) && InputRedd096.IsSameInput(InputRedd096.GetActiveControlName("Pause Button"), InputRedd096.GetActiveControlName("Deny Turret")))
-                return;
-
-            //if not ended game && time is running && is not end assault phase (showing panel to end level)
-            if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
-            {
-                SceneLoader.instance.PauseGame();
-            }
-        }
-        else if(InputRedd096.GetButtonDown("Resume Button"))
-        {
-            //only if pause state
-            if (state.GetType() != typeof(PlayerPause))
-                return;
-
-            //if not ended game && time is paused && is not end assault phase (showing panel to end level)
-            if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
-            {
-                SceneLoader.instance.ResumeGame();
-            }
-        }
     }
 
     public override void SetState(State stateToSet)
@@ -186,6 +171,48 @@ public class Player : StateMachine
         //set pause state and show mouse
         SetState(new PlayerPause(this));
         Utility.LockMouse(CursorLockMode.None);
+    }
+
+    #endregion
+
+    #region private API
+
+    bool PauseGame(bool inputPause)
+    {
+        if(inputPause)
+        {
+            //if state is place turret && press escape, doesn't pause (we use it to exit from this state)
+            if (state.GetType() == typeof(PlayerPlaceTurret) && InputRedd096.IsSameInput("Pause Button", "Deny Turret"))
+                return false;
+
+            //if not ended game && time is running && is not end assault phase (showing panel to end level)
+            if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
+            {
+                SceneLoader.instance.PauseGame();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool ResumeGame(bool input)
+    {
+        if(input)
+        {
+            //only if pause state
+            if (state.GetType() != typeof(PlayerPause))
+                return false;
+
+            //if not ended game && time is paused && is not end assault phase (showing panel to end level)
+            if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
+            {
+                SceneLoader.instance.ResumeGame();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     #endregion
