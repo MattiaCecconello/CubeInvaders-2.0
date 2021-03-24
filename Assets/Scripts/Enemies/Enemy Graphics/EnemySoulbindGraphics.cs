@@ -4,6 +4,9 @@ using redd096;
 [AddComponentMenu("Cube Invaders/Enemy Graphics/Enemy Soulbind Graphics")]
 public class EnemySoulbindGraphics : MonoBehaviour
 {
+    [Header("SoulBind")]
+    [SerializeField] bool lookAtSoulBind = false;
+
     [Header("VFX")]
     [SerializeField] ParticleSystem particlesSpawnFirstSoulbind = default;
     [SerializeField] AudioStruct soundSpawnFirstSoulbind = default;
@@ -29,6 +32,13 @@ public class EnemySoulbindGraphics : MonoBehaviour
         {
             enemy.onSpawnSoulbind -= OnSpawnSoulbind;
         }
+    }
+
+    void FixedUpdate()
+    {
+        //look at soulbind
+        if(lookAtSoulBind)
+            transform.rotation = Quaternion.LookRotation(enemy.soulBind.transform.position - transform.position);
     }
 
     void OnSpawnSoulbind(Vector3 firstPosition, Quaternion firstRotation, Vector3 secondPosition, Quaternion secondRotation)

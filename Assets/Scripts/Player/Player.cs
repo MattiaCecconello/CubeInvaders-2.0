@@ -8,7 +8,7 @@ public class Player : StateMachine
     #region lock 60 fps
 
     [Header("Lock 60 FPS")]
-    [SerializeField] bool lock60FPS;
+    [SerializeField] bool lock60FPS = false;
 
     private void OnValidate()
     {
