@@ -24,6 +24,10 @@ public class MenuSystem : MonoBehaviour
     {
         foreach(MenuStruct levelButton in levelButtons)
         {
+            //skip not setted button
+            if (levelButton.button == null)
+                continue;
+
             //if no key, or load is succesfull
             bool isActive = string.IsNullOrWhiteSpace(levelButton.necessaryKey) || Load(levelButton.necessaryKey);
 
