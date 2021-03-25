@@ -18,4 +18,5 @@ MonoBehaviour:
     IgnorePreviousFacesAtSpawn: 0
     TimeBetweenSpawns: 0
     DistanceFromWorld: 0
-    EnemiesStructs: []
+    Enemies:
+    - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}

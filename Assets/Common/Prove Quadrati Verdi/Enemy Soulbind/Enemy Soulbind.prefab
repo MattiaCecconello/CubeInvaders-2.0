@@ -20,7 +20,7 @@ MonoBehaviour:
     y: 0
   shareHealth: 0
   killSoulbindOnDeath: 1
-  useOppositeFace: 1
+  useOppositeFace: 0
   sameCell: 1
   checkNoHitEnemies: 1
 --- !u!114 &5108049396857094920
@@ -35,10 +35,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a17d58ab74b1944ac3660c92802cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlesSpawnFirstSoulbind: {fileID: 0}
-  soundSpawnFirstSoulbind: {fileID: 0}
-  particlesSpawnSecondSoulbind: {fileID: 0}
-  soundSpawnSecondSoulbind: {fileID: 0}
+  particlesSpawnFirstSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
+  soundSpawnFirstSoulbind:
+    audioClip: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
+    volume: 0
+  particlesSpawnSecondSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
+  soundSpawnSecondSoulbind:
+    audioClip: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+    volume: 0
+--- !u!1 &7806833892014286635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6724077666069234956}
+  - component: {fileID: 3432049747336329583}
+  - component: {fileID: 7004047304510205797}
+  - component: {fileID: 3522549307519022236}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6724077666069234956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7806833892014286635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 6054031182743981224}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3432049747336329583
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7806833892014286635}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7004047304510205797
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7806833892014286635}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: c6a0039516cf2c745a90d1a783627898, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3522549307519022236
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7806833892014286635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5815022865668079179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,5 +199,10 @@ PrefabInstance:
 --- !u!1 &3849306090492092292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7338728851212345807, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+  m_PrefabInstance: {fileID: 5815022865668079179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6054031182743981224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 339776805562790627, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
   m_PrefabInstance: {fileID: 5815022865668079179}
   m_PrefabAsset: {fileID: 0}

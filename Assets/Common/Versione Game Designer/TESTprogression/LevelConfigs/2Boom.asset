@@ -20,6 +20,6 @@ MonoBehaviour:
   TurretsNeedGenerator: 0
   GeneratorActiveAllFace: 1
   LimitOfTurretsOnSameFace: 1
-  TimeBeforeDestroyTurretsOnSameFace: 2
+  TimeBeforeDestroyTurretsOnSameFace: 8
   OnlyIfSameType: 0
   CloseLineFeedback: 1
