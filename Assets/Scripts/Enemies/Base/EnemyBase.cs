@@ -6,6 +6,11 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float health = 100;
     [SerializeField] protected float speed = 1;
 
+    [Header("Resources")]
+    [SerializeField] protected float resourcesWhenKilledByShot = 1;
+    [SerializeField] protected float resourcesWhenKilledByShield = 0;
+    [SerializeField] protected float resourcesWhenHitWorld = 0;
+
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
 
@@ -46,6 +51,20 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void Die<T>(T hittedBy) where T : Component
     {
+        //add resources to player
+        if (hittedBy.GetType() == typeof(TurretShot))
+        {
+            GameManager.instance.player.CurrentResources += resourcesWhenKilledByShot;
+        }
+        else if(hittedBy.GetType() == typeof(Shield))
+        {
+            GameManager.instance.player.CurrentResources += resourcesWhenKilledByShield;
+        }
+        else if (hittedBy.GetType() == typeof(Cell))
+        {
+            GameManager.instance.player.CurrentResources += resourcesWhenHitWorld;
+        }
+
         //destroy this enemy
         Destroy(gameObject);
     }
