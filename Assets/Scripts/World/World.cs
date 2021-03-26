@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 #region enum & struct
 
@@ -85,6 +86,7 @@ public class World : MonoBehaviour
 
     [Header("Important")]
     public BiomesConfig biomesConfig;
+    [SerializeField] bool resetCube = true;
 
     public System.Action onEndRotation;
 
@@ -97,6 +99,10 @@ public class World : MonoBehaviour
     void Awake()
     {
         GenerateReferences();
+
+        //if not reset cube, try load
+        if (resetCube == false)
+            LoadCube();
     }
 
     void OnDestroy()
@@ -122,6 +128,23 @@ public class World : MonoBehaviour
             if (cell != null)
             {
                 Cells.Add(cell.coordinates, cell);
+            }
+        }
+    }
+
+    void LoadCube()
+    {
+        //load class
+        ClassToSave load = SaveLoadJSON.Load(worldConfig.name);
+
+        if (load != null)
+        {
+            //foreach cell
+            for(int i = 0; i < load.coordinates.Count; i++)
+            {
+                //if was destroyed, load a destroyed cell
+                if (load.isAlive[i] == false)
+                    Cells[load.coordinates[i]].LoadDestroyedCell();
             }
         }
     }

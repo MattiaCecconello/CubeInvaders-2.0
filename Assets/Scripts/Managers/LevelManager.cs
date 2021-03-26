@@ -106,6 +106,10 @@ public class LevelManager : MonoBehaviour
         //save using scene name
         MenuSystem.Save(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, win);
 
+        //if win level, save world
+        if(win)
+            GameManager.instance.SaveWorld();
+
         //call event
         onEndGame?.Invoke(win);
     }

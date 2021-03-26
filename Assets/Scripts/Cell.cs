@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/World/Cell")]
@@ -29,6 +30,7 @@ public class Cell : MonoBehaviour
 
     [Header("Debug")]
     public Coordinates coordinates;
+    [ReadOnly] public Coordinates startCoordinates;
 
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
@@ -42,6 +44,9 @@ public class Cell : MonoBehaviour
 
     void Awake()
     {
+        //save start coordinates
+        startCoordinates = coordinates;
+
         //if build at start, build turret 
         BuildAtStart();
     }
@@ -102,7 +107,7 @@ public class Cell : MonoBehaviour
         }
     }
 
-    void DestroyCell()
+    void DestroyCell(bool loaded = false)
     {
         IsAlive = false;
 
@@ -112,7 +117,9 @@ public class Cell : MonoBehaviour
         //remove biome
         ActiveRemoveOnDead(false);
 
-        onDestroyCell?.Invoke();
+        //call feedback only when loaded is false
+        if(loaded == false)
+            onDestroyCell?.Invoke();
     }
 
     void RecreateCell()
@@ -330,6 +337,15 @@ public class Cell : MonoBehaviour
         {
             GameManager.instance.levelManager.EndGame(false);
         }
+    }
+
+    /// <summary>
+    /// To call when load world and this cell was destroyed
+    /// </summary>
+    public void LoadDestroyedCell()
+    {
+        //destroy cell, but set is loaded
+        DestroyCell(true);
     }
 
     #endregion

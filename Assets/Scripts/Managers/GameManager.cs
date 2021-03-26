@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using redd096;
+using System.Collections.Generic;
 
 [AddComponentMenu("Cube Invaders/Manager/Game Manager")]
 [DefaultExecutionOrder(-100)]
 public class GameManager : Singleton<GameManager>
 {
+    [Header("Important")]
+    [SerializeField] bool canSaveWorld = true;
+
     public UIManager uiManager { get; private set; }
     public Player player { get; private set; }
     public World world { get; private set; }
@@ -21,7 +25,7 @@ public class GameManager : Singleton<GameManager>
         waveManager = FindObjectOfType<WaveManager>();
     }
 
-    #region public API
+    #region old, used from buttons UI
 
     public void UpdateLevel(LevelConfig levelConfig)
     {
@@ -53,6 +57,25 @@ public class GameManager : Singleton<GameManager>
     {
         //increase wave +1, than set wave
         SetWave(instance.waveManager.CurrentWave + 1);
+    }
+
+    #endregion
+
+    #region public API
+
+    public void SaveWorld()
+    {
+        //only if can save world
+        if (canSaveWorld == false)
+            return;
+
+        //create a list with every cell
+        List<Cell> cellsToSave = new List<Cell>();
+        foreach (Cell cell in world.Cells.Values)
+            cellsToSave.Add(cell);
+
+        //save
+        SaveLoadJSON.Save(world.worldConfig.name, new ClassToSave(cellsToSave));
     }
 
     #endregion
