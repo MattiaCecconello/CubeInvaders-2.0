@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 1
+  resourcesWhenKilledByShot: 1
+  resourcesWhenKilledByShield: 0
+  resourcesWhenHitWorld: 0
   coordinatesToAttack:
     face: 0
     x: 0
@@ -35,6 +38,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a17d58ab74b1944ac3660c92802cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookAtSoulBind: 0
   particlesSpawnFirstSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
   soundSpawnFirstSoulbind:
     audioClip: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
@@ -145,6 +149,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 662828375890962951, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7338728851212345807, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_Name
       value: Enemy Soulbind
@@ -193,8 +205,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - target: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
 --- !u!1 &3849306090492092292 stripped
 GameObject:
