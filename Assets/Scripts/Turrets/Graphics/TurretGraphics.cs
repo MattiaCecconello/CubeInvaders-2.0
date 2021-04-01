@@ -110,7 +110,7 @@ public class TurretGraphics : BuildableGraphics
 
     void SetLineColor(float delta)
     {
-        if (line.ContainsKey(turret.CellOwner.coordinates.face))
+        if (line.ContainsKey(turret.CellOwner.coordinates.face) && line[turret.CellOwner.coordinates.face] != null)
         {
             //set color of the line renderer on this face
             line[turret.CellOwner.coordinates.face].material.color = Color.Lerp(linePrefab.sharedMaterial.color, colorNoTurretsOnSameFace, delta);
@@ -121,6 +121,13 @@ public class TurretGraphics : BuildableGraphics
     {
         if (line.ContainsKey(face))
         {
+            //if line is destroyed, remove key and recreate line
+            if (line[face] == null)
+            {
+                line.Remove(face);
+                CreateLine(turrets);
+            }
+
             //get position of every turret
             List<Vector3> positions = new List<Vector3>();
             foreach (Turret t in turrets)
@@ -140,9 +147,16 @@ public class TurretGraphics : BuildableGraphics
 
     public void DestroyLine(EFace face)
     {
-        //deactive line
         if (line.ContainsKey(face))
         {
+            //if line is destroyed, remove key
+            if(line[face] == null)
+            {
+                line.Remove(face);
+                return;
+            }
+
+            //deactive line
             line[face].gameObject.SetActive(false);
         }
     }
