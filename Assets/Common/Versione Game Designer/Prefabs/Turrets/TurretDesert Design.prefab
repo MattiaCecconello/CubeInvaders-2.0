@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: delayShoot
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: shotSpawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 6915140966674930062}
     - target: {fileID: 154868810570998539, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -23,9 +27,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 63e70a8c588521b4d87b5dd69f6f1ee2, type: 2}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: objectToRotate
+      value: 
+      objectReference: {fileID: 6915140966674930062}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: linePosition
+      value: 
+      objectReference: {fileID: 6915140966674930062}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: baseToRotate
+      value: 
+      objectReference: {fileID: 4634717462426181190}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
-      value: TurretDesert 1
+      value: TurretDesert Design
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847546852766523752, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_LocalPosition.x
@@ -73,7 +93,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9026065299652409340, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+--- !u!4 &4634717462426181190 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4307658412770666545, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 8905360808660006519}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6915140966674930062 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2621577029701890041, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 8905360808660006519}
+  m_PrefabAsset: {fileID: 0}
