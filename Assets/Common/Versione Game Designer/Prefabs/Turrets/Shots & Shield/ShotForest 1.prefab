@@ -91,7 +91,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5102132534195509726}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -411,6 +411,10 @@ PrefabInstance:
       propertyPath: areaEffectAlsoOnAutodestruction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6942024394601423785, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
+      propertyPath: trail
+      value: 
+      objectReference: {fileID: 2041787935888799137}
     - target: {fileID: 7794059173458503746, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
       propertyPath: m_Name
       value: ShotForest 1
