@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    resourcesMax: 6
+    resourcesMax: 10
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 5
     DistanceFromWorld: 20
@@ -32,7 +32,7 @@ MonoBehaviour:
     - {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
     - {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    resourcesMax: 6
+    resourcesMax: 0
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 2
     DistanceFromWorld: 20

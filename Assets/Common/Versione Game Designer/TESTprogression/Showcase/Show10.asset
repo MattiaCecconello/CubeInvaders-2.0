@@ -25,7 +25,7 @@ MonoBehaviour:
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    resourcesMax: 5
+    resourcesMax: 0
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 4
     DistanceFromWorld: 20
@@ -46,7 +46,7 @@ MonoBehaviour:
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 1759264677936211684, guid: 0f568b49b437f6641838637e69948122, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    resourcesMax: 3
+    resourcesMax: 0
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 4
     DistanceFromWorld: 20
