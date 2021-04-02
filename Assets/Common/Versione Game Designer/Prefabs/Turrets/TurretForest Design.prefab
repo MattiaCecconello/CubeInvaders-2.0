@@ -23,12 +23,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222145157857609860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.225, y: 0.487, z: -0.102}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70710677, y: -1.9525532e-17, z: 1.9525534e-17, w: 0.7071069}
+  m_LocalPosition: {x: -0.0038771406, y: -0.00057944143, z: 0.19107455}
+  m_LocalScale: {x: 0.5, y: 0.4999999, z: 0.4999999}
   m_Children: []
-  m_Father: {fileID: 7716389013822844008}
-  m_RootOrder: 3
+  m_Father: {fileID: 2631364458102454292}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4546572821488001596
 GameObject:
@@ -53,12 +53,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4546572821488001596}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.209, y: 0.487, z: -0.102}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.70710677, y: -1.9525532e-17, z: 1.9525534e-17, w: 0.7071069}
+  m_LocalPosition: {x: -0.0023421496, y: -0.00057944143, z: 0.19107443}
+  m_LocalScale: {x: 0.5, y: 0.4999999, z: 0.4999999}
   m_Children: []
-  m_Father: {fileID: 7716389013822844008}
-  m_RootOrder: 2
+  m_Father: {fileID: 489560291824067667}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5623002573002463558
 PrefabInstance:
@@ -221,6 +221,16 @@ Transform:
 --- !u!4 &1654439463382167084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6412374771729921898, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 5623002573002463558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &489560291824067667 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5243227293415128341, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 5623002573002463558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2631364458102454292 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7677677508751499602, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
   m_PrefabInstance: {fileID: 5623002573002463558}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2830213938489731141 stripped
