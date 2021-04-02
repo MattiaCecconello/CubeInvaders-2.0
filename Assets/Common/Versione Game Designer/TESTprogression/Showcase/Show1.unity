@@ -708,7 +708,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220346895}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4552,7 +4552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -230.89996, y: -100}
+  m_AnchoredPosition: {x: -230.89996, y: -83.6478}
   m_SizeDelta: {x: 305.93787, y: 403.7311}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1378759587
@@ -4590,9 +4590,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "CONTROLS:\nMouse: rotate the camera\nWASD: move the selector \nMouse Hold
     Left Click + WASD: rotate the cube\n\nSPACE: enter Build Mode\n\t|-SPACE: build
-    turrets on the colored cells\nESC: to exit Build Mode\n\n***Test them a little***\n\nHOLD
-    E: start Assault Phase\n\n\n___________________________\nThe green turret shoots
-    enemies"
+    turrets on the colored cells\nATTENTION: Built turrets cannot be removed!\n\nESC:
+    to exit Build Mode\n\n***Test them a little***\n\nHOLD E: start Assault Phase\n\n\n___________________________\nThe
+    green turret shoots enemies"
 --- !u!222 &1378759588
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7677,11 +7677,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4141321910947719412, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017203547
+      value: -0.000000017203536
       objectReference: {fileID: 0}
     - target: {fileID: 4141321910947719412, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.1297545e-10
+      value: -3.1297526e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4141321910947719412, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -7745,11 +7745,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4141321912506538154, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017328938
+      value: 0.000000017328842
       objectReference: {fileID: 0}
     - target: {fileID: 4141321912506538154, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -6.2988853e-10
+      value: 6.298849e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4141321912506538154, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.x
