@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 544917859407743568, guid: 67770a00676249843a219a3c065d5a40, type: 3}
+      propertyPath: turretToCreate
+      value: 
+      objectReference: {fileID: 1011887737371601664, guid: 36fbb68017bc14b44b0c38b287ea2163, type: 3}
     - target: {fileID: 1021961826106364913, guid: 67770a00676249843a219a3c065d5a40, type: 3}
       propertyPath: m_IsActive
       value: 0

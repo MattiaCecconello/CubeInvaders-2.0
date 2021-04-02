@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: 2023740628721856583, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: turretToCreate
       value: 
-      objectReference: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
+      objectReference: {fileID: 7142474919267577014, guid: 3920b23598a45e14198aab6f2a7f5e7e, type: 3}
     - target: {fileID: 2355013907607203371, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
