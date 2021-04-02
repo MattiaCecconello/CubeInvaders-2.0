@@ -16,7 +16,9 @@ MonoBehaviour:
   baseToRotate: {fileID: 0}
   effectColor: {r: 0, g: 1, b: 1, a: 1}
   buildVFX: {fileID: 9077197156876236203, guid: efcda9f521d4cac46a21671808dd3bf5, type: 3}
-  buildAudio: {fileID: 8300000, guid: e34147ac2ccffc346bd1f64225e6f22c, type: 3}
+  buildAudio:
+    audioClip: {fileID: 0}
+    volume: 0
   objectToColor: {fileID: 7651475957941394624}
   colorTimeBeforeDestroy: {r: 1, g: 0, b: 0, a: 1}
   linePrefab: {fileID: 1408518994515950534, guid: 1ac4076fd79dde74ba1e918ba4bbeed9, type: 3}
@@ -98,7 +100,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fd63445399c596b4d86350d3301bc793, type: 2}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
-      value: TurretMushroom 1
+      value: TurretMushroom Design
+      objectReference: {fileID: 0}
+    - target: {fileID: 6726192205966826368, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_LocalPosition.x
@@ -146,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9026065299652409340, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
