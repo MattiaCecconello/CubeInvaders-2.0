@@ -285,7 +285,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RED
+  m_Text: Twin Suns
 --- !u!222 &62072054
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1251,7 +1251,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ...but Rotating
+  m_Text: All For One
 --- !u!222 &597875913
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2016,7 +2016,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Agents of SHIELD
+  m_Text: And One For The Shield
 --- !u!222 &1027554128
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2306,9 +2306,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Enemies
-
-    on the Horizon'
+  m_Text: We have a problem
 --- !u!222 &1100753120
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2598,7 +2596,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Twin Suns
+  m_Text: Riko
 --- !u!222 &1442194223
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3216,18 +3214,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 50
+    m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Just the Beginning
+  m_Text: Trust Us
 --- !u!222 &1838671029
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3306,7 +3304,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Slowly...
+  m_Text: Slowly
 --- !u!222 &1843099888
 CanvasRenderer:
   m_ObjectHideFlags: 0
