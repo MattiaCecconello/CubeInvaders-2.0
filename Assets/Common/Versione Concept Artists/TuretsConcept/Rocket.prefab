@@ -7,10 +7,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 980804014164528564, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: objectToRotate
+      value: 
+      objectReference: {fileID: 3440232232974986247}
+    - target: {fileID: 980804014164528564, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: baseToRotate
+      value: 
+      objectReference: {fileID: 5999592063253782515}
+    - target: {fileID: 1378590980641829785, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: shotPrefab
+      value: 
+      objectReference: {fileID: 4905811305150014882, guid: 76b7cba32d2bb1946bbd863c89ec76a6, type: 3}
+    - target: {fileID: 1378590980641829785, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: delayShoot
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257001581633139542, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257001581633139542, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257001581633139542, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5175332855094573583, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5444388230559814130, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100006, guid: 6296e48663fd7ad46b1a2af507f871cf, type: 3}
     - target: {fileID: 6484417618836974220, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
       propertyPath: m_Name
       value: Rocket
@@ -65,3 +97,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+--- !u!4 &3440232232974986247 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3644933021464769694, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+  m_PrefabInstance: {fileID: 2101861304555608217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5999592063253782515 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5650217124309993322, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+  m_PrefabInstance: {fileID: 2101861304555608217}
+  m_PrefabAsset: {fileID: 0}

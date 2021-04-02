@@ -15,270 +15,270 @@ MonoBehaviour:
   Waves:
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
     resourcesMax: 42069
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
+    resourcesMax: 42069
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 20
     Enemies:
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
     - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
