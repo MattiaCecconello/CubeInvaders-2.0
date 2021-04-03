@@ -399,9 +399,9 @@ public class World : MonoBehaviour
     /// <param name="coordinates">coordinates to rotate</param>
     /// <param name="lookingFace">rotation of the camera</param>
     /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
-    public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection)
+    public void PlayerRotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime)
     {
-        worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
+        worldRotator.PlayerRotate(new Coordinates[1] { coordinates }, lookingFace, rotateDirection, rotationTime);
     }
 
     /// <summary>
@@ -410,9 +410,9 @@ public class World : MonoBehaviour
     /// <param name="coordinates">coordinates to rotate</param>
     /// <param name="lookingFace">rotation of the camera</param>
     /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
-    public void Rotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection)
+    public void PlayerRotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime)
     {
-        worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
+        worldRotator.PlayerRotate(coordinates, lookingFace, rotateDirection, rotationTime);
     }
 
     /// <summary>
@@ -428,7 +428,18 @@ public class World : MonoBehaviour
     /// </summary>
     public void RotateByEnemy(int numberRotations, float rotationTime)
     {
-        new WorldEnemyRotator(this).StartRandomize(numberRotations, rotationTime);
+        //for n times, rotate row or column
+        for (int i = 0; i < numberRotations; i++)
+        {
+            //randomize rotation
+            EFace face = (EFace)Random.Range(0, 6);
+            int x = Random.Range(0, worldConfig.NumberCells);
+            int y = Random.Range(0, worldConfig.NumberCells);
+            ERotateDirection randomDirection = (ERotateDirection)Random.Range(0, 4);
+
+            //effective rotation
+            worldRotator.Rotate(new Coordinates(face, x, y), EFace.front, randomDirection, rotationTime);
+        }
     }
 
     /// <summary>

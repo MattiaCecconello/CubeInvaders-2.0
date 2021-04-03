@@ -162,21 +162,22 @@ public class PlayerMove : PlayerState
 
     void DoRotation(ERotateDirection rotateDirection)
     {
-        //if selector is greater, rotate more cells
-        if (GameManager.instance.levelManager.levelConfig.SelectorSize > 1)
+        //do for number of rotations
+        for (int i = 0; i < GameManager.instance.levelManager.levelConfig.NumberRotations; i++)
         {
-            List<Coordinates> coordinatesToRotate = RotateMoreCells(rotateDirection);   //get list of coordinates to rotate
-            coordinatesToRotate.Add(coordinates);                                       //add our coordinates
-            GameManager.instance.world.Rotate(coordinatesToRotate.ToArray(), WorldUtility.LateralFace(transform), rotateDirection);
+            //if selector is greater, rotate more cells
+            if (GameManager.instance.levelManager.levelConfig.SelectorSize > 1)
+            {
+                List<Coordinates> coordinatesToRotate = RotateMoreCells(rotateDirection);   //get list of coordinates to rotate
+                coordinatesToRotate.Add(coordinates);                                       //add our coordinates
+                GameManager.instance.world.PlayerRotate(coordinatesToRotate.ToArray(), WorldUtility.LateralFace(transform), rotateDirection, GameManager.instance.world.worldConfig.RotationTime);
+            }
+            //else rotate only this cell
+            else
+            {
+                GameManager.instance.world.PlayerRotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection, GameManager.instance.world.worldConfig.RotationTime);
+            }
         }
-        //else rotate only this cell
-        else
-        {
-            GameManager.instance.world.Rotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection);
-        }
-
-        //change state
-        player.SetState(new PlayerWaitRotation(player, coordinates, WorldUtility.LateralFace(transform), rotateDirection));
     }
 
     List<Coordinates> RotateMoreCells(ERotateDirection rotateDirection)

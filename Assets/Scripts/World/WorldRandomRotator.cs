@@ -39,7 +39,7 @@ public class WorldRandomRotator : WorldRotator
             ERotateDirection randomDirection = (ERotateDirection)Random.Range(0, 4);
 
             //effective rotation
-            Rotate(new Coordinates(face, x, y), EFace.front, randomDirection);
+            Rotate(new Coordinates(face, x, y), EFace.front, randomDirection, world.randomWorldConfig.RotationTime);
 
             //wait until the end of the rotation
             OnStartRotation();
@@ -73,22 +73,10 @@ public class WorldRandomRotator : WorldRotator
 
     #region override world rotator
 
-    protected override float GetRotationTime()
-    {
-        //use random rotation time
-        return world.randomWorldConfig.RotationTime;
-    }
-
     protected override float GetAnimationCurveValue(float delta)
     {
         //use random rotation animation curve
         return world.randomWorldConfig.RotationAnimationCurve.Evaluate(delta);
-    }
-
-    protected override bool SkipAnimation(float delta)
-    {
-        //can't skip random rotation
-        return false;
     }
 
     #endregion
