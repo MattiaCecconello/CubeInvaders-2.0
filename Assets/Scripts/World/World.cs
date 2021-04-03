@@ -268,7 +268,6 @@ public class World : MonoBehaviour
         //set it
         Cells.Add(coordinates, cell);
         cell.coordinates = coordinates;
-        cell.SelectModel(worldConfig.NumberCells);
     }
 
     Cell CreateCell(Coordinates coordinates, Vector3 eulerRotation)
