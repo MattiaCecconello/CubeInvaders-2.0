@@ -128,6 +128,9 @@ public class World : MonoBehaviour
             if (cell != null)
             {
                 Cells.Add(cell.coordinates, cell);
+
+                //save start coordinates
+                cell.startCoordinates = cell.coordinates;
             }
         }
     }

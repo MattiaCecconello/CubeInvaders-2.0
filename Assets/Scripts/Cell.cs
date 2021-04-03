@@ -44,9 +44,6 @@ public class Cell : MonoBehaviour
 
     void Awake()
     {
-        //save start coordinates
-        startCoordinates = coordinates;
-
         //if build at start, build turret 
         BuildAtStart();
     }
