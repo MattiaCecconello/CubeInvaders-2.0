@@ -28,7 +28,7 @@ PrefabInstance:
     - target: {fileID: 980804014164528564, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
       propertyPath: baseToRotate
       value: 
-      objectReference: {fileID: 2259019261597531425}
+      objectReference: {fileID: 6000828365523320222}
     - target: {fileID: 980804014164528564, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
       propertyPath: objectToRotate
       value: 
@@ -108,9 +108,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6484417618836974220, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
   m_PrefabInstance: {fileID: 677880189280981985}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2259019261597531425 stripped
+--- !u!4 &6000828365523320222 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1599330357245062848, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6498529241184136831, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
   m_PrefabInstance: {fileID: 677880189280981985}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &675047242854952680 stripped
