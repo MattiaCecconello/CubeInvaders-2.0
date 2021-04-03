@@ -97,7 +97,7 @@ public class TurretGraphics : BuildableGraphics
     {
         EFace face = turret.CellOwner.coordinates.face;
 
-        //instantiate line prefab if null and save normal color
+        //instantiate line prefab if null
         if (line.ContainsKey(face) == false)
         {
             line.Add(face, Instantiate(linePrefab));
