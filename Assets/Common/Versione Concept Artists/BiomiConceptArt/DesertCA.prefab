@@ -10,19 +10,23 @@ PrefabInstance:
     - target: {fileID: 77185304347773692, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 7928202848341674667, guid: f152540e451b6ee458a1c0c7edffab0a, type: 3}
+      objectReference: {fileID: 2100000, guid: 0b493958f2c96264e9be9ce791879262, type: 2}
+    - target: {fileID: 816310849502392958, guid: 8f288672954559845b17ea665e90a84a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2023740628721856583, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: center
       value: 
-      objectReference: {fileID: 5383703512716278122}
+      objectReference: {fileID: 0}
     - target: {fileID: 2023740628721856583, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: side
       value: 
-      objectReference: {fileID: 5383703512716278122}
+      objectReference: {fileID: 0}
     - target: {fileID: 2023740628721856583, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: angle
       value: 
-      objectReference: {fileID: 5383703512716278122}
+      objectReference: {fileID: 0}
     - target: {fileID: 2023740628721856583, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: turretToCreate
       value: 
@@ -71,10 +75,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2373743506087021438, guid: 8f288672954559845b17ea665e90a84a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c2a45df847e510e4f806628e13153959, type: 2}
     - target: {fileID: 2410063353850989909, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2500237455957315200, guid: 8f288672954559845b17ea665e90a84a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 60647c1e0bbbe054bbb3c04ade74257f, type: 2}
     - target: {fileID: 2564208569407940298, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -87,6 +99,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DesertCA
       objectReference: {fileID: 0}
+    - target: {fileID: 3696388303636741693, guid: 8f288672954559845b17ea665e90a84a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c2508372468621d4ea923b1366f1d6ba, type: 2}
+    - target: {fileID: 4377012221298033716, guid: 8f288672954559845b17ea665e90a84a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 38126c4be359c5948a7604a2f6278074, type: 2}
     - target: {fileID: 5075896048873888910, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -105,12 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 38126c4be359c5948a7604a2f6278074, type: 2}
     - target: {fileID: 9000417518377490485, guid: 8f288672954559845b17ea665e90a84a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.02
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f288672954559845b17ea665e90a84a, type: 3}
---- !u!1 &5383703512716278122 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2410063353850989909, guid: 8f288672954559845b17ea665e90a84a, type: 3}
-  m_PrefabInstance: {fileID: 7765474645393830975}
-  m_PrefabAsset: {fileID: 0}
