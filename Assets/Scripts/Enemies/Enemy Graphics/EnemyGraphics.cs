@@ -35,6 +35,7 @@ public class EnemyGraphics : MonoBehaviour
         if (enemy)
         {
             enemy.onGetDamage -= OnGetDamage;
+            enemy.onEnemyDeath -= OnEnemyDeath;
         }
     }
 

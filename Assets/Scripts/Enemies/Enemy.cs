@@ -39,15 +39,12 @@ public class Enemy : EnemyBase
         base.FixedUpdate();
     }
 
-    protected virtual void OnDestroy()
-    {
-        //be sure to remove event
-        onEnemyDeath = null;
-    }
-
     public override void Die<T>(T hittedBy)
     {
         base.Die(hittedBy);
+
+        //call wave manager
+        GameManager.instance.waveManager.OnEnemyDeath(this);
 
         //call event
         onEnemyDeath?.Invoke(this);

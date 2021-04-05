@@ -103,19 +103,6 @@ public class WaveManager : MonoBehaviour
             StopCoroutine(wave_coroutine);
     }
 
-    void OnEnemyDeath(Enemy enemy)
-    {
-        //remove from the list
-        if (enemies.Contains(enemy))
-            enemies.Remove(enemy);
-
-        //if there are no other enemies, end wave
-        if(enemies.Count <= 0)
-        {
-            EndWave();
-        }
-    }
-
     #endregion
 
     #region private API
@@ -196,11 +183,23 @@ public class WaveManager : MonoBehaviour
         Enemy enemy = Instantiate(enemyPrefab, transform);
         enemy.gameObject.SetActive(false);
 
-        //save in the list and add to the event
+        //save in the list
         enemies.Add(enemy);
-        enemy.onEnemyDeath += OnEnemyDeath;
 
         return enemy;
+    }
+
+    public void OnEnemyDeath(Enemy enemy)
+    {
+        //remove from the list
+        if (enemies.Contains(enemy))
+            enemies.Remove(enemy);
+
+        //if there are no other enemies, end wave
+        if (enemies.Count <= 0 && GameManager.instance.levelManager.CurrentPhase == EPhase.assault)
+        {
+            EndWave();
+        }
     }
 
     #endregion
