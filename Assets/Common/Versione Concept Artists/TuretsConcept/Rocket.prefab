@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: baseToRotate
       value: 
       objectReference: {fileID: 3465658549622664143}
+    - target: {fileID: 980804014164528564, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
+      propertyPath: buildVFX
+      value: 
+      objectReference: {fileID: 2295486064368261484, guid: 8cb76ccec2329d64dbbbaea73d41b12f, type: 3}
     - target: {fileID: 1378590980641829785, guid: 2a11ca150412f0c4c8c3db86fab0e86d, type: 3}
       propertyPath: shotPrefab
       value: 
