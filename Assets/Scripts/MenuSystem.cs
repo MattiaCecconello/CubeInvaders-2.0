@@ -31,6 +31,7 @@ public class MenuSystem : MonoBehaviour
             //if no key, or load is succesfull
             bool isActive = string.IsNullOrWhiteSpace(levelButton.necessaryKey) || Load(levelButton.necessaryKey);
 
+            //if not active
             if(isActive == false)
             {
                 //set interactable
@@ -44,10 +45,6 @@ public class MenuSystem : MonoBehaviour
                 //remove event
                 levelButton.button.onClick = new Button.ButtonClickedEvent();
             }
-
-            //if not active, remove event
-            if (isActive == false)
-                levelButton.button.onClick = new Button.ButtonClickedEvent();
         }
     }
 
@@ -81,5 +78,20 @@ public class MenuSystem : MonoBehaviour
     public static void DeleteAll()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    /// <summary>
+    /// Unlock every level
+    /// </summary>
+    public void UnlockEveryLevel()
+    {
+        //save every necessary key
+        foreach (MenuStruct levelButton in levelButtons)
+        {
+            Save(levelButton.necessaryKey, true);
+        }
+
+        //then reload scene
+        SceneLoader.instance.RestartGame();
     }
 }
