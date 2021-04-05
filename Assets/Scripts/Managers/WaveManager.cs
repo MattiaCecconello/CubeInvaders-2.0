@@ -137,21 +137,25 @@ public class WaveManager : MonoBehaviour
         //current wave
         WaveStruct wave = waveConfig.Waves[CurrentWave];
 
+        //enemies to spawn
+        List<EnemyStruct> enemiesToSpawn = new List<EnemyStruct>();
+
         //foreach enemy in this wave, instantiate but deactivate
-        foreach (Enemy enemy in wave.Enemies)
+        foreach (EnemyStruct enemyStruct in wave.Enemies)
         {
-            InstantiateNewEnemy(enemy);
+            Enemy enemy = InstantiateNewEnemy(enemyStruct.enemy);
+
+            //add to list enemies to spawn
+            enemiesToSpawn.Add(new EnemyStruct(enemy, enemyStruct.enemyTimer));
+
             yield return null;
         }
-
-        //enemies copy(copy because when enemy is killed, it's removed from list)
-        List<Enemy> enemiesCopy = enemies.CreateCopy();
 
         //queue to not spawn on same face
         Queue<EFace> facesQueue = new Queue<EFace>();
 
         //for every enemy
-        foreach (Enemy enemy in enemiesCopy)
+        foreach (EnemyStruct enemyStruct in enemiesToSpawn)
         {
             //randomize coordinates to attack
             EFace face = WorldUtility.GetRandomFace(facesQueue, waveConfig.Waves[CurrentWave].IgnorePreviousFacesAtSpawn);
@@ -165,8 +169,8 @@ public class WaveManager : MonoBehaviour
             GameManager.instance.world.GetPositionAndRotation(coordinatesToAttack, waveConfig.Waves[CurrentWave].DistanceFromWorld, out position, out rotation);
 
             //set enemy position and rotation, then activate
-            enemy.transform.position = position;
-            enemy.transform.rotation = rotation;
+            enemyStruct.enemy.transform.position = position;
+            enemyStruct.enemy.transform.rotation = rotation;
 
             //instantiate portal at position and rotation
             if (GameManager.instance.levelManager.generalConfig.PortalPrefab)
@@ -175,10 +179,10 @@ public class WaveManager : MonoBehaviour
             }
 
             //set enemy destination and activate
-            enemy.Init(coordinatesToAttack);
+            enemyStruct.enemy.Init(coordinatesToAttack);
 
             //wait for next enemy
-            yield return new WaitForSeconds(wave.TimeBetweenSpawns);
+            yield return new WaitForSeconds(wave.TimeBetweenSpawns + enemyStruct.enemyTimer);
         }
     }
 
