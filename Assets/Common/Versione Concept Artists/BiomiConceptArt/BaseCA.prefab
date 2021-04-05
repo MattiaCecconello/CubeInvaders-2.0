@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150faf478d520af43bce47cf4118679b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
+  rotationParticlePrefab: {fileID: 6531257405417519565, guid: 5713d2d1b74b18e49973fa38be0c51cf, type: 3}
   rotationSound:
     audioClip: {fileID: 0}
     volume: 0
