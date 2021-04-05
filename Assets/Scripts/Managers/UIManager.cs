@@ -172,8 +172,9 @@ public class UIManager : MonoBehaviour
         float size = GameManager.instance.world.worldConfig.CellsSize;
         selector.transform.localScale = new Vector3(size, size, size);
 
-        //position of our cell
+        //position and rotation of our cell
         selector.transform.position = coordinates.position;
+        selector.transform.rotation = coordinates.rotation;
 
         //active selector
         selector.SetActive(true);
@@ -195,6 +196,7 @@ public class UIManager : MonoBehaviour
         position += MoveSelector(false, coordinates);
 
         multipleSelector.transform.position = position;
+        multipleSelector.transform.rotation = coordinates.rotation;
 
         //active selector
         multipleSelector.SetActive(true);
