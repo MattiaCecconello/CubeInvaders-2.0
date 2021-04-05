@@ -30,6 +30,7 @@ public struct Coordinates
     public int y;
 
     public Vector3 position => GameManager.instance.world.CoordinatesToPosition(this, 0);
+    public Quaternion rotation => GameManager.instance.world.CoordinatesToRotation(this);
 
     public Coordinates(EFace face, int x, int y)
     {
@@ -217,10 +218,10 @@ public class World : MonoBehaviour
             for (int y = 0; y < worldConfig.NumberCells; y++)
             {
                 //front
-                CreateAndSetCell(new Vector3(0, 180, 0), new Coordinates(EFace.front, x, y));
+                CreateAndSetCell(new Coordinates(EFace.front, x, y));
 
                 //back
-                CreateAndSetCell(new Vector3(0, 0, 0), new Coordinates(EFace.back, x, y));
+                CreateAndSetCell(new Coordinates(EFace.back, x, y));
             }
         }
     }
@@ -232,10 +233,10 @@ public class World : MonoBehaviour
             for (int y = 0; y < worldConfig.NumberCells; y++)
             {
                 //right
-                CreateAndSetCell(new Vector3(0, 90, 0), new Coordinates(EFace.right, z, y));
+                CreateAndSetCell(new Coordinates(EFace.right, z, y));
 
                 //left
-                CreateAndSetCell(new Vector3(0, -90, 0), new Coordinates(EFace.left, z, y));
+                CreateAndSetCell(new Coordinates(EFace.left, z, y));
             }
         }
     }
@@ -248,10 +249,10 @@ public class World : MonoBehaviour
             for (int z = 0; z < worldConfig.NumberCells; z++)
             {
                 //up
-                CreateAndSetCell(new Vector3(-90, 180, 0), new Coordinates(EFace.up, x, z));
+                CreateAndSetCell(new Coordinates(EFace.up, x, z));
 
                 //down
-                CreateAndSetCell(new Vector3(90, 180, 0), new Coordinates(EFace.down, x, z));
+                CreateAndSetCell(new Coordinates(EFace.down, x, z));
             }
         }
     }
@@ -260,23 +261,22 @@ public class World : MonoBehaviour
 
     #region create cell
 
-    void CreateAndSetCell(Vector3 eulerRotation, Coordinates coordinates)
+    void CreateAndSetCell(Coordinates coordinates)
     {
         //create cell
-        Cell cell = CreateCell(coordinates, eulerRotation);
+        Cell cell = CreateCell(coordinates);
 
         //set it
         Cells.Add(coordinates, cell);
         cell.coordinates = coordinates;
     }
 
-    Cell CreateCell(Coordinates coordinates, Vector3 eulerRotation)
+    Cell CreateCell(Coordinates coordinates)
     {
         //create and set position and rotation
         Cell cell = InstantiateCellBasedOnFace(coordinates.face);
         cell.transform.position = CoordinatesToPosition(coordinates, 0);
-        cell.transform.eulerAngles = eulerRotation;
-        cell.transform.Rotate(RotateAngleOrSide(coordinates), Space.Self);
+        cell.transform.rotation = CoordinatesToRotation(coordinates);
 
         //set scale
         float size = worldConfig.CellsSize;
@@ -323,52 +323,6 @@ public class World : MonoBehaviour
         }
 
         return null;
-    }
-
-    Vector3 RotateAngleOrSide(Coordinates coordinates)
-    {
-        //left
-        if (coordinates.x <= 0)
-        {
-            //down
-            if (coordinates.y <= 0)
-            {
-                return new Vector3(0, 0, 180);
-            }
-            //center or up
-            else
-            {
-                return new Vector3(0, 0, -90);
-            }
-        }
-        //right
-        else if (coordinates.x >= worldConfig.NumberCells - 1)
-        {
-            //up
-            if (coordinates.y >= worldConfig.NumberCells - 1)
-            {
-                return Vector3.zero;
-            }
-            //center or down
-            else
-            {
-                return new Vector3(0, 0, 90);
-            }
-        }
-        //center
-        else
-        {
-            //down
-            if (coordinates.y <= 0)
-            {
-                return new Vector3(0, 0, 180);
-            }
-            //center or up
-            else
-            {
-                return Vector3.zero;
-            }
-        }
     }
 
     #endregion
@@ -493,6 +447,28 @@ public class World : MonoBehaviour
 
         //return start position + cell position + pivot position (cause we start from the angle of the cube, but we need the center of the cell as pivot)
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
+    }
+
+    public Quaternion CoordinatesToRotation(Coordinates coordinates)
+    {
+        //cell rotation based on face
+        switch (coordinates.face)
+        {
+            case EFace.front:
+                return Quaternion.Euler(0, 180, 0);
+            case EFace.right:
+                return Quaternion.Euler(0, 90, 0);
+            case EFace.back:
+                return Quaternion.Euler(0, 0, 0);
+            case EFace.left:
+                return Quaternion.Euler(0, -90, 0);
+            case EFace.up:
+                return Quaternion.Euler(-90, 180, 0);
+            case EFace.down:
+                return Quaternion.Euler(90, 180, 0);
+            default:
+                return Quaternion.identity;
+        }
     }
 
     /// <summary>

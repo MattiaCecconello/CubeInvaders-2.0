@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using redd096;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy Slime")]
