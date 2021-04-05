@@ -17,7 +17,7 @@ public struct EnemyStruct
 public struct WaveStruct
 {
     public LevelConfig LevelConfig;
-    public float resourcesMax;
+    public float Resources;
     public int IgnorePreviousFacesAtSpawn;
     public float TimeBetweenSpawns;
     public float DistanceFromWorld;

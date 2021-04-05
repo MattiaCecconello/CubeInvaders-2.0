@@ -34,7 +34,7 @@ public class WaveManager : MonoBehaviour
 
         //update level config (change level) and update resources for player
         GameManager.instance.levelManager.UpdateLevel(wave.LevelConfig);
-        GameManager.instance.player.CurrentResources += wave.resourcesMax;
+        GameManager.instance.player.CurrentResources += wave.Resources;
     }
 
     void StartWave()
