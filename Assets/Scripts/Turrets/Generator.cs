@@ -8,7 +8,7 @@ public class Generator : BuildableObject
 {
     #region override
 
-    protected override void ActivateTurret()
+    public override void ActivateTurret()
     {
         base.ActivateTurret();
 
@@ -16,7 +16,7 @@ public class Generator : BuildableObject
         CheckTurretsAround(true);
     }
 
-    protected override void DeactivateTurret()
+    public override void DeactivateTurret()
     {
         base.DeactivateTurret();
 

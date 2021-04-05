@@ -68,7 +68,7 @@ public class TurretShield : Turret
 
     #region override
 
-    protected override void ActivateTurret()
+    public override void ActivateTurret()
     {
         base.ActivateTurret();
 
@@ -79,7 +79,7 @@ public class TurretShield : Turret
         TryActivateShield();
     }
 
-    protected override void DeactivateTurret()
+    public override void DeactivateTurret()
     {
         base.DeactivateTurret();
 

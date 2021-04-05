@@ -134,10 +134,13 @@ public class DestroyTurretWhenNoMove
             yield return null;
         }
 
-        //than remove turret
+        //than deactive or remove turret
         if (turret)
         {
-            turret.RemoveTurret();
+            if (GameManager.instance.levelManager.levelConfig.DisableInsteadOfDestroy)
+                turret.DeactivateTurret();
+            else
+                turret.RemoveTurret();
         }
     }
 

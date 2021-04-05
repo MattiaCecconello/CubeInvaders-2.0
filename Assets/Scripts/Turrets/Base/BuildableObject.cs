@@ -18,20 +18,6 @@ public class BuildableObject : MonoBehaviour
 
     public System.Action onBuildTurret;
 
-    #region protected API
-
-    protected virtual void ActivateTurret()
-    {
-        isActive = true;
-    }
-
-    protected virtual void DeactivateTurret()
-    {
-        isActive = false;
-    }
-
-    #endregion
-
     #region on world rotate
 
     protected virtual void OnWorldRotate(Coordinates coordinates)
@@ -55,6 +41,16 @@ public class BuildableObject : MonoBehaviour
     #endregion
 
     #region public API
+
+    public virtual void ActivateTurret()
+    {
+        isActive = true;
+    }
+
+    public virtual void DeactivateTurret()
+    {
+        isActive = false;
+    }
 
     public virtual void BuildTurret(Cell cellOwner)
     {
