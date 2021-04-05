@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using redd096;
 using System.Linq;
@@ -17,7 +16,7 @@ public class TurretShooter : Turret
     [Tooltip("Where the shot spawn. Cycle between them")] [SerializeField] Transform[] shotSpawns = default;
 
     //used for the graphics
-    public System.Action onShoot;
+    public System.Action<Transform> onShoot;
     public Enemy EnemyToAttack { get; private set; }
 
     bool canShoot = true;
@@ -81,11 +80,11 @@ public class TurretShooter : Turret
         shot.transform.localScale = new Vector3(size, size, size);
         shot.Init(this, EnemyToAttack);
 
+        //call event
+        onShoot?.Invoke(shotSpawns[indexSpawn]);
+
         //cycle between spawns
         indexSpawn = indexSpawn < shotSpawns.Length - 1 ? indexSpawn + 1 : 0;
-
-        //call event
-        onShoot?.Invoke();
     }
 
     #endregion
@@ -109,7 +108,7 @@ public class TurretShooter : Turret
         base.OnEndRotation();
 
         //start coroutine to shoot again
-        if(IsActive)
+        if(gameObject.activeInHierarchy)
             canShootAgain_Coroutine = StartCoroutine(CanShootAgain());
     }
 

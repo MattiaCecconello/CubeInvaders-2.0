@@ -6,6 +6,11 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float health = 100;
     [SerializeField] protected float speed = 1;
 
+    [Header("Resources")]
+    [SerializeField] protected float resourcesWhenKilledByShot = 1;
+    [SerializeField] protected float resourcesWhenKilledByShield = 0;
+    [SerializeField] protected float resourcesWhenHitWorld = 0;
+
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
 
@@ -21,7 +26,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         //move to the cell
-        Vector3 direction = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack) - transform.position;
+        Vector3 direction = coordinatesToAttack.position - transform.position;
 
         rb.velocity = direction.normalized * speed;
     }
@@ -46,8 +51,29 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void Die<T>(T hittedBy) where T : Component
     {
+        //add resources to player
+        if (hittedBy.GetType() == typeof(TurretShot))
+        {
+            GameManager.instance.player.CurrentResources += resourcesWhenKilledByShot;
+        }
+        else if(hittedBy.GetType() == typeof(Shield))
+        {
+            GameManager.instance.player.CurrentResources += resourcesWhenKilledByShield;
+        }
+        else if (hittedBy.GetType() == typeof(Cell))
+        {
+            GameManager.instance.player.CurrentResources += resourcesWhenHitWorld;
+        }
+
         //destroy this enemy
         Destroy(gameObject);
+    }
+
+    public virtual void Init(Coordinates coordinatesToAttack)
+    {
+        //set coordinates to attack and enable
+        this.coordinatesToAttack = coordinatesToAttack;
+        gameObject.SetActive(true);
     }
 
     #endregion

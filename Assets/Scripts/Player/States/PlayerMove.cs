@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
+using redd096;
 
 public class PlayerMove : PlayerState
 {
     protected Coordinates coordinates;
 
-    public PlayerMove(redd096.StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
+    public PlayerMove(StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
     {
         //get previous coordinates
         this.coordinates = coordinates;
@@ -18,49 +18,67 @@ public class PlayerMove : PlayerState
 
         //show selector
         GameManager.instance.uiManager.ShowSelector(coordinates);
+
+        //enable camera movement
+        player.VirtualCam.enabled = true;
     }
 
     public override void Execution()
     {
         base.Execution();
 
-        //if moving mouse or analog, move camera
-        if(controls.Gameplay.MoveCamera.phase == InputActionPhase.Started)
-        {
-            MoveCamera(controls.Gameplay.MoveCamera.ReadValue<Vector2>());
-        }
+        //set invert Y
+        player.VirtualCam.m_YAxis.m_InvertInput = player.invertY;
+
+        //move camera
+        MoveCamera(InputRedd096.GetActiveControlName("Move Camera"), InputRedd096.GetValue<Vector2>("Move Camera"));
+
+        //when move camera, check if changed face
+        CheckChangedFace();
+
+        //rotate cube or select cell (check if keeping pressed to rotate)
+        if (InputRedd096.GetButton("Keep Pressed To Rotate"))
+            RotateCube(InputRedd096.GetValue<Vector2>("Rotate Cube"));
+        else
+            SelectCell(InputRedd096.GetValue<Vector2>("Select Cell"));
     }
 
-    #region inputs
+    public override void Exit()
+    {
+        base.Exit();
+
+        //stop camera movement
+        player.VirtualCam.enabled = false;
+    }
+
+    #region private API
 
     bool pressedSelectCell;
     bool pressedRotateCube;
 
-    protected override void AddInputs()
+    void MoveCamera(string activeControlName, Vector2 input)
     {
-        base.AddInputs();
+        //set max speed
+        if (activeControlName == "delta")
+        {
+            //if delta (so mouse movement) don't use deltaTime
+            player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
+            player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
+        }
+        else
+        {
+            //normally, use deltaTime
+            player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX * Time.deltaTime;
+            player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY * Time.deltaTime;
+        }
 
-        controls.Gameplay.SelectCell.started += PressedSelectCell;
-        controls.Gameplay.SelectCell.performed += SelectCell;
-        controls.Gameplay.RotateCube.started += PressedRotateCube;
-        controls.Gameplay.RotateCube.performed += RotateCube;
+        //move camera
+        player.VirtualCam.m_XAxis.m_InputAxisValue = input.x;
+        player.VirtualCam.m_YAxis.m_InputAxisValue = input.y;
     }
 
-    protected override void RemoveInputs()
-    {
-        base.RemoveInputs();
-
-        controls.Gameplay.SelectCell.started -= PressedSelectCell;
-        controls.Gameplay.SelectCell.performed -= SelectCell;
-        controls.Gameplay.RotateCube.started -= PressedRotateCube;
-        controls.Gameplay.RotateCube.performed -= RotateCube;
-    }
-
-    void MoveCamera(Vector2 movement)
+    void CheckChangedFace()
     {        
-        //move cinemachine
-        CinemachineMovement(movement);
-
         //if change face, reselect center cell and move selector
         EFace face = WorldUtility.SelectFace(transform);
 
@@ -71,60 +89,67 @@ public class PlayerMove : PlayerState
         }
     }
 
-    void PressedSelectCell(InputAction.CallbackContext ctx)
+    void SelectCell(Vector2 movement)
     {
-        pressedSelectCell = true;
-    }
-
-    void SelectCell(InputAction.CallbackContext ctx)
-    {
-        //do nothing if keeping pressed, or if not clicked
-        if (controls.Gameplay.KeepPressedToRotate.phase == InputActionPhase.Started || CheckClick(ref pressedSelectCell) == false)
-            return;
-
-        Vector2 movement = ctx.ReadValue<Vector2>();
-
-        //select cell
-        if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+        //check if pressed input or moved analog
+        if (movement.magnitude >= player.deadZoneAnalogs && pressedSelectCell == false)
         {
-            if (movement.y > 0)
-                DoSelectionCell(ERotateDirection.up);
-            else if (movement.y < 0)
-                DoSelectionCell(ERotateDirection.down);
+            pressedSelectCell = true;
+
+            //check if y or x axis
+            if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+            {
+                if (movement.y > 0)
+                    DoSelectionCell(ERotateDirection.up);
+                else if (movement.y < 0)
+                    DoSelectionCell(ERotateDirection.down);
+            }
+            else
+            {
+                if (movement.x > 0)
+                    DoSelectionCell(ERotateDirection.right);
+                else if (movement.x < 0)
+                    DoSelectionCell(ERotateDirection.left);
+            }
+
+            //save coordinates and show selector
+            GameManager.instance.uiManager.ShowSelector(coordinates);
         }
-        else
+        //reset when release input or analog
+        else if (movement.magnitude < player.deadZoneAnalogs)
         {
-            if (movement.x > 0)
-                DoSelectionCell(ERotateDirection.right);
-            else if (movement.x < 0)
-                DoSelectionCell(ERotateDirection.left);
+            pressedSelectCell = false;
         }
-
-        //save coordinates and show selector
-        GameManager.instance.uiManager.ShowSelector(coordinates);
     }
 
-    void PressedRotateCube(InputAction.CallbackContext ctx)
+    void RotateCube(Vector2 movement)
     {
-        pressedRotateCube = true;
-    }
+        //check if pressed input or moved analog
+        if (movement.magnitude >= player.deadZoneAnalogs && pressedRotateCube == false)
+        {
+            pressedRotateCube = true;
 
-    void RotateCube(InputAction.CallbackContext ctx)
-    {
-        //do nothing if NOT keeping pressed, or if not clicked
-        if (controls.Gameplay.KeepPressedToRotate.phase != InputActionPhase.Started || CheckClick(ref pressedRotateCube) == false)
-            return;
-
-        Vector2 movement = ctx.ReadValue<Vector2>();
-
-        if (movement.y > 0)
-            DoRotation(ERotateDirection.up);
-        else if (movement.y < 0)
-            DoRotation(ERotateDirection.down);
-        else if (movement.x > 0)
-            DoRotation(ERotateDirection.right);
-        else if (movement.x < 0)
-            DoRotation(ERotateDirection.left);
+            //check if y or x axis
+            if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+            {
+                if (movement.y > 0)
+                    DoRotation(ERotateDirection.up);
+                else if (movement.y < 0)
+                    DoRotation(ERotateDirection.down);
+            }
+            else
+            {
+                if (movement.x > 0)
+                    DoRotation(ERotateDirection.right);
+                else if (movement.x < 0)
+                    DoRotation(ERotateDirection.left);
+            }
+        }
+        //reset when release input or analog
+        else if (movement.magnitude < player.deadZoneAnalogs)
+        {
+            pressedRotateCube = false;
+        }
     }
 
     #endregion
@@ -137,29 +162,37 @@ public class PlayerMove : PlayerState
 
     void DoRotation(ERotateDirection rotateDirection)
     {
-        //if selector is greater, rotate more cells
-        if (GameManager.instance.levelManager.levelConfig.SelectorSize > 1)
+        //do for number of rotations
+        for (int i = 0; i < GameManager.instance.levelManager.levelConfig.NumberRotations; i++)
         {
-            List<Coordinates> coordinatesToRotate = RotateMoreCells(rotateDirection);   //get list of coordinates to rotate
-            coordinatesToRotate.Add(coordinates);                                       //add our coordinates
-            GameManager.instance.world.Rotate(coordinatesToRotate.ToArray(), WorldUtility.LateralFace(transform), rotateDirection);
+            //if selector is greater, rotate more cells
+            if (GameManager.instance.levelManager.levelConfig.SelectorSize > 1)
+            {
+                List<Coordinates> coordinatesToRotate = RotateMoreCells(rotateDirection);   //get list of coordinates to rotate
+                coordinatesToRotate.Add(coordinates);                                       //add our coordinates
+                GameManager.instance.world.PlayerRotate(coordinatesToRotate.ToArray(), WorldUtility.LateralFace(transform), rotateDirection, GameManager.instance.world.worldConfig.RotationTime);
+            }
+            //else rotate only this cell
+            else
+            {
+                GameManager.instance.world.PlayerRotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection, GameManager.instance.world.worldConfig.RotationTime);
+            }
         }
-        //else rotate only this cell
-        else
-        {
-            GameManager.instance.world.Rotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection);
-        }
-
-        //change state
-        player.SetState(new PlayerWaitRotation(player, coordinates, WorldUtility.LateralFace(transform), rotateDirection));
     }
 
     List<Coordinates> RotateMoreCells(ERotateDirection rotateDirection)
     {
         int selectorSize = GameManager.instance.levelManager.levelConfig.SelectorSize;
+        EFace lookingFace = WorldUtility.LateralFace(transform);
 
         //check if get cells on x or y
         bool useX = rotateDirection == ERotateDirection.up || rotateDirection == ERotateDirection.down;
+
+        //if rotating up or down face, when looking from right or left, inverse useX
+        if (coordinates.face == EFace.up || coordinates.face == EFace.down)
+            if (lookingFace == EFace.right || lookingFace == EFace.left)
+                useX = !useX;
+
         int value = useX ? coordinates.x : coordinates.y;
 
         //check if there are enough cells to the right (useX) or up (!useX)

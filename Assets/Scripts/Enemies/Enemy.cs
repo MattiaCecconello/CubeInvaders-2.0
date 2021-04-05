@@ -4,6 +4,7 @@ using UnityEngine;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy")]
+[RequireComponent(typeof(EnemyGraphics))]
 public class Enemy : EnemyBase
 {
     struct SlowEffect
@@ -38,7 +39,7 @@ public class Enemy : EnemyBase
         base.FixedUpdate();
     }
 
-    void OnDestroy()
+    protected virtual void OnDestroy()
     {
         //be sure to remove event
         onEnemyDeath = null;
@@ -65,7 +66,8 @@ public class Enemy : EnemyBase
         effectsOnEnemy.Add(slowEffect);
 
         //remove effect timer
-        StartCoroutine(RemoveEffectTimer(new SlowEffect(slowPercentage), slowDuration));
+        if(gameObject.activeInHierarchy)
+            StartCoroutine(RemoveEffectTimer(new SlowEffect(slowPercentage), slowDuration));
     }
 
     IEnumerator RemoveEffectTimer(SlowEffect slowEffect, float slowDuration)

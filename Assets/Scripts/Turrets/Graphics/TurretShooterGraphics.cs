@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Turret Graphics/Turret Shooter Graphics")]
 public class TurretShooterGraphics : TurretGraphics
 {
+    [Header("Shooter")]
+    [SerializeField] ParticleSystem fireVFX = default;
+    [SerializeField] AudioStruct fireAudio = default;
+
     TurretShooter turretShooter;
+
+    Pooling<ParticleSystem> poolFireVFX = new Pooling<ParticleSystem>();
+    Pooling<AudioSource> poolFireAudio = new Pooling<AudioSource>();
 
     protected override void Awake()
     {
@@ -35,9 +43,11 @@ public class TurretShooterGraphics : TurretGraphics
         turretShooter.onShoot -= OnShoot;
     }
 
-    void OnShoot()
+    void OnShoot(Transform shotSpawn)
     {
-        //animation on shoot
+        //vfx on shoot
+        ParticlesManager.instance.Play(poolFireVFX, fireVFX, shotSpawn.position, shotSpawn.rotation);
+        SoundManager.instance.Play(poolFireAudio, fireAudio.audioClip, shotSpawn.position, fireAudio.volume);
     }
 
     #endregion

@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/World/Cell")]
+[RequireComponent(typeof(CellGraphics))]
 public class Cell : MonoBehaviour
 {
     [Header("Modifier")]
@@ -16,16 +18,18 @@ public class Cell : MonoBehaviour
     [SerializeField] bool buildTurretAtStart = false;
     [SerializeField] bool canRemoveTurret = true;
 
-    [Header("Cell Models")]
-    [SerializeField] GameObject center = default;
-    [SerializeField] GameObject side = default;
-    [SerializeField] GameObject angle = default;
+    [Header("Resources")]
+    [SerializeField] float resourcesToRecreateCell = 100;
+    [SerializeField] float resourcesToCreateTurret = 10;
+    [SerializeField] float resourcesOnSellTurret = 10;
 
     [Header("Debug")]
     public Coordinates coordinates;
+    [ReadOnly] public Coordinates startCoordinates;
 
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
+    public System.Action onDestroyCell;
 
     public BuildableObject turret { get; private set; }
 
@@ -85,30 +89,29 @@ public class Cell : MonoBehaviour
         }
     }
 
-    void RemoveBuildOnCell(bool sell)
+    void RemoveBuildOnCell()
     {
         //do only if there is a turret and is not a preview
         if (turret && turret.IsPreview == false)
         {
             //remove it
             turret.RemoveTurret();
-
-            if (sell)
-            {
-                //get resources
-            }
         }
     }
 
-    void DestroyCell()
+    void DestroyCell(bool loaded = false)
     {
         IsAlive = false;
 
         //remove turret
-        RemoveBuildOnCell(false);
+        RemoveBuildOnCell();
 
         //remove biome
         ActiveRemoveOnDead(false);
+
+        //call feedback only when loaded is false
+        if(loaded == false)
+            onDestroyCell?.Invoke();
     }
 
     void RecreateCell()
@@ -134,80 +137,39 @@ public class Cell : MonoBehaviour
 
     #region public API
 
-    public void SelectModel(int numberCells)
-    {
-        //left
-        if(coordinates.x <= 0)
-        {
-            //down or up
-            if(coordinates.y <= 0 || coordinates.y >= numberCells -1)
-            {
-                angle.SetActive(true);
-
-                center.SetActive(false);
-                side.SetActive(false);
-            }
-            //else is side
-            else
-            {
-                side.SetActive(true);
-
-                center.SetActive(false);
-                angle.SetActive(false);
-            }
-        }
-        //right
-        else if(coordinates.x >= numberCells -1)
-        {
-            //down or up
-            if (coordinates.y <= 0 || coordinates.y >= numberCells - 1)
-            {
-                angle.SetActive(true);
-
-                center.SetActive(false);
-                side.SetActive(false);
-            }
-            //else is side
-            else
-            {
-                side.SetActive(true);
-
-                center.SetActive(false);
-                angle.SetActive(false);
-            }
-        }
-        //center column
-        else
-        {
-            //down or up is side
-            if (coordinates.y <= 0 || coordinates.y >= numberCells - 1)
-            {
-                side.SetActive(true);
-
-                center.SetActive(false);
-                angle.SetActive(false);
-            }
-            //else is center
-            else
-            {
-                center.SetActive(true);
-
-                side.SetActive(false);
-                angle.SetActive(false);
-            }
-        }
-    }
-
     /// <summary>
     /// Show turret without activate it
     /// </summary>
     public void ShowPreview()
     {
-        //do only if there is a turret to create, and there isn't already a turret builded on it
-        if (turretToCreate == null || (turret != null && turret.IsPreview == false))
+        //show preview only if is alive
+        if (IsAlive == false)
+        {
+            //but if can recreate cell, show cost
+            if(GameManager.instance.levelManager.levelConfig.CanRecreateCell)
+                GameManager.instance.uiManager.SetCostText(true, true, resourcesToRecreateCell);
+
+            return;
+        }
+
+        //do only if there is a turret to create
+        if (turretToCreate == null)
             return;
 
-        //instantiate (with parent) or build it
+
+        //do only if there isn't already a turret builded on it
+        if ((turret != null && turret.IsPreview == false))
+        {
+            //but if can remove turret, show resources on sell
+            if(canRemoveTurret)
+                GameManager.instance.uiManager.SetCostText(true, false, resourcesOnSellTurret);
+
+            return;
+        }
+
+        //else show preview
+
+        //instantiate (with parent) or active it
         if (turret == null)
             turret = Instantiate(turretToCreate, transform);
         else
@@ -217,6 +179,9 @@ public class Cell : MonoBehaviour
         turret.transform.localPosition = Vector3.zero;
         turret.transform.localRotation = Quaternion.identity;
         turret.transform.localScale = Vector3.one;
+
+        //show cost to create turret
+        GameManager.instance.uiManager.SetCostText(true, true, resourcesToCreateTurret);
     }
 
     /// <summary>
@@ -227,37 +192,55 @@ public class Cell : MonoBehaviour
         //check if there is a turret and is only a preview
         if (turret != null && turret.IsPreview)
             turret.gameObject.SetActive(false);
+
+        //hide cost
+        GameManager.instance.uiManager.SetCostText(false);
     }
 
     /// <summary>
     /// Player interact with the cell
     /// </summary>
-    public void Interact()
+    public bool Interact()
     {
         //if dead, try recreate cell
         if(IsAlive == false)
         {
-            if (GameManager.instance.levelManager.levelConfig.CanRecreateCell)
+            if (GameManager.instance.levelManager.levelConfig.CanRecreateCell && GameManager.instance.player.CurrentResources >= resourcesToRecreateCell)
+            {
                 RecreateCell();
+                GameManager.instance.player.CurrentResources -= resourcesToRecreateCell;    //remove resources to recreate cell
+                return true;
+            }
 
-            return;
+            return false;
         }
 
         //else check if there is a turret to create
         if (turretToCreate == null)
-            return;
+            return false;
 
         //if there is already a turret, try remove it
         if (turret != null && turret.IsPreview == false)
         {
-            if(canRemoveTurret)
-                RemoveBuildOnCell(true);
+            if (canRemoveTurret)
+            {
+                RemoveBuildOnCell();
+                GameManager.instance.player.CurrentResources += resourcesOnSellTurret;      //give resources from sell turret
+                return true;
+            }
 
-            return;
+            return false;
         }
 
         //else build
-        BuildOnCell();
+        if (GameManager.instance.player.CurrentResources >= resourcesToCreateTurret)
+        {
+            BuildOnCell();
+            GameManager.instance.player.CurrentResources -= resourcesToCreateTurret;        //remove resources to create turret
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -282,6 +265,15 @@ public class Cell : MonoBehaviour
         {
             GameManager.instance.levelManager.EndGame(false);
         }
+    }
+
+    /// <summary>
+    /// To call when load world and this cell was destroyed
+    /// </summary>
+    public void LoadDestroyedCell()
+    {
+        //destroy cell, but set is loaded
+        DestroyCell(true);
     }
 
     #endregion

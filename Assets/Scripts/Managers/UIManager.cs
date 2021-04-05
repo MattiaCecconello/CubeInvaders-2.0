@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Manager/UI Manager")]
 public class UIManager : MonoBehaviour
@@ -8,6 +9,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu = default;
     [SerializeField] GameObject endMenu = default;
     [SerializeField] Text endText = default;
+    [SerializeField] string winString = "YOU WON!!";
+    [SerializeField] string loseString = "YOU LOST...";
+
+    [Header("Resources")]
+    [SerializeField] Text resourcesText = default;
+    [SerializeField] string stringBeforeResources = "Resources: ";
+    [SerializeField] [Min(0)] int decimalsResourcesText = 0;
+    [SerializeField] Text costText = default;
+    [SerializeField] string stringBeforeCost = "Cost: ";
+    [SerializeField] string stringBeforeSell = "Sell: ";
+    [SerializeField] [Min(0)] int decimalsCostText = 0;
+
+    [Header("Current Level")]
+    [SerializeField] Text currentLevelText = default;
+    [SerializeField] string currentLevelString = "Level: ";
 
     [Header("Strategic")]
     [SerializeField] GameObject strategicCanvas = default;
@@ -23,10 +39,14 @@ public class UIManager : MonoBehaviour
         multipleSelector = Instantiate(GameManager.instance.levelManager.generalConfig.MultipleSelector);
         HideSelector();
 
-        //hide menus and strategic canvas
+        //hide all
         PauseMenu(false);
         EndMenu(false);
+        SetCostText(false);
         strategicCanvas.SetActive(false);
+
+        //show default wave
+        UpdateCurrentLevelText(GameManager.instance.waveManager.CurrentWave);
 
         //add events
         AddEvents();
@@ -68,7 +88,7 @@ public class UIManager : MonoBehaviour
     void OnEndGame(bool win)
     {
         //show end menu
-        string text = win ? GameManager.instance.levelManager.WinText : GameManager.instance.levelManager.LoseText;
+        string text = win ? winString : loseString;
         EndMenu(true, text);
     }
 
@@ -97,6 +117,44 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    #region resources
+
+    public void SetResourcesText(float resources)
+    {
+        //set resources text
+        if (resourcesText)
+        {
+            resourcesText.text = stringBeforeResources + resources.ToString($"F{decimalsResourcesText}");
+        }
+    }
+
+    public void SetCostText(bool active, bool isBuying = false, float cost = 0)
+    {
+        //set cost text + active or deactive
+        if(costText)
+        {
+            string stringBefore = isBuying ? stringBeforeCost : stringBeforeSell;
+
+            costText.text = stringBefore + cost.ToString($"F{decimalsCostText}");
+            costText.gameObject.SetActive(active);
+        }
+    }
+
+    #endregion
+
+    #region current level
+
+    public void UpdateCurrentLevelText(int currentWave)
+    {
+        if (currentLevelText)
+        {
+            //set text (current wave +1, so player doesn't see wave 0)
+            currentLevelText.text = currentLevelString + (currentWave + 1);
+        }
+    }
+
+    #endregion
+
     #region strategic
 
     public void UpdateReadySlider(float value)
@@ -115,7 +173,7 @@ public class UIManager : MonoBehaviour
         selector.transform.localScale = new Vector3(size, size, size);
 
         //position of our cell
-        selector.transform.position = GameManager.instance.world.CoordinatesToPosition(coordinates);
+        selector.transform.position = coordinates.position;
 
         //active selector
         selector.SetActive(true);
@@ -132,7 +190,7 @@ public class UIManager : MonoBehaviour
         multipleSelector.transform.localScale = new Vector3(size, size, size);
 
         //position of our cell + move to select other cells
-        Vector3 position = GameManager.instance.world.CoordinatesToPosition(coordinates);
+        Vector3 position = coordinates.position;
         position += MoveSelector(true, coordinates);
         position += MoveSelector(false, coordinates);
 

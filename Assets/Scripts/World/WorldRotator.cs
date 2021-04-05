@@ -2,7 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using redd096;
-using UnityEngine.InputSystem;
+
+public struct RotationStruct
+{
+    public Coordinates[] coordinates;
+    public EFace lookingFace;
+    public ERotateDirection rotateDirection;
+    public float rotationTime;
+    public bool canSkipAnimation;
+
+    public RotationStruct(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime, bool canSkipAnimation)
+    {
+        this.coordinates = coordinates;
+        this.lookingFace = lookingFace;
+        this.rotateDirection = rotateDirection;
+        this.rotationTime = rotationTime;
+        this.canSkipAnimation = canSkipAnimation;
+    }
+}
 
 public class WorldRotator
 {
@@ -28,11 +45,110 @@ public class WorldRotator
     List<Coordinates> cellsKeys = new List<Coordinates>();
     Coroutine rotatingWorld_Coroutine;
 
+    Queue<RotationStruct> rotationsToDo = new Queue<RotationStruct>();
+    bool skippingRotations = false;
+    Queue<RotationStruct> rotationsWaitingSkip = new Queue<RotationStruct>();
+
     #endregion
 
     public WorldRotator(World world)
     {
         this.world = world;
+    }
+
+    void DoRotation()
+    {
+        RotationStruct rotation = rotationsToDo.Peek();
+
+        //set variables
+        coordinatesToRotate = rotation.coordinates;
+        cellsToRotate.Clear();
+        cellsKeys.Clear();
+
+        //every coordinates can be only on the same face
+        EFace startFace = coordinatesToRotate[0].face;
+
+        //rotate row
+        if (rotation.rotateDirection == ERotateDirection.right || rotation.rotateDirection == ERotateDirection.left)
+        {
+            bool forward = rotation.rotateDirection == ERotateDirection.right;
+
+            if (startFace == EFace.up || startFace == EFace.down)
+            {
+                //if face up or face down, the inputs are differents based on the rotation of the camera
+                switch (rotation.lookingFace)
+                {
+                    case EFace.front:
+                        RotateUpDownRow(startFace, forward);
+                        break;
+                    case EFace.right:
+                        if (startFace == EFace.up)
+                            RotateFrontColumn(startFace, forward);
+                        else
+                            RotateFrontColumn(startFace, !forward);
+                        break;
+                    case EFace.back:
+                        RotateUpDownRow(startFace, !forward);
+                        break;
+                    case EFace.left:
+                        if (startFace == EFace.up)
+                            RotateFrontColumn(startFace, !forward);
+                        else
+                            RotateFrontColumn(startFace, forward);
+                        break;
+                }
+            }
+            else
+            {
+                //else just rotate row lateral faces
+                RotateLateralRow(forward);
+            }
+        }
+        //rotate column
+        else
+        {
+            bool forward = rotation.rotateDirection == ERotateDirection.up;
+
+            //if face up or face down, the inputs are differents based on the rotation of the camera
+            if (startFace == EFace.up || startFace == EFace.down)
+            {
+                switch (rotation.lookingFace)
+                {
+                    case EFace.front:
+                        RotateFrontColumn(startFace, forward);
+                        break;
+                    case EFace.right:
+                        if (startFace == EFace.up)
+                            RotateUpDownRow(startFace, !forward);
+                        else
+                            RotateUpDownRow(startFace, forward);
+                        break;
+                    case EFace.back:
+                        RotateFrontColumn(startFace, !forward);
+                        break;
+                    case EFace.left:
+                        if (startFace == EFace.up)
+                            RotateUpDownRow(startFace, forward);
+                        else
+                            RotateUpDownRow(startFace, !forward);
+                        break;
+                }
+            }
+            else
+            {
+                //else just rotate column
+                if (startFace == EFace.right || startFace == EFace.left)
+                {
+                    //rotate column face right or left
+                    RotateRightLeftColumn(startFace, forward);
+                }
+                else
+                {
+                    //rotate column front faces (front, up, back, down)
+                    RotateFrontColumn(startFace, forward);
+                }
+            }
+        }
     }
 
     #region private API
@@ -127,21 +243,9 @@ public class WorldRotator
 
     #region animations
 
-    protected virtual float GetRotationTime()
+    protected virtual float GetAnimationCurveValue(float delta)
     {
-        return world.worldConfig.RotationTime;
-    }
-
-    protected virtual bool SkipAnimation(float delta)
-    {
-        //if player pressed input to skip, if some time already passed, then skip animation
-        if (Keyboard.current.anyKey.wasPressedThisFrame && delta > 0.1f)
-        {
-            Debug.Log("skip animation");
-            return true;
-        }
-
-        return false;
+        return world.worldConfig.RotationAnimationCurve.Evaluate(delta);
     }
 
     IEnumerator AnimationRotate(Vector3 rotateAxis, bool forward)
@@ -159,13 +263,16 @@ public class WorldRotator
         float delta = 0;
         while (delta < 1)
         {
-            delta += Time.deltaTime / GetRotationTime();
+            delta += Time.deltaTime / rotationsToDo.Peek().rotationTime;
 
-            float rotated = Mathf.Lerp(0, rotationToReach, delta);
+            float rotated = Mathf.Lerp(0, rotationToReach, GetAnimationCurveValue(delta));
             RotatorParent.eulerAngles = rotateAxis * rotated;
 
-            //skip animation
-            if (SkipAnimation(delta)) break;
+            //if skipping rotations, skip this one
+            if (skippingRotations)
+            {
+                break;
+            }
 
             yield return null;
         }
@@ -177,17 +284,37 @@ public class WorldRotator
         cellsToRotate.SetParent(world.transform);
         RotatorParent.rotation = Quaternion.identity;
 
-        rotatingWorld_Coroutine = null;
+        //remove from the list
+        rotationsToDo.Dequeue();
 
         //call end rotation
         world.onEndRotation?.Invoke();
+        rotatingWorld_Coroutine = null;
+
+        //if skipping rotations and finished rotations
+        if(skippingRotations && rotationsToDo.Count <= 0)
+        {
+            //finish skip
+            skippingRotations = false;
+
+            //then copy rotations waiting skip in rotations to do, and reset rotations waiting skip
+            if(rotationsWaitingSkip.Count > 0)
+            {
+                rotationsToDo = new Queue<RotationStruct>(rotationsWaitingSkip);
+                rotationsWaitingSkip.Clear();
+            }
+        }
+
+        //if there are other rotations to do, start it
+        if (rotationsToDo.Count > 0)
+            DoRotation();
     }
 
     #endregion
 
     #region rotate row
 
-    #region lateral
+    #region front, right, back, left
 
     void RotateLateralRow(bool toRight)
     {
@@ -201,7 +328,8 @@ public class WorldRotator
         }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.up, !toRight));
+        if(world.gameObject.activeInHierarchy)
+            rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.up, !toRight));
 
         //update dictionary
         UpdateDictionaryLateralRow(toRight);
@@ -253,7 +381,7 @@ public class WorldRotator
 
     #region up and down
 
-    void RotateUpDownRow(EFace face, bool toRight)
+    void RotateUpDownRow(EFace startFace, bool toRight)
     {
         //foreach coordinate, use y to select
         foreach (Coordinates coordinates in coordinatesToRotate)
@@ -261,21 +389,23 @@ public class WorldRotator
             int y = coordinates.y;
 
             //rotate y. Down face is the inverse
-            if (face == EFace.up)
+            if (startFace == EFace.up)
             {
                 SelectUpDownRowCells(y);
             }
             else
             {
                 SelectUpDownRowCells(WorldMath.InverseN(y, world.worldConfig.NumberCells));
-
-                //in the down face is inverse
-                toRight = !toRight;
             }
         }
 
+        //in the down face is inverse
+        if (startFace == EFace.down)
+            toRight = !toRight;
+
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, !toRight));
+        if(world.gameObject.activeInHierarchy)
+            rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, !toRight));
 
         //update dictionary
         UpdateDictionaryUpDownRow(toRight);
@@ -374,9 +504,9 @@ public class WorldRotator
 
     #region rotate column
 
-    #region front
+    #region front, up, back, down
 
-    void RotateFrontColumn(EFace face, bool toUp)
+    void RotateFrontColumn(EFace startFace, bool toUp)
     {
         //foreach coordinate, use x to select
         foreach (Coordinates coordinates in coordinatesToRotate)
@@ -384,21 +514,23 @@ public class WorldRotator
             int x = coordinates.x;
 
             //rotate x. Back face is the inverse
-            if (face != EFace.back)
+            if (startFace != EFace.back)
             {
                 SelectFrontColumnCells(x);
             }
             else
             {
                 SelectFrontColumnCells(WorldMath.InverseN(x, world.worldConfig.NumberCells));
-
-                //in the back face is inverse
-                toUp = !toUp;
             }
         }
 
+        //in the back face is inverse
+        if (startFace == EFace.back)
+            toUp = !toUp;
+
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.right, toUp));
+        if(world.gameObject.activeInHierarchy)
+            rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.right, toUp));
 
         //update dictionary
         UpdateDictionaryFrontColumn(toUp);
@@ -492,14 +624,16 @@ public class WorldRotator
             else
             {
                 SelectRightLeftColumnCells(WorldMath.InverseN(x, world.worldConfig.NumberCells));
-
-                //in the left is inverse
-                toUp = !toUp;
             }
         }
 
+        //in the left is inverse
+        if (startFace == EFace.left)
+            toUp = !toUp;
+
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, toUp));
+        if(world.gameObject.activeInHierarchy)
+            rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, toUp));
 
         //update dictionary
         UpdateDictionaryRightLeftColumn(toUp);
@@ -599,105 +733,40 @@ public class WorldRotator
 
     #region public API
 
-    public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection)
+    public void PlayerRotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime)
     {
-        Rotate(new Coordinates[1] { coordinates }, lookingFace, rotateDirection);
-    }
-
-    public void Rotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection)
-    {
-        //can't rotate during another rotation
-        if (rotatingWorld_Coroutine != null)
+        //do nothing if is running a rotation not skippable (enemy rotation)
+        if (rotatingWorld_Coroutine != null && rotationsToDo.Peek().canSkipAnimation == false)
             return;
 
-        //set variables
-        coordinatesToRotate = coordinates;
-        cellsToRotate.Clear();
-        cellsKeys.Clear();
+        //else start rotation (can skip)
+        Rotate(new RotationStruct(coordinates, lookingFace, rotateDirection, rotationTime, true));
+    }
 
-        //every coordinates can be only on the same face
-        EFace startFace = coordinates[0].face;
+    public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime)
+    {
+        //start rotation (can NOT skip)
+        Rotate(new RotationStruct(new Coordinates[1] { coordinates }, lookingFace, rotateDirection, rotationTime, false));
+    }
 
-        //rotate row
-        if (rotateDirection == ERotateDirection.right || rotateDirection == ERotateDirection.left)
+    public void Rotate(RotationStruct rotationToDo)
+    {
+        //if is running a skippable rotation, skip every skippable rotation
+        if (rotatingWorld_Coroutine != null && rotationsToDo.Peek().canSkipAnimation)
         {
-            bool forward = rotateDirection == ERotateDirection.right;
+            skippingRotations = true;
 
-            if (startFace == EFace.up || startFace == EFace.down)
-            {
-                //if face up or face down, the inputs are differents based on the rotation of the camera
-                switch (lookingFace)
-                {
-                    case EFace.front:
-                        RotateUpDownRow(startFace, forward);
-                        break;
-                    case EFace.right:
-                        if (startFace == EFace.up)
-                            RotateFrontColumn(startFace, forward);
-                        else
-                            RotateFrontColumn(startFace, !forward);
-                        break;
-                    case EFace.back:
-                        RotateUpDownRow(startFace, !forward);
-                        break;
-                    case EFace.left:
-                        if (startFace == EFace.up)
-                            RotateFrontColumn(startFace, !forward);
-                        else
-                            RotateFrontColumn(startFace, forward);
-                        break;
-                }
-            }
-            else
-            {
-                //else just rotate row lateral faces
-                RotateLateralRow(forward);
-            }
+            //add to list rotations waiting skip
+            rotationsWaitingSkip.Enqueue(rotationToDo);
         }
-        //rotate column
         else
         {
-            bool forward = rotateDirection == ERotateDirection.up;
+            //add to list
+            rotationsToDo.Enqueue(rotationToDo);
 
-            //if face up or face down, the inputs are differents based on the rotation of the camera
-            if (startFace == EFace.up || startFace == EFace.down)
-            {
-                switch (lookingFace)
-                {
-                    case EFace.front:
-                        RotateFrontColumn(startFace, forward);
-                        break;
-                    case EFace.right:
-                        if (startFace == EFace.up)
-                            RotateUpDownRow(startFace, !forward);
-                        else
-                            RotateUpDownRow(startFace, forward);
-                        break;
-                    case EFace.back:
-                        RotateFrontColumn(startFace, !forward);
-                        break;
-                    case EFace.left:
-                        if (startFace == EFace.up)
-                            RotateUpDownRow(startFace, forward);
-                        else
-                            RotateUpDownRow(startFace, !forward);
-                        break;
-                }
-            }
-            else
-            {
-                //else just rotate column
-                if (startFace == EFace.right || startFace == EFace.left)
-                {
-                    //rotate column face right or left
-                    RotateRightLeftColumn(startFace, forward);
-                }
-                else
-                {
-                    //rotate column front faces (front, up, back, down)
-                    RotateFrontColumn(startFace, forward);
-                }
-            }
+            //if there is no rotation running, start rotation
+            if (rotatingWorld_Coroutine == null)
+                DoRotation();
         }
     }
 

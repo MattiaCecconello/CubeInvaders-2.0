@@ -9,6 +9,7 @@ public class TurretShot : MonoBehaviour
     [SerializeField] float shotSpeed = 1;
     [Tooltip("When shot target die, start autodestruction timer")] [SerializeField] float timerAutodestructionWithoutEnemy = 5;
     [Tooltip("On autodestruction, do area damage or area slow anyway")] [SerializeField] bool areaEffectAlsoOnAutodestruction = false;
+    [SerializeField] bool followEnemyWhenChangeFace = true;
 
     [Header("Effect")]
     [Min(0)]
@@ -19,6 +20,9 @@ public class TurretShot : MonoBehaviour
     [SerializeField] float slowDuration = 0;
     [Min(0)]
     [SerializeField] float area = 0;
+
+    [Header("Graphics")]
+    [SerializeField] TrailRenderer trail = default;
 
     Coordinates coordinatesToDefend;
     Enemy enemyToAttack;
@@ -34,6 +38,9 @@ public class TurretShot : MonoBehaviour
 
     void Update()
     {
+        //be sure enemy is still valid
+        CheckEnemyStillValid();
+
         //look at enemy
         if (enemyToAttack)
         {
@@ -46,10 +53,13 @@ public class TurretShot : MonoBehaviour
 
     void FixedUpdate()
     {
+        //be sure enemy is still valid
+        CheckEnemyStillValid();
+
         //direction to enemy or forward
         Vector3 direction = Vector3.zero;
 
-        if (enemyToAttack != null)
+        if (enemyToAttack)
         {
             direction = enemyToAttack.transform.position - transform.position;
         }
@@ -77,6 +87,16 @@ public class TurretShot : MonoBehaviour
     }
 
     #region private API
+
+    void CheckEnemyStillValid()
+    {
+        if (enemyToAttack == null)
+            return;
+
+        //if enemy change face, remove target
+        if (followEnemyWhenChangeFace == false && enemyToAttack.coordinatesToAttack.face != coordinatesToDefend.face)
+            enemyToAttack = null;
+    }
 
     void TryAutoDestruction()
     {
@@ -137,6 +157,10 @@ public class TurretShot : MonoBehaviour
 
         //reset timer
         timerAutodestruction = 0;
+
+        //reset trail
+        if (trail)
+            trail.Clear();
     }
 
     #endregion

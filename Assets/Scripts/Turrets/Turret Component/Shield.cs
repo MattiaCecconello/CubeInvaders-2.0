@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret Component/Shield")]
@@ -14,7 +14,9 @@ public class Shield : MonoBehaviour
     [Tooltip("Time for despawn animation")] [SerializeField] float timeDespawn = 0.5f;
 
     public System.Action onShieldDestroyed;
-    public int CurrentHealth { get; private set; }
+
+    [Header("Debug")]
+    [ReadOnly] public int CurrentHealth;
 
     Coroutine spawnShield_Coroutine;
     float distanceFromWorld;
@@ -109,7 +111,8 @@ public class Shield : MonoBehaviour
         Vector3 finalScale = new Vector3(faceSize, faceSize, cellSize);
 
         //start spawn
-        spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, true));
+        if(gameObject.activeInHierarchy)
+            spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, true));
     }
 
     public void DeactivateShield()
@@ -121,7 +124,8 @@ public class Shield : MonoBehaviour
         Vector3 finalScale = Vector3.zero;
 
         //start despawn
-        spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, false));
+        if(gameObject.activeInHierarchy)
+            spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, false));
     }
 
     #endregion

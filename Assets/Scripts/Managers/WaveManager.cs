@@ -8,9 +8,10 @@ public class WaveManager : MonoBehaviour
 {
     [Header("Important")]
     public WaveConfig waveConfig;
-    public int currentWave = 0;
+    
+    public int CurrentWave { get; set; }
 
-    List<EnemyStruct> enemies = new List<EnemyStruct>();
+    List<Enemy> enemies = new List<Enemy>();
     Coroutine wave_coroutine;
 
     void Start()
@@ -23,6 +24,46 @@ public class WaveManager : MonoBehaviour
     {
         //remove events
         RemoveEvents();
+    }
+
+    void SetNewWave()
+    {
+        //current wave and update UI
+        WaveStruct wave = waveConfig.Waves[CurrentWave];
+        GameManager.instance.uiManager.UpdateCurrentLevelText(CurrentWave);
+
+        //update level config (change level) and update resources for player
+        GameManager.instance.levelManager.UpdateLevel(wave.LevelConfig);
+        GameManager.instance.player.CurrentResources += wave.resourcesMax;
+    }
+
+    void StartWave()
+    {
+        //start coroutine
+        if (gameObject.activeInHierarchy)
+        {
+            if (wave_coroutine != null)
+                StopCoroutine(wave_coroutine);
+
+            wave_coroutine = StartCoroutine(Wave_Coroutine());
+        }
+    }
+
+    void EndWave()
+    {
+        //end assault phase
+        GameManager.instance.levelManager.EndAssaultPhase();
+
+        //if there aren't other waves
+        if (waveConfig.Waves == null || CurrentWave >= waveConfig.Waves.Length -1 || CurrentWave < 0)
+        {
+            //win
+            GameManager.instance.levelManager.EndGame(true);
+            return;
+        }
+
+        //else go to next wave
+        CurrentWave++;
     }
 
     #region events
@@ -46,31 +87,17 @@ public class WaveManager : MonoBehaviour
         //remove all enemies
         ClearEnemies();
 
-        //if there aren't other waves
-        if(waveConfig.Waves == null || currentWave >= waveConfig.Waves.Length)
-        {
-            //win
-            GameManager.instance.levelManager.EndGame(true);
-            return;
-        }
-
-        CreateWave();
+        SetNewWave();
     }
 
     void OnStartAssaultPhase()
     {
         //start wave
-        if (wave_coroutine != null)
-            StopCoroutine(wave_coroutine);
-
-        wave_coroutine = StartCoroutine(Wave_Coroutine());
+        StartWave();
     }
 
     void OnEndAssaultPhase()
     {
-        //wave +1
-        currentWave++;
-
         //stop coroutine if still running
         if (wave_coroutine != null)
             StopCoroutine(wave_coroutine);
@@ -79,19 +106,13 @@ public class WaveManager : MonoBehaviour
     void OnEnemyDeath(Enemy enemy)
     {
         //remove from the list
-        foreach(EnemyStruct enemyStruct in enemies)
-        {
-            if(enemyStruct.Enemy == enemy)
-            {
-                enemies.Remove(enemyStruct);
-                break;
-            }
-        }
+        if (enemies.Contains(enemy))
+            enemies.Remove(enemy);
 
-        //if there are no other enemies, end assault phase
+        //if there are no other enemies, end wave
         if(enemies.Count <= 0)
         {
-            GameManager.instance.levelManager.EndAssaultPhase();
+            EndWave();
         }
     }
 
@@ -111,95 +132,68 @@ public class WaveManager : MonoBehaviour
         enemies.Clear();
     }
 
-    void CreateWave()
-    {
-        //do only if there are waves
-        if (this.currentWave < 0 || this.currentWave >= waveConfig.Waves.Length)
-            return;
-
-        //current wave
-        WaveStruct wave = waveConfig.Waves[this.currentWave];
-
-        //update level config (change level)
-        GameManager.instance.UpdateLevel(wave.LevelConfig);
-
-        //foreach enemy in this wave, instantiate but deactivate
-        foreach (EnemyStruct enemyStruct in wave.EnemiesStructs)
-        {
-            InstantiateNewEnemy(enemyStruct.Enemy, enemyStruct.TimeToAddBeforeSpawn);
-        }
-    }
-
     IEnumerator Wave_Coroutine()
     {
-        //current wave + enemies copy (copy because when enemy is killed, it's removed from list)
-        WaveStruct wave = waveConfig.Waves[currentWave];
-        List<EnemyStruct> enemiesCopy = enemies.CreateCopy();
+        //current wave
+        WaveStruct wave = waveConfig.Waves[CurrentWave];
+
+        //foreach enemy in this wave, instantiate but deactivate
+        foreach (Enemy enemy in wave.Enemies)
+        {
+            InstantiateNewEnemy(enemy);
+            yield return null;
+        }
+
+        //enemies copy(copy because when enemy is killed, it's removed from list)
+        List<Enemy> enemiesCopy = enemies.CreateCopy();
 
         //queue to not spawn on same face
         Queue<EFace> facesQueue = new Queue<EFace>();
 
         //for every enemy
-        foreach (EnemyStruct enemyStruct in enemiesCopy)
+        foreach (Enemy enemy in enemiesCopy)
         {
-            //wait for this enemy
-            yield return new WaitForSeconds(enemyStruct.TimeToAddBeforeSpawn);
-
             //randomize coordinates to attack
-            EFace face = GetRandomFace(facesQueue);
+            EFace face = WorldUtility.GetRandomFace(facesQueue, waveConfig.Waves[CurrentWave].IgnorePreviousFacesAtSpawn);
             int x = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
             int y = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
             Coordinates coordinatesToAttack = new Coordinates(face, x, y);
 
-            //set enemy position
-            enemyStruct.Enemy.transform.position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, wave.DistanceFromWorld);
+            //get position and rotation
+            Vector3 position;
+            Quaternion rotation;
+            GameManager.instance.world.GetPositionAndRotation(coordinatesToAttack, waveConfig.Waves[CurrentWave].DistanceFromWorld, out position, out rotation);
+
+            //set enemy position and rotation, then activate
+            enemy.transform.position = position;
+            enemy.transform.rotation = rotation;
+
+            //instantiate portal at position and rotation
+            if (GameManager.instance.levelManager.generalConfig.PortalPrefab)
+            {
+                Instantiate(GameManager.instance.levelManager.generalConfig.PortalPrefab, position, rotation);
+            }
 
             //set enemy destination and activate
-            enemyStruct.Enemy.coordinatesToAttack = coordinatesToAttack;
-            enemyStruct.Enemy.gameObject.SetActive(true);
+            enemy.Init(coordinatesToAttack);
 
             //wait for next enemy
             yield return new WaitForSeconds(wave.TimeBetweenSpawns);
         }
     }
 
-    EFace GetRandomFace(Queue<EFace> facesQueue)
-    {
-        //check every possible face
-        List<EFace> faces = new List<EFace>();
-        for(int i = 0; i < System.Enum.GetNames(typeof(EFace)).Length; i++)
-        {
-            //if not inside facesQueue, add to list
-            EFace tryingFace = (EFace)i;
-            if(facesQueue.Contains(tryingFace) == false)
-            {
-                faces.Add(tryingFace);
-            }
-        }
-
-        //select random face in list
-        EFace selectedFace = faces[Random.Range(0, faces.Count)];
-
-        //add to queue (clamp at max)
-        facesQueue.Enqueue(selectedFace);
-        if (facesQueue.Count > waveConfig.Waves[currentWave].IgnorePreviousFacesAtSpawn)
-            facesQueue.Dequeue();
-
-        return selectedFace;
-    }
-
     #endregion
 
     #region public API
 
-    public Enemy InstantiateNewEnemy(Enemy enemyPrefab, float timeToAddBeforeSpawn)
+    public Enemy InstantiateNewEnemy(Enemy enemyPrefab)
     {
         //instantiate and set parent but deactivate
         Enemy enemy = Instantiate(enemyPrefab, transform);
         enemy.gameObject.SetActive(false);
 
         //save in the list and add to the event
-        enemies.Add(new EnemyStruct(enemy, timeToAddBeforeSpawn));
+        enemies.Add(enemy);
         enemy.onEnemyDeath += OnEnemyDeath;
 
         return enemy;

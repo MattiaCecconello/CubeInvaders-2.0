@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EPhase
 {
-    strategic, assault, waiting
+    strategic, assault, endStrategic, endAssault
 }
 
 [AddComponentMenu("Cube Invaders/Manager/Level Manager")]
@@ -14,10 +14,7 @@ public class LevelManager : MonoBehaviour
     public LevelConfig levelConfig;
     public GeneralConfig generalConfig;
 
-    [Header("EndGame")]
-    public string WinText = "YOU WON!!";
-    public string LoseText = "YOU LOST...";
-
+    public System.Action onStartGame;
     public System.Action onStartStrategicPhase;
     public System.Action onEndStrategicPhase;
     public System.Action onStartAssaultPhase;
@@ -32,7 +29,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         //check if randomize world
-        if (levelConfig.RandomizeWorldAtStart)
+        if (levelConfig && levelConfig.RandomizeWorldAtStart)
         {
             GameManager.instance.world.RandomRotate();
         }
@@ -52,11 +49,11 @@ public class LevelManager : MonoBehaviour
         CurrentPhase = EPhase.strategic;
     }
 
-    public void EndStrategicPhase(bool force = false)
+    public void EndStrategicPhase()
     {
-        if (force || CurrentPhase == EPhase.strategic)
+        if (CurrentPhase == EPhase.strategic)
         {
-            CurrentPhase = EPhase.waiting;
+            CurrentPhase = EPhase.endStrategic;
 
             onEndStrategicPhase?.Invoke();
 
@@ -71,11 +68,11 @@ public class LevelManager : MonoBehaviour
         CurrentPhase = EPhase.assault;
     }
 
-    public void EndAssaultPhase(bool force = false)
+    public void EndAssaultPhase()
     {
-        if (force || CurrentPhase == EPhase.assault)
+        if (CurrentPhase == EPhase.assault)
         {
-            CurrentPhase = EPhase.waiting;
+            CurrentPhase = EPhase.endAssault;
 
             onEndAssaultPhase?.Invoke();
 
@@ -93,6 +90,9 @@ public class LevelManager : MonoBehaviour
 
         //start in strategic
         StartStrategicPhase();
+
+        //call event
+        onStartGame?.Invoke();
     }
 
     public void EndGame(bool win)
@@ -103,8 +103,21 @@ public class LevelManager : MonoBehaviour
 
         GameEnded = true;
 
+        //save using scene name
+        MenuSystem.Save(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, win);
+
+        //if win level, save world
+        if(win)
+            GameManager.instance.SaveWorld();
+
         //call event
         onEndGame?.Invoke(win);
+    }
+
+    public void UpdateLevel(LevelConfig levelConfig)
+    {
+        //update level config
+        this.levelConfig = levelConfig;
     }
 
     #endregion

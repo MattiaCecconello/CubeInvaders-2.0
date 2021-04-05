@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4334ec798e7787438925ec807cfec7f, type: 3}
+  m_Name: Show10
+  m_EditorClassIdentifier: 
+  Waves:
+  - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
+    resourcesMax: 8
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 4
+    DistanceFromWorld: 20
+    Enemies:
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+  - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
+    resourcesMax: 0
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 4
+    DistanceFromWorld: 20
+    Enemies:
+    - {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
+    - {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+  - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
+    resourcesMax: 0
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 4
+    DistanceFromWorld: 20
+    Enemies:
+    - {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}
+    - {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
+    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
+    - {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}

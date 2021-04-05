@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 #region enum & struct
 
@@ -28,6 +29,8 @@ public struct Coordinates
     public int x;
     public int y;
 
+    public Vector3 position => GameManager.instance.world.CoordinatesToPosition(this, 0);
+
     public Coordinates(EFace face, int x, int y)
     {
         this.face = face;
@@ -40,6 +43,11 @@ public struct Coordinates
         this.face = face;
         this.x = v.x;
         this.y = v.y;
+    }
+
+    public override string ToString()
+    {
+        return $"Face {face} ({x},{y})";
     }
 
     public static Coordinates operator +(Coordinates a, Vector2Int b) => new Coordinates(a.face, a.x + b.x, a.y + b.y);
@@ -78,6 +86,7 @@ public class World : MonoBehaviour
 
     [Header("Important")]
     public BiomesConfig biomesConfig;
+    [SerializeField] bool resetCube = true;
 
     public System.Action onEndRotation;
 
@@ -90,6 +99,10 @@ public class World : MonoBehaviour
     void Awake()
     {
         GenerateReferences();
+
+        //if not reset cube, try load
+        if (resetCube == false)
+            LoadCube();
     }
 
     void OnDestroy()
@@ -115,6 +128,26 @@ public class World : MonoBehaviour
             if (cell != null)
             {
                 Cells.Add(cell.coordinates, cell);
+
+                //save start coordinates
+                cell.startCoordinates = cell.coordinates;
+            }
+        }
+    }
+
+    void LoadCube()
+    {
+        //load class
+        ClassToSave load = SaveLoadJSON.Load(worldConfig.name);
+
+        if (load != null)
+        {
+            //foreach cell
+            for(int i = 0; i < load.coordinates.Count; i++)
+            {
+                //if was destroyed, load a destroyed cell
+                if (load.isAlive[i] == false)
+                    Cells[load.coordinates[i]].LoadDestroyedCell();
             }
         }
     }
@@ -157,7 +190,11 @@ public class World : MonoBehaviour
     void InstantiateSun()
     {
         //create sun and set name, and position
+#if UNITY_EDITOR
+        Transform sun = (UnityEditor.PrefabUtility.InstantiatePrefab(worldConfig.SunPrefab) as GameObject).transform;
+#else
         Transform sun = Instantiate(worldConfig.SunPrefab).transform;
+#endif
         sun.name = "Sun";
         sun.position = transform.position;
 
@@ -231,14 +268,13 @@ public class World : MonoBehaviour
         //set it
         Cells.Add(coordinates, cell);
         cell.coordinates = coordinates;
-        cell.SelectModel(worldConfig.NumberCells);
     }
 
     Cell CreateCell(Coordinates coordinates, Vector3 eulerRotation)
     {
         //create and set position and rotation
         Cell cell = InstantiateCellBasedOnFace(coordinates.face);
-        cell.transform.position = CoordinatesToPosition(coordinates);
+        cell.transform.position = CoordinatesToPosition(coordinates, 0);
         cell.transform.eulerAngles = eulerRotation;
         cell.transform.Rotate(RotateAngleOrSide(coordinates), Space.Self);
 
@@ -257,6 +293,20 @@ public class World : MonoBehaviour
         //create biome based on face
         switch (face)
         {
+#if UNITY_EDITOR
+            case EFace.front:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Front) as Cell;
+            case EFace.right:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Right) as Cell;
+            case EFace.back:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Back) as Cell;
+            case EFace.left:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Left) as Cell;
+            case EFace.up:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Up) as Cell;
+            case EFace.down:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Down) as Cell;
+#else
             case EFace.front:
                 return Instantiate(biomesConfig.Front);
             case EFace.right:
@@ -269,6 +319,7 @@ public class World : MonoBehaviour
                 return Instantiate(biomesConfig.Up);
             case EFace.down:
                 return Instantiate(biomesConfig.Down);
+#endif
         }
 
         return null;
@@ -348,9 +399,9 @@ public class World : MonoBehaviour
     /// <param name="coordinates">coordinates to rotate</param>
     /// <param name="lookingFace">rotation of the camera</param>
     /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
-    public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection)
+    public void PlayerRotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime)
     {
-        worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
+        worldRotator.PlayerRotate(new Coordinates[1] { coordinates }, lookingFace, rotateDirection, rotationTime);
     }
 
     /// <summary>
@@ -359,9 +410,9 @@ public class World : MonoBehaviour
     /// <param name="coordinates">coordinates to rotate</param>
     /// <param name="lookingFace">rotation of the camera</param>
     /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
-    public void Rotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection)
+    public void PlayerRotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime)
     {
-        worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
+        worldRotator.PlayerRotate(coordinates, lookingFace, rotateDirection, rotationTime);
     }
 
     /// <summary>
@@ -373,10 +424,29 @@ public class World : MonoBehaviour
     }
 
     /// <summary>
+    /// Enemy rotate cube
+    /// </summary>
+    public void RotateByEnemy(int numberRotations, float rotationTime)
+    {
+        //for n times, rotate row or column
+        for (int i = 0; i < numberRotations; i++)
+        {
+            //randomize rotation
+            EFace face = (EFace)Random.Range(0, 6);
+            int x = Random.Range(0, worldConfig.NumberCells);
+            int y = Random.Range(0, worldConfig.NumberCells);
+            ERotateDirection randomDirection = (ERotateDirection)Random.Range(0, 4);
+
+            //effective rotation
+            worldRotator.Rotate(new Coordinates(face, x, y), EFace.front, randomDirection, rotationTime);
+        }
+    }
+
+    /// <summary>
     /// Returns the position in the world of the cell at these coordinates
     /// <param name="distanceFromWorld">distance from the cell position</param>
     /// </summary>
-    public Vector3 CoordinatesToPosition(Coordinates coordinates, float distanceFromWorld = 0)
+    public Vector3 CoordinatesToPosition(Coordinates coordinates, float distanceFromWorld)
     {
         //position is index * size (then one axis is -distanceFromWorld or FaceSize + distanceFromWorld)
         Vector3 v = Vector3.zero;
@@ -425,6 +495,9 @@ public class World : MonoBehaviour
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
     }
 
+    /// <summary>
+    /// Get cells around (up, down, left, right) these coordinates
+    /// </summary>
     public List<Cell> GetCellsAround(Coordinates coordinates)
     {
         List<Cell> cellsAround = new List<Cell>();
@@ -446,6 +519,37 @@ public class World : MonoBehaviour
         }
 
         return cellsAround;
+    }
+
+    /// <summary>
+    /// Get every cell in this face
+    /// </summary>
+    public List<Cell> GetEveryCellInFace(EFace face)
+    {
+        //get cells in new face
+        List<Cell> possibleCells = new List<Cell>();
+        foreach (Coordinates coordinates in Cells.Keys)
+        {
+            if (coordinates.face == face)
+                possibleCells.Add(GameManager.instance.world.Cells[coordinates]);
+        }
+
+        return possibleCells;
+    }
+
+    /// <summary>
+    /// Return position and rotation at new coordinates
+    /// </summary>
+    public void GetPositionAndRotation(Coordinates coordinatesToAttack, float distance, out Vector3 position, out Quaternion rotation)
+    {
+        //coordinate position + distance from world
+        position = CoordinatesToPosition(coordinatesToAttack, distance);
+
+        //find direction to attack
+        Vector3 direction = (coordinatesToAttack.position - position).normalized;
+
+        //look in direction
+        rotation = Quaternion.LookRotation(direction);
     }
 
     #endregion

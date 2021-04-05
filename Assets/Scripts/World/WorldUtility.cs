@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using redd096;
 
 public static class WorldUtility
 {
@@ -28,6 +30,9 @@ public static class WorldUtility
         return index;
     }
 
+    /// <summary>
+    /// Select new cell
+    /// </summary>
     public static Coordinates SelectCell(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
     {
         Coordinates selectedCell = new Coordinates(startFace, x, y);
@@ -176,6 +181,81 @@ public static class WorldUtility
         return startFace;
     }
 
+    /// <summary>
+    /// Get random face, but ignoring previous in queue
+    /// </summary>
+    public static EFace GetRandomFace(Queue<EFace> facesQueue, int numberOfPreviousFacesToIgnore)
+    {
+        //check every possible face
+        List<EFace> faces = new List<EFace>();
+        for (int i = 0; i < System.Enum.GetNames(typeof(EFace)).Length; i++)
+        {
+            //if not inside facesQueue, add to list
+            EFace tryingFace = (EFace)i;
+            if (facesQueue.Contains(tryingFace) == false)
+            {
+                faces.Add(tryingFace);
+            }
+        }
+
+        //select random face in list
+        EFace selectedFace = faces[Random.Range(0, faces.Count)];
+
+        //add to queue
+        facesQueue.Enqueue(selectedFace);
+
+        //clamp list of faces to ignore
+        if (facesQueue.Count > numberOfPreviousFacesToIgnore)
+            facesQueue.Dequeue();
+
+        return selectedFace;
+    }
+
+    /// <summary>
+    /// Get opposite face
+    /// </summary>
+    public static EFace GetOppositeFace(EFace currentFace)
+    {
+        switch (currentFace)
+        {
+            case EFace.front:
+                return EFace.back;
+            case EFace.right:
+                return EFace.left;
+            case EFace.back:
+                return EFace.front;
+            case EFace.left:
+                return EFace.right;
+            case EFace.up:
+                return EFace.down;
+            case EFace.down:
+                return EFace.up;
+            default:
+                return EFace.front;
+        }
+    }
+
+    /// <summary>
+    /// In possible cells, remove everyone where overlap
+    /// </summary>
+    /// <param name="position">current position, used to calculate distance</param>
+    /// <param name="coordinatesToAttackPosition">coordinates to attack, used to calculate distance</param>
+    /// <param name="possibleCells">possible cells to teleport</param>
+    public static void CheckOverlap(Vector3 position, Vector3 coordinatesToAttackPosition, List<Cell> possibleCells)
+    {
+        //get distance
+        float distance = Vector3.Distance(position, coordinatesToAttackPosition);
+
+        //foreach possible cell
+        foreach (Cell cell in possibleCells.CreateCopy())
+        {
+            //if overlap in new position, remove from list
+            Vector3 newPosition = GameManager.instance.world.CoordinatesToPosition(cell.coordinates, distance);   //adjacent coordinates, but same distance
+            if (Physics.OverlapBox(newPosition, Vector3.one * 0.2f, Quaternion.identity, CreateLayer.LayerAllExcept(""), QueryTriggerInteraction.Collide).Length > 0)
+                possibleCells.Remove(cell);
+        }
+    }
+
     #endregion
 
     #region face based on transform
@@ -220,6 +300,9 @@ public static class WorldUtility
 
     #region rotate vector based on face
 
+    /// <summary>
+    /// Rotate vector based on face
+    /// </summary>
     public static Vector3 RotateTowardsFace(Vector3 current, EFace face)
     {
         switch (face)
