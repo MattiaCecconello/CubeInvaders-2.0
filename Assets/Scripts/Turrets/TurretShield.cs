@@ -91,7 +91,7 @@ public class TurretShield : Turret
         if (isRotating == false)
         {
             //reset shield for when this turret will be reactivate
-            shield.ResetShield();
+            shield.ResetShieldSize();
 
             //remove from queue
             RemoveFromQueue(CellOwner.coordinates);
@@ -228,7 +228,8 @@ public class TurretShield : Turret
     void InstantiateShield()
     {
         //reset shield
-        shield.ResetShield();
+        shield.ResetShieldSize();
+        shield.RegenHealth();
     }
 
     void TryActivateShield()

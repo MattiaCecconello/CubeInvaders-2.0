@@ -83,17 +83,14 @@ public class Shield : MonoBehaviour
         CurrentHealth = health;
     }
 
-    public void ResetShield()
+    public void ResetShieldSize()
     {
-        //reset shield at start
-
         //be sure there is no coroutine running
         if (spawnShield_Coroutine != null)
             StopCoroutine(spawnShield_Coroutine);
 
-        //reset size and health
+        //reset size immediatly cause this turret could be deactivate in hierarchy
         transform.localScale = Vector3.zero;
-        RegenHealth();
     }
 
     public void ActivateShield(Coordinates coordinates)
