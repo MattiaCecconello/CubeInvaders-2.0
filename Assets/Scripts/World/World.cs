@@ -76,6 +76,27 @@ public struct Coordinates
 
 #endregion
 
+#region save class
+
+[System.Serializable]
+public class WorldSave
+{
+    public List<Coordinates> coordinates = new List<Coordinates>();
+    public List<bool> isAlive = new List<bool>();
+
+    public WorldSave(List<Cell> cells)
+    {
+        //foreach cell, save start coordinates and values
+        foreach (Cell cell in cells)
+        {
+            coordinates.Add(cell.startCoordinates);
+            isAlive.Add(cell.IsAlive);
+        }
+    }
+}
+
+#endregion
+
 [AddComponentMenu("Cube Invaders/World/World")]
 public class World : MonoBehaviour
 {
@@ -139,7 +160,7 @@ public class World : MonoBehaviour
     void LoadCube()
     {
         //load class
-        ClassToSave load = SaveLoadJSON.Load(worldConfig.name);
+        WorldSave load = SaveLoadJSON.Load<WorldSave>(worldConfig.name);
 
         if (load != null)
         {

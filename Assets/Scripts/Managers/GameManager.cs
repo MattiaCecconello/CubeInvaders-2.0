@@ -75,7 +75,7 @@ public class GameManager : Singleton<GameManager>
             cellsToSave.Add(cell);
 
         //save
-        SaveLoadJSON.Save(world.worldConfig.name, new ClassToSave(cellsToSave));
+        SaveLoadJSON.Save(world.worldConfig.name, new WorldSave(cellsToSave));
     }
 
     #endregion

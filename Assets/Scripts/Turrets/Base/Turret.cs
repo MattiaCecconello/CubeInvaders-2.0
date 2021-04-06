@@ -159,7 +159,6 @@ public class Turret : BuildableObject
     {
         //save previous face
         previousFace = CellOwner.coordinates.face;
-
         
         Turret[] turrets;
 
