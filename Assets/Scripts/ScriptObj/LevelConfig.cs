@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using redd096;
 
 [CreateAssetMenu(menuName = "Cube Invaders/Level/Level Config", fileName = "Level Config")]
 public class LevelConfig : ScriptableObject
@@ -13,15 +14,15 @@ public class LevelConfig : ScriptableObject
 
     [Header("Modifier - Destroy turrets when no move")]
     [Tooltip("Destroy turret after few seconds that player doesn't move it")] public bool DestroyTurretWhenNoMove = false;
-    public bool DisableInsteadOfDestroy = true;
+    [CanShow("DestroyTurretWhenNoMove")] public bool DisableInsteadOfDestroy = true;
 
     [Header("Modifier - Generator")]
     [Tooltip("Turret need generator to activate")] public bool TurretsNeedGenerator = false;
-    [Tooltip("Activate every turret on this face, or only turrets around")] public bool GeneratorActiveAllFace = true;
+    [Tooltip("Activate every turret on this face, or only turrets around")] [CanShow("TurretsNeedGenerator")] public bool GeneratorActiveAllFace = true;
 
     [Header("Modifier - Limit of turrets on same face")]
     [Tooltip("Limit of turrets on same face, if exceed explode turrets (0 = no limits)")] [Min(0)] public int LimitOfTurretsOnSameFace = 0;
-    [Tooltip("Timer to destroy if there are more turrets on same face")] [Min(0)] public float TimeBeforeDestroyTurretsOnSameFace = 2;
-    [Tooltip("Limit of turrets on same face, only if is the same type of turret")] public bool OnlyIfSameType = true;
-    [Tooltip("When draw line feedback, close line or keep open?")] public bool CloseLineFeedback = true;
+    [Tooltip("Timer to destroy if there are more turrets on same face")] [CanShow("LimitOfTurretsOnSameFace")] [Min(0)] public float TimeBeforeDestroyTurretsOnSameFace = 2;
+    [Tooltip("Limit of turrets on same face, only if is the same type of turret")] [CanShow("LimitOfTurretsOnSameFace")] public bool OnlyIfSameType = true;
+    [Tooltip("When draw line feedback, close line or keep open?")] [CanShow("LimitOfTurretsOnSameFace")] public bool CloseLineFeedback = true;
 }
