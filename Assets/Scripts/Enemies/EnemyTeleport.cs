@@ -10,6 +10,7 @@ public class EnemyTeleport : Enemy
     [Header("Teleport at percentage life")]
     [Tooltip("Check there are no enemies where teleport")] [SerializeField] bool checkNoHitEnemies = true;
     [Tooltip("Ignore previous faces when teleport")] [Min(1)] [SerializeField] int numberOfPreviousFacesToIgnore = 1;
+    [Tooltip("Can use opposite face or only adjacent faces?")] [SerializeField] bool canTeleportOnOppositeFace = false;
     [Tooltip("When reach one of this percentages of life, do teleport")] [SerializeField] [Range(0, 100)] int[] percentagesLife = default;
 
     public System.Action<Vector3, Quaternion, Vector3, Quaternion> onTeleport;
@@ -45,8 +46,13 @@ public class EnemyTeleport : Enemy
         if (CheckTeleport() == false)
             return;
 
+        //if can NOT teleport on opposite face, add it to faces to ignore
+        List<EFace> facesToIgnore = new List<EFace>();
+        if (canTeleportOnOppositeFace == false)
+            facesToIgnore.Add(WorldUtility.GetOppositeFace(coordinatesToAttack.face));
+
         //get new random face to teleport and save previous position
-        EFace randomFace = WorldUtility.GetRandomFace(facesQueue, numberOfPreviousFacesToIgnore);
+        EFace randomFace = WorldUtility.GetRandomFace(facesQueue, numberOfPreviousFacesToIgnore, facesToIgnore);
 
         //find coordinates where teleport
         Coordinates newCoordinates = GetNewCoordinates(randomFace);

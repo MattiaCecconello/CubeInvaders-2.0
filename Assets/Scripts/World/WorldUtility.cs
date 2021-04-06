@@ -184,7 +184,7 @@ public static class WorldUtility
     /// <summary>
     /// Get random face, but ignoring previous in queue
     /// </summary>
-    public static EFace GetRandomFace(Queue<EFace> facesQueue, int numberOfPreviousFacesToIgnore)
+    public static EFace GetRandomFace(Queue<EFace> facesQueue, int numberOfPreviousFacesToIgnore, List<EFace> facesToIgnore = null)
     {
         //check every possible face
         List<EFace> faces = new List<EFace>();
@@ -194,7 +194,11 @@ public static class WorldUtility
             EFace tryingFace = (EFace)i;
             if (facesQueue.Contains(tryingFace) == false)
             {
-                faces.Add(tryingFace);
+                //be sure there are not faces to ignore, or this face is not inside that list
+                if (facesToIgnore == null || facesToIgnore.Contains(tryingFace) == false)
+                {
+                    faces.Add(tryingFace);
+                }
             }
         }
 
