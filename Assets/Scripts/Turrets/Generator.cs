@@ -46,6 +46,10 @@ public class Generator : BuildableObject
 
     void CheckTurretsAround(bool activate)
     {
+        //do only if need generator
+        if (GameManager.instance.levelManager.levelConfig.TurretsNeedGenerator == false)
+            return;
+
         //foreach cell on this face
         if (GameManager.instance.levelManager.levelConfig.GeneratorActiveAllFace)
         {
