@@ -72,30 +72,38 @@ public class TurretShield : Turret
     {
         base.ActivateTurret();
 
-        //add to queue
-        AddToQueue();
+        //do only if not rotating
+        if (isRotating == false)
+        {
+            //add to queue
+            AddToQueue();
 
-        //try activate shield
-        TryActivateShield();
+            //try activate shield
+            TryActivateShield();
+        }
     }
 
     public override void DeactivateTurret()
     {
         base.DeactivateTurret();
 
-        //reset shield for when this turret will be reactivate
-        shield.ResetShield();
+        //do only if not rotating
+        if (isRotating == false)
+        {
+            //reset shield for when this turret will be reactivate
+            shield.ResetShield();
 
-        //remove from queue
-        RemoveFromQueue(CellOwner.coordinates);
+            //remove from queue
+            RemoveFromQueue(CellOwner.coordinates);
+        }
     }
 
     protected override void OnWorldRotate(Coordinates coordinates)
     {
-        base.OnWorldRotate(coordinates);
-
         //set isRotating
         isRotating = true;
+
+        base.OnWorldRotate(coordinates);
 
         //deactivate the shield and remove from queue
         shield.DeactivateShield();
