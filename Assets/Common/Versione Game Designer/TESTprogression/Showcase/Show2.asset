@@ -14,52 +14,90 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    resourcesMax: 5
-    IgnorePreviousFacesAtSpawn: 3
+    Resources: 5
+    IgnorePreviousFacesAtSpawn: 4
     TimeBetweenSpawns: 5
     DistanceFromWorld: 20
     Enemies:
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 3
+    Resources: 0
+    IgnorePreviousFacesAtSpawn: 4
+    TimeBetweenSpawns: 5
+    DistanceFromWorld: 20
+    Enemies:
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+  - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
+    Resources: 0
+    IgnorePreviousFacesAtSpawn: 4
     TimeBetweenSpawns: 4
     DistanceFromWorld: 20
     Enemies:
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-  - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    resourcesMax: 0
-    IgnorePreviousFacesAtSpawn: 3
-    TimeBetweenSpawns: 3
-    DistanceFromWorld: 20
-    Enemies:
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-    - {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -5
