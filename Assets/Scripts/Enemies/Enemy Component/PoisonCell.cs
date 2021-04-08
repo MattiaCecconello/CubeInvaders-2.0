@@ -52,7 +52,7 @@ public class PoisonCell : MonoBehaviour
             }
         }
 
-        //and kill this one
-        currentCell.KillCell(false);
+        //and kill this one (or lose game)
+        currentCell.KillCell();
     }
 }
