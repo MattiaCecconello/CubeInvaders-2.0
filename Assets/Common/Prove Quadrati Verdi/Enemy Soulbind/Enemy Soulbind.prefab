@@ -1,52 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6529817813752180074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3849306090492092292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f895c06cb65f1224bb7c2c8621913d02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  speed: 1
-  resourcesWhenKilledByShot: 1
-  resourcesWhenKilledByShield: 0
-  resourcesWhenHitWorld: 0
-  coordinatesToAttack:
-    face: 0
-    x: 0
-    y: 0
-  shareHealth: 0
-  killSoulbindOnDeath: 1
-  useOppositeFace: 0
-  sameCell: 1
-  checkNoHitEnemies: 1
---- !u!114 &5108049396857094920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3849306090492092292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a17d58ab74b1944ac3660c92802cd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookAtSoulBind: 0
-  particlesSpawnFirstSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
-  soundSpawnFirstSoulbind:
-    audioClip: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
-    volume: 0
-  particlesSpawnSecondSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
-  soundSpawnSecondSoulbind:
-    audioClip: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
-    volume: 0
 --- !u!1 &5445727669487121111
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +46,53 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6529817813752180074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849306090492092292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f895c06cb65f1224bb7c2c8621913d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  speed: 1
+  resourcesWhenKilledByShot: 1
+  resourcesWhenKilledByShield: 0
+  resourcesWhenHitWorld: 0
+  coordinatesToAttack:
+    face: 0
+    x: 0
+    y: 0
+  shareHealth: 0
+  killSoulbindOnDeath: 1
+  useOppositeFace: 0
+  sameCell: 1
+  checkNoHitEnemies: 1
+--- !u!114 &5108049396857094920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849306090492092292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a17d58ab74b1944ac3660c92802cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookAtSoulBind: 1
+  particlesSpawnFirstSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
+  soundSpawnFirstSoulbind:
+    audioClip: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
+    volume: 0
+  particlesSpawnSecondSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
+  soundSpawnSecondSoulbind:
+    audioClip: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+    volume: 0
 --- !u!1 &6738568377448998033
 GameObject:
   m_ObjectHideFlags: 0
