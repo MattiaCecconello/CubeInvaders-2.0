@@ -10,12 +10,15 @@ public class EnemyPoison : Enemy
 
     public override void Die<T>(T hittedBy)
     {
-        base.Die(hittedBy);
-
-        //poison cell instead of kill it
-        if (hittedBy.GetType() == typeof(Cell))
+        if (StillAlive)
         {
-            hittedBy.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
+            base.Die(hittedBy);
+
+            //poison cell instead of kill it
+            if (hittedBy.GetType() == typeof(Cell))
+            {
+                hittedBy.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
+            }
         }
     }
 }

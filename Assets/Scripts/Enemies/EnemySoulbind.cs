@@ -92,17 +92,20 @@ public class EnemySoulbind : Enemy
 
     public override void Die<T>(T hittedBy)
     {
-        base.Die(hittedBy);
-
-        //if kill also soulbind (only if damageSoulBind is true)
-        if (soulBind && killSoulbindOnDeath && damageSoulBind)
+        if (StillAlive)
         {
-            //be sure shareHealth is false, otherwise is already killed by get damage
-            if (shareHealth == false)
+            base.Die(hittedBy);
+
+            //if kill also soulbind (only if damageSoulBind is true)
+            if (soulBind && killSoulbindOnDeath && damageSoulBind)
             {
-                soulBind.damageSoulBind = false;
-                soulBind.Die(hittedBy);
-                soulBind.damageSoulBind = true;
+                //be sure shareHealth is false, otherwise is already killed by get damage
+                if (shareHealth == false)
+                {
+                    soulBind.damageSoulBind = false;
+                    soulBind.Die(hittedBy);
+                    soulBind.damageSoulBind = true;
+                }
             }
         }
     }

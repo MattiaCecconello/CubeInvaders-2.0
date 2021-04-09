@@ -53,7 +53,7 @@ public class Cell : MonoBehaviour
     {
         //if hitted by enemy
         Enemy enemy = other.GetComponentInParent<Enemy>();
-        if (enemy)
+        if (enemy && enemy.StillAlive)  //be sure enemy is still alive (to not have 2 hit on same frame)
         {
             //only if not enemy poison
             if (enemy.GetType() != typeof(EnemyPoison))

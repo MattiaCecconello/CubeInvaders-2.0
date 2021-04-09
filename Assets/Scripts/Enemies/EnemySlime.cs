@@ -15,14 +15,17 @@ public class EnemySlime : Enemy
 
     public override void Die<T>(T hittedBy)
     {
-        //instantiate slimes (if hit by shot and not already istantiated slimes)
-        if (enemiesPrefabs != null && hittedBy.GetType() == typeof(TurretShot) && instantiatedSlimes == false)
+        if (StillAlive)
         {
-            instantiatedSlimes = true;
-            InstantiateSlimes();
-        }
+            //instantiate slimes (if hit by shot and not already istantiated slimes)
+            if (enemiesPrefabs != null && hittedBy.GetType() == typeof(TurretShot) && instantiatedSlimes == false)
+            {
+                instantiatedSlimes = true;
+                InstantiateSlimes();
+            }
 
-        base.Die(hittedBy);
+            base.Die(hittedBy);
+        }
     }
 
     void InstantiateSlimes()

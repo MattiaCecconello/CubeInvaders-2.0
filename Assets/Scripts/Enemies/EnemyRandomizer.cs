@@ -10,12 +10,15 @@ public class EnemyRandomizer : Enemy
 
     public override void Die<T>(T hittedBy)
     {
-        base.Die(hittedBy);
-
-        //if hitted world, randomize it few times
-        if (hittedBy.GetType() == typeof(Cell))
+        if (StillAlive)
         {
-            GameManager.instance.world.RotateByEnemy(numberRotations, rotationTime);
+            base.Die(hittedBy);
+
+            //if hitted world, randomize it few times
+            if (hittedBy.GetType() == typeof(Cell))
+            {
+                GameManager.instance.world.RotateByEnemy(numberRotations, rotationTime);
+            }
         }
     }
 }

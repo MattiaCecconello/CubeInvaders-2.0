@@ -41,13 +41,16 @@ public class Enemy : EnemyBase
 
     public override void Die<T>(T hittedBy)
     {
-        base.Die(hittedBy);
+        if (StillAlive)
+        {
+            base.Die(hittedBy);
 
-        //call wave manager
-        GameManager.instance.waveManager.OnEnemyDeath(this);
+            //call wave manager
+            GameManager.instance.waveManager.OnEnemyDeath(this);
 
-        //call event
-        onEnemyDeath?.Invoke(this);
+            //call event
+            onEnemyDeath?.Invoke(this);
+        }
     }
 
     #region slow
