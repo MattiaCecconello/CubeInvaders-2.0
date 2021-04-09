@@ -64,18 +64,18 @@ MonoBehaviour:
     - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       enemyTimer: 0
     - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -3
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       enemyTimer: 0
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -1.5
     - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       enemyTimer: 0
     - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       enemyTimer: 0
     - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      enemyTimer: 0
+      enemyTimer: -2.5
     - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       enemyTimer: 0
     - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      enemyTimer: 0
+      enemyTimer: -1.5
