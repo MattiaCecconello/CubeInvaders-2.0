@@ -14,15 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    Resources: 5
+    Resources: 7
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 6
     DistanceFromWorld: 20
     Enemies:
-    - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
-      enemyTimer: 0
     - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
       enemyTimer: 0
     - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
@@ -31,7 +27,7 @@ MonoBehaviour:
       enemyTimer: 0
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
     Resources: 0
-    IgnorePreviousFacesAtSpawn: 3
+    IgnorePreviousFacesAtSpawn: 5
     TimeBetweenSpawns: 6
     DistanceFromWorld: 20
     Enemies:
@@ -43,5 +39,7 @@ MonoBehaviour:
       enemyTimer: -6
     - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
       enemyTimer: -6
+    - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
+      enemyTimer: 0
     - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
       enemyTimer: 0
