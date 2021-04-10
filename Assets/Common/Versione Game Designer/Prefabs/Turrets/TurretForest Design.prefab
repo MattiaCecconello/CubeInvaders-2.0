@@ -103,6 +103,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7c32e3a5f3e03e641b2cc031da402b25, type: 2}
+    - target: {fileID: 1746683508730722721, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec6337d4d2e1904439c82845e8087544, type: 2}
     - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -119,6 +123,10 @@ PrefabInstance:
       propertyPath: linePosition
       value: 
       objectReference: {fileID: 1654439463382167084}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: fireVFX
+      value: 
+      objectReference: {fileID: 1017221412707956363, guid: 8dc8d61365160ff48acd43c83d3776cd, type: 3}
     - target: {fileID: 2674845573597132078, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.00000020861623
@@ -147,6 +155,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7c32e3a5f3e03e641b2cc031da402b25, type: 2}
+    - target: {fileID: 5240151495471432326, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec6337d4d2e1904439c82845e8087544, type: 2}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
       value: TurretForest Design
@@ -203,6 +215,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8562967988810305923, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 351c9c164bf1bbe4580a3e5c353ec275, type: 2}
     - target: {fileID: 9026065299652409340, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
       value: 0

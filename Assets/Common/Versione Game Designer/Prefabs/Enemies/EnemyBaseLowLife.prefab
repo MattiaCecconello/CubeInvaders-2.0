@@ -50,6 +50,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5873725972075197134, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: explosionParticlePrefab
+      value: 
+      objectReference: {fileID: 2162059483477449232, guid: 985343edef3e2aa4aa565f0d131447ca, type: 3}
     - target: {fileID: 7338728851212345807, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_Name
       value: EnemyBaseLowLife

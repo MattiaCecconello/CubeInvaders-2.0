@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8846992995886679285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2195800761646489814}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2195800761646489814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846992995886679285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1365103848991586335}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &302704404510105201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18,7 +48,7 @@ PrefabInstance:
     - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: shotSpawns.Array.data[0]
       value: 
-      objectReference: {fileID: 1365103848991586335}
+      objectReference: {fileID: 2195800761646489814}
     - target: {fileID: 154868810570998539, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -39,10 +69,18 @@ PrefabInstance:
       propertyPath: baseToRotate
       value: 
       objectReference: {fileID: 5253682925371288425}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: fireVFX
+      value: 
+      objectReference: {fileID: 9034834866260689696, guid: ede125c508000ea499e8a2c1101f32ad, type: 3}
     - target: {fileID: 4325549587960767796, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4559445207674165187, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 60451468a00f336458653b26b2d8bced, type: 2}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
       value: TurretSea Design
@@ -91,6 +129,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7997021515278422279, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e13329f43a53e2a4488ddccf9dd72b32, type: 2}
     - target: {fileID: 9026065299652409340, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
       value: 0

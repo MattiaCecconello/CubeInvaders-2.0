@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &85767730710086937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6846401194471027212}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6846401194471027212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85767730710086937}
+  m_LocalRotation: {x: 0.70710707, y: -0, z: -0, w: 0.7071066}
+  m_LocalPosition: {x: 0, y: -0.050000668, z: 0.51100004}
+  m_LocalScale: {x: 0.5, y: 0.4999999, z: 0.4999999}
+  m_Children: []
+  m_Father: {fileID: 6915140966674930062}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8905360808660006519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18,7 +48,7 @@ PrefabInstance:
     - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: shotSpawns.Array.data[0]
       value: 
-      objectReference: {fileID: 6915140966674930062}
+      objectReference: {fileID: 6846401194471027212}
     - target: {fileID: 154868810570998539, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -39,6 +69,14 @@ PrefabInstance:
       propertyPath: baseToRotate
       value: 
       objectReference: {fileID: 4634717462426181190}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: fireVFX
+      value: 
+      objectReference: {fileID: 8674483777696671608, guid: 5e42a5666bbd7b54b9c18e40eef666f2, type: 3}
+    - target: {fileID: 3926694849208164264, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c2a45df847e510e4f806628e13153959, type: 2}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
       value: TurretDesert Design
@@ -47,6 +85,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6735849498408258197, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 60647c1e0bbbe054bbb3c04ade74257f, type: 2}
     - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
