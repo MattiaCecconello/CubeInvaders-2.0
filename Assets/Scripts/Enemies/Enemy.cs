@@ -43,13 +43,13 @@ public class Enemy : EnemyBase
     {
         if (StillAlive)
         {
-            base.Die(hittedBy);
-
             //call wave manager
             GameManager.instance.waveManager.OnEnemyDeath(this);
 
             //call event
             onEnemyDeath?.Invoke(this);
+
+            base.Die(hittedBy);
         }
     }
 

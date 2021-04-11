@@ -94,8 +94,6 @@ public class EnemySoulbind : Enemy
     {
         if (StillAlive)
         {
-            base.Die(hittedBy);
-
             //if kill also soulbind (only if damageSoulBind is true)
             if (soulBind && killSoulbindOnDeath && damageSoulBind)
             {
@@ -107,6 +105,8 @@ public class EnemySoulbind : Enemy
                     soulBind.damageSoulBind = true;
                 }
             }
+
+            base.Die(hittedBy);
         }
     }
 

@@ -46,7 +46,6 @@ public class EnemyBase : MonoBehaviour
         if (health <= 0)
         {
             Die(whoHit);
-            return;
         }
     }
 

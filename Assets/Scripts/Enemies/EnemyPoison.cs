@@ -12,13 +12,13 @@ public class EnemyPoison : Enemy
     {
         if (StillAlive)
         {
-            base.Die(hittedBy);
-
             //poison cell instead of kill it
             if (hittedBy.GetType() == typeof(Cell))
             {
                 hittedBy.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
             }
+
+            base.Die(hittedBy);
         }
     }
 }

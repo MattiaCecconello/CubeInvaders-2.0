@@ -12,13 +12,13 @@ public class EnemyRandomizer : Enemy
     {
         if (StillAlive)
         {
-            base.Die(hittedBy);
-
             //if hitted world, randomize it few times
             if (hittedBy.GetType() == typeof(Cell))
             {
                 GameManager.instance.world.RotateByEnemy(numberRotations, rotationTime);
             }
+
+            base.Die(hittedBy);
         }
     }
 }
