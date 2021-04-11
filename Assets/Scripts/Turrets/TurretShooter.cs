@@ -80,6 +80,9 @@ public class TurretShooter : Turret
         shot.transform.localScale = new Vector3(size, size, size);
         shot.Init(this, EnemyToAttack);
 
+        //set parent
+        shot.transform.SetParent(transform);
+
         //call event
         onShoot?.Invoke(shotSpawns[indexSpawn]);
 

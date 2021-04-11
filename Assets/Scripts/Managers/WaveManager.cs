@@ -14,6 +14,18 @@ public class WaveManager : MonoBehaviour
     List<Enemy> enemies = new List<Enemy>();
     Coroutine wave_coroutine;
 
+    private Transform portalsParent;
+    Transform PortalsParent
+    {
+        get
+        {
+            if (portalsParent == null)
+                portalsParent = new GameObject("Portals Parent").transform;
+
+            return portalsParent;
+        }
+    }
+
     void Start()
     {
         //add events
@@ -162,7 +174,8 @@ public class WaveManager : MonoBehaviour
             //instantiate portal at position and rotation
             if (GameManager.instance.levelManager.generalConfig.PortalPrefab)
             {
-                Instantiate(GameManager.instance.levelManager.generalConfig.PortalPrefab, position, rotation);
+                GameObject portal = Instantiate(GameManager.instance.levelManager.generalConfig.PortalPrefab, position, rotation);
+                portal.transform.SetParent(PortalsParent);
             }
 
             //set enemy destination and activate
