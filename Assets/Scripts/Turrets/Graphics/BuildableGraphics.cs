@@ -20,9 +20,6 @@ public class BuildableGraphics : MonoBehaviour
     protected BuildableObject buildableObject;
     Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
 
-    Pooling<ParticleSystem> poolBuildVFX = new Pooling<ParticleSystem>();
-    Pooling<AudioSource> poolBuildAudio = new Pooling<AudioSource>();
-
     Dictionary<Transform, Quaternion> defaultRotations = new Dictionary<Transform, Quaternion>();
 
     protected virtual void Awake()
@@ -215,8 +212,8 @@ public class BuildableGraphics : MonoBehaviour
     void OnBuildTurret()
     {
         //vfx and sound
-        ParticlesManager.instance.Play(poolBuildVFX, buildVFX, transform.position, transform.rotation);
-        SoundManager.instance.Play(poolBuildAudio, buildAudio.audioClip, transform.position, buildAudio.volume);
+        ParticlesManager.instance.Play(buildVFX, transform.position, transform.rotation);
+        SoundManager.instance.Play(buildAudio.audioClip, transform.position, buildAudio.volume);
     }
 
     #endregion

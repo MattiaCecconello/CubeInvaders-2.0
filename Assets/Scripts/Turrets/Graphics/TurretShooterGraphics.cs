@@ -10,9 +10,6 @@ public class TurretShooterGraphics : TurretGraphics
 
     TurretShooter turretShooter;
 
-    Pooling<ParticleSystem> poolFireVFX = new Pooling<ParticleSystem>();
-    Pooling<AudioSource> poolFireAudio = new Pooling<AudioSource>();
-
     protected override void Awake()
     {
         base.Awake();
@@ -46,8 +43,8 @@ public class TurretShooterGraphics : TurretGraphics
     void OnShoot(Transform shotSpawn)
     {
         //vfx on shoot
-        ParticlesManager.instance.Play(poolFireVFX, fireVFX, shotSpawn.position, shotSpawn.rotation);
-        SoundManager.instance.Play(poolFireAudio, fireAudio.audioClip, shotSpawn.position, fireAudio.volume);
+        ParticlesManager.instance.Play(fireVFX, shotSpawn.position, shotSpawn.rotation);
+        SoundManager.instance.Play(fireAudio.audioClip, shotSpawn.position, fireAudio.volume);
     }
 
     #endregion

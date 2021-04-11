@@ -14,9 +14,6 @@ public class EnemyGraphics : MonoBehaviour
     [SerializeField] ParticleSystem explosionParticlePrefab = default;
     [SerializeField] AudioStruct explosionSound = default;
 
-    Pooling<ParticleSystem> poolExplosionParticles = new Pooling<ParticleSystem>();
-    Pooling<AudioSource> poolExplosionSound = new Pooling<AudioSource>();
-
     Enemy enemy;
 
     //for blink
@@ -70,7 +67,7 @@ public class EnemyGraphics : MonoBehaviour
     void OnEnemyDeath(Enemy enemy)
     {
         //vfx and sound
-        ParticlesManager.instance.Play(poolExplosionParticles, explosionParticlePrefab, transform.position, transform.rotation);
-        SoundManager.instance.Play(poolExplosionSound, explosionSound.audioClip, transform.position, explosionSound.volume);
+        ParticlesManager.instance.Play(explosionParticlePrefab, transform.position, transform.rotation);
+        SoundManager.instance.Play(explosionSound.audioClip, transform.position, explosionSound.volume);
     }
 }
