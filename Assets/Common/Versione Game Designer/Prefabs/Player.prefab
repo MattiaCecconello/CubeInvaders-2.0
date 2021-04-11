@@ -108,7 +108,6 @@ GameObject:
   - component: {fileID: 3982990953853281141}
   - component: {fileID: 3982990953853281143}
   - component: {fileID: 5009825169229375118}
-  - component: {fileID: 481579100}
   m_Layer: 0
   m_Name: Player
   m_TagString: MainCamera
@@ -283,23 +282,6 @@ MonoBehaviour:
   frequemcyGain: 1
   shakeDuration: 1
 --- !u!114 &5009825169229375118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3982990953853281142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 11178017b7cc0e4479c299f0d57e9336, type: 2}
---- !u!114 &481579100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
