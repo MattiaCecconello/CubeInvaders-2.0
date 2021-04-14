@@ -67,6 +67,9 @@ public class Player : StateMachine
         Utility.LockMouse(CursorLockMode.Locked);
 
         AddEvents();
+
+        //set values from options
+        SetOptionsValue(SaveLoadJSON.Load<OptionsSave>("Options"));
     }
 
     void OnDestroy()
@@ -231,6 +234,19 @@ public class Player : StateMachine
         {
             //resume
             SetState(previousState);
+        }
+    }
+
+    public void SetOptionsValue(OptionsSave optionsSave)
+    {
+        //set every value from Options class
+        if (optionsSave != null)
+        {
+            mouseSpeedX = optionsSave.mouseX;
+            mouseSpeedY = optionsSave.mouseY;
+            gamepadSpeedX = optionsSave.gamepadX;
+            gamepadSpeedY = optionsSave.gamepadY;
+            invertY = optionsSave.invertY;
         }
     }
 

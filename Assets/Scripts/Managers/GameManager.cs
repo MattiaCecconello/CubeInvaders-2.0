@@ -25,6 +25,12 @@ public class GameManager : Singleton<GameManager>
         waveManager = FindObjectOfType<WaveManager>();
     }
 
+    void Start()
+    {
+        //load default options (necessary only when start game)
+        LoadDefaultOptions(SaveLoadJSON.Load<OptionsSave>("Options"));
+    }
+
     #region old, used from buttons UI
 
     public void UpdateLevel(LevelConfig levelConfig)
@@ -57,6 +63,19 @@ public class GameManager : Singleton<GameManager>
     {
         //increase wave +1, than set wave
         SetWave(instance.waveManager.CurrentWave + 1);
+    }
+
+    #endregion
+
+    #region private API
+
+    void LoadDefaultOptions(OptionsSave optionsSave)
+    {
+        //set default options
+        if (optionsSave != null)
+        {
+            AudioListener.volume = optionsSave.volume;
+        }
     }
 
     #endregion
