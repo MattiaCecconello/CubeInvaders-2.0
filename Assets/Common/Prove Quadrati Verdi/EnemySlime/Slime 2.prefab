@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44dda22cad02e94bbcc2eda1f945ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
-  speed: 1
+  health: 22
+  speed: 0.7
   resourcesWhenKilledByShot: 1
   resourcesWhenKilledByShield: 0
   resourcesWhenHitWorld: 0

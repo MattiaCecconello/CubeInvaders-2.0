@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 234860cf3fc17274c85c47d87e9adfb1, type: 3}
-  m_Name: Turret 1+2+3+4
+  m_Name: G + Sl + Ra + Ro
   m_EditorClassIdentifier: 
   Front: {fileID: 4345371316559743906, guid: 752e05119be44a6459b9611292d81972, type: 3}
   Right: {fileID: 4523705146514746641, guid: cd3ba82684757894791abf2c130d0b1a, type: 3}
