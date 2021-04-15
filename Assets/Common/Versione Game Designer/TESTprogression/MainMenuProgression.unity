@@ -6081,10 +6081,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1231021255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084bd54dc6f36974b8badc9f43beb0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c300e8046eda251428d8ae7cbc7dc0e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
+  direction: {x: 0, y: 1, z: 0}
+  speed: 2
 --- !u!1 &1254080751
 GameObject:
   m_ObjectHideFlags: 0
