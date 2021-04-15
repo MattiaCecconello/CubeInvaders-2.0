@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using redd096;
 
@@ -16,7 +17,7 @@ public class EnemyGraphics : MonoBehaviour
     Enemy enemy;
 
     //for blink
-    Material originalMat;
+    Dictionary<Renderer, Material> originalMaterials = new Dictionary<Renderer, Material>();
     Coroutine blink_Coroutine;
 
     void OnEnable()
@@ -24,6 +25,13 @@ public class EnemyGraphics : MonoBehaviour
         enemy = GetComponent<Enemy>();
         enemy.onGetDamage += OnGetDamage;
         enemy.onEnemyDeath += OnEnemyDeath;
+
+        //set original materials
+        foreach(Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            if (originalMaterials.ContainsKey(r) == false)
+                originalMaterials.Add(r, r.material);
+        }
     }
 
     void OnDisable()
@@ -44,21 +52,16 @@ public class EnemyGraphics : MonoBehaviour
 
     IEnumerator Blink_Coroutine()
     {
-        Renderer renderer = GetComponentInChildren<Renderer>();
-
-        //change material
-        if (originalMat == null)
-        {
-            originalMat = renderer.material;
-            renderer.material = blinkMaterial;
-        }
+        //set blink materials
+        foreach (Renderer r in originalMaterials.Keys)
+            r.material = blinkMaterial;
 
         //wait
         yield return new WaitForSeconds(blinkTime);
 
         //back to original material
-        renderer.material = originalMat;
-        originalMat = null;
+        foreach (Renderer r in originalMaterials.Keys)
+            r.material = originalMaterials[r];
 
         blink_Coroutine = null;
     }
