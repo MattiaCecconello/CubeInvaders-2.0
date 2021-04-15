@@ -13,7 +13,7 @@ public class CellGraphics : MonoBehaviour
     CameraShake camShake;
     Cell cell;
 
-    private void Awake()
+    private void Start()
     {
         camShake = FindObjectOfType<CameraShake>();
         cell = GetComponent<Cell>();
