@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
@@ -11,6 +10,7 @@ public class EnemyTeleport : Enemy
     [Tooltip("Check there are no enemies where teleport")] [SerializeField] bool checkNoHitEnemies = true;
     [Tooltip("Ignore previous faces when teleport")] [Min(1)] [SerializeField] int numberOfPreviousFacesToIgnore = 1;
     [Tooltip("Can use opposite face or only adjacent faces?")] [SerializeField] bool canTeleportOnOppositeFace = false;
+    [Tooltip("At every teleport, increase distance from the cube")] [Min(0)] [SerializeField] float increaseDistanceEveryTeleport = 0;
     [Tooltip("When reach one of this percentages of life, do teleport")] [SerializeField] [Range(0, 100)] int[] percentagesLife = default;
 
     public System.Action<Vector3, Quaternion, Vector3, Quaternion> onTeleport;
@@ -59,7 +59,7 @@ public class EnemyTeleport : Enemy
         if (newCoordinates != null)
         {
             //save distance
-            float distance = Vector3.Distance(transform.position, coordinatesToAttack.position);
+            float distance = Vector3.Distance(transform.position, coordinatesToAttack.position) + increaseDistanceEveryTeleport;
 
             //get new position and rotation
             Vector3 position;
