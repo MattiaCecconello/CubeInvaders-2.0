@@ -37,7 +37,7 @@ public class WorldRotator
             }
 
             //get rotator parent in transform position
-            rotatorParent.position = world.transform.position;
+            rotatorParent.localPosition = Vector3.zero;
             return rotatorParent;
         } }
 
@@ -254,7 +254,8 @@ public class WorldRotator
         //call event on world rotate
         OnWorldRotate();
 
-        //set parent
+        //be sure rotator parent is at 0, then set parent
+        RotatorParent.localRotation = Quaternion.identity;
         cellsToRotate.SetParent(RotatorParent);
 
         //we need to do a 90° rotation
@@ -281,9 +282,8 @@ public class WorldRotator
         //final rotation
         RotatorParent.localEulerAngles = rotateAxis * rotationToReach;
 
-        //remove parent and reset its rotation
+        //remove parent
         cellsToRotate.SetParent(world.transform);
-        RotatorParent.localRotation = Quaternion.identity;
 
         //remove from the list
         rotationsToDo.Dequeue();
