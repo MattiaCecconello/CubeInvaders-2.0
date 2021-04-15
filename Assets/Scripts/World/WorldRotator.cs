@@ -33,6 +33,7 @@ public class WorldRotator
             if (rotatorParent == null)
             {
                 rotatorParent = new GameObject("RotatorParent").transform;
+                rotatorParent.SetParent(world.transform);
             }
 
             //get rotator parent in transform position
@@ -266,7 +267,7 @@ public class WorldRotator
             delta += Time.deltaTime / rotationsToDo.Peek().rotationTime;
 
             float rotated = Mathf.Lerp(0, rotationToReach, GetAnimationCurveValue(delta));
-            RotatorParent.eulerAngles = rotateAxis * rotated;
+            RotatorParent.localEulerAngles = rotateAxis * rotated;
 
             //if skipping rotations, skip this one
             if (skippingRotations)
@@ -278,11 +279,11 @@ public class WorldRotator
         }
 
         //final rotation
-        RotatorParent.eulerAngles = rotateAxis * rotationToReach;
+        RotatorParent.localEulerAngles = rotateAxis * rotationToReach;
 
         //remove parent and reset its rotation
         cellsToRotate.SetParent(world.transform);
-        RotatorParent.rotation = Quaternion.identity;
+        RotatorParent.localRotation = Quaternion.identity;
 
         //remove from the list
         rotationsToDo.Dequeue();
