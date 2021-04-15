@@ -24,6 +24,18 @@ public class TurretShooter : Turret
     int indexSpawn;
     Pooling<TurretShot> shots = new Pooling<TurretShot>();
 
+    private Transform shotsParent;
+    Transform ShotsParent
+    {
+        get
+        {
+            if (shotsParent == null)
+                shotsParent = new GameObject($"Shots {shotPrefab.name} Parent").transform;
+
+            return shotsParent;
+        }
+    }
+
     Coroutine canShootAgain_Coroutine;
 
     #endregion
@@ -81,7 +93,7 @@ public class TurretShooter : Turret
         shot.Init(this, EnemyToAttack);
 
         //set parent
-        shot.transform.SetParent(transform);
+        shot.transform.SetParent(ShotsParent);
 
         //call event
         onShoot?.Invoke(shotSpawns[indexSpawn]);
