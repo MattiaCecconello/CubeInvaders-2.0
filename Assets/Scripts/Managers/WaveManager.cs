@@ -156,6 +156,9 @@ public class WaveManager : MonoBehaviour
         //for every enemy
         foreach (EnemyStruct enemyStruct in enemiesToSpawn)
         {
+            //wait for next enemy
+            yield return new WaitForSeconds(wave.TimeBetweenSpawns + enemyStruct.enemyTimer);
+
             //randomize coordinates to attack
             EFace face = WorldUtility.GetRandomFace(facesQueue, waveConfig.Waves[CurrentWave].IgnorePreviousFacesAtSpawn);
             int x = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
@@ -180,9 +183,6 @@ public class WaveManager : MonoBehaviour
 
             //set enemy destination and activate
             enemyStruct.enemy.Init(coordinatesToAttack);
-
-            //wait for next enemy
-            yield return new WaitForSeconds(wave.TimeBetweenSpawns + enemyStruct.enemyTimer);
         }
     }
 
