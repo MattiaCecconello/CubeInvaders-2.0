@@ -54,7 +54,8 @@ public class WorldRandomRotator : WorldRotator
         }
 
         //call start game
-        GameManager.instance.levelManager.StartGame();
+        if(GameManager.instance && GameManager.instance.levelManager)
+            GameManager.instance.levelManager.StartGame();
     }
 
     void OnStartRotation()

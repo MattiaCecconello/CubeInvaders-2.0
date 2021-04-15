@@ -105,6 +105,7 @@ public class World : MonoBehaviour
     [Header("Base")]
     public WorldConfig worldConfig;
     public RandomWorldConfig randomWorldConfig;
+    [SerializeField] bool randomizeCubeIfNoLevelManagerInScene = true;
 
     [Header("Important")]
     public BiomesConfig biomesConfig;
@@ -125,6 +126,11 @@ public class World : MonoBehaviour
         //if not reset cube, try load
         if (resetCube == false)
             LoadCube();
+
+        //if there is no level manager in scene, and randomizeCube is true, start randomize
+        if (GameManager.instance == null || GameManager.instance.levelManager == null)
+            if (randomizeCubeIfNoLevelManagerInScene)
+                RandomRotate();
     }
 
     void OnDestroy()
