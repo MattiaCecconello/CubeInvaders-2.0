@@ -202,6 +202,7 @@ MonoBehaviour:
   checkNoHitEnemies: 1
   numberOfPreviousFacesToIgnore: 1
   canTeleportOnOppositeFace: 0
+  increaseDistanceEveryTeleport: 1
   percentagesLife: 52000000430000002b000000190000000a000000
 --- !u!114 &5873725972075197134
 MonoBehaviour:
