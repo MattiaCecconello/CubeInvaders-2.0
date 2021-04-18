@@ -153,12 +153,12 @@ public class WaveManager : MonoBehaviour
         //queue to not spawn on same face
         Queue<EFace> facesQueue = new Queue<EFace>();
 
+        //wait before instantiate first enemy
+        yield return new WaitForSeconds(1);
+
         //for every enemy
         foreach (EnemyStruct enemyStruct in enemiesToSpawn)
         {
-            //wait for next enemy
-            yield return new WaitForSeconds(wave.TimeBetweenSpawns + enemyStruct.enemyTimer);
-
             //randomize coordinates to attack
             EFace face = WorldUtility.GetRandomFace(facesQueue, waveConfig.Waves[CurrentWave].IgnorePreviousFacesAtSpawn);
             int x = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
@@ -183,6 +183,9 @@ public class WaveManager : MonoBehaviour
 
             //set enemy destination and activate
             enemyStruct.enemy.Init(coordinatesToAttack);
+
+            //wait for next enemy
+            yield return new WaitForSeconds(wave.TimeBetweenSpawns + enemyStruct.enemyTimer);
         }
     }
 
