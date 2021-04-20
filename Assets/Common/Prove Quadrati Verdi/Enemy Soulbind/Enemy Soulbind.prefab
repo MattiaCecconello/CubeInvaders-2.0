@@ -4961,6 +4961,8 @@ MonoBehaviour:
     face: 0
     x: 0
     y: 0
+  maxHealth: 0
+  distanceFromCube: 0
   shareHealth: 0
   killSoulbindOnDeath: 1
   useOppositeFace: 0
@@ -4979,6 +4981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAtSoulBind: 1
+  objectToRotateToSoulbind: {fileID: 5741680812796075413}
   particlesSpawnFirstSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
   soundSpawnFirstSoulbind:
     audioClip: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
