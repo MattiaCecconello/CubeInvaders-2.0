@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using redd096;
 
 [CreateAssetMenu(menuName = "Cube Invaders/General Config", fileName = "General Config")]
 public class GeneralConfig : ScriptableObject
@@ -16,4 +17,5 @@ public class GeneralConfig : ScriptableObject
     [Header("Radar")]
     public bool showEnemiesHealth = true;
     public bool showEnemiesDestination = true;
+    [CanShow("showEnemiesDestination")] public float minDistanceToShowDestination = 10;
 }

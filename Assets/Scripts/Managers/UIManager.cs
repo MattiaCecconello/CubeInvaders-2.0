@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using redd096;
 
 [AddComponentMenu("Cube Invaders/Manager/UI Manager")]
 public class UIManager : MonoBehaviour

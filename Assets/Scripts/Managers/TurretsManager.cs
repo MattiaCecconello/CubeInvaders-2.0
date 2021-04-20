@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 public class TurretsManager : MonoBehaviour
 {
@@ -43,14 +44,24 @@ public class TurretsManager : MonoBehaviour
 
     #region radar
 
+    List<Cell> previousCellsInRadar = new List<Cell>();
+    List<Cell> cellsInRadar = new List<Cell>();
+    Dictionary<Coordinates, List<Enemy>> enemiesCoordinates = new Dictionary<Coordinates, List<Enemy>>();
+
     void UpdateRadarEnemies()
     {
+        //OGNI VOLTA CHE SI ATTIVA UN RADAR, TUTTI I NEMICI SU QUELLA FACCIA MOSTRANO DESTINAZIONE E VITA (viene chiamato anche quando finisce di ruotare, se si riesce a riattivare)
+        //OGNI VOLTA CHE SI DISATTIVA UN RADAR, SE NON CI SONO ALTRI RADAR SU QUELLA FACCIA, TUTTI I NEMICI SU QUELLA FACCIA NASCONDONO DESTINAZIONE E VITA (viene chiamato anche quando ruota)
+
+        //NB di default cella e nemico nascondono vita e destination, quindi se viene chiamato Show() per primo, fallisce
+        //NB che il destination sulle celle va aggiornato in base a quale nemico sia più vicino - quindi comunque nell'update avrà sia il resize dell'object che il find nearest enemy
+
         //foreach face
         foreach(EFace face in System.Enum.GetValues(typeof(EFace)))
         {
             //check there is a radar on this face && is active
             bool containsRadar = false;
-            foreach (BuildableObject buildableObject in buildableObjectsOnFace[face])
+            foreach (BuildableObject buildableObject in TurretsOnFace(face))
             {
                 if (buildableObject is Radar && buildableObject.IsActive)
                 {
@@ -59,14 +70,48 @@ public class TurretsManager : MonoBehaviour
                 }
             }
 
+            //clear lists
+            cellsInRadar.Clear();
+            enemiesCoordinates.Clear();
+
             //enemy call if inside or outside radar area
             foreach (Enemy enemy in GameManager.instance.waveManager.EnemiesOnFace(face))
             {
                 if (containsRadar)
-                    enemy.InRadarArea();
+                {
+                    enemy.ShowHealth();
+
+                    //add key if not in dictionary
+                    if (enemiesCoordinates.ContainsKey(enemy.CoordinatesToAttack) == false)
+                        enemiesCoordinates.Add(enemy.CoordinatesToAttack, new List<Enemy>());
+
+                    enemiesCoordinates[enemy.CoordinatesToAttack].Add(enemy);   //add to dictionary based on coordinates
+                }
                 else
-                    enemy.OutRadarArea();
+                {
+                    enemy.HideHealth();
+                }
             }
+
+            //foreach coordinates, find nearest enemy and show destination on cell
+            foreach(Coordinates coordinates in enemiesCoordinates.Keys)
+            {
+                Enemy nearestToThisCell = enemiesCoordinates[coordinates].FindNearest(coordinates.position);
+                Cell cell = GameManager.instance.world.Cells[coordinates];
+                cell.ShowEnemyDestination(nearestToThisCell);
+
+                //add to list to check when hide destination
+                cellsInRadar.Add(cell);
+            }
+
+            //foreach cell not in radar, hide destination if in previous list
+            foreach (Cell cell in previousCellsInRadar)
+                if (cellsInRadar.Contains(cell) == false)
+                    cell.HideEnemyDestination();
+
+            //set previous
+            previousCellsInRadar = new List<Cell>(cellsInRadar);
+
         }
     }
 

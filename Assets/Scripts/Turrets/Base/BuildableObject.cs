@@ -27,6 +27,8 @@ public class BuildableObject : MonoBehaviour
 
         //deactivate it
         DeactivateTurret();
+
+        GameManager.instance.turretsManager.RemoveTurretFromDictionary(this);  //remove from dictionary
     }
 
     protected virtual void OnEndRotation()
@@ -36,6 +38,8 @@ public class BuildableObject : MonoBehaviour
 
         //try activate it
         TryActivateTurret();
+
+        GameManager.instance.turretsManager.AddTurretToDictionary(this);  //add to dictionary
     }
 
     #endregion
@@ -63,6 +67,8 @@ public class BuildableObject : MonoBehaviour
         //try activate it
         TryActivateTurret();
 
+        GameManager.instance.turretsManager.AddTurretToDictionary(this);  //add to dictionary
+
         onBuildTurret?.Invoke();
     }
 
@@ -76,6 +82,8 @@ public class BuildableObject : MonoBehaviour
 
         //deactive it
         DeactivateTurret();
+
+        GameManager.instance.turretsManager.RemoveTurretFromDictionary(this);  //remove from dictionary
     }
 
     public virtual void TryActivateTurret()

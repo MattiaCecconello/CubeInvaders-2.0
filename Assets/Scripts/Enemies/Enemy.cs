@@ -34,6 +34,8 @@ public class Enemy : EnemyBase
 
     //used by wave manager
     public System.Action<Enemy> onEnemyDeath;
+    public System.Action onShowHealth;
+    public System.Action onHideHealth;
 
     List<SlowEffect> effectsOnEnemy = new List<SlowEffect>();
     float maxSpeed;
@@ -119,24 +121,16 @@ public class Enemy : EnemyBase
 
     #region radar
 
-    public void InRadarArea()
+    public void ShowHealth()
     {
-        //show destination
-        if(GameManager.instance.levelManager.generalConfig.showEnemiesDestination)
-        {
-
-        }
-
         //show health
-        if(GameManager.instance.levelManager.generalConfig.showEnemiesHealth)
-        {
-
-        }
+        onShowHealth?.Invoke();
     }
 
-    public void OutRadarArea()
+    public void HideHealth()
     {
-        //hide destination and health
+        //hide health
+        onHideHealth?.Invoke();
     }
 
     #endregion
