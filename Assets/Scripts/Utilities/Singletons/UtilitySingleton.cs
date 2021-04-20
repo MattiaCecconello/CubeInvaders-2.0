@@ -4,10 +4,69 @@
     using UnityEngine;
     using UnityEngine.UI;
 
+    public static class StaticUtilitySingleton
+    {
+        #region write letter by letter
+
+        /// <summary>
+        /// Write a text letter by letter, then wait input. When press to skip, accelerate speed
+        /// </summary>
+        public static void WriteLetterByLetterAndWait(this Text textToSet, string value, float timeBetweenChar, float skipSpeed, System.Action onEndWrite = null, bool canSkip = true)
+        {
+            UtilitySingleton.instance.WriteLetterByLetterAndWait(textToSet, value, timeBetweenChar, skipSpeed, onEndWrite, canSkip);
+        }
+
+        /// <summary>
+        /// Write a text letter by letter, then wait input. When press to skip, set immediatly all text
+        /// </summary>
+        public static void WriteLetterByLetterAndWait(this Text textToSet, string value, float timeBetweenChar, System.Action onEndWrite = null, bool canSkip = true)
+        {
+            UtilitySingleton.instance.WriteLetterByLetterAndWait(textToSet, value, timeBetweenChar, onEndWrite, canSkip);
+        }
+
+        /// <summary>
+        /// Write a text letter by letter. When press to skip, accelerate speed
+        /// </summary>
+        public static void WriteLetterByLetter(this Text textToSet, string value, float timeBetweenChar, float skipSpeed, System.Action onEndWrite = null, bool canSkip = true)
+        {
+            UtilitySingleton.instance.WriteLetterByLetter(textToSet, value, timeBetweenChar, skipSpeed, onEndWrite, canSkip);
+        }
+
+        /// <summary>
+        /// Write a text letter by letter. When press to skip, set immediatly all text
+        /// </summary>
+        public static void WriteLetterByLetter(this Text textToSet, string value, float timeBetweenChar, System.Action onEndWrite = null, bool canSkip = true)
+        {
+            UtilitySingleton.instance.WriteLetterByLetter(textToSet, value, timeBetweenChar, onEndWrite, canSkip);
+        }
+
+        #endregion
+
+        #region fade
+
+        /// <summary>
+        /// Fade an image
+        /// </summary>
+        public static void Fade(this Image image, float from, float to, float duration, System.Action onEndFade = null)
+        {
+            UtilitySingleton.instance.Fade(image, from, to, duration, onEndFade);
+        }
+
+        /// <summary>
+        /// Fade an image with fillAmount
+        /// </summary>
+        public static void FadeFill(this Image image, float from, float to, float duration, System.Action onEndFade = null)
+        {
+            UtilitySingleton.instance.FadeFill(image, from, to, duration, onEndFade);
+        }
+
+        #endregion
+    }
+
     [AddComponentMenu("redd096/Singletons/Utility Singleton")]
     public class UtilitySingleton : Singleton<UtilitySingleton>
     {
-        #region Write Letter By Letter
+        #region write letter by letter
 
         #region private API
 
@@ -142,10 +201,7 @@
 
         #endregion
 
-
-
-
-        #region Fade
+        #region fade
 
         #region private API
 
@@ -154,16 +210,21 @@
             float delta = 0;
 
             //from 0 to 1
-            while(delta < 1)
+            while (delta < 1)
             {
+                delta += Time.deltaTime / duration;
+
                 //fade or fade_fill
-                if(isNormalFade)
+                if (isNormalFade)
                 {
-                    image.Set_Fade(ref delta, from, to, duration);
+                    //set alpha from to
+                    float alpha = Mathf.Lerp(from, to, delta);
+                    image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
                 }
                 else
                 {
-                    image.Set_FadeFill(ref delta, from, to, duration);
+                    //set fill amount
+                    image.fillAmount = Mathf.Lerp(from, to, delta);
                 }
 
                 yield return null;
