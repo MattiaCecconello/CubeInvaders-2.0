@@ -12,21 +12,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float resourcesWhenHitWorld = 0;
 
     [Header("Debug")]
-    [SerializeField] Coordinates coordinatesToAttack;
-    public Coordinates CoordinatesToAttack
-    {
-        get
-        {
-            return coordinatesToAttack;
-        }
-        set
-        {
-            GameManager.instance.waveManager.RemoveEnemyFromDictionary(this);
-            coordinatesToAttack = value;
-            GameManager.instance.waveManager.AddEnemyToDictionary(this);
-
-        }
-    }
+    [SerializeField] protected Coordinates coordinatesToAttack;
 
     Rigidbody rb;
 
@@ -41,7 +27,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         //move to the cell
-        Vector3 direction = CoordinatesToAttack.position - transform.position;
+        Vector3 direction = coordinatesToAttack.position - transform.position;
 
         rb.velocity = direction.normalized * speed;
     }
@@ -91,7 +77,7 @@ public class EnemyBase : MonoBehaviour
     public virtual void Init(Coordinates coordinatesToAttack)
     {
         //set coordinates to attack and enable
-        CoordinatesToAttack = coordinatesToAttack;
+        this.coordinatesToAttack = coordinatesToAttack;
         gameObject.SetActive(true);
     }
 

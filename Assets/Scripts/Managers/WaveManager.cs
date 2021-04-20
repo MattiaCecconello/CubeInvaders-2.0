@@ -25,7 +25,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    Dictionary<EFace, List<EnemyBase>> enemiesOnFace = new Dictionary<EFace, List<EnemyBase>>();
+    public Dictionary<EFace, List<Enemy>> enemiesOnFace { get; private set; } = new Dictionary<EFace, List<Enemy>>();
 
     void Start()
     {
@@ -185,6 +185,7 @@ public class WaveManager : MonoBehaviour
 
             //set enemy destination and activate
             enemyStruct.enemy.Init(coordinatesToAttack);
+            AddEnemyToDictionary(enemyStruct.enemy);
 
             //wait for next enemy
             yield return new WaitForSeconds(wave.TimeBetweenSpawns + enemyStruct.enemyTimer);
@@ -225,17 +226,17 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public void AddEnemyToDictionary(EnemyBase enemy)
+    public void AddEnemyToDictionary(Enemy enemy)
     {
         //add key if dictionary no contains
         if (enemiesOnFace.ContainsKey(enemy.CoordinatesToAttack.face) == false)
-            enemiesOnFace.Add(enemy.CoordinatesToAttack.face, new List<EnemyBase>());
+            enemiesOnFace.Add(enemy.CoordinatesToAttack.face, new List<Enemy>());
 
         //add enemy to the list
         enemiesOnFace[enemy.CoordinatesToAttack.face].Add(enemy);
     }
 
-    public void RemoveEnemyFromDictionary(EnemyBase enemy)
+    public void RemoveEnemyFromDictionary(Enemy enemy)
     {
         //if dictionary has key && enemy is in the list, remove it
         if (enemiesOnFace.ContainsKey(enemy.CoordinatesToAttack.face) && enemiesOnFace[enemy.CoordinatesToAttack.face].Contains(enemy))

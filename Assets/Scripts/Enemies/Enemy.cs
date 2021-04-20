@@ -7,6 +7,21 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyGraphics))]
 public class Enemy : EnemyBase
 {
+    public Coordinates CoordinatesToAttack
+    {
+        get
+        {
+            return coordinatesToAttack;
+        }
+        set
+        {
+            GameManager.instance.waveManager.RemoveEnemyFromDictionary(this);
+            coordinatesToAttack = value;
+            GameManager.instance.waveManager.AddEnemyToDictionary(this);
+
+        }
+    }
+
     struct SlowEffect
     {
         public float slowPercentage;
