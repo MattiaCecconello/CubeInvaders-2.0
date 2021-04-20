@@ -33,10 +33,12 @@ public class PlayerStrategic : PlayerMove
     {
         float timeToEnd = GameManager.instance.levelManager.generalConfig.TimeToEndStrategic;
 
-        //if keeping pressed, update slider
-        if (inputPressed || timerDelayReleaseStrategic > Time.time)     //check delay
-        {
+        if (inputPressed)
             timerDelayReleaseStrategic = Time.time + GameManager.instance.levelManager.generalConfig.delayReleaseFinishStrategicPhase;      //use a delay, to not stop immediatly when unity see a release button
+
+        //if keeping pressed, update slider
+        if (timerDelayReleaseStrategic > Time.time)     //check delay
+        {
             timeToEndStrategic += Time.deltaTime;
 
             //check if end
