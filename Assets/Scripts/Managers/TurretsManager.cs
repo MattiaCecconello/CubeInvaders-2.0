@@ -2,6 +2,7 @@
 using UnityEngine;
 using redd096;
 
+[AddComponentMenu("Cube Invaders/Manager/Turrets Manager")]
 public class TurretsManager : MonoBehaviour
 {
     Dictionary<EFace, List<BuildableObject>> buildableObjectsOnFace = new Dictionary<EFace, List<BuildableObject>>();
@@ -53,8 +54,13 @@ public class TurretsManager : MonoBehaviour
         //OGNI VOLTA CHE SI ATTIVA UN RADAR, TUTTI I NEMICI SU QUELLA FACCIA MOSTRANO DESTINAZIONE E VITA (viene chiamato anche quando finisce di ruotare, se si riesce a riattivare)
         //OGNI VOLTA CHE SI DISATTIVA UN RADAR, SE NON CI SONO ALTRI RADAR SU QUELLA FACCIA, TUTTI I NEMICI SU QUELLA FACCIA NASCONDONO DESTINAZIONE E VITA (viene chiamato anche quando ruota)
 
-        //NB di default cella e nemico nascondono vita e destination, quindi se viene chiamato Show() per primo, fallisce
-        //NB che il destination sulle celle va aggiornato in base a quale nemico sia più vicino - quindi comunque nell'update avrà sia il resize dell'object che il find nearest enemy
+        //NB di default cella e nemico nascondono vita e destination, quindi se viene chiamato Show() per primo, fallisce (questo dovrebbe già essere a posto per celle, ma bisogna assicurarsi l'health dei nemici)
+        //NB che il destination sulle celle va aggiornato in base a quale nemico sia più vicino - quindi comunque nell'update avrà sia il resize dell'object che il find nearest enemy (ok per il resize, manca il find enemy)
+
+        //NB che pure se vengono istanziati nuovi nemici dovranno mostrare la slider se c'è un radar presente, anche se non si è attivato o disattivato niente
+        //NB bisogna tener presente che si possono ruotare celle senza radar e dovranno disabilitare l'enemyDestination e si può teletrasportare un enemy che dovrà disattivare la vita se non ha radar sulla nuova faccia
+        //QUINDI servirebbe una chiamata ogni volta che un Enemy si sposta di faccia o viene istanziato (aggiunto alla dictionary del Wave Manager) - una chiamata anche ogni volta che muore un enemy
+        //QUINDI servirebbe una chiamata ogni volta che viene fatta una rotazione (onWorldRotate di ogni Cell)
 
         //clear lists
         cellsInRadar.Clear();
