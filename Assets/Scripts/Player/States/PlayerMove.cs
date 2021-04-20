@@ -5,6 +5,7 @@ using redd096;
 public class PlayerMove : PlayerState
 {
     protected Coordinates coordinates;
+    float timerDelayRotateOrSelect;
 
     public PlayerMove(StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
     {
@@ -37,10 +38,13 @@ public class PlayerMove : PlayerState
         CheckChangedFace();
 
         //rotate cube or select cell (check if keeping pressed to rotate)
-        if (InputRedd096.GetButton("Keep Pressed To Rotate"))
-            RotateCube(InputRedd096.GetValue<Vector2>("Rotate Cube"));
-        else
-            SelectCell(InputRedd096.GetValue<Vector2>("Select Cell"));
+        if (Time.time > timerDelayRotateOrSelect)                               //check delay
+        {
+            if (InputRedd096.GetButton("Keep Pressed To Rotate"))
+                RotateCube(InputRedd096.GetValue<Vector2>("Rotate Cube"));
+            else
+                SelectCell(InputRedd096.GetValue<Vector2>("Select Cell"));
+        }
     }
 
     public override void Exit()
@@ -53,8 +57,7 @@ public class PlayerMove : PlayerState
 
     #region private API
 
-    bool pressedSelectCell;
-    bool pressedRotateCube;
+    bool pressedRotateOrSelect;
 
     void MoveCamera(string activeControlName, Vector2 input)
     {
@@ -89,12 +92,42 @@ public class PlayerMove : PlayerState
         }
     }
 
+    void RotateCube(Vector2 movement)
+    {
+        //check if pressed input or moved analog
+        if (movement.magnitude >= player.deadZoneAnalogs && pressedRotateOrSelect == false)
+        {
+            pressedRotateOrSelect = true;
+
+            //check if y or x axis
+            if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+            {
+                if (movement.y > 0)
+                    DoRotation(ERotateDirection.up);
+                else if (movement.y < 0)
+                    DoRotation(ERotateDirection.down);
+            }
+            else
+            {
+                if (movement.x > 0)
+                    DoRotation(ERotateDirection.right);
+                else if (movement.x < 0)
+                    DoRotation(ERotateDirection.left);
+            }
+        }
+        //reset when release input or analog
+        else if (movement.magnitude < player.deadZoneAnalogs)
+        {
+            pressedRotateOrSelect = false;
+        }
+    }
+
     void SelectCell(Vector2 movement)
     {
         //check if pressed input or moved analog
-        if (movement.magnitude >= player.deadZoneAnalogs && pressedSelectCell == false)
+        if (movement.magnitude >= player.deadZoneAnalogs && pressedRotateOrSelect == false)
         {
-            pressedSelectCell = true;
+            pressedRotateOrSelect = true;
 
             //check if y or x axis
             if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
@@ -118,37 +151,7 @@ public class PlayerMove : PlayerState
         //reset when release input or analog
         else if (movement.magnitude < player.deadZoneAnalogs)
         {
-            pressedSelectCell = false;
-        }
-    }
-
-    void RotateCube(Vector2 movement)
-    {
-        //check if pressed input or moved analog
-        if (movement.magnitude >= player.deadZoneAnalogs && pressedRotateCube == false)
-        {
-            pressedRotateCube = true;
-
-            //check if y or x axis
-            if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
-            {
-                if (movement.y > 0)
-                    DoRotation(ERotateDirection.up);
-                else if (movement.y < 0)
-                    DoRotation(ERotateDirection.down);
-            }
-            else
-            {
-                if (movement.x > 0)
-                    DoRotation(ERotateDirection.right);
-                else if (movement.x < 0)
-                    DoRotation(ERotateDirection.left);
-            }
-        }
-        //reset when release input or analog
-        else if (movement.magnitude < player.deadZoneAnalogs)
-        {
-            pressedRotateCube = false;
+            pressedRotateOrSelect = false;
         }
     }
 
@@ -156,12 +159,16 @@ public class PlayerMove : PlayerState
 
     void DoSelectionCell(ERotateDirection direction)
     {
+        timerDelayRotateOrSelect = Time.time + GameManager.instance.levelManager.generalConfig.delayRotateOrSelectCell;     //use a delay, to not call again for error
+
         //update coordinates
         coordinates = WorldUtility.SelectCell(WorldUtility.SelectFace(transform), coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), direction);
     }
 
     void DoRotation(ERotateDirection rotateDirection)
     {
+        timerDelayRotateOrSelect = Time.time + GameManager.instance.levelManager.generalConfig.delayRotateOrSelectCell;     //use a delay, to not call again for error
+
         //do for number of rotations
         for (int i = 0; i < GameManager.instance.levelManager.levelConfig.NumberRotations; i++)
         {

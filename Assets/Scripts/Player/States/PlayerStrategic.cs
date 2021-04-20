@@ -4,6 +4,7 @@ using redd096;
 public class PlayerStrategic : PlayerMove
 {
     float timeToEndStrategic;
+    float timerDelayReleaseStrategic;
 
     public PlayerStrategic(StateMachine stateMachine, Coordinates coordinates) : base(stateMachine, coordinates)
     {
@@ -33,8 +34,9 @@ public class PlayerStrategic : PlayerMove
         float timeToEnd = GameManager.instance.levelManager.generalConfig.TimeToEndStrategic;
 
         //if keeping pressed, update slider
-        if (inputPressed)
+        if (inputPressed || timerDelayReleaseStrategic > Time.time)     //check delay
         {
+            timerDelayReleaseStrategic = Time.time + GameManager.instance.levelManager.generalConfig.delayReleaseFinishStrategicPhase;      //use a delay, to not stop immediatly when unity see a release button
             timeToEndStrategic += Time.deltaTime;
 
             //check if end

@@ -197,6 +197,8 @@ public class WaveManager : MonoBehaviour
     {
         //instantiate and set parent but deactivate
         Enemy enemy = Instantiate(enemyPrefab, transform);
+        //float size = GameManager.instance.world.worldConfig.CellsSize;
+        //enemy.transform.localScale = new Vector3(size, size, size);
         enemy.gameObject.SetActive(false);
 
         //save in the list
