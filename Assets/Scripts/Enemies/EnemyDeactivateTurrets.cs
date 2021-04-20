@@ -66,7 +66,7 @@ public class EnemyDeactivateTurrets : Enemy
     BuildableObject[] FindObjectsToDeactivate()
     {
         //find every buildable object on this face
-        IEnumerable<BuildableObject> objectsToDeactivate = FindObjectsOfType<BuildableObject>().Where(x => x.CellOwner.coordinates.face == coordinatesToAttack.face);
+        IEnumerable<BuildableObject> objectsToDeactivate = FindObjectsOfType<BuildableObject>().Where(x => x.CellOwner.coordinates.face == CoordinatesToAttack.face);
 
         //remove generators
         if (deactivateGeneratorsToo == false)

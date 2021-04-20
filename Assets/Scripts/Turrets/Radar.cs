@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Linq;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using redd096;
 
 [SelectionBase]
@@ -21,7 +21,7 @@ public class Radar : BuildableObject
     Enemy FindEnemy()
     {
         //find enemies attacking this face and get the nearest
-        Enemy[] enemies = FindObjectsOfType<Enemy>().Where(x => x.coordinatesToAttack.face == CellOwner.coordinates.face).ToArray();
+        List<Enemy> enemies = GameManager.instance.waveManager.enemiesOnFace[CellOwner.coordinates.face];
         return enemies.FindNearest(transform.position);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using redd096;
-using System.Linq;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Turret Shooter")]
@@ -80,7 +80,7 @@ public class TurretShooter : Turret
     Enemy FindEnemy()
     {
         //find enemies attacking this face and get the nearest
-        Enemy[] enemies = FindObjectsOfType<Enemy>().Where(x => x.coordinatesToAttack.face == CellOwner.coordinates.face).ToArray();
+        List<Enemy> enemies = GameManager.instance.waveManager.enemiesOnFace[CellOwner.coordinates.face];
         return enemies.FindNearest(transform.position);
     }
 

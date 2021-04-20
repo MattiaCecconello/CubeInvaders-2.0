@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Linq;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret Component/Turret Shot")]
@@ -130,13 +129,12 @@ public class TurretShot : MonoBehaviour
     void AreaEffect(Enemy hitEnemy)
     {
         //find enemies on the same face, inside the area effect
-        FindObjectsOfType<Enemy>().Where(
-            x => x != hitEnemy 
-            && x.coordinatesToAttack.face == coordinatesToDefend.face 
-            && Vector3.Distance(x.transform.position, transform.position) < area).ToList()
-            
+        foreach (Enemy enemy in GameManager.instance.waveManager.enemiesOnFace[coordinatesToDefend.face])
+        {
             //apply effect on every enemy
-            .ForEach(x => ApplyEffect(x));
+            if (enemy != hitEnemy && Vector3.Distance(enemy.transform.position, transform.position) < area)
+                ApplyEffect(enemy);
+        }
     }
 
     void ApplyEffect(Enemy enemy)
