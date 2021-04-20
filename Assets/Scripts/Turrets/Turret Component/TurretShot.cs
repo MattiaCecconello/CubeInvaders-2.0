@@ -94,7 +94,7 @@ public class TurretShot : MonoBehaviour
             return;
 
         //if enemy change face, remove target
-        if (followEnemyWhenChangeFace == false && enemyToAttack.coordinatesToAttack.face != coordinatesToDefend.face)
+        if (followEnemyWhenChangeFace == false && enemyToAttack.CoordinatesToAttack.face != coordinatesToDefend.face)
             enemyToAttack = null;
     }
 

@@ -40,10 +40,7 @@ public class EnemySlime : Enemy
             {
                 slime.transform.position = transform.position;      //same position
                 slime.transform.rotation = transform.rotation;      //same rotation
-                slime.coordinatesToAttack = coordinatesToAttack;    //attacking same face
-
-                //add coordinates to list
-                coordinatesAlreadyUsed.Add(coordinatesToAttack);
+                slime.CoordinatesToAttack = CoordinatesToAttack;    //attacking same face
             }
             //else go to adjacent coordinates
             else
@@ -52,7 +49,7 @@ public class EnemySlime : Enemy
                 if (adjacentCoordinates != null)
                 {
                     //save distance
-                    float distance = Vector3.Distance(transform.position, coordinatesToAttack.position);
+                    float distance = Vector3.Distance(transform.position, CoordinatesToAttack.position);
 
                     //get new position and rotation
                     Vector3 position;
@@ -61,10 +58,7 @@ public class EnemySlime : Enemy
 
                     slime.transform.position = position;                //adjacent coordinates, but same distance
                     slime.transform.rotation = rotation;                //new rotation looking at cube
-                    slime.coordinatesToAttack = adjacentCoordinates;    //attack this new coordinates
-
-                    //add coordinates to list
-                    coordinatesAlreadyUsed.Add(coordinatesToAttack);
+                    slime.CoordinatesToAttack = adjacentCoordinates;    //attack this new coordinates
                 }
                 //kill slime if there are no coordinates
                 else
@@ -74,15 +68,16 @@ public class EnemySlime : Enemy
                 }
             }
 
-            //activate slime
+            //activate slime and add to coordinates already used
             slime.gameObject.SetActive(true);
+            ((EnemySlime)slime).coordinatesAlreadyUsed.Add(slime.CoordinatesToAttack);
         }
     }
 
     Coordinates GetAdjacentCoordinates()
     {
         //get cells around 
-        List<Cell> cellsAround = GameManager.instance.world.GetCellsAround(coordinatesToAttack);
+        List<Cell> cellsAround = GameManager.instance.world.GetCellsAround(CoordinatesToAttack);
 
         //remove coordinates already used
         foreach(Coordinates coordinates in coordinatesAlreadyUsed)
@@ -97,7 +92,7 @@ public class EnemySlime : Enemy
         //removes coordinates where there are already enemies
         if (checkNoHitEnemies)
         {
-            WorldUtility.CheckOverlap(transform.position, coordinatesToAttack.position, cellsAround);
+            WorldUtility.CheckOverlap(transform.position, CoordinatesToAttack.position, cellsAround);
         }
 
         //return random

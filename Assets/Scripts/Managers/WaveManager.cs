@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using redd096;
 
 [AddComponentMenu("Cube Invaders/Manager/Wave Manager")]
 public class WaveManager : MonoBehaviour
@@ -25,6 +24,8 @@ public class WaveManager : MonoBehaviour
             return portalsParent;
         }
     }
+
+    Dictionary<EFace, List<EnemyBase>> enemiesOnFace = new Dictionary<EFace, List<EnemyBase>>();
 
     void Start()
     {
@@ -129,6 +130,7 @@ public class WaveManager : MonoBehaviour
 
         //clear list
         enemies.Clear();
+        enemiesOnFace.Clear();
     }
 
     IEnumerator Wave_Coroutine()
@@ -211,13 +213,33 @@ public class WaveManager : MonoBehaviour
     {
         //remove from the list
         if (enemies.Contains(enemy))
+        {
             enemies.Remove(enemy);
+            RemoveEnemyFromDictionary(enemy);       //remove from dictionary
+        }
 
         //if there are no other enemies, end wave
         if (enemies.Count <= 0 && GameManager.instance.levelManager.CurrentPhase == EPhase.assault)
         {
             EndWave();
         }
+    }
+
+    public void AddEnemyToDictionary(EnemyBase enemy)
+    {
+        //add key if dictionary no contains
+        if (enemiesOnFace.ContainsKey(enemy.CoordinatesToAttack.face) == false)
+            enemiesOnFace.Add(enemy.CoordinatesToAttack.face, new List<EnemyBase>());
+
+        //add enemy to the list
+        enemiesOnFace[enemy.CoordinatesToAttack.face].Add(enemy);
+    }
+
+    public void RemoveEnemyFromDictionary(EnemyBase enemy)
+    {
+        //if dictionary has key && enemy is in the list, remove it
+        if (enemiesOnFace.ContainsKey(enemy.CoordinatesToAttack.face) && enemiesOnFace[enemy.CoordinatesToAttack.face].Contains(enemy))
+            enemiesOnFace[enemy.CoordinatesToAttack.face].Remove(enemy);
     }
 
     #endregion

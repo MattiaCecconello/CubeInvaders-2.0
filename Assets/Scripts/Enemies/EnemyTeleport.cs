@@ -49,7 +49,7 @@ public class EnemyTeleport : Enemy
         //if can NOT teleport on opposite face, add it to faces to ignore
         List<EFace> facesToIgnore = new List<EFace>();
         if (canTeleportOnOppositeFace == false)
-            facesToIgnore.Add(WorldUtility.GetOppositeFace(coordinatesToAttack.face));
+            facesToIgnore.Add(WorldUtility.GetOppositeFace(CoordinatesToAttack.face));
 
         //get new random face to teleport and save previous position
         EFace randomFace = WorldUtility.GetRandomFace(facesQueue, numberOfPreviousFacesToIgnore, facesToIgnore);
@@ -59,7 +59,7 @@ public class EnemyTeleport : Enemy
         if (newCoordinates != null)
         {
             //save distance
-            float distance = Vector3.Distance(transform.position, coordinatesToAttack.position) + increaseDistanceEveryTeleport;
+            float distance = Vector3.Distance(transform.position, CoordinatesToAttack.position) + increaseDistanceEveryTeleport;
 
             //get new position and rotation
             Vector3 position;
@@ -71,7 +71,7 @@ public class EnemyTeleport : Enemy
 
             transform.position = position;          //new coordinates, but same distance
             transform.rotation = rotation;          //new rotation looking at cube
-            coordinatesToAttack = newCoordinates;   //attack this new coordinates
+            CoordinatesToAttack = newCoordinates;   //attack this new coordinates
 
         }
         //kill if there are no coordinates
@@ -116,7 +116,7 @@ public class EnemyTeleport : Enemy
         //removes coordinates where there are already enemies
         if (checkNoHitEnemies)
         {
-            WorldUtility.CheckOverlap(transform.position, coordinatesToAttack.position, possibleCells);
+            WorldUtility.CheckOverlap(transform.position, CoordinatesToAttack.position, possibleCells);
         }
 
         //return random

@@ -50,7 +50,7 @@ public class EnemySoulbind : Enemy
             soulBind = GameManager.instance.waveManager.InstantiateNewEnemy(this) as EnemySoulbind;
             soulBind.transform.position = position;             //set position
             soulBind.transform.rotation = rotation;             //set rotation
-            soulBind.coordinatesToAttack = newCoordinates;      //set new coordinates to attack
+            soulBind.CoordinatesToAttack = newCoordinates;      //set new coordinates to attack
             soulBind.soulBind = this;                           //set this one as its soulbind
 
             //active soulbind and call event
@@ -120,7 +120,7 @@ public class EnemySoulbind : Enemy
         //removes coordinates where there are already enemies
         if (checkNoHitEnemies)
         {
-            WorldUtility.CheckOverlap(transform.position, coordinatesToAttack.position, possibleCells);
+            WorldUtility.CheckOverlap(transform.position, CoordinatesToAttack.position, possibleCells);
         }
 
         //return random
