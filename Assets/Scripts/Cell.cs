@@ -86,6 +86,7 @@ public class Cell : MonoBehaviour
         {
             //build it
             turret.BuildTurret(this);
+            GameManager.instance.turretsManager.AddTurretToDictionary(turret);  //add to dictionary
         }
     }
 
@@ -96,6 +97,7 @@ public class Cell : MonoBehaviour
         {
             //remove it
             turret.RemoveTurret();
+            GameManager.instance.turretsManager.RemoveTurretFromDictionary(turret);  //remove from dictionary
         }
     }
 

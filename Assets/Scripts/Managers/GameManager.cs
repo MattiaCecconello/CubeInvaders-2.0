@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     public World world { get; private set; }
     public LevelManager levelManager { get; private set; }
     public WaveManager waveManager { get; private set; }
+    public TurretsManager turretsManager { get; private set; }
 
     protected override void SetDefaults()
     {
@@ -23,6 +24,11 @@ public class GameManager : Singleton<GameManager>
         world = FindObjectOfType<World>();
         levelManager = FindObjectOfType<LevelManager>();
         waveManager = FindObjectOfType<WaveManager>();
+        turretsManager = FindObjectOfType<TurretsManager>();
+
+        //in scenes where there is a level manager, be sure there is also turrets manager
+        if (levelManager && turretsManager == null)
+            turretsManager = new GameObject("Turrets Manager", typeof(TurretsManager)).GetComponent<TurretsManager>();
     }
 
     void Start()
