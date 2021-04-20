@@ -12,4 +12,8 @@ public class GeneralConfig : ScriptableObject
     [Header("Delay Commands")]
     public float delayReleaseFinishStrategicPhase = 0.1f;
     public float delayRotateOrSelectCell = 0.1f;
+
+    [Header("Radar")]
+    public bool showEnemiesHealth = true;
+    public bool showEnemiesDestination = true;
 }

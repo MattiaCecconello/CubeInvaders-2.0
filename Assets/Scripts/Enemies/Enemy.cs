@@ -116,4 +116,28 @@ public class Enemy : EnemyBase
     }
 
     #endregion
+
+    #region radar
+
+    public void InRadarArea()
+    {
+        //show destination
+        if(GameManager.instance.levelManager.generalConfig.showEnemiesDestination)
+        {
+
+        }
+
+        //show health
+        if(GameManager.instance.levelManager.generalConfig.showEnemiesHealth)
+        {
+
+        }
+    }
+
+    public void OutRadarArea()
+    {
+        //hide destination and health
+    }
+
+    #endregion
 }

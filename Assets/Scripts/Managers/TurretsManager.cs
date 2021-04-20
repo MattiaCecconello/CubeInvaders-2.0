@@ -5,6 +5,12 @@ public class TurretsManager : MonoBehaviour
 {
     Dictionary<EFace, List<BuildableObject>> buildableObjectsOnFace = new Dictionary<EFace, List<BuildableObject>>();
 
+    void Update()
+    {
+        //update radar functions
+        UpdateRadarEnemies();
+    }
+
     #region public API
 
     public void AddTurretToDictionary(BuildableObject buildableObject)
@@ -31,6 +37,37 @@ public class TurretsManager : MonoBehaviour
             return buildableObjectsOnFace[face];
 
         return new List<BuildableObject>();
+    }
+
+    #endregion
+
+    #region radar
+
+    void UpdateRadarEnemies()
+    {
+        //foreach face
+        foreach(EFace face in System.Enum.GetValues(typeof(EFace)))
+        {
+            //check there is a radar on this face && is active
+            bool containsRadar = false;
+            foreach (BuildableObject buildableObject in buildableObjectsOnFace[face])
+            {
+                if (buildableObject is Radar && buildableObject.IsActive)
+                {
+                    containsRadar = true;
+                    break;
+                }
+            }
+
+            //enemy call if inside or outside radar area
+            foreach (Enemy enemy in GameManager.instance.waveManager.EnemiesOnFace(face))
+            {
+                if (containsRadar)
+                    enemy.InRadarArea();
+                else
+                    enemy.OutRadarArea();
+            }
+        }
     }
 
     #endregion

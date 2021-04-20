@@ -90,7 +90,7 @@ public class TurretShield : Turret
         //do only if not rotating
         if (isRotating == false)
         {
-            //reset shield for when this turret will be reactivate
+            //reset shield for when this turret will be reactivate (immediatly because the turret will be deactivated too)
             shield.ResetShieldSize();
 
             //remove from queue
