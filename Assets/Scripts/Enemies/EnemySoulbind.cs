@@ -38,13 +38,10 @@ public class EnemySoulbind : Enemy
         Coordinates newCoordinates = sameCell ? new Coordinates(faceSoulbind, coordinatesToAttack.x, coordinatesToAttack.y) : GetNewCoordinates(faceSoulbind);
         if (newCoordinates != null)
         {
-            //save distance
-            float distance = Vector3.Distance(transform.position, coordinatesToAttack.position);
-
             //get new position and rotation
             Vector3 position;
             Quaternion rotation;
-            GameManager.instance.world.GetPositionAndRotation(newCoordinates, distance, out position, out rotation);
+            GameManager.instance.world.GetPositionAndRotation(newCoordinates, distanceFromCube, out position, out rotation);
 
             //instantiate soulbind
             soulBind = GameManager.instance.waveManager.InstantiateNewEnemy(this) as EnemySoulbind;

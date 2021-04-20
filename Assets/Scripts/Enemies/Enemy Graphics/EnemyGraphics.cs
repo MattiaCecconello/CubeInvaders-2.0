@@ -43,7 +43,7 @@ public class EnemyGraphics : MonoBehaviour
         }
     }
 
-    void OnGetDamage()
+    void OnGetDamage(float currentHealth, float maxHealth)
     {
         //blink on get damage
         if (blink_Coroutine == null && gameObject.activeInHierarchy)

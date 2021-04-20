@@ -15,7 +15,6 @@ public class EnemyTeleport : Enemy
 
     public System.Action<Vector3, Quaternion, Vector3, Quaternion> onTeleport;
 
-    float maxHealth;
     int previousPercentage;
 
     //queue to not spawn on same face
@@ -25,8 +24,7 @@ public class EnemyTeleport : Enemy
     {
         base.Awake();
 
-        //save max health and set max percentage
-        maxHealth = health;
+        //set max percentage
         previousPercentage = 100;
     }
 
@@ -59,7 +57,7 @@ public class EnemyTeleport : Enemy
         if (newCoordinates != null)
         {
             //save distance
-            float distance = Vector3.Distance(transform.position, CoordinatesToAttack.position) + increaseDistanceEveryTeleport;
+            float distance = distanceFromCube + increaseDistanceEveryTeleport;
 
             //get new position and rotation
             Vector3 position;

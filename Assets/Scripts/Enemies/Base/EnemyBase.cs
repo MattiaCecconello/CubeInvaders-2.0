@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using redd096;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -13,15 +14,21 @@ public class EnemyBase : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] protected Coordinates coordinatesToAttack;
+    [ReadOnly] [SerializeField] protected float maxHealth;
+    [ReadOnly] [SerializeField] protected float distanceFromCube;
 
     Rigidbody rb;
 
-    public System.Action onGetDamage;
+    public System.Action<float, float> onGetDamage;
     public bool StillAlive { get; private set; } = true;
+    public float DistanceFromCube => distanceFromCube;
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        //set max health
+        maxHealth = health;
     }
 
     protected virtual void FixedUpdate()
@@ -30,6 +37,9 @@ public class EnemyBase : MonoBehaviour
         Vector3 direction = coordinatesToAttack.position - transform.position;
 
         rb.velocity = direction.normalized * speed;
+
+        //update distance from cube
+        distanceFromCube = Vector3.Distance(transform.position, coordinatesToAttack.position);
     }
 
     #region public API
@@ -37,7 +47,7 @@ public class EnemyBase : MonoBehaviour
     public virtual void GetDamage(float damage, TurretShot whoHit)
     {
         //invoke event
-        onGetDamage?.Invoke();
+        onGetDamage?.Invoke(health, maxHealth);
 
         //get damage
         health -= damage;

@@ -68,7 +68,7 @@ public class RadarGraphics : BuildableGraphics
         int currentWave = GameManager.instance.waveManager.CurrentWave;
 
         //get flick speed based on enemy distance to its coordinates to attack
-        float enemyDistance = Vector3.Distance(GetEnemy().CoordinatesToAttack.position, GetEnemy().transform.position);
+        float enemyDistance = GetEnemy().DistanceFromCube;
         float distanceFrom0To1 = 1 - (enemyDistance / GameManager.instance.waveManager.waveConfig.Waves[currentWave].DistanceFromWorld);        //distance from 0 to 1
         float flickSpeed = Mathf.Lerp(minFlick, maxFlick, distanceFrom0To1);                                                                    //speed from minFlick to maxFlick
 
