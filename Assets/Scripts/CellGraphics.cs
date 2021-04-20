@@ -10,26 +10,49 @@ public class CellGraphics : MonoBehaviour
     [SerializeField] ParticleSystem explosionCellPrefab = default;
     [SerializeField] AudioStruct explosionCellSound = default;
 
+    [Header("Radar things")]
+    [SerializeField] Transform enemyDestinationObject = default;
+
     CameraShake camShake;
     Cell cell;
 
-    private void Start()
+    Enemy nearestEnemy;
+
+    private void OnEnable()
     {
         camShake = FindObjectOfType<CameraShake>();
         cell = GetComponent<Cell>();
 
-        cell.onWorldRotate += OnWorldRotate;
-        cell.onDestroyCell += OnDestroyCell;
+        if (cell)
+        {
+            cell.onWorldRotate += OnWorldRotate;
+            cell.onDestroyCell += OnDestroyCell;
+            cell.onShowEnemyDestination += OnShowEnemyDestination;
+            cell.onHideEnemyDestination += OnHideEnemyDestination;
+        }
+
+        //by default, hide enemy destination
+        OnHideEnemyDestination();
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if(cell)
         {
             cell.onWorldRotate -= OnWorldRotate;
             cell.onDestroyCell -= OnDestroyCell;
+            cell.onShowEnemyDestination -= OnShowEnemyDestination;
+            cell.onHideEnemyDestination -= OnHideEnemyDestination;
         }
     }
+
+    void Update()
+    {
+        //update size enemy destination object
+        UpdateDestinationObject();
+    }
+
+    #region events
 
     void OnWorldRotate(Coordinates coordinates)
     {
@@ -45,4 +68,53 @@ public class CellGraphics : MonoBehaviour
         //do camera shake
         camShake.DoShake();
     }
+
+    void OnShowEnemyDestination(Enemy nearestEnemy)
+    {
+        //show destination
+        if (GameManager.instance.levelManager.generalConfig.showEnemiesDestination)
+        {
+            enemyDestinationObject?.gameObject.SetActive(true);
+
+            //set nearest enemy
+            this.nearestEnemy = nearestEnemy;
+        }
+    }
+
+    void OnHideEnemyDestination()
+    {
+        //hide destination
+        enemyDestinationObject?.gameObject.SetActive(false);
+
+        //be sure to start from 0 when reactivate
+        if(enemyDestinationObject)
+            enemyDestinationObject.transform.localScale = new Vector3(0, 0, 0);
+
+        //remove nearest enemy
+        nearestEnemy = null;
+    }
+
+    #endregion
+
+    #region private API
+
+    void UpdateDestinationObject()
+    {
+        //update destination object
+        if (enemyDestinationObject && nearestEnemy)
+        {
+            //set size based on distance from cube
+            float distanceFrom0To1 = 1 - (nearestEnemy.DistanceFromCube / GameManager.instance.levelManager.generalConfig.minDistanceToShowDestination);    //distance from 0 to 1
+            float size = Mathf.Lerp(0, 1, distanceFrom0To1);
+
+            //show only if distance greater than minimum
+            if (nearestEnemy.DistanceFromCube > GameManager.instance.levelManager.generalConfig.minDistanceToShowDestination)
+                size = 0;
+
+            //set size
+            enemyDestinationObject.transform.localScale = new Vector3(size, size, size);
+        }
+    }
+
+    #endregion
 }

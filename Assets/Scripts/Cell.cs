@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using redd096;
 
 [SelectionBase]
@@ -30,6 +28,8 @@ public class Cell : MonoBehaviour
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
     public System.Action onDestroyCell;
+    public System.Action<Enemy> onShowEnemyDestination;
+    public System.Action onHideEnemyDestination;
 
     public BuildableObject turret { get; private set; }
 
@@ -86,7 +86,6 @@ public class Cell : MonoBehaviour
         {
             //build it
             turret.BuildTurret(this);
-            GameManager.instance.turretsManager.AddTurretToDictionary(turret);  //add to dictionary
         }
     }
 
@@ -97,7 +96,6 @@ public class Cell : MonoBehaviour
         {
             //remove it
             turret.RemoveTurret();
-            GameManager.instance.turretsManager.RemoveTurretFromDictionary(turret);  //remove from dictionary
         }
     }
 
@@ -276,6 +274,18 @@ public class Cell : MonoBehaviour
     {
         //destroy cell, but set is loaded
         DestroyCell(true);
+    }
+
+    public void ShowEnemyDestination(Enemy nearestEnemy)
+    {
+        //show enemy destination
+        onShowEnemyDestination?.Invoke(nearestEnemy);
+    }
+
+    public void HideEnemyDestination()
+    {
+        //hide enemy destination
+        onHideEnemyDestination?.Invoke();
     }
 
     #endregion

@@ -56,8 +56,12 @@ public class TurretsManager : MonoBehaviour
         //NB di default cella e nemico nascondono vita e destination, quindi se viene chiamato Show() per primo, fallisce
         //NB che il destination sulle celle va aggiornato in base a quale nemico sia più vicino - quindi comunque nell'update avrà sia il resize dell'object che il find nearest enemy
 
+        //clear lists
+        cellsInRadar.Clear();
+        enemiesCoordinates.Clear();
+
         //foreach face
-        foreach(EFace face in System.Enum.GetValues(typeof(EFace)))
+        foreach (EFace face in System.Enum.GetValues(typeof(EFace)))
         {
             //check there is a radar on this face && is active
             bool containsRadar = false;
@@ -69,10 +73,6 @@ public class TurretsManager : MonoBehaviour
                     break;
                 }
             }
-
-            //clear lists
-            cellsInRadar.Clear();
-            enemiesCoordinates.Clear();
 
             //enemy call if inside or outside radar area
             foreach (Enemy enemy in GameManager.instance.waveManager.EnemiesOnFace(face))
@@ -92,27 +92,32 @@ public class TurretsManager : MonoBehaviour
                     enemy.HideHealth();
                 }
             }
-
-            //foreach coordinates, find nearest enemy and show destination on cell
-            foreach(Coordinates coordinates in enemiesCoordinates.Keys)
-            {
-                Enemy nearestToThisCell = enemiesCoordinates[coordinates].FindNearest(coordinates.position);
-                Cell cell = GameManager.instance.world.Cells[coordinates];
-                cell.ShowEnemyDestination(nearestToThisCell);
-
-                //add to list to check when hide destination
-                cellsInRadar.Add(cell);
-            }
-
-            //foreach cell not in radar, hide destination if in previous list
-            foreach (Cell cell in previousCellsInRadar)
-                if (cellsInRadar.Contains(cell) == false)
-                    cell.HideEnemyDestination();
-
-            //set previous
-            previousCellsInRadar = new List<Cell>(cellsInRadar);
-
         }
+
+        //foreach coordinates, find nearest enemy and show destination on cell
+        foreach (Coordinates coordinates in enemiesCoordinates.Keys)
+        {
+            Enemy nearestToThisCell = enemiesCoordinates[coordinates].FindNearest(coordinates.position);
+            Cell cell = GameManager.instance.world.Cells[coordinates];
+            cell.ShowEnemyDestination(nearestToThisCell);
+
+            //add to list to check when hide destination
+            cellsInRadar.Add(cell);
+        }
+
+        //foreach cell in previous list
+        foreach (Cell previousCell in previousCellsInRadar)
+        {
+            //if not still in radar area
+            if (cellsInRadar.Contains(previousCell) == false)
+            {
+                //hide destination
+                previousCell.HideEnemyDestination();
+            }
+        }
+
+        //set previous
+        previousCellsInRadar = new List<Cell>(cellsInRadar);
     }
 
     #endregion
