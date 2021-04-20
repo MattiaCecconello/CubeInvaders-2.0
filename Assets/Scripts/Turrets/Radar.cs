@@ -21,7 +21,7 @@ public class Radar : BuildableObject
     Enemy FindEnemy()
     {
         //find enemies attacking this face and get the nearest
-        List<Enemy> enemies = GameManager.instance.waveManager.enemiesOnFace[CellOwner.coordinates.face];
+        List<Enemy> enemies = GameManager.instance.waveManager.EnemiesOnFace(CellOwner.coordinates.face);
         return enemies.FindNearest(transform.position);
     }
 }

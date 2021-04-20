@@ -129,7 +129,7 @@ public class TurretShot : MonoBehaviour
     void AreaEffect(Enemy hitEnemy)
     {
         //find enemies on the same face, inside the area effect
-        foreach (Enemy enemy in GameManager.instance.waveManager.enemiesOnFace[coordinatesToDefend.face])
+        foreach (Enemy enemy in GameManager.instance.waveManager.EnemiesOnFace(coordinatesToDefend.face))
         {
             //apply effect on every enemy
             if (enemy != hitEnemy && Vector3.Distance(enemy.transform.position, transform.position) < area)

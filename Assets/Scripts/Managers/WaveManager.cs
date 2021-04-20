@@ -25,7 +25,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public Dictionary<EFace, List<Enemy>> enemiesOnFace { get; private set; } = new Dictionary<EFace, List<Enemy>>();
+    Dictionary<EFace, List<Enemy>> enemiesOnFace = new Dictionary<EFace, List<Enemy>>();
 
     void Start()
     {
@@ -241,6 +241,15 @@ public class WaveManager : MonoBehaviour
         //if dictionary has key && enemy is in the list, remove it
         if (enemiesOnFace.ContainsKey(enemy.CoordinatesToAttack.face) && enemiesOnFace[enemy.CoordinatesToAttack.face].Contains(enemy))
             enemiesOnFace[enemy.CoordinatesToAttack.face].Remove(enemy);
+    }
+
+    public List<Enemy> EnemiesOnFace(EFace face)
+    {
+        //return list - if no key in the dictionary, return clear list
+        if (enemiesOnFace.ContainsKey(face))
+            return enemiesOnFace[face];
+
+        return new List<Enemy>();
     }
 
     #endregion
