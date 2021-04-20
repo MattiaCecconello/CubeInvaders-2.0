@@ -6,6 +6,7 @@ public class EnemySoulbindGraphics : MonoBehaviour
 {
     [Header("SoulBind")]
     [SerializeField] bool lookAtSoulBind = false;
+    [CanShow("lookAtSoulBind")] [SerializeField] Transform objectToRotateToSoulbind = default;
 
     [Header("VFX")]
     [SerializeField] ParticleSystem particlesSpawnFirstSoulbind = default;
@@ -32,8 +33,8 @@ public class EnemySoulbindGraphics : MonoBehaviour
     void FixedUpdate()
     {
         //look at soulbind
-        if(lookAtSoulBind)
-            transform.rotation = Quaternion.LookRotation(enemy.soulBind.transform.position - transform.position);
+        if(lookAtSoulBind && objectToRotateToSoulbind)
+            objectToRotateToSoulbind.rotation = Quaternion.LookRotation(enemy.soulBind.transform.position - transform.position);
     }
 
     void OnSpawnSoulbind(Vector3 firstPosition, Quaternion firstRotation, Vector3 secondPosition, Quaternion secondRotation)
