@@ -104,8 +104,8 @@ public class CellGraphics : MonoBehaviour
         if (enemyDestinationObject && nearestEnemy)
         {
             //set size based on distance from cube
-            float distanceFrom0To1 = 1 - (nearestEnemy.DistanceFromCube / GameManager.instance.levelManager.generalConfig.minDistanceToShowDestination);    //distance from 0 to 1
-            float size = Mathf.Lerp(0, 1, distanceFrom0To1);
+            //float distanceFrom0To1 = 1 - (nearestEnemy.DistanceFromCube / GameManager.instance.levelManager.generalConfig.minDistanceToShowDestination);    //distance from 0 to 1
+            float size = 1;// Mathf.Lerp(0, 1, distanceFrom0To1);
 
             //show only if distance greater than minimum
             if (nearestEnemy.DistanceFromCube > GameManager.instance.levelManager.generalConfig.minDistanceToShowDestination)
