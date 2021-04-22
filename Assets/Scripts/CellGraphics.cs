@@ -11,7 +11,8 @@ public class CellGraphics : MonoBehaviour
     [SerializeField] AudioStruct explosionCellSound = default;
 
     [Header("Radar things")]
-    [SerializeField] Transform enemyDestinationObject = default;
+    [SerializeField] SpriteRenderer enemyDestinationObject = default;
+    [SerializeField] float flickSpeed = 1;
 
     CameraShake camShake;
     Cell cell;
@@ -86,9 +87,8 @@ public class CellGraphics : MonoBehaviour
         //hide destination
         enemyDestinationObject?.gameObject.SetActive(false);
 
-        //be sure to start from 0 when reactivate
-        if(enemyDestinationObject)
-            enemyDestinationObject.transform.localScale = new Vector3(0, 0, 0);
+        //set alpha to 0, for when reactivate it
+        enemyDestinationObject.color = new Color(enemyDestinationObject.color.r, enemyDestinationObject.color.g, enemyDestinationObject.color.b, 0);
 
         //remove nearest enemy
         nearestEnemy = null;
@@ -103,16 +103,10 @@ public class CellGraphics : MonoBehaviour
         //update destination object
         if (enemyDestinationObject && nearestEnemy)
         {
-            //set size based on distance from cube
-            //float distanceFrom0To1 = 1 - (nearestEnemy.DistanceFromCube / GameManager.instance.levelManager.generalConfig.minDistanceToShowDestination);    //distance from 0 to 1
-            float size = 1;// Mathf.Lerp(0, 1, distanceFrom0To1);
+            float alpha = Mathf.Abs(Mathf.Sin(Time.time * flickSpeed));
 
-            //show only if distance greater than minimum
-            if (nearestEnemy.DistanceFromCube > GameManager.instance.levelManager.generalConfig.minDistanceToShowDestination)
-                size = 0;
-
-            //set size
-            enemyDestinationObject.transform.localScale = new Vector3(size, size, size);
+            //set alpha
+            enemyDestinationObject.color = new Color(enemyDestinationObject.color.r, enemyDestinationObject.color.g, enemyDestinationObject.color.b, alpha);
         }
     }
 

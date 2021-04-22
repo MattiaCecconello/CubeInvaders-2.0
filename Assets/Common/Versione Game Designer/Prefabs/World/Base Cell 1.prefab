@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4077013533456902468
 Transform:
   m_ObjectHideFlags: 0
@@ -383,7 +383,8 @@ MonoBehaviour:
   explosionCellSound:
     audioClip: {fileID: 0}
     volume: 0
-  enemyDestinationObject: {fileID: 4077013533456902468}
+  enemyDestinationObject: {fileID: 7707521044161059786}
+  flickSpeed: 1
 --- !u!1 &7756657623923859071
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3162045442576442036
 Transform:
   m_ObjectHideFlags: 0

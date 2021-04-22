@@ -104,6 +104,11 @@ public class TurretsManager : MonoBehaviour
         foreach (Coordinates coordinates in enemiesCoordinates.Keys)
         {
             Enemy nearestToThisCell = enemiesCoordinates[coordinates].FindNearest(coordinates.position);
+
+            //do only if enemy is near than minimum distance
+            if (nearestToThisCell.DistanceFromCube > GameManager.instance.levelManager.generalConfig.minDistanceToShowDestination)
+                continue;
+
             Cell cell = GameManager.instance.world.Cells[coordinates];
             cell.ShowEnemyDestination(nearestToThisCell);
 
