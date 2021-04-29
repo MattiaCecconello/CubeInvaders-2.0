@@ -4965,7 +4965,7 @@ MonoBehaviour:
   maxHealth: 0
   distanceFromCube: 0
   maxSpeed: 0
-  shareHealth: 0
+  shareHealth: 1
   killSoulbindOnDeath: 1
   useOppositeFace: 0
   sameCell: 1

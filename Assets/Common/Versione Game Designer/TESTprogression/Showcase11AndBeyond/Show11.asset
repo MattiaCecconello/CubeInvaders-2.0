@@ -26,7 +26,9 @@ MonoBehaviour:
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
       enemyTimer: 0
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
+      enemyTimer: -3
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: -3
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
       enemyTimer: 0
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
@@ -34,7 +36,9 @@ MonoBehaviour:
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
       enemyTimer: 0
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
+      enemyTimer: -3
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: -3
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
       enemyTimer: 0
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
@@ -42,7 +46,9 @@ MonoBehaviour:
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
       enemyTimer: 0
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
+      enemyTimer: -3
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: -3
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
       enemyTimer: 0
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
@@ -50,32 +56,6 @@ MonoBehaviour:
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
       enemyTimer: 0
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
+      enemyTimer: -3
     - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
-      enemyTimer: 0
+      enemyTimer: -3
