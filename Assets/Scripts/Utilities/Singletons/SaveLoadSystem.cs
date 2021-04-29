@@ -37,6 +37,21 @@
 
     #endregion
 
+    #region save class
+
+    [System.Serializable]
+    public class ExampleClassToSave
+    {
+        public int test;
+
+        public ExampleClassToSave(int test)
+        {
+            this.test = test;
+        }
+    }
+
+    #endregion
+
     public enum SaveFolder
     {
         persistentDataPath, gameFolder, nothing

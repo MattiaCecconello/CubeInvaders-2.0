@@ -26,6 +26,8 @@ public class LevelManager : MonoBehaviour
 
     public bool GameEnded { get; private set; }
 
+    bool noDamage = true;
+
     void Start()
     {
         //check if randomize world
@@ -104,7 +106,7 @@ public class LevelManager : MonoBehaviour
         GameEnded = true;
 
         //save using scene name
-        MenuSystem.Save(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, win);
+        MenuSystem.Save(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, win, noDamage);
 
         //if win level, save world
         if(win)
@@ -118,6 +120,15 @@ public class LevelManager : MonoBehaviour
     {
         //update level config
         this.levelConfig = levelConfig;
+    }
+
+    public void GetDamage()
+    {
+        //set got damage in this level
+        if (noDamage)
+        {
+            noDamage = false;
+        }
     }
 
     #endregion

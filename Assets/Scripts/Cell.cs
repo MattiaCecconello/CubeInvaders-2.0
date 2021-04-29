@@ -248,6 +248,9 @@ public class Cell : MonoBehaviour
     /// </summary>
     public void KillCell(bool canEndGame = true)
     {
+        //set got damage in this level
+        GameManager.instance.levelManager.GetDamage();
+
         //do nothing if invincible
         if (isInvincible)
             return;
