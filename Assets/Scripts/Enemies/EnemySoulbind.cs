@@ -91,15 +91,19 @@ public class EnemySoulbind : Enemy
     {
         if (StillAlive)
         {
-            //if kill also soulbind (only if damageSoulBind is true)
-            if (soulBind && killSoulbindOnDeath && damageSoulBind)
+            //if hit cube, do not destroy souldbind
+            if (hittedBy.GetType() != typeof(Cell))
             {
-                //be sure shareHealth is false, otherwise is already killed by get damage
-                if (shareHealth == false)
+                //if kill also soulbind (only if damageSoulBind is true)
+                if (soulBind && killSoulbindOnDeath && damageSoulBind)
                 {
-                    soulBind.damageSoulBind = false;
-                    soulBind.Die(hittedBy);
-                    soulBind.damageSoulBind = true;
+                    //be sure shareHealth is false, otherwise is already killed by get damage
+                    if (shareHealth == false)
+                    {
+                        soulBind.damageSoulBind = false;
+                        soulBind.Die(hittedBy);
+                        soulBind.damageSoulBind = true;
+                    }
                 }
             }
 
