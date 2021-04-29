@@ -9,6 +9,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject winMenu = default;
     [SerializeField] GameObject loseMenu = default;
 
+    [Header("Main Pause - Options")]
+    [SerializeField] GameObject mainPauseMenu = default;
+    [SerializeField] GameObject optionsMenu = default;
+
     [Header("Resources")]
     [SerializeField] Text resourcesText = default;
     [SerializeField] string stringBeforeResources = "Resources: ";
@@ -26,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject strategicCanvas = default;
     [SerializeField] Slider readySlider = default;
 
+    //selector
     GameObject selector;
     GameObject multipleSelector;
 
@@ -117,6 +122,31 @@ public class UIManager : MonoBehaviour
         {
             winMenu.SetActive(false);
             loseMenu.SetActive(false);
+        }
+    }
+
+    #endregion
+
+    #region options - pause
+
+    public bool IsActiveOptions()
+    {
+        return optionsMenu.activeInHierarchy;
+    }
+
+    public void OptionsMenu(bool active)
+    {
+        //hide main and show options
+        if(active)
+        {
+            mainPauseMenu.SetActive(false);
+            optionsMenu.SetActive(true);
+        }
+        //viceversa
+        else
+        {
+            mainPauseMenu.SetActive(true);
+            optionsMenu.SetActive(false);
         }
     }
 

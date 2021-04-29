@@ -210,6 +210,14 @@ public class Player : StateMachine
             //if not ended game && time is paused && is not end assault phase (showing panel to end level)
             if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
             {
+                //if options menu is active, back to pause menu
+                if(GameManager.instance.uiManager.IsActiveOptions())
+                {
+                    GameManager.instance.uiManager.OptionsMenu(false);
+                    return true;
+                }    
+
+                //else resume game
                 SceneLoader.instance.ResumeGame();
                 return true;
             }

@@ -410,6 +410,7 @@ MonoBehaviour:
   m_DragThreshold: 10
   firstSelectedGameObjects:
   - {fileID: 4158868890421293380}
+  - {fileID: 6564895935328090550}
   overrideObjects:
   - {fileID: 4158868890456934114}
   - {fileID: 4158868890849408574}
@@ -1731,6 +1732,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 4158868891263794784}
   winMenu: {fileID: 4158868891777957470}
   loseMenu: {fileID: 4158868890461490887}
+  mainPauseMenu: {fileID: 4158868891013168613}
+  optionsMenu: {fileID: 7235578792783454153}
   resourcesText: {fileID: 4158868891732072968}
   stringBeforeResources: 'Resources: '
   decimalsResourcesText: 0
@@ -3947,13 +3950,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
---- !u!1 &7235578792783454153 stripped
+--- !u!1 &6564895935328090550 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6764043436985870428, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7110188936370916899, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
   m_PrefabInstance: {fileID: 4158868890588280725}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &7235578792783454152 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6764043436985870429, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
+  m_PrefabInstance: {fileID: 4158868890588280725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7235578792783454153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6764043436985870428, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
   m_PrefabInstance: {fileID: 4158868890588280725}
   m_PrefabAsset: {fileID: 0}
