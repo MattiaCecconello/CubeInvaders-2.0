@@ -16,6 +16,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected Coordinates coordinatesToAttack;
     [ReadOnly] [SerializeField] protected float maxHealth;
     [ReadOnly] [SerializeField] protected float distanceFromCube;
+    [ReadOnly] [SerializeField] protected float maxSpeed;
 
     Rigidbody rb;
 
@@ -29,6 +30,9 @@ public class EnemyBase : MonoBehaviour
 
         //set max health
         maxHealth = health;
+
+        //set max speed
+        maxSpeed = speed;
     }
 
     protected virtual void FixedUpdate()

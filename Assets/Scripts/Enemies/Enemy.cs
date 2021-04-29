@@ -38,15 +38,6 @@ public class Enemy : EnemyBase
     public System.Action onHideHealth;
 
     List<SlowEffect> effectsOnEnemy = new List<SlowEffect>();
-    float maxSpeed;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        //set max speed
-        maxSpeed = speed;
-    }
 
     protected override void FixedUpdate()
     {
