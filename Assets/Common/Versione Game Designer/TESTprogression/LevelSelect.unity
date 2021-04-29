@@ -2814,6 +2814,7 @@ GameObject:
   - component: {fileID: 1375623696}
   - component: {fileID: 1375623695}
   - component: {fileID: 1375623694}
+  - component: {fileID: 1375623698}
   m_Layer: 5
   m_Name: Show1
   m_TagString: Untagged
@@ -2935,6 +2936,19 @@ RectTransform:
   m_AnchoredPosition: {x: 106.69003, y: -117.26001}
   m_SizeDelta: {x: 126.03732, y: 44.046234}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1375623698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375623693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b11c8ed22c48f145b8a2366aced2a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noDamageObject: {fileID: 1690833456}
 --- !u!1001 &1377620606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3026,55 +3040,38 @@ MonoBehaviour:
   colorOnDisable: {r: 1, g: 0, b: 0, a: 1}
   levelButtons:
   - button: {fileID: 1375623694}
-    noDamageObject: {fileID: 1690833456}
     necessaryKey: 
   - button: {fileID: 1351108126}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show1
   - button: {fileID: 591709449}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show2
   - button: {fileID: 552862929}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show3
   - button: {fileID: 356829871}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show4
   - button: {fileID: 1227510685}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show5
   - button: {fileID: 1877678422}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show6
   - button: {fileID: 331746027}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show7
   - button: {fileID: 219105186}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show8
   - button: {fileID: 1150401186}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show9
   - button: {fileID: 86173607}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show10
   - button: {fileID: 811026939}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show11
   - button: {fileID: 1947866209}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show12
   - button: {fileID: 166527263}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show13
   - button: {fileID: 1694152048}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show14
   - button: {fileID: 979440549}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show15
   - button: {fileID: 1905836737}
-    noDamageObject: {fileID: 0}
     necessaryKey: Show16
 --- !u!4 &1423676350
 Transform:
