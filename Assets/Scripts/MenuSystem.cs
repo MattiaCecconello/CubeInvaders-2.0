@@ -23,7 +23,9 @@ public class MenuSave
 public struct MenuStruct
 {
     public Button button;
+    public GameObject noDamageObject;
     public string necessaryKey;
+    public string nameThisLevel;
 }
 
 [AddComponentMenu("Cube Invaders/Menu System")]
@@ -80,13 +82,22 @@ public class MenuSystem : MonoBehaviour
             levelButton.button.GetComponent<Image>().color = colorOnDisable;
         }
 
-        //remove event
-        levelButton.button.onClick = new Button.ButtonClickedEvent();
+        //disable no damage object
+        if(levelButton.noDamageObject)
+            levelButton.noDamageObject.SetActive(false);
     }
 
     void UnlockLevel(MenuStruct levelButton)
     {
+        //try load
+        MenuSave load = SaveLoadJSON.Load<MenuSave>(levelButton.nameThisLevel);
 
+        //if no damage, active object
+        if(load != null && load.noDamage)
+        {
+            if (levelButton.noDamageObject)
+                levelButton.noDamageObject.SetActive(true);
+        }
     }
 
     #endregion
