@@ -148,7 +148,11 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static void Delete(string key)
     {
+        //delete key
         SaveLoadJSON.DeleteData(key);
+
+        //then reload scene
+        SceneLoader.instance.RestartGame();
     }
 
     /// <summary>
@@ -156,7 +160,11 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static void DeleteAll()
     {
+        //delete all
         SaveLoadJSON.DeleteAll();
+
+        //then reload scene
+        SceneLoader.instance.RestartGame();
     }
 
     /// <summary>
