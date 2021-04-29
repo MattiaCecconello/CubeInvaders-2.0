@@ -120,20 +120,20 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public void UnlockEveryLevel()
     {
-        ////save every necessary key
-        //foreach (MenuStruct levelButton in levelButtons)
-        //{
-        //    Save(levelButton.necessaryKey, true, false);
-        //}
-        //
-        ////then reload scene
-        //SceneLoader.instance.RestartGame();
-
-        //set interactable every button
+        //save every necessary key
         foreach (MenuStruct levelButton in levelButtons)
         {
-            levelButton.button.interactable = true;
+            Save(levelButton.necessaryKey, true, false);
         }
+        
+        //then reload scene
+        SceneLoader.instance.RestartGame();
+
+        //set interactable every button
+        //foreach (MenuStruct levelButton in levelButtons)
+        //{
+        //    levelButton.button.interactable = true;
+        //}
     }
 
     #endregion
