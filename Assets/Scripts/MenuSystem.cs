@@ -50,15 +50,13 @@ public class MenuSystem : MonoBehaviour
             //if no key, or load is succesfull
             bool isActive = string.IsNullOrWhiteSpace(levelButton.necessaryKey) || Load(levelButton.necessaryKey);
 
+            //try show achievements if there is a save (call also if there is not, so deactive objects)
+            ShowAchievements(levelButton);
+
             //if not active, lock level
             if(isActive == false)
             {
                 LockLevel(levelButton);
-            }
-            //else show no damage
-            else
-            {
-                UnlockLevel(levelButton);
             }
         }
     }
@@ -81,13 +79,9 @@ public class MenuSystem : MonoBehaviour
 
             levelButton.button.GetComponent<Image>().color = colorOnDisable;
         }
-
-        //disable no damage object
-        if(levelButton.noDamageObject)
-            levelButton.noDamageObject.SetActive(false);
     }
 
-    void UnlockLevel(MenuStruct levelButton)
+    void ShowAchievements(MenuStruct levelButton)
     {
         //try load
         MenuSave load = SaveLoadJSON.Load<MenuSave>(levelButton.nameThisLevel);
@@ -97,6 +91,12 @@ public class MenuSystem : MonoBehaviour
         {
             if (levelButton.noDamageObject)
                 levelButton.noDamageObject.SetActive(true);
+        }
+        //else disable object
+        else
+        {
+            if (levelButton.noDamageObject)
+                levelButton.noDamageObject.SetActive(false);
         }
     }
 
