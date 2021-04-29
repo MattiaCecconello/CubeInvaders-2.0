@@ -2,6 +2,23 @@
 using UnityEngine.UI;
 using redd096;
 
+#region save class
+
+[System.Serializable]
+public class MenuSave
+{
+    public bool win;
+    public bool noDamage;
+
+    public MenuSave(bool win, bool noDamage)
+    {
+        this.win = win;
+        this.noDamage = noDamage;
+    }
+}
+
+#endregion
+
 [System.Serializable]
 public struct MenuStruct
 {
@@ -31,16 +48,23 @@ public class MenuSystem : MonoBehaviour
             //if no key, or load is succesfull
             bool isActive = string.IsNullOrWhiteSpace(levelButton.necessaryKey) || Load(levelButton.necessaryKey);
 
-            //if not active
+            //if not active, lock level
             if(isActive == false)
             {
                 //set interactable
                 if (setNotInteractable)
                     levelButton.button.interactable = false;
 
-                //change color
+                //change color on disable
                 if (changeColor)
+                {
+                    //ColorBlock colorBlock = levelButton.button.GetComponent<Button>().colors;
+                    //colorBlock.disabledColor = colorOnDisable;
+                    //
+                    //levelButton.button.GetComponent<Button>().colors = colorBlock;
+
                     levelButton.button.GetComponent<Image>().color = colorOnDisable;
+                }
 
                 //remove event
                 levelButton.button.onClick = new Button.ButtonClickedEvent();
@@ -48,12 +72,16 @@ public class MenuSystem : MonoBehaviour
         }
     }
 
+    #region public API
+
     /// <summary>
     /// Save data
     /// </summary>
-    public static void Save(string key, bool win)
+    public static void Save(string key, bool win, bool noDamage)
     {
-        PlayerPrefs.SetInt(key, win ? 1 : 0);
+        //PlayerPrefs.SetInt(key, win ? 1 : 0);
+
+        SaveLoadJSON.Save(key, new MenuSave(win, noDamage));
     }
 
     /// <summary>
@@ -61,7 +89,10 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static bool Load(string key)
     {
-        return PlayerPrefs.GetInt(key, 0) > 0 ? true : false;
+        //return PlayerPrefs.GetInt(key, 0) > 0 ? true : false;
+
+        MenuSave load = SaveLoadJSON.Load<MenuSave>(key);
+        return load != null && load.win;
     }
 
     /// <summary>
@@ -69,7 +100,9 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static void Delete(string key)
     {
-        PlayerPrefs.DeleteKey(key);
+        //PlayerPrefs.DeleteKey(key);
+
+        SaveLoadJSON.DeleteData(key);
     }
 
     /// <summary>
@@ -77,7 +110,9 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static void DeleteAll()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
+
+        SaveLoadJSON.DeleteAll();
     }
 
     /// <summary>
@@ -85,13 +120,21 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public void UnlockEveryLevel()
     {
-        //save every necessary key
+        ////save every necessary key
+        //foreach (MenuStruct levelButton in levelButtons)
+        //{
+        //    Save(levelButton.necessaryKey, true, false);
+        //}
+        //
+        ////then reload scene
+        //SceneLoader.instance.RestartGame();
+
+        //set interactable every button
         foreach (MenuStruct levelButton in levelButtons)
         {
-            Save(levelButton.necessaryKey, true);
+            levelButton.button.interactable = true;
         }
-
-        //then reload scene
-        SceneLoader.instance.RestartGame();
     }
+
+    #endregion
 }
