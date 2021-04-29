@@ -89,6 +89,9 @@ public class EnemyBase : MonoBehaviour
         //set coordinates to attack and enable
         this.coordinatesToAttack = coordinatesToAttack;
         gameObject.SetActive(true);
+
+        //update distance from cube
+        distanceFromCube = Vector3.Distance(transform.position, coordinatesToAttack.position);
     }
 
     #endregion
