@@ -51,26 +51,45 @@ public class MenuSystem : MonoBehaviour
             //if not active, lock level
             if(isActive == false)
             {
-                //set interactable
-                if (setNotInteractable)
-                    levelButton.button.interactable = false;
-
-                //change color on disable
-                if (changeColor)
-                {
-                    //ColorBlock colorBlock = levelButton.button.GetComponent<Button>().colors;
-                    //colorBlock.disabledColor = colorOnDisable;
-                    //
-                    //levelButton.button.GetComponent<Button>().colors = colorBlock;
-
-                    levelButton.button.GetComponent<Image>().color = colorOnDisable;
-                }
-
-                //remove event
-                levelButton.button.onClick = new Button.ButtonClickedEvent();
+                LockLevel(levelButton);
+            }
+            //else show no damage
+            else
+            {
+                UnlockLevel(levelButton);
             }
         }
     }
+
+    #region private API
+
+    void LockLevel(MenuStruct levelButton)
+    {
+        //set interactable
+        if (setNotInteractable)
+            levelButton.button.interactable = false;
+
+        //change color on disable
+        if (changeColor)
+        {
+            //ColorBlock colorBlock = levelButton.button.GetComponent<Button>().colors;
+            //colorBlock.disabledColor = colorOnDisable;
+            //
+            //levelButton.button.GetComponent<Button>().colors = colorBlock;
+
+            levelButton.button.GetComponent<Image>().color = colorOnDisable;
+        }
+
+        //remove event
+        levelButton.button.onClick = new Button.ButtonClickedEvent();
+    }
+
+    void UnlockLevel(MenuStruct levelButton)
+    {
+
+    }
+
+    #endregion
 
     #region public API
 
@@ -79,9 +98,30 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static void Save(string key, bool win, bool noDamage)
     {
-        //PlayerPrefs.SetInt(key, win ? 1 : 0);
+        //try load
+        MenuSave load = SaveLoadJSON.Load<MenuSave>(key);
 
-        SaveLoadJSON.Save(key, new MenuSave(win, noDamage));
+        //if nothing saved, create new save
+        if (load == null)
+        {
+            SaveLoadJSON.Save(key, new MenuSave(win, noDamage));
+        }
+        //else - try save without overwrite already won levels
+        else
+        {
+            //if saved as lost, try save a win
+            if(load.win == false)
+            {
+                if(win)
+                    SaveLoadJSON.Save(key, new MenuSave(win, noDamage));
+            }
+            //if saved a win but with damage, try save with no damage
+            else if(load.noDamage == false)
+            {
+                if(noDamage)
+                    SaveLoadJSON.Save(key, new MenuSave(win, noDamage));
+            }
+        }
     }
 
     /// <summary>
@@ -89,8 +129,6 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static bool Load(string key)
     {
-        //return PlayerPrefs.GetInt(key, 0) > 0 ? true : false;
-
         MenuSave load = SaveLoadJSON.Load<MenuSave>(key);
         return load != null && load.win;
     }
@@ -100,8 +138,6 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static void Delete(string key)
     {
-        //PlayerPrefs.DeleteKey(key);
-
         SaveLoadJSON.DeleteData(key);
     }
 
@@ -110,8 +146,6 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static void DeleteAll()
     {
-        //PlayerPrefs.DeleteAll();
-
         SaveLoadJSON.DeleteAll();
     }
 
