@@ -23,7 +23,6 @@ public class MenuSave
 public struct MenuStruct
 {
     public Button button;
-    public GameObject noDamageObject;
     public string necessaryKey;
 }
 
@@ -88,14 +87,12 @@ public class MenuSystem : MonoBehaviour
         //if no damage, active object
         if(load != null && load.noDamage)
         {
-            if (levelButton.noDamageObject)
-                levelButton.noDamageObject.SetActive(true);
+            levelButton.button.GetComponent<LevelButtonGraphics>()?.SetNoDamage(true);
         }
         //else disable object
         else
         {
-            if (levelButton.noDamageObject)
-                levelButton.noDamageObject.SetActive(false);
+            levelButton.button.GetComponent<LevelButtonGraphics>()?.SetNoDamage(false);
         }
     }
 
