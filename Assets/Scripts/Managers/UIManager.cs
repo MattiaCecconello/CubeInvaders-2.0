@@ -6,10 +6,8 @@ public class UIManager : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] GameObject pauseMenu = default;
-    [SerializeField] GameObject endMenu = default;
-    [SerializeField] Text endText = default;
-    [SerializeField] string winString = "YOU WON!!";
-    [SerializeField] string loseString = "YOU LOST...";
+    [SerializeField] GameObject winMenu = default;
+    [SerializeField] GameObject loseMenu = default;
 
     [Header("Resources")]
     [SerializeField] Text resourcesText = default;
@@ -40,7 +38,7 @@ public class UIManager : MonoBehaviour
 
         //hide all
         PauseMenu(false);
-        EndMenu(false);
+        EndMenu(false, false);
         SetCostText(false);
         strategicCanvas.SetActive(false);
 
@@ -87,8 +85,7 @@ public class UIManager : MonoBehaviour
     void OnEndGame(bool win)
     {
         //show end menu
-        string text = win ? winString : loseString;
-        EndMenu(true, text);
+        EndMenu(true, win);
     }
 
     #endregion
@@ -102,16 +99,25 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(active);
     }
 
-    public void EndMenu(bool active, string text = "")
+    public void EndMenu(bool active, bool win)
     {
         //if active, be sure pause menu is deactivated
         if (active)
+        {
             PauseMenu(false);
 
-        endMenu.SetActive(active);
-
-        //set text
-        endText.text = text;
+            //then show win or lose menu
+            if (win)
+                winMenu.SetActive(true);
+            else
+                loseMenu.SetActive(true);
+        }
+        //else, hide end menus
+        else
+        {
+            winMenu.SetActive(false);
+            loseMenu.SetActive(false);
+        }
     }
 
     #endregion
