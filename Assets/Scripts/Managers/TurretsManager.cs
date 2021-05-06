@@ -83,6 +83,9 @@ public class TurretsManager : MonoBehaviour
             //enemy call if inside or outside radar area
             foreach (Enemy enemy in GameManager.instance.waveManager.EnemiesOnFace(face))
             {
+                if (enemy == null)
+                    continue;
+
                 if (containsRadar)
                 {
                     enemy.ShowHealth();

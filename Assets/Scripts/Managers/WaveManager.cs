@@ -144,7 +144,7 @@ public class WaveManager : MonoBehaviour
         //foreach enemy in this wave, instantiate but deactivate
         foreach (EnemyStruct enemyStruct in wave.Enemies)
         {
-            Enemy enemy = InstantiateNewEnemy(enemyStruct.enemy);
+            Enemy enemy = InstantiateNewEnemy(enemyStruct.enemy);   //add also to enemies list
 
             //add to list enemies to spawn
             enemiesToSpawn.Add(new EnemyStruct(enemy, enemyStruct.enemyTimer));
@@ -247,7 +247,7 @@ public class WaveManager : MonoBehaviour
     {
         //return list - if no key in the dictionary, return clear list
         if (enemiesOnFace.ContainsKey(face))
-            return enemiesOnFace[face];
+            return new List<Enemy>(enemiesOnFace[face]);
 
         return new List<Enemy>();
     }

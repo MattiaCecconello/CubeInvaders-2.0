@@ -132,7 +132,7 @@ public class TurretShot : MonoBehaviour
         foreach (Enemy enemy in GameManager.instance.waveManager.EnemiesOnFace(coordinatesToDefend.face))
         {
             //apply effect on every enemy
-            if (enemy != hitEnemy && Vector3.Distance(enemy.transform.position, transform.position) < area)
+            if (enemy && enemy != hitEnemy && Vector3.Distance(enemy.transform.position, transform.position) < area)
                 ApplyEffect(enemy);
         }
     }
