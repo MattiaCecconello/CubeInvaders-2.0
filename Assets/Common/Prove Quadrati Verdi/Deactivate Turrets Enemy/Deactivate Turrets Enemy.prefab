@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a508dde258161b04f81d6f4f03a7a138, type: 2}
+  - {fileID: 2100000, guid: c6a0039516cf2c745a90d1a783627898, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4c4f3d8f30f384484a6143e5832f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  speed: 0.3
+  health: 70
+  speed: 1
   resourcesWhenKilledByShot: 1
   resourcesWhenKilledByShield: 0
   resourcesWhenHitWorld: 0
@@ -166,8 +166,11 @@ MonoBehaviour:
     face: 0
     x: 0
     y: 0
+  maxHealth: 0
+  distanceFromCube: 0
+  maxSpeed: 0
   howOftenDeactivate: 7
-  durationEffect: 3
+  durationEffect: 5
   deactivateGeneratorsToo: 0
   deactivateRadarsToo: 0
 --- !u!114 &-2322329882968076001
@@ -188,6 +191,7 @@ MonoBehaviour:
   explosionSound:
     audioClip: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
     volume: 0
+  healthSlider: {fileID: 0}
   effectColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &8976919603826603930
 GameObject:
