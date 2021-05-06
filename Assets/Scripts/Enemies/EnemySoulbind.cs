@@ -56,6 +56,8 @@ public class EnemySoulbind : Enemy
             soulBind.Init(newCoordinates);
             onSpawnSoulbind?.Invoke(transform.position, transform.rotation, position, rotation);
 
+            //add to dictionary in wave manager
+            GameManager.instance.waveManager.AddEnemyToDictionary(soulBind);
         }
         //kill if there are no coordinates
         else
