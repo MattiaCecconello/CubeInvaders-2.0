@@ -25,6 +25,10 @@ public class EnemySoulbind : Enemy
     {
         base.Init(coordinatesToAttack);
 
+        //do only if this is not already the soulbind of someone
+        if (soulBind != null)
+            return;
+
         //get opposite face
         EFace oppositeFace = WorldUtility.GetOppositeFace(coordinatesToAttack.face);
 
@@ -47,11 +51,10 @@ public class EnemySoulbind : Enemy
             soulBind = GameManager.instance.waveManager.InstantiateNewEnemy(this) as EnemySoulbind;
             soulBind.transform.position = position;             //set position
             soulBind.transform.rotation = rotation;             //set rotation
-            soulBind.CoordinatesToAttack = newCoordinates;      //set new coordinates to attack
             soulBind.soulBind = this;                           //set this one as its soulbind
 
-            //active soulbind and call event
-            soulBind.gameObject.SetActive(true);
+            //init soulbind and call event
+            soulBind.Init(newCoordinates);
             onSpawnSoulbind?.Invoke(transform.position, transform.rotation, position, rotation);
 
         }

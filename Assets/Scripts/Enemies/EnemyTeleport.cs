@@ -56,13 +56,13 @@ public class EnemyTeleport : Enemy
         Coordinates newCoordinates = GetNewCoordinates(randomFace);
         if (newCoordinates != null)
         {
-            //save distance
-            float distance = distanceFromCube + increaseDistanceEveryTeleport;
+            //increase distance
+            distanceFromCube += increaseDistanceEveryTeleport;
 
             //get new position and rotation
             Vector3 position;
             Quaternion rotation;
-            GameManager.instance.world.GetPositionAndRotation(newCoordinates, distance, out position, out rotation);
+            GameManager.instance.world.GetPositionAndRotation(newCoordinates, distanceFromCube, out position, out rotation);
 
             //call event
             onTeleport?.Invoke(transform.position, transform.rotation, position, rotation);

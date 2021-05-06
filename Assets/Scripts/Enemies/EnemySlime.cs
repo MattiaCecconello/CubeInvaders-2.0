@@ -65,8 +65,8 @@ public class EnemySlime : Enemy
                 }
             }
 
-            //activate slime and add to coordinates already used
-            slime.gameObject.SetActive(true);
+            //init slime and add to coordinates already used
+            slime.Init(slime.CoordinatesToAttack);
             ((EnemySlime)slime).coordinatesAlreadyUsed.Add(slime.CoordinatesToAttack);
         }
     }
