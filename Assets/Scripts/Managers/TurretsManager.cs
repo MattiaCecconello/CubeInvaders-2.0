@@ -36,7 +36,7 @@ public class TurretsManager : MonoBehaviour
     {
         //return list - if no key in the dictionary, return clear list
         if (buildableObjectsOnFace.ContainsKey(face))
-            return buildableObjectsOnFace[face];
+            return new List<BuildableObject>(buildableObjectsOnFace[face]);
 
         return new List<BuildableObject>();
     }
@@ -73,7 +73,7 @@ public class TurretsManager : MonoBehaviour
             bool containsRadar = false;
             foreach (BuildableObject buildableObject in TurretsOnFace(face))
             {
-                if (buildableObject is Radar && buildableObject.IsActive)
+                if (buildableObject && buildableObject is Radar && buildableObject.IsActive)
                 {
                     containsRadar = true;
                     break;
