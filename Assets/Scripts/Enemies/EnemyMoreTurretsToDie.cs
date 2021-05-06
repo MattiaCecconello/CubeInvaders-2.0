@@ -20,7 +20,7 @@ public class EnemyMoreTurretsToDie : Enemy
     public override void GetDamage(float damage, TurretShot whoHit)
     {
         //if reached number of enemies aiming to this enemy, get damage
-        if (turretsAiming.Length >= numberOfTurretsWhoMustAim)
+        if (turretsAiming != null && turretsAiming.Length >= numberOfTurretsWhoMustAim)
         {
             base.GetDamage(damage, whoHit);
         }

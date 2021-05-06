@@ -28,6 +28,8 @@ public class TurretShot : MonoBehaviour
 
     float timerAutodestruction;
 
+    bool beSureHitOnlyOneTime;
+
     Rigidbody rb;
 
     void Awake()
@@ -73,6 +75,10 @@ public class TurretShot : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        //if already hit, return
+        if (beSureHitOnlyOneTime == false)
+            return;
+
         //check hit enemy
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy)
@@ -115,6 +121,9 @@ public class TurretShot : MonoBehaviour
 
     void DestroyShot(Enemy hitEnemy)
     {
+        //stop hit, until new init
+        beSureHitOnlyOneTime = false;
+
         //if hit enemy, or can do area effect also on autodestruction
         if(hitEnemy || areaEffectAlsoOnAutodestruction)
         {
@@ -155,6 +164,9 @@ public class TurretShot : MonoBehaviour
 
         //reset timer
         timerAutodestruction = 0;
+
+        //hit only one time
+        beSureHitOnlyOneTime = true;
 
         //reset trail
         if (trail)

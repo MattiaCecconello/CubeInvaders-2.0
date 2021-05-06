@@ -639,7 +639,12 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
     volume: 0
   healthSlider: {fileID: 8711118203313040683}
+  useLine: 0
   linePrefab: {fileID: 1408518994515950534, guid: 71668a84d5f62d14cbf8e454862dc534, type: 3}
+  useOutline: 1
+  outlineObjects:
+  - {fileID: 6901471913254480009}
+  - {fileID: 8026973432355966251}
 --- !u!114 &5897344682041585998
 MonoBehaviour:
   m_ObjectHideFlags: 0

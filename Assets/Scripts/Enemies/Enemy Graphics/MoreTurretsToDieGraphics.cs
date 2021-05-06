@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Enemy Graphics/More Turrets To Die Graphics")]
 public class MoreTurretsToDieGraphics : EnemyGraphics
 {
-    [Header("More Turrets To Die")]
-    [SerializeField] LineRenderer linePrefab = default;
+    [Header("Line Renderer")]
+    [SerializeField] bool useLine = false;
+    [CanShow("useLine")] [SerializeField] LineRenderer linePrefab = default;
+
+    [Header("Outline")]
+    [SerializeField] bool useOutline = true;
+    [CanShow("useOutline")] [SerializeField] Outline[] outlineObjects = default;
 
     EnemyMoreTurretsToDie logic;
     LineRenderer lineFeedback;
@@ -23,7 +29,12 @@ public class MoreTurretsToDieGraphics : EnemyGraphics
     void Update()
     {
         //set line feedback
-        SetPositions();
+        if (useLine)
+            SetPositions();
+
+        //set outline feedback
+        if (useOutline)
+            SetOutlines();
     }
 
     void SetPositions()
@@ -41,6 +52,19 @@ public class MoreTurretsToDieGraphics : EnemyGraphics
             //set positions
             lineFeedback.positionCount = positions.Count;
             lineFeedback.SetPositions(positions.ToArray());
+        }
+    }
+
+    void SetOutlines()
+    {
+        //deactive outline when a turrets is aiming this enemy
+        for (int i = 0; i < outlineObjects.Length; i++)
+        {
+            //hide if aimed
+            bool hide = logic.turretsAiming != null && logic.turretsAiming.Length > i;
+
+            if(outlineObjects[i].enabled != !hide)
+                outlineObjects[i].enabled = !hide;
         }
     }
 }

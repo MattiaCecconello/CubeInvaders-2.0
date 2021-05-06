@@ -77,7 +77,7 @@ public class EnemySoulbind : Enemy
     public override void GetDamage(float damage, TurretShot whoHit)
     {
         //if aiming at this one and its soulbind, get damage
-        if (turretsAiming.Length > 0 && (soulBind == null || soulBind.turretsAiming.Length > 0))
+        if (turretsAiming != null && turretsAiming.Length > 0 && (soulBind == null || soulBind.turretsAiming.Length > 0))
         {
             base.GetDamage(damage, whoHit);
 

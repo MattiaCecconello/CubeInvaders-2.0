@@ -5259,6 +5259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookAtSoulBind: 1
   objectToRotateToSoulbind: {fileID: 5868691009007719433}
+  outlineObject: {fileID: 3853996994245325413}
   particlesSpawnFirstSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
   soundSpawnFirstSoulbind:
     audioClip: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
@@ -10263,9 +10264,21 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1656339347848922716, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2578565484713005149, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737055632980139820, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737055632980139820, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_Enabled

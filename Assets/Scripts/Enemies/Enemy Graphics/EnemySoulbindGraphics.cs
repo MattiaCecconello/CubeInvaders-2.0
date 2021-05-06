@@ -8,6 +8,9 @@ public class EnemySoulbindGraphics : MonoBehaviour
     [SerializeField] bool lookAtSoulBind = false;
     [CanShow("lookAtSoulBind")] [SerializeField] Transform objectToRotateToSoulbind = default;
 
+    [Header("Outline")]
+    [SerializeField] Outline outlineObject = default;
+
     [Header("VFX")]
     [SerializeField] ParticleSystem particlesSpawnFirstSoulbind = default;
     [SerializeField] AudioStruct soundSpawnFirstSoulbind = default;
@@ -33,8 +36,10 @@ public class EnemySoulbindGraphics : MonoBehaviour
     void FixedUpdate()
     {
         //look at soulbind
-        if(lookAtSoulBind && objectToRotateToSoulbind)
-            objectToRotateToSoulbind.rotation = Quaternion.LookRotation(enemy.soulBind.transform.position - transform.position);
+        LookAtSoulbind();
+
+        //show outline when no one is aiming, else disable
+        ShowHideOutline();
     }
 
     void OnSpawnSoulbind(Vector3 firstPosition, Quaternion firstRotation, Vector3 secondPosition, Quaternion secondRotation)
@@ -46,5 +51,25 @@ public class EnemySoulbindGraphics : MonoBehaviour
         //new
         ParticlesManager.instance.Play(particlesSpawnSecondSoulbind, secondPosition, secondRotation);
         SoundManager.instance.Play(soundSpawnSecondSoulbind.audioClip, secondPosition, soundSpawnSecondSoulbind.volume);
+    }
+
+    void LookAtSoulbind()
+    {
+        //look at soulbind
+        if (lookAtSoulBind && objectToRotateToSoulbind)
+            objectToRotateToSoulbind.rotation = Quaternion.LookRotation(enemy.soulBind.transform.position - transform.position);
+    }
+
+    void ShowHideOutline()
+    {
+        //show outline when no one is aiming, else disable
+        if (outlineObject)
+        {
+            //hide if aimed
+            bool hide = enemy.turretsAiming != null && enemy.turretsAiming.Length > 0;
+
+            //if (outlineObject.enabled != !hide)
+                outlineObject.enabled = !hide;
+        }
     }
 }
