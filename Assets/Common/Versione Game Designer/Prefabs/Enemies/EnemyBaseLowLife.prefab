@@ -9647,6 +9647,7 @@ MonoBehaviour:
     y: 0
   maxHealth: 0
   distanceFromCube: 0
+  maxSpeed: 0
   numberRotations: 3
   rotationTime: 0.1
 --- !u!1001 &7110068079413753007
@@ -9692,6 +9693,14 @@ PrefabInstance:
       propertyPath: explosionParticlePrefab
       value: 
       objectReference: {fileID: 2162059483477449232, guid: 985343edef3e2aa4aa565f0d131447ca, type: 3}
+    - target: {fileID: 5873725972075197134, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: objectToFlick
+      value: 
+      objectReference: {fileID: 7078121234707328282}
+    - target: {fileID: 6281652222580307534, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7338728851212345807, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_Name
       value: EnemyBaseLowLife
@@ -9844,5 +9853,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rotation_M
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 848d42ef82c239e488e191cff2199f9f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 848d42ef82c239e488e191cff2199f9f, type: 3}
+--- !u!1 &7078121234707328282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 848d42ef82c239e488e191cff2199f9f, type: 3}
+  m_PrefabInstance: {fileID: 7997231935735468107}
+  m_PrefabAsset: {fileID: 0}

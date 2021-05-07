@@ -10292,6 +10292,10 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 6845564179598617361}
+    - target: {fileID: 5873725972075197134, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: objectToFlick
+      value: 
+      objectReference: {fileID: 6501535183762575027}
     - target: {fileID: 7338728851212345807, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_Name
       value: Enemy Soulbind
@@ -10420,6 +10424,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a3ddd1de82667ec47808b4ceb67c1775, type: 3}
       propertyPath: m_Name
       value: Soulbind_M (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a3ddd1de82667ec47808b4ceb67c1775, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3ddd1de82667ec47808b4ceb67c1775, type: 3}

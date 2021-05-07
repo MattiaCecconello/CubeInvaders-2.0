@@ -547,6 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4d30862abc21c04c9fa3d5243a159d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToFlick: {fileID: 6281652222580307534}
   blinkMaterial: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
   blinkTime: 0.1
   explosionParticlePrefab: {fileID: 2162059483477449232, guid: 985343edef3e2aa4aa565f0d131447ca, type: 3}
@@ -885,12 +886,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base_M
       objectReference: {fileID: 0}
+    - target: {fileID: 1981655285513110736, guid: f84c5fa3853f15a4aaab1f18961fb568, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5514876023189797201, guid: f84c5fa3853f15a4aaab1f18961fb568, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a5e66acef9f1c6344a070c0dee506490, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f84c5fa3853f15a4aaab1f18961fb568, type: 3}
+--- !u!1 &6281652222580307534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1981655285513110736, guid: f84c5fa3853f15a4aaab1f18961fb568, type: 3}
+  m_PrefabInstance: {fileID: 5524977285548602014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5415034211776370037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f84c5fa3853f15a4aaab1f18961fb568, type: 3}
