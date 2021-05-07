@@ -8,6 +8,7 @@ using redd096;
 public class EnemyGraphics : MonoBehaviour
 {
     [Header("Blink")]
+    [SerializeField] GameObject objectToFlick = default;
     [SerializeField] Material blinkMaterial = default;
     [SerializeField] float blinkTime = 0.1f;
 
@@ -35,8 +36,12 @@ public class EnemyGraphics : MonoBehaviour
             enemy.onHideHealth += OnHideHealth;
         }
 
+        //if there is not object to flick, select this object
+        if (objectToFlick == null)
+            objectToFlick = gameObject;
+
         //set original materials
-        foreach(Renderer r in GetComponentsInChildren<Renderer>())
+        foreach(Renderer r in objectToFlick.GetComponentsInChildren<Renderer>())
         {
             if (originalMaterials.ContainsKey(r) == false)
                 originalMaterials.Add(r, r.material);
