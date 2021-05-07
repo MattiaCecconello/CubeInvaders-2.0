@@ -64,16 +64,23 @@ public class WaveManager : MonoBehaviour
 
     void EndWave()
     {
-        //end assault phase
-        GameManager.instance.levelManager.EndAssaultPhase();
-
         //if there aren't other waves
         if (waveConfig.Waves == null || CurrentWave >= waveConfig.Waves.Length -1 || CurrentWave < 0)
         {
+            //remove all enemies                    - just to be sure
+            ClearEnemies();
+
+            //stop coroutine if still running       - just to be sure
+            if (wave_coroutine != null)
+                StopCoroutine(wave_coroutine);
+
             //win
             GameManager.instance.levelManager.EndGame(true);
             return;
         }
+
+        //end assault phase
+        GameManager.instance.levelManager.EndAssaultPhase();
 
         //else go to next wave
         CurrentWave++;
@@ -156,7 +163,7 @@ public class WaveManager : MonoBehaviour
         Queue<EFace> facesQueue = new Queue<EFace>();
 
         //wait before instantiate first enemy
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(GameManager.instance.levelManager.generalConfig.DelaySpawnFirstEnemyWave);
 
         //for every enemy
         foreach (EnemyStruct enemyStruct in enemiesToSpawn)

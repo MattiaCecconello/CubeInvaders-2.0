@@ -9,6 +9,7 @@ public class GeneralConfig : ScriptableObject
     [Tooltip("Cell selector")] public GameObject Selector;
     [Tooltip("Selector when there are more tiles selected at same time")] public GameObject MultipleSelector;
     [Tooltip("Portal to instantiate on enemy spawn")] public GameObject PortalPrefab;
+    [Tooltip("When start wave, the delay before spawn first enemy")] public float DelaySpawnFirstEnemyWave = 1;
 
     [Header("Delay Commands")]
     public float delayReleaseFinishStrategicPhase = 0.1f;
