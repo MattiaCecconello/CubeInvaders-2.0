@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 4158868890032583755}
   - component: {fileID: 4158868890032583754}
   - component: {fileID: 4158868890032583753}
+  - component: {fileID: 3537628526498199625}
   m_Layer: 5
   m_Name: Reload
   m_TagString: Untagged
@@ -361,6 +362,20 @@ MonoBehaviour:
           m_StringArgument: MainMenuProgression
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3537628526498199625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868890032583759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868890670846072}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890066969923
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,6 +648,7 @@ GameObject:
   - component: {fileID: 4158868890153706743}
   - component: {fileID: 4158868890153706742}
   - component: {fileID: 4158868890153706741}
+  - component: {fileID: 164857168332338350}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -753,6 +769,20 @@ MonoBehaviour:
           m_StringArgument: LevelSelect
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &164857168332338350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868890153706507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868891164308063}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890173847652
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +831,7 @@ GameObject:
   - component: {fileID: 4158868890370073850}
   - component: {fileID: 4158868890370073849}
   - component: {fileID: 4158868890370073848}
+  - component: {fileID: 6042339587679467376}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -921,6 +952,20 @@ MonoBehaviour:
           m_StringArgument: LevelSelect
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6042339587679467376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868890370073854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868891886170924}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890379631564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1079,7 @@ GameObject:
   - component: {fileID: 4158868890421293376}
   - component: {fileID: 4158868890421293383}
   - component: {fileID: 4158868890421293382}
+  - component: {fileID: 5401060873214275470}
   m_Layer: 5
   m_Name: Resume
   m_TagString: Untagged
@@ -1154,6 +1200,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5401060873214275470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868890421293380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868890134487250}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890447647260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,6 +1315,7 @@ GameObject:
   - component: {fileID: 4158868890456934126}
   - component: {fileID: 4158868890456934125}
   - component: {fileID: 4158868890456934124}
+  - component: {fileID: 2522491543029766177}
   m_Layer: 5
   m_Name: NextLevel
   m_TagString: Untagged
@@ -1375,6 +1436,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2522491543029766177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868890456934114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868890682656136}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890461490887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,6 +2144,7 @@ GameObject:
   - component: {fileID: 4158868890849408569}
   - component: {fileID: 4158868890849408568}
   - component: {fileID: 4158868890849408575}
+  - component: {fileID: 1782427801961311497}
   m_Layer: 5
   m_Name: Reload
   m_TagString: Untagged
@@ -2189,6 +2265,20 @@ MonoBehaviour:
           m_StringArgument: MainMenuProgression
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1782427801961311497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868890849408574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868891054006309}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890873185452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2201,6 +2291,7 @@ GameObject:
   - component: {fileID: 4158868890873185448}
   - component: {fileID: 4158868890873185455}
   - component: {fileID: 4158868890873185454}
+  - component: {fileID: 1899325298508270758}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -2321,6 +2412,20 @@ MonoBehaviour:
           m_StringArgument: LevelSelect
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1899325298508270758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868890873185452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868890494642936}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890876295937
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,6 +2517,7 @@ GameObject:
   - component: {fileID: 4158868890884630805}
   - component: {fileID: 4158868890884630804}
   - component: {fileID: 4158868890884630827}
+  - component: {fileID: 1770698481044960541}
   m_Layer: 5
   m_Name: OPTIONS
   m_TagString: Untagged
@@ -2544,6 +2650,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &1770698481044960541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868890884630825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868890595985652}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868891001170958
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,6 +3063,7 @@ GameObject:
   - component: {fileID: 4158868891357750834}
   - component: {fileID: 4158868891357750833}
   - component: {fileID: 4158868891357750832}
+  - component: {fileID: 3237893331297324471}
   m_Layer: 5
   m_Name: Reload
   m_TagString: Untagged
@@ -3063,6 +3184,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3237893331297324471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158868891357750838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039eed80e1049104e98f8d917ff11e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 4158868889893179069}
+  selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868891453343721
 GameObject:
   m_ObjectHideFlags: 0
@@ -3950,9 +4085,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
---- !u!1 &6564895935328090550 stripped
+--- !u!1 &7235578792783454153 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7110188936370916899, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6764043436985870428, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
   m_PrefabInstance: {fileID: 4158868890588280725}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &7235578792783454152 stripped
@@ -3960,8 +4095,8 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6764043436985870429, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
   m_PrefabInstance: {fileID: 4158868890588280725}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7235578792783454153 stripped
+--- !u!1 &6564895935328090550 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6764043436985870428, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7110188936370916899, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
   m_PrefabInstance: {fileID: 4158868890588280725}
   m_PrefabAsset: {fileID: 0}
