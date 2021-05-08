@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -956,7 +956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6764043436985870429, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6764043436985870429, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1411,8 +1411,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 463209636}
-  - component: {fileID: 463209635}
   - component: {fileID: 463209634}
+  - component: {fileID: 463209635}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1456,12 +1456,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 463209633}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Script: {fileID: 11500000, guid: fa6d0440f54d2934e8ff67102518a34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+  firstSelectedGameObjects:
+  - {fileID: 1481008728}
+  - {fileID: 2059699181}
+  overrideObjects: []
+  notInteractables: []
 --- !u!4 &463209636
 Transform:
   m_ObjectHideFlags: 0
@@ -5692,6 +5697,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 179044568877757309, guid: cd3ba82684757894791abf2c130d0b1a, type: 3}
   m_PrefabInstance: {fileID: 1530264898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2059699181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7110188936370916899, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
+  m_PrefabInstance: {fileID: 287605362}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2066422207 stripped
 Transform:

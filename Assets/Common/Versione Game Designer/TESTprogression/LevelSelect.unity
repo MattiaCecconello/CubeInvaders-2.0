@@ -3324,8 +3324,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2076881432}
-  - component: {fileID: 2076881431}
   - component: {fileID: 2076881430}
+  - component: {fileID: 2076881431}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3369,12 +3369,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2076881429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Script: {fileID: 11500000, guid: fa6d0440f54d2934e8ff67102518a34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1375623693}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+  firstSelectedGameObjects:
+  - {fileID: 1375623693}
+  overrideObjects: []
+  notInteractables: []
 --- !u!4 &2076881432
 Transform:
   m_ObjectHideFlags: 0
