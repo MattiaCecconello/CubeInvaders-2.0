@@ -81,6 +81,8 @@ public class GameManager : Singleton<GameManager>
         if (optionsSave != null)
         {
             AudioListener.volume = optionsSave.volume;
+
+            Screen.fullScreenMode = optionsSave.fullScreen ? FullScreenMode.MaximizedWindow : FullScreenMode.Windowed;
         }
     }
 

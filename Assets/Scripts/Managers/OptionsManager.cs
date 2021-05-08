@@ -7,14 +7,15 @@ using UnityEngine.UI;
 [System.Serializable]
 public class OptionsSave
 {
-    public float volume;
+    public float volume = 1;
     public float mouseX;
     public float mouseY;
     public float gamepadX;
     public float gamepadY;
     public bool invertY;
+    public bool fullScreen = true;
 
-    public OptionsSave(float volume, float mouseX, float mouseY, float gamepadX, float gamepadY, bool invertY)
+    public OptionsSave(float volume, float mouseX, float mouseY, float gamepadX, float gamepadY, bool invertY, bool fullScreen)
     {
         this.volume = volume;
         this.mouseX = mouseX;
@@ -22,6 +23,7 @@ public class OptionsSave
         this.gamepadX = gamepadX;
         this.gamepadY = gamepadY;
         this.invertY = invertY;
+        this.fullScreen = fullScreen;
     }
 }
 
@@ -37,6 +39,7 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] float gamepadX = 150;
     [SerializeField] float gamepadY = 1;
     [SerializeField] bool invertY = false;
+    [SerializeField] bool fullScreen = true;
 
     [Header("Volume")]
     [SerializeField] Slider volumeSlider = default;
@@ -61,6 +64,9 @@ public class OptionsManager : MonoBehaviour
     [Header("Invert Y")]
     [SerializeField] Toggle invertYToggle = default;
 
+    [Header("Full Screen")]
+    [SerializeField] Toggle fullScreenToggle = default;
+
     OptionsSave loaded;
 
     void Start()
@@ -69,7 +75,7 @@ public class OptionsManager : MonoBehaviour
         loaded = SaveLoadJSON.Load<OptionsSave>("Options");
         if (loaded == null)
         {
-            loaded = new OptionsSave(volume, mouseX, mouseY, gamepadX, gamepadY, invertY);
+            loaded = new OptionsSave(volume, mouseX, mouseY, gamepadX, gamepadY, invertY, fullScreen);
             SaveLoadJSON.Save("Options", loaded);
         }
 
@@ -99,6 +105,9 @@ public class OptionsManager : MonoBehaviour
 
         if (invertYToggle)
             invertYToggle.isOn = loaded.invertY;
+
+        if (fullScreenToggle)
+            fullScreenToggle.isOn = loaded.fullScreen;
     }
 
     void SetEverythingInGame()
@@ -108,6 +117,8 @@ public class OptionsManager : MonoBehaviour
 
         if (GameManager.instance && GameManager.instance.player)
             GameManager.instance.player.SetOptionsValue(loaded);
+
+        Screen.fullScreenMode = loaded.fullScreen ? FullScreenMode.MaximizedWindow : FullScreenMode.Windowed;
     }
 
     #endregion
@@ -191,10 +202,22 @@ public class OptionsManager : MonoBehaviour
         SaveLoadJSON.Save("Options", loaded);
     }
 
+    public void SetFullScreen(bool value)
+    {
+        //update options
+        loaded.fullScreen = value;
+
+        //set in game
+        Screen.fullScreenMode = loaded.fullScreen ? FullScreenMode.MaximizedWindow : FullScreenMode.Windowed;
+
+        //save
+        SaveLoadJSON.Save("Options", loaded);
+    }
+
     public void ResetOptions()
     {
         //reset options
-        loaded = new OptionsSave(volume, mouseX, mouseY, gamepadX, gamepadY, invertY);
+        loaded = new OptionsSave(volume, mouseX, mouseY, gamepadX, gamepadY, invertY, fullScreen);
 
         //set in game
         SetEverythingInGame();

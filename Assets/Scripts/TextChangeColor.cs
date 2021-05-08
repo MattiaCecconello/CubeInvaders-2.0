@@ -6,7 +6,7 @@ using TMPro;
 [AddComponentMenu("Cube Invaders/Text Change Color")]
 public class TextChangeColor : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    [SerializeField] Text text;
+    [SerializeField] Text text = default;
     [SerializeField] TextMeshProUGUI textPro = default;
     [SerializeField] Color selectedColor = Color.black;
 
