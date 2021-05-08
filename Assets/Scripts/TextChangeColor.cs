@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 [AddComponentMenu("Cube Invaders/Text Change Color")]
 public class TextChangeColor : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     [SerializeField] Text text;
+    [SerializeField] TextMeshProUGUI textPro = default;
     [SerializeField] Color selectedColor = Color.black;
 
     Color normalColor = Color.white;
@@ -17,11 +19,19 @@ public class TextChangeColor : MonoBehaviour, ISelectHandler, IDeselectHandler
         {
             text = GetComponent<Text>();
         }
+        if(textPro == null)
+        {
+            textPro = GetComponent<TextMeshProUGUI>();
+        }
 
         //get normalColor
         if (text)
         {
             normalColor = text.color;
+        }
+        if (textPro)
+        {
+            normalColor = textPro.color;
         }
     }
 
@@ -32,6 +42,10 @@ public class TextChangeColor : MonoBehaviour, ISelectHandler, IDeselectHandler
         {
             text.color = normalColor;
         }
+        if (textPro)
+        {
+            textPro.color = normalColor;
+        }
     }
 
     public void OnDisable()
@@ -40,6 +54,10 @@ public class TextChangeColor : MonoBehaviour, ISelectHandler, IDeselectHandler
         if (text)
         {
             text.color = normalColor;
+        }
+        if (textPro)
+        {
+            textPro.color = normalColor;
         }
     }
 
@@ -50,6 +68,10 @@ public class TextChangeColor : MonoBehaviour, ISelectHandler, IDeselectHandler
         {
             text.color = selectedColor;
         }
+        if (textPro)
+        {
+            textPro.color = selectedColor;
+        }
     }
 
     public void OnDeselect(BaseEventData eventData)
@@ -58,6 +80,10 @@ public class TextChangeColor : MonoBehaviour, ISelectHandler, IDeselectHandler
         if (text)
         {
             text.color = normalColor;
+        }
+        if (textPro)
+        {
+            textPro.color = normalColor;
         }
     }
 }
