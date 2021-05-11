@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using redd096;
 
+[System.Serializable]
+public struct ChangeSpeedStruct
+{
+    public float distanceFromCube;
+    public float maxSpeedPercentage;
+}
+
 public class EnemyBase : MonoBehaviour
 {
     [Header("Important")]
@@ -18,10 +25,14 @@ public class EnemyBase : MonoBehaviour
     [CanShow("destroyCross")] [Min(1)] [SerializeField] int poisonSpread = 1;
     [CanShow("destroyCross")] [SerializeField] bool poisonDestroyTurrets = false;
 
+    [Header("Change Speed", order = 0)]
+    [SerializeField] protected ChangeSpeedStruct[] percentageMaxSpeed = default;
+
     [Header("Debug")]
     [SerializeField] protected Coordinates coordinatesToAttack;
     [ReadOnly] [SerializeField] protected float maxHealth;
     [ReadOnly] [SerializeField] protected float distanceFromCube;
+    [ReadOnly] [SerializeField] protected float initialMaxSpeed;
     [ReadOnly] [SerializeField] protected float maxSpeed;
 
     Rigidbody rb;
@@ -39,6 +50,7 @@ public class EnemyBase : MonoBehaviour
         maxHealth = health;
 
         //set max speed
+        initialMaxSpeed = speed;
         maxSpeed = speed;
     }
 
