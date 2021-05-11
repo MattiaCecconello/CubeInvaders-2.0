@@ -2,7 +2,7 @@
 using redd096;
 
 [System.Serializable]
-public struct ChangeSpeedStruct
+public struct ChangeMaxSpeedStruct
 {
     public float distanceFromCube;
     public float maxSpeedPercentage;
@@ -25,8 +25,8 @@ public class EnemyBase : MonoBehaviour
     [CanShow("destroyCross")] [Min(1)] [SerializeField] int poisonSpread = 1;
     [CanShow("destroyCross")] [SerializeField] bool poisonDestroyTurrets = false;
 
-    [Header("Change Speed", order = 0)]
-    [SerializeField] protected ChangeSpeedStruct[] percentageMaxSpeed = default;
+    [Header("Change Max Speed")]
+    [SerializeField] protected ChangeMaxSpeedStruct[] percentageMaxSpeed = default;
 
     [Header("Debug")]
     [SerializeField] protected Coordinates coordinatesToAttack;
