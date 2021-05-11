@@ -1,19 +1,23 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Enemy Component/Poison Cell")]
 public class PoisonCell : MonoBehaviour
 {
-    [SerializeField] float timerPoison = 10;
-    [SerializeField] int limitSpread = 1;
+    [SerializeField] float poisonTimer = 10;
+    [SerializeField] int poisonSpread = 1;
+    [SerializeField] bool poisonDestroyTurrets = true;
+    [ReadOnly] [SerializeField] bool isFirstPoison = false;
 
     Coroutine poison_Coroutine;
 
-    public void Init(float timerPoison, int limitSpread)
+    public void Init(float poisonTimer, int poisonSpread, bool poisonDestroyTurrets, bool isFirstPoison)
     {
-        this.timerPoison = timerPoison;
-        this.limitSpread = limitSpread;
+        this.poisonTimer = poisonTimer;
+        this.poisonSpread = poisonSpread;
+        this.poisonDestroyTurrets = poisonDestroyTurrets;
+        this.isFirstPoison = isFirstPoison;
     }
 
     void Start()
@@ -26,7 +30,7 @@ public class PoisonCell : MonoBehaviour
     IEnumerator Poison_Coroutine()
     {
         //wait
-        yield return new WaitForSeconds(timerPoison);
+        yield return new WaitForSeconds(poisonTimer);
 
         //poison every cell around and kill this one
         Poison();
@@ -36,10 +40,10 @@ public class PoisonCell : MonoBehaviour
     {
         Cell currentCell = GetComponent<Cell>();
 
-        if(limitSpread > 0)
+        if(poisonSpread > 0)
         {
             //remove limit spread
-            limitSpread--;
+            poisonSpread--;
 
             //foreach cell around
             foreach (Cell cell in GameManager.instance.world.GetCellsAround(currentCell.coordinates))
@@ -47,12 +51,13 @@ public class PoisonCell : MonoBehaviour
                 //if is alive, poison it
                 if (cell.IsAlive)
                 {
-                    cell.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
+                    cell.gameObject.AddComponent<PoisonCell>().Init(poisonTimer, poisonSpread, poisonDestroyTurrets, false);
                 }
             }
         }
 
-        //and kill this one (or lose game)
-        currentCell.KillCell();
+        //and kill this one (or lose game) - only if there is no turret, or is only a preview (impossible i think), or is active poisonDestroyTurrets, or is the first poison (enemy hitted this cell)
+        if (currentCell.turret == null || currentCell.turret.IsPreview || poisonDestroyTurrets || isFirstPoison)
+            currentCell.KillCell();
     }
 }

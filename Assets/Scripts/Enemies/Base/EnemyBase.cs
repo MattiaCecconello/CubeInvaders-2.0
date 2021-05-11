@@ -16,6 +16,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] bool destroyCross = false;
     [CanShow("destroyCross")] [Min(0)] [SerializeField] float poisonTimer = 0;
     [CanShow("destroyCross")] [Min(1)] [SerializeField] int poisonSpread = 1;
+    [CanShow("destroyCross")] [SerializeField] bool poisonDestroyTurrets = false;
 
     [Header("Debug")]
     [SerializeField] protected Coordinates coordinatesToAttack;
@@ -28,6 +29,7 @@ public class EnemyBase : MonoBehaviour
     public System.Action<float, float> onGetDamage;
     public bool StillAlive { get; private set; } = true;
     public float DistanceFromCube => distanceFromCube;
+    public bool DestroyCross => destroyCross;
 
     protected virtual void Awake()
     {
@@ -87,9 +89,9 @@ public class EnemyBase : MonoBehaviour
             {
                 GameManager.instance.player.CurrentResources += resourcesWhenHitWorld;
 
-                //when hit cell, can poison cell
+                //when hit cell, can poison it
                 if(destroyCross)
-                    hittedBy.gameObject.AddComponent<PoisonCell>().Init(poisonTimer, poisonSpread);
+                    hittedBy.gameObject.AddComponent<PoisonCell>().Init(poisonTimer, poisonSpread, poisonDestroyTurrets, true);
             }
 
             //destroy this enemy

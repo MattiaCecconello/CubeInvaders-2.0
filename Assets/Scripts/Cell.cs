@@ -55,8 +55,8 @@ public class Cell : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy && enemy.StillAlive)  //be sure enemy is still alive (to not have 2 hit on same frame)
         {
-            //only if not enemy poison
-            if (enemy.GetType() != typeof(EnemyPoison))
+            //only if not enemy poison, or is not active destroyCross (cause poison destroy this cell)
+            if (enemy.GetType() != typeof(EnemyPoison) && enemy.DestroyCross == false)
             {
                 //kill cell 
                 KillCell();
