@@ -12,6 +12,11 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float resourcesWhenKilledByShield = 0;
     [SerializeField] protected float resourcesWhenHitWorld = 0;
 
+    [Header("Destroy Cross")]
+    [SerializeField] bool destroyCross = false;
+    [CanShow("destroyCross")] [Min(0)] [SerializeField] float poisonTimer = 0;
+    [CanShow("destroyCross")] [Min(1)] [SerializeField] int poisonSpread = 1;
+
     [Header("Debug")]
     [SerializeField] protected Coordinates coordinatesToAttack;
     [ReadOnly] [SerializeField] protected float maxHealth;
@@ -81,6 +86,10 @@ public class EnemyBase : MonoBehaviour
             else if (hittedBy.GetType() == typeof(Cell))
             {
                 GameManager.instance.player.CurrentResources += resourcesWhenHitWorld;
+
+                //when hit cell, can poison cell
+                if(destroyCross)
+                    hittedBy.gameObject.AddComponent<PoisonCell>().Init(poisonTimer, poisonSpread);
             }
 
             //destroy this enemy
