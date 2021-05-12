@@ -551,12 +551,20 @@ MonoBehaviour:
   resourcesWhenKilledByShot: 1
   resourcesWhenKilledByShield: 0
   resourcesWhenHitWorld: 0
+  destroyCross: 1
+  poisonTimer: 0
+  poisonSpread: 1
+  poisonDestroyTurrets: 0
+  percentageMaxSpeed:
+  - distanceFromCube: 4
+    maxSpeedPercentage: 15
   coordinatesToAttack:
     face: 0
     x: 0
     y: 0
   maxHealth: 0
   distanceFromCube: 0
+  initialMaxSpeed: 0
   maxSpeed: 0
   checkNoHitEnemies: 1
   numberOfPreviousFacesToIgnore: 1
