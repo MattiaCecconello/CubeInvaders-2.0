@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 5741680812796075413}
   - component: {fileID: 4131576304942144219}
   - component: {fileID: 5696350018659830735}
+  - component: {fileID: 1988561550727128083}
   m_Layer: 0
   m_Name: Soulbind_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5741680812796075413
 Transform:
   m_ObjectHideFlags: 0
@@ -81,66 +82,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-6529817813752180074
+--- !u!114 &1988561550727128083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3849306090492092292}
-  m_Enabled: 1
+  m_GameObject: {fileID: 2601342600398077856}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f895c06cb65f1224bb7c2c8621913d02, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  speed: 2
-  resourcesWhenKilledByShot: 1
-  resourcesWhenKilledByShield: 0
-  resourcesWhenHitWorld: 0
-  destroyCross: 1
-  poisonTimer: 0
-  poisonSpread: 1
-  poisonDestroyTurrets: 0
-  percentageMaxSpeed:
-  - distanceFromCube: 4
-    maxSpeedPercentage: 15
-  coordinatesToAttack:
-    face: 0
-    x: 0
-    y: 0
-  maxHealth: 0
-  distanceFromCube: 0
-  initialMaxSpeed: 0
-  maxSpeed: 0
-  shareHealth: 1
-  killSoulbindOnDeath: 1
-  useOppositeFace: 0
-  sameCell: 1
-  checkNoHitEnemies: 1
---- !u!114 &5108049396857094920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3849306090492092292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a17d58ab74b1944ac3660c92802cd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookAtSoulBind: 1
-  objectToRotateToSoulbind: {fileID: 5868691009007719433}
-  outlineObject: {fileID: 3853996994245325413}
-  particlesSpawnFirstSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
-  soundSpawnFirstSoulbind:
-    audioClip: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
-    volume: 0
-  particlesSpawnSecondSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
-  soundSpawnSecondSoulbind:
-    audioClip: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
-    volume: 0
+  outlineMode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3931223927503979508
 GameObject:
   m_ObjectHideFlags: 0
@@ -5002,6 +4961,66 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6529817813752180074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849306090492092292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f895c06cb65f1224bb7c2c8621913d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  speed: 2
+  resourcesWhenKilledByShot: 1
+  resourcesWhenKilledByShield: 0
+  resourcesWhenHitWorld: 0
+  destroyCross: 1
+  poisonTimer: 0
+  poisonSpread: 1
+  poisonDestroyTurrets: 0
+  percentageMaxSpeed:
+  - distanceFromCube: 4
+    maxSpeedPercentage: 15
+  coordinatesToAttack:
+    face: 0
+    x: 0
+    y: 0
+  maxHealth: 0
+  distanceFromCube: 0
+  initialMaxSpeed: 0
+  maxSpeed: 0
+  shareHealth: 1
+  killSoulbindOnDeath: 1
+  useOppositeFace: 0
+  sameCell: 1
+  checkNoHitEnemies: 1
+--- !u!114 &5108049396857094920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849306090492092292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a17d58ab74b1944ac3660c92802cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookAtSoulBind: 1
+  objectToRotateToSoulbind: {fileID: 5868691009007719433}
+  outlineObject: {fileID: 1988561550727128083}
+  particlesSpawnFirstSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
+  soundSpawnFirstSoulbind:
+    audioClip: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
+    volume: 0
+  particlesSpawnSecondSoulbind: {fileID: 8611625995788095879, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
+  soundSpawnSecondSoulbind:
+    audioClip: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+    volume: 0
 --- !u!114 &3853996994245325413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9952,7 +9971,7 @@ PrefabInstance:
     - target: {fileID: 5873725972075197134, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: objectToFlick
       value: 
-      objectReference: {fileID: 6501535183762575027}
+      objectReference: {fileID: 2601342600398077856}
     - target: {fileID: 7338728851212345807, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_Name
       value: Enemy Soulbind
@@ -10090,7 +10109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a3ddd1de82667ec47808b4ceb67c1775, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3ddd1de82667ec47808b4ceb67c1775, type: 3}
