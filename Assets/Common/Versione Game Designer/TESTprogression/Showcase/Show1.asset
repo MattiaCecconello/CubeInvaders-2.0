@@ -34,11 +34,11 @@ MonoBehaviour:
     - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
       enemyTimer: 0
     - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
+      enemyTimer: -6
+    - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
+      enemyTimer: -6
+    - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
       enemyTimer: 0
-    - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
-      enemyTimer: -6
-    - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
-      enemyTimer: -6
     - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
       enemyTimer: 0
     - enemy: {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
