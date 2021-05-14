@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 90
-  speed: 0.85
+  speed: 2
   resourcesWhenKilledByShot: 1
   resourcesWhenKilledByShield: 0
   resourcesWhenHitWorld: 0

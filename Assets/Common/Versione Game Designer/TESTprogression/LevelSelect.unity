@@ -302,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &286079130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3407,10 +3407,11 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+  startMenu: {fileID: 0}
   firstSelectedGameObjects:
   - {fileID: 1375623693}
   overrideObjects: []
-  notInteractables: []
+  notNavigables: []
 --- !u!4 &2076881432
 Transform:
   m_ObjectHideFlags: 0
@@ -3444,7 +3445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2105716575
 RectTransform:
   m_ObjectHideFlags: 0
