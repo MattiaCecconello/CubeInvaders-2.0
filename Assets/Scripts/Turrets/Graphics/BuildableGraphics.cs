@@ -10,6 +10,13 @@ public class BuildableGraphics : MonoBehaviour
     [SerializeField] Transform objectToRotate = default;
     [SerializeField] Transform baseToRotate = default;
 
+    [Header("Cupola")]
+    [SerializeField] GameObject cupolaObject = default;
+
+    [Header("Height On Preview")]
+    [SerializeField] float heightOnPreview = 0.5f;
+    [SerializeField] float timeLerpOnBuild = 0.5f;
+
     [Header("Deactivate Turrets Effect")]
     [SerializeField] Color effectColor = Color.cyan;
 
@@ -22,6 +29,8 @@ public class BuildableGraphics : MonoBehaviour
 
     Dictionary<Transform, Quaternion> defaultRotations = new Dictionary<Transform, Quaternion>();
 
+    Coroutine lerpHeightCoroutine;
+
     protected virtual void Awake()
     {
         //set logic component
@@ -33,8 +42,12 @@ public class BuildableGraphics : MonoBehaviour
             normalColors.Add(r, r.material.color);
         }
 
-        buildableObject.onDeactivateStart += OnDeactivateStart;
-        buildableObject.onBuildTurret += OnBuildTurret;
+        if (buildableObject)
+        {
+            buildableObject.onDeactivateStart += OnDeactivateStart;
+            buildableObject.onBuildTurret += OnBuildTurret;
+            buildableObject.onShowPreview += OnShowPreview;
+        }
 
         //save default rotations
         SaveDefaultRotation(objectToRotate);
@@ -43,16 +56,24 @@ public class BuildableGraphics : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
-        buildableObject.onDeactivateStart -= OnDeactivateStart;
-        buildableObject.onBuildTurret -= OnBuildTurret;
+        if (buildableObject)
+        {
+            buildableObject.onDeactivateStart -= OnDeactivateStart;
+            buildableObject.onBuildTurret -= OnBuildTurret;
+            buildableObject.onShowPreview -= OnShowPreview;
+        }
     }
 
     protected virtual void Update()
     {
+        //hide or show cupola
+        HideShowCupola();
+
         //do nothing when preview mode
         if (buildableObject.IsPreview)
             return;
 
+        //rotate
         if (baseToRotate)
             LookAtEnemy_TwoAxis();
         else
@@ -207,13 +228,56 @@ public class BuildableGraphics : MonoBehaviour
 
     #endregion
 
-    #region on build turret
+    #region on preview and on build turret
+
+    void OnShowPreview()
+    {
+        //set position, rotation and size
+        transform.localPosition = Vector3.forward * heightOnPreview;
+        transform.localRotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
+    }
 
     void OnBuildTurret()
     {
+        //lerp to correct height
+        if (lerpHeightCoroutine != null)
+            StopCoroutine(lerpHeightCoroutine);
+
+        lerpHeightCoroutine = StartCoroutine(LerpHeightCoroutine());
+
         //vfx and sound
         ParticlesManager.instance.Play(buildVFX, transform.position, transform.rotation);
         SoundManager.instance.Play(buildAudio.audioClip, transform.position, buildAudio.volume);
+    }
+
+    IEnumerator LerpHeightCoroutine()
+    {
+        Vector3 startPosition = transform.localPosition;
+        float delta = 0;
+
+        while(delta < 1)
+        {
+            delta += Time.deltaTime / timeLerpOnBuild;
+
+            //move to correct height position
+            transform.localPosition = Vector3.Lerp(startPosition, Vector3.zero, delta);
+            yield return null;
+        }
+    }
+
+    #endregion
+
+    #region cupola
+
+    void HideShowCupola()
+    {
+        if (cupolaObject == null)
+            return;
+
+        //show cupola when buildableObject is active and hide when not active
+        if (cupolaObject.activeInHierarchy != buildableObject.IsActive)
+            cupolaObject.SetActive(!cupolaObject.activeInHierarchy);
     }
 
     #endregion

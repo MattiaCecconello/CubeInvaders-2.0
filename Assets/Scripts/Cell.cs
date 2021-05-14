@@ -175,10 +175,7 @@ public class Cell : MonoBehaviour
         else
             turret.gameObject.SetActive(true);
 
-        //set position, rotation and size
-        turret.transform.localPosition = Vector3.zero;
-        turret.transform.localRotation = Quaternion.identity;
-        turret.transform.localScale = Vector3.one;
+        turret.ShowPreview();
 
         //show cost to create turret
         GameManager.instance.uiManager.SetCostText(true, true, resourcesToCreateTurret);

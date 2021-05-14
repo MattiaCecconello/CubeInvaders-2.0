@@ -159,6 +159,10 @@ PrefabInstance:
       propertyPath: buildVFX
       value: 
       objectReference: {fileID: 2295486064368261484, guid: 8cb76ccec2329d64dbbbaea73d41b12f, type: 3}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: cupolaObject
+      value: 
+      objectReference: {fileID: 6013227295814124088}
     - target: {fileID: 3926694849208164264, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

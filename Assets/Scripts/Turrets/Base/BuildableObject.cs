@@ -16,6 +16,7 @@ public class BuildableObject : MonoBehaviour
         }
     }
 
+    public System.Action onShowPreview;
     public System.Action onBuildTurret;
 
     #region on world rotate
@@ -54,6 +55,11 @@ public class BuildableObject : MonoBehaviour
     public virtual void DeactivateTurret()
     {
         isActive = false;
+    }
+
+    public void ShowPreview()
+    {
+        onShowPreview?.Invoke();
     }
 
     public virtual void BuildTurret(Cell cellOwner)
