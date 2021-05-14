@@ -69,11 +69,14 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void GetDamage(float damage, TurretShot whoHit)
     {
-        //invoke event
-        onGetDamage?.Invoke(health, maxHealth);
+        //check helpers
+        CheckHelpers();
 
         //get damage
         health -= damage;
+
+        //invoke event
+        onGetDamage?.Invoke(health, maxHealth);
 
         //check death
         if (health <= 0)
@@ -122,4 +125,21 @@ public class EnemyBase : MonoBehaviour
     }
 
     #endregion
+
+    void CheckHelpers()
+    {
+        foreach (HelperHitLastSecond helper in GameManager.instance.levelManager.generalConfig.Helpers)
+        {
+            //if there are helper hit last second
+            if(helper)
+            {
+                //if enemy has low life and is near to the cube
+                if(health <= helper.EnemyHealth && DistanceFromCube <= helper.DistanceFromCube)
+                {
+                    //add damage
+                    health -= helper.HelperDamage;
+                }
+            }
+        }
+    }
 }

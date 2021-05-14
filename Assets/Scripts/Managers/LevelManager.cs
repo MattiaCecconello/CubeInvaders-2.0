@@ -124,7 +124,7 @@ public class LevelManager : MonoBehaviour
 
     public void GetDamage()
     {
-        //set got damage in this level
+        //set got damage in this level (used for bonus when finish level with no hit)
         if (noDamage)
         {
             noDamage = false;

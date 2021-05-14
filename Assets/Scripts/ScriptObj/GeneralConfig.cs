@@ -19,4 +19,7 @@ public class GeneralConfig : ScriptableObject
     public bool showEnemiesHealth = true;
     public bool showEnemiesDestination = true;
     [CanShow("showEnemiesDestination")] public float minDistanceToShowDestination = 10;
+
+    [Header("Helpers")]
+    public HelperBase[] Helpers = default;
 }
