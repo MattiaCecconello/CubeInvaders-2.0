@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Turret Graphics/Radar Graphics")]
 public class RadarGraphics : BuildableGraphics
@@ -13,6 +14,10 @@ public class RadarGraphics : BuildableGraphics
     [SerializeField] float minFlick = 1;
     [SerializeField] float maxFlick = 10;
     [SerializeField] float timerBeforeChangeObject = 1;
+
+    [Header("Debug")]
+    [ReadOnly] [SerializeField] float currentTimer = 0;
+    [ReadOnly] [SerializeField] float currentFlickSpeed = 0;
 
     Radar radar;
     Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
@@ -83,19 +88,19 @@ public class RadarGraphics : BuildableGraphics
             for(int i = 0; i < objectsToFlick.Length; i++)
             {
                 //check timer
-                float timer = 0;
-                while(timer < timerBeforeChangeObject)
+                currentTimer = 0;
+                while(currentTimer < timerBeforeChangeObject)
                 {
                     int currentWave = GameManager.instance.waveManager.CurrentWave;
                     
                     //get flick speed based on enemy distance to its coordinates to attack
                     float distanceFrom1To0 = GetEnemy().DistanceFromCube / GameManager.instance.waveManager.waveConfig.Waves[currentWave].DistanceFromWorld;        //distance from 1 to 0
-                    float flickSpeed = Mathf.Lerp(maxFlick, minFlick, distanceFrom1To0);                                                                            //speed from minFlick to maxFlick
+                    currentFlickSpeed = Mathf.Lerp(maxFlick, minFlick, distanceFrom1To0);                                                                           //speed from minFlick to maxFlick
 
-                    timer += flickSpeed * Time.deltaTime;
+                    currentTimer += currentFlickSpeed * Time.deltaTime;
 
                     //set color based on timer
-                    Color color = flickColor.Evaluate(timer / timerBeforeChangeObject);
+                    Color color = flickColor.Evaluate(currentTimer / timerBeforeChangeObject);
 
                     //change color
                     objectsToFlick[i].material.color = color;
