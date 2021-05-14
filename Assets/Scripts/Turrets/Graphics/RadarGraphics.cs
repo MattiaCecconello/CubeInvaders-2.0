@@ -1,19 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("Cube Invaders/Turret Graphics/Radar Graphics")]
 public class RadarGraphics : BuildableGraphics
 {
     [Header("Radar")]
-    [SerializeField] Transform objectToFlick = default;
+    [SerializeField] Renderer[] objectsToFlick = default;
 
     [Header("Flick")]
     [SerializeField] Gradient flickColor = default;
     [SerializeField] float minFlick = 1;
     [SerializeField] float maxFlick = 10;
+    [SerializeField] float timerBeforeChangeObject = 1;
 
     Radar radar;
     Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
+
+    Coroutine flickColorCoroutine;
 
     protected override void Awake()
     {
@@ -23,16 +27,23 @@ public class RadarGraphics : BuildableGraphics
         radar = buildableObject as Radar;
 
         //set normal colors
-        foreach(Renderer r in objectToFlick.GetComponentsInChildren<Renderer>())
+        foreach(Renderer r in objectsToFlick)
         {
             normalColors.Add(r, r.material.color);
         }
+    }
+
+    void OnDisable()
+    {
+        //be sure to reset coroutine
+        ResetCoroutine();
     }
 
     protected override void Update()
     {
         base.Update();
 
+        //color radar
         if (buildableObject.IsActive)
         {
             ColorRadar();
@@ -47,50 +58,76 @@ public class RadarGraphics : BuildableGraphics
 
     void ColorRadar()
     {
-        //need model for flick
-        if (objectToFlick == null) 
+        //need renderer for flick
+        if (objectsToFlick == null || objectsToFlick.Length <= 0) 
             return;
 
         //if enemy is attacking, flick color
         if(GetEnemy())
         {
-            SetColorFlick();
+            if (flickColorCoroutine == null)
+                flickColorCoroutine = StartCoroutine(FlickColorCoroutine());
         }
         //else show normal color
-        else 
+        else
         {
-            SetColor(Color.white, 0, true);
+            ResetCoroutine();
         }
     }
 
-    void SetColorFlick()
+    IEnumerator FlickColorCoroutine()
     {
-        int currentWave = GameManager.instance.waveManager.CurrentWave;
+        while(true)
+        {
+            //cycle between objects to flick
+            for(int i = 0; i < objectsToFlick.Length; i++)
+            {
+                //check timer
+                float timer = 0;
+                while(timer < timerBeforeChangeObject)
+                {
+                    int currentWave = GameManager.instance.waveManager.CurrentWave;
+                    
+                    //get flick speed based on enemy distance to its coordinates to attack
+                    float distanceFrom1To0 = GetEnemy().DistanceFromCube / GameManager.instance.waveManager.waveConfig.Waves[currentWave].DistanceFromWorld;        //distance from 1 to 0
+                    float flickSpeed = Mathf.Lerp(maxFlick, minFlick, distanceFrom1To0);                                                                            //speed from minFlick to maxFlick
 
-        //get flick speed based on enemy distance to its coordinates to attack
-        float enemyDistance = GetEnemy().DistanceFromCube;
-        float distanceFrom0To1 = 1 - (enemyDistance / GameManager.instance.waveManager.waveConfig.Waves[currentWave].DistanceFromWorld);        //distance from 0 to 1
-        float flickSpeed = Mathf.Lerp(minFlick, maxFlick, distanceFrom0To1);                                                                    //speed from minFlick to maxFlick
+                    timer += flickSpeed * Time.deltaTime;
 
-        //sin from 0 to 1
-        float flick = Mathf.Abs(Mathf.Sin(Time.time * flickSpeed));
+                    //set color based on timer
+                    Color color = flickColor.Evaluate(timer / timerBeforeChangeObject);
 
-        //set color based on enemy distance
-        Color color = flickColor.Evaluate(distanceFrom0To1);
+                    //change color
+                    objectsToFlick[i].material.color = color;
+                    objectsToFlick[i].material.SetColor("_EmissionColor", color);
 
-        SetColor(color, flick, false);
+                    yield return null;
+                }
+
+                //reset color
+                objectsToFlick[i].material.color = normalColors[objectsToFlick[i]];
+                objectsToFlick[i].material.SetColor("_EmissionColor", normalColors[objectsToFlick[i]]);
+            }
+        }
     }
 
-    void SetColor(Color colorFlick, float delta, bool setNormalColor)
+    void ResetCoroutine()
     {
-        //foreach renderer set color and emission
-        foreach (Renderer renderer in normalColors.Keys)
+        if (flickColorCoroutine != null)
         {
-            //set color flick or stay normal color
-            Color color = setNormalColor ? normalColors[renderer] : colorFlick;
+            //stop coroutine
+            if(gameObject.activeInHierarchy)
+                StopCoroutine(flickColorCoroutine);
 
-            renderer.material.color = Color.Lerp(normalColors[renderer], color, delta);
-            renderer.material.SetColor("_EmissionColor", Color.Lerp(normalColors[renderer], color, delta));
+            //reset check
+            flickColorCoroutine = null;
+
+            //reset color
+            foreach (Renderer r in normalColors.Keys)
+            {
+                r.material.color = normalColors[r];
+                r.material.SetColor("_EmissionColor", normalColors[r]);
+            }
         }
     }
 }

@@ -31,7 +31,10 @@ MonoBehaviour:
   buildAudio:
     audioClip: {fileID: 0}
     volume: 0
-  objectToFlick: {fileID: 50285627041264429}
+  objectsToFlick:
+  - {fileID: 1676103937631604725}
+  - {fileID: 4528184668859121274}
+  - {fileID: 6945864208580396783}
   flickColor:
     serializedVersion: 2
     key0: {r: 1, g: 0.08614111, b: 0, a: 1}
@@ -61,8 +64,9 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  minFlick: 0.2
-  maxFlick: 1
+  minFlick: 1
+  maxFlick: 10
+  timerBeforeChangeObject: 1
 --- !u!1001 &6352962091975492871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207,8 +211,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
   m_PrefabInstance: {fileID: 6352962091975492871}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &50285627041264429 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6384107412779103786, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+--- !u!23 &1676103937631604725 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5722094881696025330, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 6352962091975492871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4528184668859121274 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7421112688749542269, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 6352962091975492871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6945864208580396783 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4057439724177982440, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
   m_PrefabInstance: {fileID: 6352962091975492871}
   m_PrefabAsset: {fileID: 0}
