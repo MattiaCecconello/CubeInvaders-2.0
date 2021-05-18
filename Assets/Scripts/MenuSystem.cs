@@ -24,6 +24,7 @@ public struct MenuStruct
 {
     public Button button;
     public string necessaryKey;
+    public string[] levelsForNoDamage;
 }
 
 [AddComponentMenu("Cube Invaders/Menu System")]
@@ -81,11 +82,34 @@ public class MenuSystem : MonoBehaviour
 
     void ShowAchievements(MenuStruct levelButton)
     {
-        //try load
-        MenuSave load = SaveLoadJSON.Load<MenuSave>(levelButton.button.name);
+        //check no damage achievement
+        bool noDamage = true;
+
+        //if no levels to load - check this button name as level
+        if (levelButton.levelsForNoDamage == null || levelButton.levelsForNoDamage.Length <= 0)
+        {
+            //check there is a save and achievement completed, else set it to false
+            MenuSave load = SaveLoadJSON.Load<MenuSave>(levelButton.button.name);
+            if (load == null && load.noDamage == false)
+                noDamage = false;
+        }
+        //else - check every level to load
+        else
+        {
+            foreach(string levelToCheck in levelButton.levelsForNoDamage)
+            {
+                //check there is a save and achievement completed, else set it to false
+                MenuSave load = SaveLoadJSON.Load<MenuSave>(levelToCheck);
+                if(load == null || load.noDamage == false)
+                {
+                    noDamage = false;
+                    break;
+                }
+            }
+        }
 
         //if no damage, active object
-        if(load != null && load.noDamage)
+        if(noDamage)
         {
             levelButton.button.GetComponent<LevelButtonGraphics>()?.SetNoDamage(true);
         }

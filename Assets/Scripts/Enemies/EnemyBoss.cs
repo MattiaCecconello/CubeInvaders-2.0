@@ -19,8 +19,15 @@ public class EnemyBoss : Enemy
     {
         if (StillAlive)
         {
-            //load new scene
-            SceneLoader.instance.StartCoroutine(SceneLoader.instance.LoadSceneAfterSeconds(sceneToLoad, timeBeforeLoadNewScene));
+            //do only if this is not last phase
+            if (lastPhaseBoss == false)
+            {
+                //save if achievement in this level
+                GameManager.instance.levelManager.SaveEndBossLevel();
+
+                //load new scene
+                SceneLoader.instance.StartCoroutine(SceneLoader.instance.LoadSceneAfterSeconds(sceneToLoad, timeBeforeLoadNewScene));
+            }
 
             base.Die(hittedBy);
         }

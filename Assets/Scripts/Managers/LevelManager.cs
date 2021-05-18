@@ -134,5 +134,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void SaveEndBossLevel()
+    {
+        //save using scene name
+        MenuSystem.Save(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, true, noDamage);    //this level is ended, because player killed boss
+    }
+
     #endregion
 }
