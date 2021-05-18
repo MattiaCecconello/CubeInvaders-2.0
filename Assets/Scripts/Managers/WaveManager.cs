@@ -106,6 +106,7 @@ public class WaveManager : MonoBehaviour
 
     void AddEvents()
     {
+        GameManager.instance.levelManager.onStartGame += OnStartGame;
         GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
         GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
         GameManager.instance.levelManager.onEndAssaultPhase += OnEndAssaultPhase;
@@ -113,9 +114,20 @@ public class WaveManager : MonoBehaviour
 
     void RemoveEvents()
     {
+        GameManager.instance.levelManager.onStartGame -= OnStartGame;
         GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;
         GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
         GameManager.instance.levelManager.onEndAssaultPhase -= OnEndAssaultPhase;
+    }
+
+    void OnStartGame()
+    {
+        //set wave, as in strategic phase (necesary if this scene start in assault phase)
+
+        //remove all enemies
+        ClearEnemies();
+
+        SetNewWave();
     }
 
     void OnStartStrategicPhase()

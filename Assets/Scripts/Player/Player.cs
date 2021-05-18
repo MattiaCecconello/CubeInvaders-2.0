@@ -124,9 +124,17 @@ public class Player : StateMachine
         if (GameManager.instance.levelManager.GameEnded)
             return;
 
-        //start in strategic phase
         Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
-        SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
+
+        //start in strategic phase
+        if (GameManager.instance.levelManager.StartInStrategicPhase)
+        {
+            SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
+        }
+        //or in assault phase
+        {
+            SetState(new PlayerAssault(this, new Coordinates(EFace.front, centerCell)));
+        }
     }
 
     void OnStartStrategicPhase()
@@ -135,16 +143,16 @@ public class Player : StateMachine
         if (GameManager.instance.levelManager.GameEnded)
             return;
 
-        //if in pause, set as previous state strategic phase
+        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+
+        //if in pause, set as previous state strategic phase (so when remove pause, go to strategic)
         if (state is PlayerPause)
         {
-            Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
             previousState = new PlayerStrategic(this, new Coordinates(EFace.front, centerCell));
         }
-        //else go to player move, starting from center cell
+        //else go to strategic, starting from center cell
         else
         {
-            Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
             SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
         }
     }
@@ -155,16 +163,16 @@ public class Player : StateMachine
         if (GameManager.instance.levelManager.GameEnded)
             return;
 
-        //if in pause, set as previous state assault phase
+        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+
+        //if in pause, set as previous state assault phase (so when remove pause, go to assault)
         if (state is PlayerPause)
         {
-            Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
             previousState = new PlayerAssault(this, new Coordinates(EFace.front, centerCell));
         }
-        //else go to player move, starting from center cell
+        //else go to assault, starting from center cell
         else
         {
-            Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
             SetState(new PlayerAssault(this, new Coordinates(EFace.front, centerCell)));
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum EPhase
 {
@@ -13,6 +11,7 @@ public class LevelManager : MonoBehaviour
     [Header("Important")]
     public LevelConfig levelConfig;
     public GeneralConfig generalConfig;
+    public bool StartInStrategicPhase = true;
 
     public System.Action onStartGame;
     public System.Action onStartStrategicPhase;
@@ -90,11 +89,15 @@ public class LevelManager : MonoBehaviour
     {
         GameEnded = false;
 
-        //start in strategic
-        StartStrategicPhase();
-
         //call event
         onStartGame?.Invoke();
+
+        //start in strategic
+        if (StartInStrategicPhase)
+            StartStrategicPhase();
+        //or start in assault
+        else
+            StartAssaultPhase();
     }
 
     public void EndGame(bool win)
