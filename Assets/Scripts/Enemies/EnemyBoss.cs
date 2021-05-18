@@ -10,8 +10,8 @@ public class EnemyBoss : Enemy
     [SerializeField] bool lastPhaseBoss = false;
 
     [Header("Boss")]
-    [SerializeField] string sceneToLoad = "Show21";
-    [SerializeField] float timeBeforeLoadNewScene = 4;
+    [CanShow("lastPhaseBoss", NOT = true)] [SerializeField] string sceneToLoad = "Show21";
+    [CanShow("lastPhaseBoss", NOT = true)] [SerializeField] float timeBeforeLoadNewScene = 4;
 
     public bool LastPhaseBoss => lastPhaseBoss;
 
