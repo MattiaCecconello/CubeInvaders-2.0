@@ -135,7 +135,7 @@ public class BuildableObject : MonoBehaviour
             yield return null;
 
         //reactive
-        ActivateTurret();
+        TryActivateTurret();
     }
 
     #endregion
