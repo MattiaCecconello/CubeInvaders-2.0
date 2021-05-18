@@ -6,9 +6,14 @@ using redd096;
 [RequireComponent(typeof(EnemyBossGraphics))]
 public class EnemyBoss : Enemy
 {
+    [Header("Important - Is this the Last Phase?")]
+    [SerializeField] bool lastPhaseBoss = false;
+
     [Header("Boss")]
     [SerializeField] string sceneToLoad = "Show21";
     [SerializeField] float timeBeforeLoadNewScene = 4;
+
+    public bool LastPhaseBoss => lastPhaseBoss;
 
     public override void Die<T>(T hittedBy)
     {

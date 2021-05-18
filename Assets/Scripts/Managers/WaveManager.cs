@@ -1,13 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
+
+#region enum
+
+public enum ELevel
+{
+    normalLevel, bossLevel, lastPhaseBossLevel
+}
+
+#endregion
 
 [AddComponentMenu("Cube Invaders/Manager/Wave Manager")]
 public class WaveManager : MonoBehaviour
 {
     [Header("Important")]
     public WaveConfig waveConfig;
-    
+
+    [Header("Loop Wave when there is a Boss?")]
+    [SerializeField] bool loopWaveWithBoss = true;
+
+    [Header("Debug")]
+    [ReadOnly] [SerializeField] ELevel typeLevel = ELevel.normalLevel;
+
     public int CurrentWave { get; set; }
 
     List<Enemy> enemies = new List<Enemy>();
@@ -67,12 +83,12 @@ public class WaveManager : MonoBehaviour
         //if there aren't other waves
         if (waveConfig.Waves == null || CurrentWave >= waveConfig.Waves.Length -1 || CurrentWave < 0)
         {
-            //remove all enemies                    - just to be sure
-            ClearEnemies();
-
-            //stop coroutine if still running       - just to be sure
+            //stop coroutine if still running
             if (wave_coroutine != null)
                 StopCoroutine(wave_coroutine);
+
+            //remove all enemies
+            ClearEnemies();
 
             //win
             GameManager.instance.levelManager.EndGame(true);
@@ -145,16 +161,35 @@ public class WaveManager : MonoBehaviour
         //current wave
         WaveStruct wave = waveConfig.Waves[CurrentWave];
 
+        //create list enemies to spawn
+        List<EnemyStruct> waveEnemies = new List<EnemyStruct>();
+        for(int i = 0; i < wave.Enemies.Length; i++)
+        {
+            //(remove boss if this wave is restarted)
+            if (wave.Enemies[i].enemy is EnemyBoss && typeLevel != ELevel.normalLevel)
+            {
+                continue;
+            }
+
+            waveEnemies.Add(wave.Enemies[i]);
+        }
+
         //enemies to spawn
         List<EnemyStruct> enemiesToSpawn = new List<EnemyStruct>();
 
         //foreach enemy in this wave, instantiate but deactivate
-        foreach (EnemyStruct enemyStruct in wave.Enemies)
+        foreach (EnemyStruct enemyStruct in waveEnemies)
         {
             Enemy enemy = InstantiateNewEnemy(enemyStruct.enemy);   //add also to enemies list
 
             //add to list enemies to spawn
             enemiesToSpawn.Add(new EnemyStruct(enemy, enemyStruct.enemyTimer));
+
+            //if loaded a boss - set type of level (boss level or last phase boss)
+            if (enemy is EnemyBoss)
+            {
+                typeLevel = ((EnemyBoss)enemy).LastPhaseBoss ? ELevel.lastPhaseBossLevel : ELevel.bossLevel;
+            }
 
             yield return null;
         }
@@ -199,6 +234,36 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    void CheckEndWave(Enemy lastEnemyKilled)
+    {
+        //in normal levels
+        if (typeLevel == ELevel.normalLevel)
+        {
+            //if there are no other enemies, end wave
+            if (enemies.Count <= 0 && GameManager.instance.levelManager.CurrentPhase == EPhase.assault)
+            {
+                EndWave();
+            }
+        }
+        //in boss levels
+        else if(typeLevel == ELevel.bossLevel)
+        {
+            //if there is only an enemy and that enemy is the boss, restart wave
+            if(enemies.Count == 1 && enemies[0] is EnemyBoss)
+            {
+                if(loopWaveWithBoss)    //only if can loop
+                    StartWave();        //obviously in the wave, will be the check to not respawn the boss
+            }
+        }
+        //in the last phase of a boss level
+        else
+        {
+            //if kill the boss, end wave
+            if (lastEnemyKilled is EnemyBoss && GameManager.instance.levelManager.CurrentPhase == EPhase.assault)
+                EndWave();
+        }
+    }
+
     #endregion
 
     #region public API
@@ -226,11 +291,8 @@ public class WaveManager : MonoBehaviour
             RemoveEnemyFromDictionary(enemy);       //remove from dictionary
         }
 
-        //if there are no other enemies, end wave
-        if (enemies.Count <= 0 && GameManager.instance.levelManager.CurrentPhase == EPhase.assault)
-        {
-            EndWave();
-        }
+        //check if ended wave
+        CheckEndWave(enemy);
     }
 
     public void AddEnemyToDictionary(Enemy enemy)
