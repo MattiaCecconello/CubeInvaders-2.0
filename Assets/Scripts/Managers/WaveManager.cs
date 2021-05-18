@@ -95,11 +95,11 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        //end assault phase
-        GameManager.instance.levelManager.EndAssaultPhase();
-
         //else go to next wave
         CurrentWave++;
+
+        //end assault phase
+        GameManager.instance.levelManager.EndAssaultPhase();
     }
 
     #region events
@@ -132,10 +132,15 @@ public class WaveManager : MonoBehaviour
 
     void OnStartStrategicPhase()
     {
-        //remove all enemies
-        ClearEnemies();
+        //do only if not first wave, because first wave is initialized in OnStartGame
 
-        SetNewWave();
+        if (CurrentWave > 0)
+        {
+            //remove all enemies
+            ClearEnemies();
+
+            SetNewWave();
+        }
     }
 
     void OnStartAssaultPhase()
