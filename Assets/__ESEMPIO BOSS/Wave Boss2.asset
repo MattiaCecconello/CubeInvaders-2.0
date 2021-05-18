@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave Boss2
   m_EditorClassIdentifier: 
   Waves:
-  - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
+  - LevelConfig: {fileID: 11400000, guid: a86066f131a8509438cf3593d9678afd, type: 2}
     Resources: 8
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 7.5

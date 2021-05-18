@@ -12,7 +12,6 @@ public class LevelManager : MonoBehaviour
     [Header("Important")]
     public LevelConfig levelConfig;
     public GeneralConfig generalConfig;
-    public bool StartInStrategicPhase = true;
 
     public System.Action onStartGame;
     public System.Action onStartStrategicPhase;
@@ -94,7 +93,7 @@ public class LevelManager : MonoBehaviour
         onStartGame?.Invoke();
 
         //start in strategic
-        if (StartInStrategicPhase)
+        if (levelConfig.StartInStrategicPhase)
             StartStrategicPhase();
         //or start in assault
         else

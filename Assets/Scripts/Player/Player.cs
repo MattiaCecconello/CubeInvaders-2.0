@@ -127,7 +127,7 @@ public class Player : StateMachine
         Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
 
         //start in strategic phase
-        if (GameManager.instance.levelManager.StartInStrategicPhase)
+        if (GameManager.instance.levelManager.levelConfig.StartInStrategicPhase)
         {
             SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
         }
