@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanRecreateCell: 0
   RandomizeWorldAtStart: 0
+  StartInStrategicPhase: 0
   NumberRotations: 1
   SelectorSize: 1
   DestroyTurretWhenNoMove: 0
