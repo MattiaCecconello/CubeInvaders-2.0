@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using redd096;
 
 public enum EPhase
 {
@@ -21,7 +22,7 @@ public class LevelManager : MonoBehaviour
     public System.Action<bool> onEndGame;
 
     [Header("Debug")]
-    public EPhase CurrentPhase;
+    [ReadOnly] public EPhase CurrentPhase;
 
     public bool GameEnded { get; private set; }
 

@@ -1,6 +1,57 @@
 ﻿using UnityEngine;
 using redd096;
 
+#if UNITY_EDITOR
+
+using UnityEditor;
+
+[CustomEditor(typeof(Cell))]
+public class CellEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        if(GUILayout.Button("Destroy Cell"))
+        {
+            //foreach cell selected, destroy it
+            foreach(Object obj in targets)
+            {
+                Cell cell = obj as Cell;
+                if (cell)
+                    cell.DestroyCell();
+            }
+        }
+        else if(GUILayout.Button("Recreate Cell"))
+        {
+            //foreach cell selected, recreate it
+            foreach (Object obj in targets)
+            {
+                Cell cell = obj as Cell;
+                if (cell)
+                    cell.RecreateCell();
+            }
+        }
+        else if(GUILayout.Button("Move To Current Coordinates"))
+        {
+            World world = FindObjectOfType<World>();
+
+            //foreach cell selected, move to position based on coordinates
+            foreach (Object obj in targets)
+            {
+                Cell cell = obj as Cell;
+                if (cell)
+                {
+                    cell.transform.position = world.CoordinatesToPosition(cell.coordinates, 0);
+                    cell.transform.rotation = world.CoordinatesToRotation(cell.coordinates);
+                }
+            }
+        }
+    }
+}
+
+#endif
+
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/World/Cell")]
 [RequireComponent(typeof(CellGraphics))]
@@ -24,6 +75,7 @@ public class Cell : MonoBehaviour
     [Header("Debug")]
     public Coordinates coordinates;
     [ReadOnly] public Coordinates startCoordinates;
+    [ReadOnly] [SerializeField] bool isAlive = true;
 
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
@@ -32,8 +84,7 @@ public class Cell : MonoBehaviour
     public System.Action onHideEnemyDestination;
 
     public BuildableObject turret { get; private set; }
-
-    public bool IsAlive { get; private set; } = true;
+    public bool IsAlive => isAlive;
 
     public BuildableObject TurretToCreate => turretToCreate;
 
@@ -99,9 +150,10 @@ public class Cell : MonoBehaviour
         }
     }
 
-    void DestroyCell(bool loaded = false)
+    //public only for editor call
+    public void DestroyCell(bool loaded = false)
     {
-        IsAlive = false;
+        isAlive = false;
 
         //remove turret
         RemoveBuildOnCell();
@@ -109,20 +161,22 @@ public class Cell : MonoBehaviour
         //remove biome
         ActiveRemoveOnDead(false);
 
-        //call feedback only when loaded is false
-        if(loaded == false)
+        //call feedback only when loaded is false (only if playing, because this function is called by editor too)
+        if (loaded == false && Application.isPlaying)
             onDestroyCell?.Invoke();
     }
 
-    void RecreateCell()
+    //public only for editor call
+    public void RecreateCell()
     {
-        IsAlive = true;
+        isAlive = true;
 
         //recreate biome
         ActiveRemoveOnDead(true);
 
-        //if was builded at start, rebuild turret 
-        BuildAtStart();
+        //if was builded at start, rebuild turret (only if playing, because this function is called by editor too)
+        if(Application.isPlaying)
+            BuildAtStart();
     }
 
     void ActiveRemoveOnDead(bool active)

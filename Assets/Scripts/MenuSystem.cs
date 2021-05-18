@@ -90,7 +90,7 @@ public class MenuSystem : MonoBehaviour
         {
             //check there is a save and achievement completed, else set it to false
             MenuSave load = SaveLoadJSON.Load<MenuSave>(levelButton.button.name);
-            if (load == null && load.noDamage == false)
+            if (load == null || load.noDamage == false)
                 noDamage = false;
         }
         //else - check every level to load

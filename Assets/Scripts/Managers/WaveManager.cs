@@ -28,6 +28,7 @@ public class WaveManager : MonoBehaviour
 
     List<Enemy> enemies = new List<Enemy>();
     Coroutine wave_coroutine;
+    Coroutine restartWaveCoroutine;
 
     private Transform portalsParent;
     Transform PortalsParent
@@ -249,6 +250,21 @@ public class WaveManager : MonoBehaviour
             //wait for next enemy
             yield return new WaitForSeconds(wave.TimeBetweenSpawns + enemyStruct.enemyTimer);
         }
+
+        wave_coroutine = null;
+    }
+
+    IEnumerator RestartWaveCoroutine()
+    {
+        //wait until wave is finished (because can be that the boss is not still active, is only spawned disabled)
+        while(wave_coroutine != null)
+        {
+            yield return null;
+        }
+
+        //then check if ncessary to reload wave
+        if (enemies.Count == 1 && enemies[0] is EnemyBoss)
+            StartWave();
     }
 
     void CheckEndWave(Enemy lastEnemyKilled)
@@ -263,21 +279,30 @@ public class WaveManager : MonoBehaviour
             }
         }
         //in boss levels
-        else if(typeLevel == ELevel.bossLevel)
-        {
-            //if there is only an enemy and that enemy is the boss, restart wave
-            if(enemies.Count == 1 && enemies[0] is EnemyBoss)
-            {
-                if(loopWaveWithBoss)    //only if can loop
-                    StartWave();        //obviously in the wave, will be the check to not respawn the boss
-            }
-        }
-        //in the last phase of a boss level
         else
         {
-            //if kill the boss, end wave
-            if (lastEnemyKilled is EnemyBoss && GameManager.instance.levelManager.CurrentPhase == EPhase.assault)
-                EndWave();
+            //in last phase
+            if (typeLevel == ELevel.lastPhaseBossLevel)
+            {
+                //if kill the boss, end wave
+                if (lastEnemyKilled is EnemyBoss && GameManager.instance.levelManager.CurrentPhase == EPhase.assault)
+                {
+                    EndWave();
+                    return;
+                }
+            }
+
+            //if there is only an enemy and that enemy is the boss, restart wave
+            if (enemies.Count == 1 && enemies[0] is EnemyBoss)
+            {
+                if (loopWaveWithBoss)                                               //only if can loop
+                {
+                    if (restartWaveCoroutine != null)
+                        StopCoroutine(restartWaveCoroutine);
+
+                    restartWaveCoroutine = StartCoroutine(RestartWaveCoroutine());  //obviously in the wave, will be the check to not respawn the boss
+                }
+            }
         }
     }
 
