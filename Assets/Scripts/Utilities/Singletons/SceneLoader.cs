@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using UnityEngine.SceneManagement;
+    using System.Collections;
 
     [AddComponentMenu("redd096/Singletons/Scene Loader")]
     public class SceneLoader : Singleton<SceneLoader>
@@ -82,6 +83,21 @@
 
             //load next scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        /// <summary>
+        /// Wait few seconds, then load scene
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public IEnumerator LoadSceneAfterSeconds(string scene, float time)
+        {
+            //wait
+            yield return new WaitForSeconds(time);
+
+            //then load new scene
+            LoadNewScene(scene);
         }
     }
 }

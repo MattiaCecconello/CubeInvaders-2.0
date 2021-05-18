@@ -29,16 +29,26 @@ public class CameraShake : MonoBehaviour
             StopCoroutine(shakeCoroutine);
 
         if(gameObject.activeInHierarchy)
-            shakeCoroutine = StartCoroutine(ShakeCoroutine());
+            shakeCoroutine = StartCoroutine(ShakeCoroutine(amplitudeGain, frequemcyGain, shakeDuration));
     }
 
-    public IEnumerator ShakeCoroutine()
+    public void DoShake(float amplitude, float frequency, float duration)
+    {
+        //start coroutine
+        if (shakeCoroutine != null)
+            StopCoroutine(shakeCoroutine);
+
+        if (gameObject.activeInHierarchy)
+            shakeCoroutine = StartCoroutine(ShakeCoroutine(amplitude, frequency, duration));
+    }
+
+    public IEnumerator ShakeCoroutine(float amplitude, float frequency, float duration)
     {
         //noise
-        Noise(amplitudeGain, frequemcyGain);
+        Noise(amplitude, frequency);
 
         //wait and stop noise
-        yield return new WaitForSeconds(shakeDuration);
+        yield return new WaitForSeconds(duration);
         Noise(0, 0);
     }
 

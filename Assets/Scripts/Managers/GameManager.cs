@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     public LevelManager levelManager { get; private set; }
     public WaveManager waveManager { get; private set; }
     public TurretsManager turretsManager { get; private set; }
+    public CameraShake cameraShake { get; private set; }
 
     protected override void SetDefaults()
     {
@@ -25,6 +26,7 @@ public class GameManager : Singleton<GameManager>
         levelManager = FindObjectOfType<LevelManager>();
         waveManager = FindObjectOfType<WaveManager>();
         turretsManager = FindObjectOfType<TurretsManager>();
+        cameraShake = FindObjectOfType<CameraShake>();
 
         //in scenes where there is a level manager, be sure there is also turrets manager
         if (levelManager && turretsManager == null)

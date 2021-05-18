@@ -14,14 +14,12 @@ public class CellGraphics : MonoBehaviour
     [SerializeField] SpriteRenderer enemyDestinationObject = default;
     [SerializeField] float flickSpeed = 1;
 
-    CameraShake camShake;
     Cell cell;
 
     Enemy nearestEnemy;
 
     private void OnEnable()
     {
-        camShake = FindObjectOfType<CameraShake>();
         cell = GetComponent<Cell>();
 
         if (cell)
@@ -67,7 +65,7 @@ public class CellGraphics : MonoBehaviour
         SoundManager.instance.Play(explosionCellSound.audioClip, transform.position, explosionCellSound.volume);
 
         //do camera shake
-        camShake.DoShake();
+        GameManager.instance.cameraShake.DoShake();
     }
 
     void OnShowEnemyDestination(Enemy nearestEnemy)
