@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToFlick: {fileID: 6281652222580307534}
-  blinkMaterial: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
+  blinkMaterial: {fileID: 2100000, guid: 432227d2c9753a049bde8ef4cf9d06de, type: 2}
   blinkTime: 0.1
   explosionParticlePrefab: {fileID: 2162059483477449232, guid: 985343edef3e2aa4aa565f0d131447ca, type: 3}
   explosionSound:
@@ -698,11 +698,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2479229396897406758, guid: eb20088af393ff04c8cf02549d05f7a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.501
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 2479229396897406758, guid: eb20088af393ff04c8cf02549d05f7a6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2479229396897406758, guid: eb20088af393ff04c8cf02549d05f7a6, type: 3}
       propertyPath: m_LocalRotation.x

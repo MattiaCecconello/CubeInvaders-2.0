@@ -158,7 +158,7 @@ PrefabInstance:
     - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: buildVFX
       value: 
-      objectReference: {fileID: 2295486064368261484, guid: 8cb76ccec2329d64dbbbaea73d41b12f, type: 3}
+      objectReference: {fileID: 2295486064368261484, guid: fd65ae599ce906f48bce77b35ac8c6e2, type: 3}
     - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: cupolaObject
       value: 

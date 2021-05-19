@@ -9864,11 +9864,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2479229396897406758, guid: eb20088af393ff04c8cf02549d05f7a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.072
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2479229396897406758, guid: eb20088af393ff04c8cf02549d05f7a6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.509
+      value: -0.78
       objectReference: {fileID: 0}
     - target: {fileID: 2479229396897406758, guid: eb20088af393ff04c8cf02549d05f7a6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -9963,7 +9963,7 @@ PrefabInstance:
     - target: {fileID: 5873725972075197134, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: blinkMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
+      objectReference: {fileID: 2100000, guid: 432227d2c9753a049bde8ef4cf9d06de, type: 2}
     - target: {fileID: 5873725972075197134, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: healthSlider
       value: 
