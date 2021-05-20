@@ -101,7 +101,7 @@ MonoBehaviour:
   useCustomShake: 1
   amplitudeGain: 2
   frequemcyGain: 2
-  shakeDuration: 4
+  shakeDuration: 1
 --- !u!114 &7734226757634941550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,8 +132,8 @@ MonoBehaviour:
   distanceFromCube: 0
   initialMaxSpeed: 0
   maxSpeed: 0
-  lastPhaseBoss: 0
-  sceneToLoad: BF2
+  lastPhaseBoss: 1
+  sceneToLoad: TestBoss2
   timeBeforeLoadNewScene: 4
 --- !u!1 &3931223927503979508
 GameObject:
@@ -9931,7 +9931,7 @@ PrefabInstance:
       objectReference: {fileID: 2601342600398077856}
     - target: {fileID: 7338728851212345807, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_Name
-      value: Enemy Boss 1
+      value: Enemy Boss 2
       objectReference: {fileID: 0}
     - target: {fileID: 8410486576541305353, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_LocalPosition.x

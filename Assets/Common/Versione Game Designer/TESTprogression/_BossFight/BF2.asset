@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4334ec798e7787438925ec807cfec7f, type: 3}
+  m_Name: BF2
+  m_EditorClassIdentifier: 
+  Waves:
+  - LevelConfig: {fileID: 11400000, guid: f4bbb4e01e73fe944afc3b57c265fd5e, type: 2}
+    Resources: 0
+    IgnorePreviousFacesAtSpawn: 4
+    TimeBetweenSpawns: 2.5
+    DistanceFromWorld: 20
+    Enemies:
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 4764734382697931505, guid: 7ed24b87ce8eb49478b7148a5fdcbcc5, type: 3}
+      enemyTimer: 0

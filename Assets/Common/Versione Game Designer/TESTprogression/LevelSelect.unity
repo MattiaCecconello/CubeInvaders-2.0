@@ -224,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: Synphony I
+      value: Symphony I
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_fontSize
@@ -1447,7 +1447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: Synphony III
+      value: Symphony III
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_fontSize
@@ -1909,38 +1909,55 @@ MonoBehaviour:
   levelButtons:
   - button: {fileID: 1375623694}
     necessaryKey: 
+    levelsForNoDamage: []
   - button: {fileID: 1258316508}
     necessaryKey: Show1
+    levelsForNoDamage: []
   - button: {fileID: 1531304838}
     necessaryKey: Show2
+    levelsForNoDamage: []
   - button: {fileID: 334365855}
     necessaryKey: Show3
+    levelsForNoDamage: []
   - button: {fileID: 1310524224}
     necessaryKey: Show4
+    levelsForNoDamage: []
   - button: {fileID: 652553514}
     necessaryKey: Show5
+    levelsForNoDamage: []
   - button: {fileID: 324243084}
     necessaryKey: Show6
+    levelsForNoDamage: []
   - button: {fileID: 1538531186}
     necessaryKey: Show7
+    levelsForNoDamage: []
   - button: {fileID: 1713872740}
     necessaryKey: Show8
+    levelsForNoDamage: []
   - button: {fileID: 2025866859}
     necessaryKey: Show9
+    levelsForNoDamage: []
   - button: {fileID: 1439224350}
     necessaryKey: Show10
+    levelsForNoDamage: []
   - button: {fileID: 196761596}
     necessaryKey: Show11
+    levelsForNoDamage: []
   - button: {fileID: 799531219}
     necessaryKey: Show12
+    levelsForNoDamage: []
   - button: {fileID: 1821868822}
     necessaryKey: Show13
+    levelsForNoDamage: []
   - button: {fileID: 893463086}
     necessaryKey: Show14
+    levelsForNoDamage: []
   - button: {fileID: 1196457242}
     necessaryKey: Show15
+    levelsForNoDamage: []
   - button: {fileID: 1623108663}
     necessaryKey: Show16
+    levelsForNoDamage: []
 --- !u!4 &1423676350
 Transform:
   m_ObjectHideFlags: 0
@@ -2056,7 +2073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: Pearl Harbor
+      value: C - Day
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_enableAutoSizing
@@ -2739,7 +2756,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: 17
+      value: Out Of Service
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
+      propertyPath: m_fontSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
@@ -3129,7 +3154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: Synphony II
+      value: Symphony II
       objectReference: {fileID: 0}
     - target: {fileID: 4495773855215963987, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_fontSize
