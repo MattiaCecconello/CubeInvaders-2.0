@@ -20,8 +20,8 @@ public class TurretShot : MonoBehaviour
     [Min(0)]
     [SerializeField] float area = 0;
 
-    [Header("Graphics")]
-    [SerializeField] TrailRenderer trail = default;
+    public System.Action onInit { get; set; }
+    public System.Action<bool> onDestroyShot { get; set; }
 
     Coordinates coordinatesToDefend;
     Enemy enemyToAttack;
@@ -131,6 +131,9 @@ public class TurretShot : MonoBehaviour
             AreaEffect(hitEnemy);
         }
 
+        //call event
+        onDestroyShot(hitEnemy != null);
+
         //destroy this
         redd096.Pooling.Destroy(gameObject);
     }
@@ -168,9 +171,8 @@ public class TurretShot : MonoBehaviour
         //hit only one time
         beSureHitOnlyOneTime = true;
 
-        //reset trail
-        if (trail)
-            trail.Clear();
+        //call event
+        onInit?.Invoke();
     }
 
     #endregion
