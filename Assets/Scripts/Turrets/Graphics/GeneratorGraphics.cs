@@ -27,6 +27,10 @@ public class GeneratorGraphics : MonoBehaviour
 
     void FixedUpdate()
     {
+        //do only if is active
+        if (generator.IsActive == false)
+            return;
+
         //if was activating and now stop, or viceversa - color generator
         if (isActivatingTurrets != IsCurrentlyActivatingTurrets())
         {
@@ -40,8 +44,10 @@ public class GeneratorGraphics : MonoBehaviour
         bool isCurrentlyActivatingTurrets = false;
 
         //if there is at least a turret on this face, is activating turrets
-        foreach (Turret turret in GameManager.instance.turretsManager.TurretsOnFace(generator.CellOwner.coordinates.face))
+        foreach (BuildableObject buildableObject in GameManager.instance.turretsManager.TurretsOnFace(generator.CellOwner.coordinates.face))
         {
+            Turret turret = buildableObject as Turret;
+
             if (turret != null)
             {
                 isCurrentlyActivatingTurrets = true;

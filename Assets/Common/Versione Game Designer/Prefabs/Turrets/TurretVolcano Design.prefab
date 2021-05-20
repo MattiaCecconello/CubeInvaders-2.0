@@ -34,6 +34,24 @@ MonoBehaviour:
   buildAudio:
     audioClip: {fileID: 0}
     volume: 0
+--- !u!114 &7171444132538071894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928861619700782102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48349be8c8bff2d4ea8adc4fb911e67e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorWhenActive: {r: 1, g: 0, b: 0, a: 1}
+  objectsToColor:
+  - {fileID: 4515867476241235908}
+  - {fileID: 7039013376003457355}
+  - {fileID: 578304312695949834}
+  - {fileID: 5138156695988116535}
 --- !u!1001 &7470625680704562685
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,5 +194,25 @@ PrefabInstance:
 --- !u!1 &2928861619700782102 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 7470625680704562685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4515867476241235908 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6415214883928234553, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 7470625680704562685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7039013376003457355 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 433303405178823862, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 7470625680704562685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &578304312695949834 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8046369908610559991, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 7470625680704562685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5138156695988116535 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2369623698843171274, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
   m_PrefabInstance: {fileID: 7470625680704562685}
   m_PrefabAsset: {fileID: 0}
