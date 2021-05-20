@@ -801,7 +801,7 @@ MonoBehaviour:
   explosionSound:
     audioClip: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
     volume: 0
-  healthSlider: {fileID: 0}
+  healthSlider: {fileID: 4902633621812452601}
 --- !u!114 &451699539442052430
 MonoBehaviour:
   m_ObjectHideFlags: 0
