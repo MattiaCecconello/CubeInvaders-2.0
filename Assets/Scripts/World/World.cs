@@ -98,6 +98,7 @@ public class WorldSave
 #endregion
 
 [AddComponentMenu("Cube Invaders/World/World")]
+[DefaultExecutionOrder(-1)]
 public class World : MonoBehaviour
 {
     #region variables
