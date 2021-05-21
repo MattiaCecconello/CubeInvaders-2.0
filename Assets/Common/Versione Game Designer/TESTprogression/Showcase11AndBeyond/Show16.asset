@@ -38,22 +38,22 @@ MonoBehaviour:
     DistanceFromWorld: 20
     Enemies:
     - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
-      enemyTimer: 0
-    - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
       enemyTimer: -5
     - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
       enemyTimer: -5
-    - enemy: {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}
-      enemyTimer: 0
     - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
-      enemyTimer: 5
-    - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
-      enemyTimer: -5
-    - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
-      enemyTimer: -5
-    - enemy: {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}
       enemyTimer: 0
     - enemy: {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}
       enemyTimer: 5
+    - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
+      enemyTimer: -5
+    - enemy: {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}
+      enemyTimer: 0
     - enemy: {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}
       enemyTimer: -5
+    - enemy: {fileID: -6529817813752180074, guid: 86758c9e79c65f9499d254fa4970171e, type: 3}
+      enemyTimer: 0

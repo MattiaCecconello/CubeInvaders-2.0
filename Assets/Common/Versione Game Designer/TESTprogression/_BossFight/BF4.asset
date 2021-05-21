@@ -16,7 +16,7 @@ MonoBehaviour:
   - LevelConfig: {fileID: 11400000, guid: f4bbb4e01e73fe944afc3b57c265fd5e, type: 2}
     Resources: 0
     IgnorePreviousFacesAtSpawn: 4
-    TimeBetweenSpawns: 4
+    TimeBetweenSpawns: 3
     DistanceFromWorld: 20
     Enemies:
     - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
