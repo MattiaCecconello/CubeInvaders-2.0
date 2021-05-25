@@ -16,6 +16,7 @@ public class GameManager : Singleton<GameManager>
     public WaveManager waveManager { get; private set; }
     public TurretsManager turretsManager { get; private set; }
     public CameraShake cameraShake { get; private set; }
+    public TutorialManager tutorialManager { get; private set; }
 
     protected override void SetDefaults()
     {
@@ -27,10 +28,19 @@ public class GameManager : Singleton<GameManager>
         waveManager = FindObjectOfType<WaveManager>();
         turretsManager = FindObjectOfType<TurretsManager>();
         cameraShake = FindObjectOfType<CameraShake>();
+        tutorialManager = FindObjectOfType<TutorialManager>();
 
         //in scenes where there is a level manager, be sure there is also turrets manager
         if (levelManager && turretsManager == null)
             turretsManager = new GameObject("Turrets Manager", typeof(TurretsManager)).GetComponent<TurretsManager>();
+
+        //if there is a tutorial manager, player become PlayerTutorial
+        if (tutorialManager)
+        {
+            GameObject playerObj = player.gameObject;
+            Destroy(player);                                    //remove normal Player
+            player = playerObj.AddComponent<PlayerTutorial>();  //add PlayerTutorial
+        }
     }
 
     void Start()

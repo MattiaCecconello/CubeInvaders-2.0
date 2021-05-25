@@ -102,7 +102,7 @@ public class Player : StateMachine
 
     #region events
 
-    void AddEvents()
+    protected virtual void AddEvents()
     {
         GameManager.instance.levelManager.onStartGame += OnStartGame;
         GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
@@ -110,7 +110,7 @@ public class Player : StateMachine
         GameManager.instance.levelManager.onEndGame += OnEndGame;
     }
 
-    void RemoveEvents()
+    protected virtual void RemoveEvents()
     {
         GameManager.instance.levelManager.onStartGame -= OnStartGame;
         GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;

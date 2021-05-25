@@ -112,6 +112,26 @@
             return string.Empty;
         }
 
+        public static string GetControlName(string inputName, int index)
+        {
+            if (InputManagerRedd096.instance.inputActionAsset.FindAction(inputName) != null)
+                if (InputManagerRedd096.instance.inputActionAsset.FindAction(inputName).controls.Count > index)
+                    return InputManagerRedd096.instance.inputActionAsset.FindAction(inputName).controls[index].name;
+
+            //if no active control, return empty string
+            return string.Empty;
+        }
+
+        public static string GetControlDisplayName(string inputName, int index)
+        {
+            if (InputManagerRedd096.instance.inputActionAsset.FindAction(inputName) != null)
+                if (InputManagerRedd096.instance.inputActionAsset.FindAction(inputName).controls.Count > index)
+                    return InputManagerRedd096.instance.inputActionAsset.FindAction(inputName).controls[index].displayName;
+
+            //if no active control, return empty string
+            return string.Empty;
+        }
+
         #endregion
 
         #region replace old input system
