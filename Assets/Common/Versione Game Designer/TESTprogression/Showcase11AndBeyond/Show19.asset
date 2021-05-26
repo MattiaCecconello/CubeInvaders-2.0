@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - LevelConfig: {fileID: 11400000, guid: 38ec4034c3f8e29498bb9b2ca38e8c0e, type: 2}
-    Resources: 14
+    Resources: 27
     IgnorePreviousFacesAtSpawn: 4
     TimeBetweenSpawns: 5
     DistanceFromWorld: 20
