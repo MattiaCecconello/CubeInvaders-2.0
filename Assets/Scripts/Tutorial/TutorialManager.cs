@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using redd096;
 using TMPro;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Tutorial/Tutorial Manager")]
 [RequireComponent(typeof(ParseInputsTutorial))]
@@ -13,27 +11,24 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] Text textTutorial = default;
     [SerializeField] TextMeshProUGUI textProTutorial = default;
 
-    //TODO
-    //creare lista di tutorial
-    //ogni tutorial avrà string (se deve premere un bottone), float (se deve attendere tempo), int (se deve ruotare cubo), trigger (se deve andare a un trigger)
-    //+ una stringa che sarà il text da mostrare (al posto della string debug qua sotto, si controllerà ogni volta che si attiva un tutorial, la string di quel tutorial)
-
     [Header("Debug")]
-    [SerializeField] string debug = "";
     [ReadOnly] [SerializeField] bool isUsingKeyboard = false;
+    [ReadOnly] [SerializeField] string textToShow = "";
 
+    Animator anim;
     ParseInputsTutorial parseInputsTutorial;
 
     void Awake()
     {
         //get references
+        anim = GetComponentInChildren<Animator>();
         parseInputsTutorial = GetComponent<ParseInputsTutorial>();
     }
 
     void Update()
     {
-        //update text
-        if (ChangedInputDevice())
+        //if changed input, update text
+        if (IsChangedInputDevice())
         {
             UpdateText();
         }
@@ -41,7 +36,7 @@ public class TutorialManager : MonoBehaviour
 
     #region private API
 
-    bool ChangedInputDevice()
+    bool IsChangedInputDevice()
     {
         //if device didn't change, return
         bool currentlyUsingKeyboard = InputRedd096.IsCurrentControlScheme("KeyboardAndMouse");
@@ -56,8 +51,8 @@ public class TutorialManager : MonoBehaviour
 
     void UpdateText()
     {
-        //parse
-        string text = parseInputsTutorial.ParseString(debug);
+        //parse (current tutorial Text To Show)
+        string text = parseInputsTutorial.ParseString(textToShow);
 
         //update UI
         if (textTutorial)
@@ -65,6 +60,32 @@ public class TutorialManager : MonoBehaviour
 
         if (textProTutorial)
             textProTutorial.text = text;
+    }
+
+    #endregion
+
+    #region public API
+
+    public void MoveToNextTutorial()
+    {
+        //set trigger to next state
+        anim.SetTrigger("Next State");
+    }
+
+    public void SetTextToShow(string textToShow)
+    {
+        //set text to show
+        this.textToShow = textToShow;
+
+        //show new text
+        UpdateText();
+    }
+
+    public void FinishTutorials()
+    {
+        //hide text
+        textToShow = "";
+        UpdateText();
     }
 
     #endregion

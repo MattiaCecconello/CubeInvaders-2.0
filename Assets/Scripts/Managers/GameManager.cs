@@ -34,8 +34,8 @@ public class GameManager : Singleton<GameManager>
         if (levelManager && turretsManager == null)
             turretsManager = new GameObject("Turrets Manager", typeof(TurretsManager)).GetComponent<TurretsManager>();
 
-        //if there is a tutorial manager, player become PlayerTutorial
-        if (tutorialManager)
+        //if there is a tutorial manager (and player is not PlayerTutorial), player become PlayerTutorial
+        if (tutorialManager && player is PlayerTutorial == false)
         {
             GameObject playerObj = player.gameObject;
             Destroy(player);                                    //remove normal Player

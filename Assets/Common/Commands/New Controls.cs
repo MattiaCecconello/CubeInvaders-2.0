@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Resources/Commands/New Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Common/Commands/New Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -102,6 +102,14 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""name"": ""Resume Button"",
                     ""type"": ""Button"",
                     ""id"": ""499b133a-f75b-478d-a8f3-54fd7f2cdcde"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Next Tutorial"",
+                    ""type"": ""Button"",
+                    ""id"": ""29b72434-4bf6-4f92-bf8f-bd5937513ab9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -341,6 +349,17 @@ public class @NewControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""234015a7-d4c3-44f2-8acc-4d74a80e11cb"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Keep Pressed To Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""be0cf2bb-2771-4c8f-8349-4fd85261f1ec"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -510,7 +529,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Finish Strategic Phase"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -580,6 +599,39 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""action"": ""Skip Animation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""005dbbdd-0ddb-4791-8c45-b128919a5edd"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Next Tutorial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fde6a52-52e5-49d5-8241-bbb313149f10"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Next Tutorial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6eed24d4-d371-4535-8ffa-4e7d5eff1736"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Next Tutorial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -627,6 +679,7 @@ public class @NewControls : IInputActionCollection, IDisposable
         m_Gameplay_SkipAnimation = m_Gameplay.FindAction("Skip Animation", throwIfNotFound: true);
         m_Gameplay_PauseButton = m_Gameplay.FindAction("Pause Button", throwIfNotFound: true);
         m_Gameplay_ResumeButton = m_Gameplay.FindAction("Resume Button", throwIfNotFound: true);
+        m_Gameplay_NextTutorial = m_Gameplay.FindAction("Next Tutorial", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -687,6 +740,7 @@ public class @NewControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_SkipAnimation;
     private readonly InputAction m_Gameplay_PauseButton;
     private readonly InputAction m_Gameplay_ResumeButton;
+    private readonly InputAction m_Gameplay_NextTutorial;
     public struct GameplayActions
     {
         private @NewControls m_Wrapper;
@@ -702,6 +756,7 @@ public class @NewControls : IInputActionCollection, IDisposable
         public InputAction @SkipAnimation => m_Wrapper.m_Gameplay_SkipAnimation;
         public InputAction @PauseButton => m_Wrapper.m_Gameplay_PauseButton;
         public InputAction @ResumeButton => m_Wrapper.m_Gameplay_ResumeButton;
+        public InputAction @NextTutorial => m_Wrapper.m_Gameplay_NextTutorial;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -744,6 +799,9 @@ public class @NewControls : IInputActionCollection, IDisposable
                 @ResumeButton.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResumeButton;
                 @ResumeButton.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResumeButton;
                 @ResumeButton.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResumeButton;
+                @NextTutorial.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNextTutorial;
+                @NextTutorial.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNextTutorial;
+                @NextTutorial.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnNextTutorial;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -781,6 +839,9 @@ public class @NewControls : IInputActionCollection, IDisposable
                 @ResumeButton.started += instance.OnResumeButton;
                 @ResumeButton.performed += instance.OnResumeButton;
                 @ResumeButton.canceled += instance.OnResumeButton;
+                @NextTutorial.started += instance.OnNextTutorial;
+                @NextTutorial.performed += instance.OnNextTutorial;
+                @NextTutorial.canceled += instance.OnNextTutorial;
             }
         }
     }
@@ -816,5 +877,6 @@ public class @NewControls : IInputActionCollection, IDisposable
         void OnSkipAnimation(InputAction.CallbackContext context);
         void OnPauseButton(InputAction.CallbackContext context);
         void OnResumeButton(InputAction.CallbackContext context);
+        void OnNextTutorial(InputAction.CallbackContext context);
     }
 }

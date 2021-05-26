@@ -18,13 +18,23 @@ public struct ParseStruct
     }
 }
 
+[System.Serializable]
+public struct ReplaceNameStruct
+{
+    public string nameToReplace;
+    public string nameToShow;
+}
+
 #endregion
 
 [AddComponentMenu("Cube Invaders/Tutorial/Parse Inputs Tutorial")]
 public class ParseInputsTutorial : MonoBehaviour
 {
-    [Header("Parse")]
+    [Header("Use Display Name or Normal Name")]
     [SerializeField] bool useDisplayName = true;
+
+    [Header("Replace some names with others")]
+    [SerializeField] ReplaceNameStruct[] replaceNames = default;
 
     string textToShow;
 
@@ -112,10 +122,22 @@ public class ParseInputsTutorial : MonoBehaviour
         //replace every string
         foreach (ParseStruct s in stringsToReplace)
         {
+            //use display name or control name
+            string nameToShow = useDisplayName ? InputRedd096.GetControlDisplayName(s.inputName, s.inputIndex) : InputRedd096.GetControlName(s.inputName, s.inputIndex);
+
+            foreach(ReplaceNameStruct replaceName in replaceNames)
+            {
+                //if this name is to replace
+                if(nameToShow.Equals(replaceName.nameToReplace))
+                {
+                    //replace with new one
+                    nameToShow = replaceName.nameToShow;
+                    break;
+                }
+            }
+
             //replace string with display name or control name
-            textToShow = textToShow.Replace(
-                s.textToReplace,
-                useDisplayName ? InputRedd096.GetControlDisplayName(s.inputName, s.inputIndex) : InputRedd096.GetControlName(s.inputName, s.inputIndex));
+            textToShow = textToShow.Replace(s.textToReplace, nameToShow);
         }
     }
 

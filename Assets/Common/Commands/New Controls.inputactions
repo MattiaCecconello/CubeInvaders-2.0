@@ -92,6 +92,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Next Tutorial",
+                    "type": "Button",
+                    "id": "29b72434-4bf6-4f92-bf8f-bd5937513ab9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -328,6 +336,17 @@
                 },
                 {
                     "name": "",
+                    "id": "234015a7-d4c3-44f2-8acc-4d74a80e11cb",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Keep Pressed To Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "be0cf2bb-2771-4c8f-8349-4fd85261f1ec",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -497,7 +516,7 @@
                     "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardAndMouse",
                     "action": "Finish Strategic Phase",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -565,6 +584,39 @@
                     "processors": "",
                     "groups": "KeyboardAndMouse",
                     "action": "Skip Animation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "005dbbdd-0ddb-4791-8c45-b128919a5edd",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Next Tutorial",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8fde6a52-52e5-49d5-8241-bbb313149f10",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Next Tutorial",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6eed24d4-d371-4535-8ffa-4e7d5eff1736",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardAndMouse",
+                    "action": "Next Tutorial",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

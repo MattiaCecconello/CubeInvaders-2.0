@@ -1,62 +1,69 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using redd096;
 
-public class PlayerMove : PlayerState
+public class BasePlayerTutorialState : State
 {
-    protected Coordinates coordinates;
+    bool alreadyFinished;
+
+    protected PlayerTutorial player;
+    protected Transform transform;
+
     float timerDelayRotateOrSelect;
 
-    public PlayerMove(StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
+    public BasePlayerTutorialState(StateMachine stateMachine) : base(stateMachine)
     {
-        //get previous coordinates
-        this.coordinates = coordinates;
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-
-        //show selector
-        GameManager.instance.uiManager.ShowSelector(coordinates);
-
-        //enable camera movement
-        player.VirtualCam.enabled = true;
+        player = stateMachine as PlayerTutorial;
+        transform = player.transform;
     }
 
     public override void Execution()
     {
         base.Execution();
 
-        //move camera
-        MoveCamera(InputRedd096.GetActiveControlName("Move Camera"), InputRedd096.GetValue<Vector2>("Move Camera"));
-
-        //when move camera, check if changed face
-        CheckChangedFace();
-
-        //rotate cube or select cell (check if keeping pressed to rotate)
-        if (Time.time > timerDelayRotateOrSelect)                               //check delay
+        if(player.CanMove)
         {
-            if (InputRedd096.GetButton("Keep Pressed To Rotate"))
-                RotateCube(InputRedd096.GetValue<Vector2>("Rotate Cube"));
-            else
-                SelectCell(InputRedd096.GetValue<Vector2>("Select Cell"));
+            //move camera
+            MoveCamera(InputRedd096.GetActiveControlName("Move Camera"), InputRedd096.GetValue<Vector2>("Move Camera"));
+
+            //when move camera, check if changed face
+            CheckChangedFace();
+        }
+
+        if (player.CanRotate || player.CanSelectCell)
+        {
+            //rotate cube or select cell (check if keeping pressed to rotate)
+            if (Time.time > timerDelayRotateOrSelect)                               //check delay
+            {
+                if (InputRedd096.GetButton("Keep Pressed To Rotate"))
+                {
+                    if(player.CanRotate)
+                        RotateCube(InputRedd096.GetValue<Vector2>("Rotate Cube"));
+                }
+                else
+                {
+                    if(player.CanSelectCell)
+                        SelectCell(InputRedd096.GetValue<Vector2>("Select Cell"));
+                }
+            }
         }
     }
 
-    public override void Exit()
+    protected void FinishTutorial()
     {
-        base.Exit();
+        //do only one time
+        if (alreadyFinished)
+            return;
 
-        //stop camera movement
-        player.VirtualCam.enabled = false;
+        alreadyFinished = true;
+
+        //move to next tutorial
+        GameManager.instance.tutorialManager.MoveToNextTutorial();
     }
 
-    #region private API
+    #region move
 
-    bool pressedRotateOrSelect;
-
-    void MoveCamera(string activeControlName, Vector2 input)
+    protected virtual void MoveCamera(string activeControlName, Vector2 input)
     {
         //set invert Y
         player.VirtualCam.m_YAxis.m_InvertInput = player.invertY;
@@ -81,16 +88,22 @@ public class PlayerMove : PlayerState
     }
 
     void CheckChangedFace()
-    {        
+    {
         //if change face, reselect center cell and move selector
         EFace face = WorldUtility.SelectFace(transform);
 
-        if (face != coordinates.face)
+        if (face != player.CurrentCoordinates.face)
         {
-            coordinates = new Coordinates(face, GameManager.instance.world.worldConfig.CenterCell);
-            GameManager.instance.uiManager.ShowSelector(coordinates);
+            player.CurrentCoordinates = new Coordinates(face, GameManager.instance.world.worldConfig.CenterCell);
+            GameManager.instance.uiManager.ShowSelector(player.CurrentCoordinates);
         }
     }
+
+    #endregion
+
+    #region select and rotate
+
+    bool pressedRotateOrSelect = true;
 
     void RotateCube(Vector2 movement)
     {
@@ -146,7 +159,7 @@ public class PlayerMove : PlayerState
             }
 
             //save coordinates and show selector
-            GameManager.instance.uiManager.ShowSelector(coordinates);
+            GameManager.instance.uiManager.ShowSelector(player.CurrentCoordinates);
         }
         //reset when release input or analog
         else if (movement.magnitude < player.deadZoneAnalogs)
@@ -155,17 +168,15 @@ public class PlayerMove : PlayerState
         }
     }
 
-    #endregion
-
-    void DoSelectionCell(ERotateDirection direction)
+    protected virtual void DoSelectionCell(ERotateDirection direction)
     {
         timerDelayRotateOrSelect = Time.time + GameManager.instance.levelManager.generalConfig.delayRotateOrSelectCell;     //use a delay, to not call again for error
 
         //update coordinates
-        coordinates = WorldUtility.SelectCell(WorldUtility.SelectFace(transform), coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), direction);
+        player.CurrentCoordinates = WorldUtility.SelectCell(WorldUtility.SelectFace(transform), player.CurrentCoordinates.x, player.CurrentCoordinates.y, WorldUtility.LateralFace(transform), direction);
     }
 
-    void DoRotation(ERotateDirection rotateDirection)
+    protected virtual void DoRotation(ERotateDirection rotateDirection)
     {
         timerDelayRotateOrSelect = Time.time + GameManager.instance.levelManager.generalConfig.delayRotateOrSelectCell;     //use a delay, to not call again for error
 
@@ -176,13 +187,13 @@ public class PlayerMove : PlayerState
             if (GameManager.instance.levelManager.levelConfig.SelectorSize > 1)
             {
                 List<Coordinates> coordinatesToRotate = RotateMoreCells(rotateDirection);   //get list of coordinates to rotate
-                coordinatesToRotate.Add(coordinates);                                       //add our coordinates
+                coordinatesToRotate.Add(player.CurrentCoordinates);                         //add our coordinates
                 GameManager.instance.world.PlayerRotate(coordinatesToRotate.ToArray(), WorldUtility.LateralFace(transform), rotateDirection, GameManager.instance.world.worldConfig.RotationTime);
             }
             //else rotate only this cell
             else
             {
-                GameManager.instance.world.PlayerRotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection, GameManager.instance.world.worldConfig.RotationTime);
+                GameManager.instance.world.PlayerRotate(player.CurrentCoordinates, WorldUtility.LateralFace(transform), rotateDirection, GameManager.instance.world.worldConfig.RotationTime);
             }
         }
     }
@@ -196,11 +207,11 @@ public class PlayerMove : PlayerState
         bool useX = rotateDirection == ERotateDirection.up || rotateDirection == ERotateDirection.down;
 
         //if rotating up or down face, when looking from right or left, inverse useX
-        if (coordinates.face == EFace.up || coordinates.face == EFace.down)
+        if (player.CurrentCoordinates.face == EFace.up || player.CurrentCoordinates.face == EFace.down)
             if (lookingFace == EFace.right || lookingFace == EFace.left)
                 useX = !useX;
 
-        int value = useX ? coordinates.x : coordinates.y;
+        int value = useX ? player.CurrentCoordinates.x : player.CurrentCoordinates.y;
 
         //check if there are enough cells to the right (useX) or up (!useX)
         bool increase = value + selectorSize - 1 < GameManager.instance.world.worldConfig.NumberCells;
@@ -215,7 +226,7 @@ public class PlayerMove : PlayerState
         for (int i = min; i < max; i++)
         {
             //get coordinates using x or y
-            Coordinates coords = useX ? new Coordinates(coordinates.face, i, coordinates.y) : new Coordinates(coordinates.face, coordinates.x, i);
+            Coordinates coords = useX ? new Coordinates(player.CurrentCoordinates.face, i, player.CurrentCoordinates.y) : new Coordinates(player.CurrentCoordinates.face, player.CurrentCoordinates.x, i);
 
             //if there is a cell, add it
             if (GameManager.instance.world.Cells.ContainsKey(coords))
@@ -224,4 +235,6 @@ public class PlayerMove : PlayerState
 
         return coordinatesToRotate;
     }
+
+    #endregion
 }
