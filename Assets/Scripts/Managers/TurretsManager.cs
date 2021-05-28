@@ -7,6 +7,8 @@ public class TurretsManager : MonoBehaviour
 {
     Dictionary<EFace, List<BuildableObject>> buildableObjectsOnFace = new Dictionary<EFace, List<BuildableObject>>();
 
+    public Dictionary<EFace, List<BuildableObject>> BuildableObjectsOnFace => buildableObjectsOnFace;
+
     void Update()
     {
         //update radar functions

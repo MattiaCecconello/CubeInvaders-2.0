@@ -375,6 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868890670846072}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890066969923
 GameObject:
@@ -423,13 +424,14 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+  startMenu: {fileID: 0}
   firstSelectedGameObjects:
   - {fileID: 4158868890421293380}
   - {fileID: 6564895935328090550}
   overrideObjects:
   - {fileID: 4158868890456934114}
   - {fileID: 4158868890849408574}
-  notInteractables: []
+  notNavigables: []
 --- !u!114 &4158868890066969933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,6 +491,7 @@ RectTransform:
   m_Children:
   - {fileID: 4158868892014210618}
   - {fileID: 4158868890447647261}
+  - {fileID: 6461923248171876025}
   m_Father: {fileID: 4158868890600752541}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -782,6 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868891164308063}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890173847652
 GameObject:
@@ -965,6 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868891886170924}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890379631564
 GameObject:
@@ -1213,6 +1218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868890134487250}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890447647260
 GameObject:
@@ -1449,6 +1455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868890682656136}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890461490887
 GameObject:
@@ -1820,6 +1827,8 @@ MonoBehaviour:
   currentLevelString: 'Wave:'
   strategicCanvas: {fileID: 4158868890089858739}
   readySlider: {fileID: 4158868890447647262}
+  percentageWarningApparition: 0.1
+  warningObject: {fileID: 6075132247467310460}
 --- !u!1 &4158868890670846078
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,6 +2287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868891054006309}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890873185452
 GameObject:
@@ -2425,6 +2435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868890494642936}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868890876295937
 GameObject:
@@ -2663,6 +2674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868890595985652}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868891001170958
 GameObject:
@@ -3197,6 +3209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 4158868889893179069}
+  textPro: {fileID: 0}
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4158868891453343721
 GameObject:
@@ -3840,6 +3853,85 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &6075132247467310460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6461923248171876025}
+  - component: {fileID: 3483844381506663851}
+  - component: {fileID: 1119245821007888858}
+  m_Layer: 5
+  m_Name: Warning Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6461923248171876025
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075132247467310460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4158868890089858748}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 60}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3483844381506663851
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075132247467310460}
+  m_CullTransparentMesh: 0
+--- !u!114 &1119245821007888858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075132247467310460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 7
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "Is better to build a gatling \nor a rocket before start the wave"
 --- !u!1001 &4158868890588280725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4085,9 +4177,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
---- !u!1 &7235578792783454153 stripped
+--- !u!1 &6564895935328090550 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6764043436985870428, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7110188936370916899, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
   m_PrefabInstance: {fileID: 4158868890588280725}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &7235578792783454152 stripped
@@ -4095,8 +4187,8 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6764043436985870429, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
   m_PrefabInstance: {fileID: 4158868890588280725}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6564895935328090550 stripped
+--- !u!1 &7235578792783454153 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7110188936370916899, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6764043436985870428, guid: a29299d362e38f14089eeb2910aeb2d5, type: 3}
   m_PrefabInstance: {fileID: 4158868890588280725}
   m_PrefabAsset: {fileID: 0}

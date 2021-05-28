@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
     [Header("Strategic")]
     [SerializeField] GameObject strategicCanvas = default;
     [SerializeField] Slider readySlider = default;
+    [SerializeField] [Range(0, 1)] float percentageWarningApparition = 0.1f;
+    [SerializeField] GameObject warningObject = default;
 
     //selector
     GameObject selector;
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
         EndMenu(false, false);
         SetCostText(false);
         strategicCanvas.SetActive(false);
+        HideWarningObject();
 
         //show default wave
         UpdateCurrentLevelText(GameManager.instance.waveManager.CurrentWave);
@@ -194,7 +197,51 @@ public class UIManager : MonoBehaviour
 
     public void UpdateReadySlider(float value)
     {
+        //update slider
         readySlider.value = value;
+
+        //check if show warning object
+        CheckWarningObject();
+    }
+
+    void CheckWarningObject()
+    {
+        if (warningObject == null)
+            return;
+
+        //when reach percentage
+        if (warningObject.activeInHierarchy == false && readySlider.value >= percentageWarningApparition)
+        {
+            //check every face if there are gatling or rocket
+            foreach (EFace face in GameManager.instance.turretsManager.BuildableObjectsOnFace.Keys)
+            {
+                foreach (BuildableObject buildableObject in GameManager.instance.turretsManager.TurretsOnFace(face))
+                {
+                    //if there is at least one, no warning to show
+                    if (buildableObject is TurretShooter)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            //if there are no gatling or rocket builded, show warning
+            warningObject.SetActive(true);
+        }
+        //if warning still active when slider reset, hide it
+        else if (warningObject.activeInHierarchy && readySlider.value < percentageWarningApparition)
+        {
+            warningObject.SetActive(false);
+        }
+    }
+
+    void HideWarningObject()
+    {
+        if (warningObject == null)
+            return;
+
+        //hide warning object
+        warningObject.SetActive(false);
     }
 
     #endregion
