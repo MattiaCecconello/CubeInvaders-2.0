@@ -15,7 +15,7 @@ public class BuildableObject : MonoBehaviour
             return !IsPreview && isActive;
         }
     }
-    public bool isFirstWave { get; private set; } = true;   //is first wave for this turret
+    public bool isFirstWave { get; private set; }           //is first wave for this turret
 
     public System.Action onShowPreview;
     public System.Action onBuildTurret;
@@ -86,8 +86,12 @@ public class BuildableObject : MonoBehaviour
         isActive = false;
     }
 
-    public void ShowPreview()
+    public void ShowPreview(bool buildedByPlayer)
     {
+        //is first wave only if builded buy player
+        isFirstWave = buildedByPlayer;
+
+        //call event
         onShowPreview?.Invoke();
     }
 

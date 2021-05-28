@@ -125,7 +125,7 @@ public class Cell : MonoBehaviour
         //if build at start, build turret 
         if (buildTurretAtStart)
         {
-            ShowPreview();
+            ShowPreview(false);
             BuildOnCell();
         }
     }
@@ -194,7 +194,7 @@ public class Cell : MonoBehaviour
     /// <summary>
     /// Show turret without activate it
     /// </summary>
-    public void ShowPreview()
+    public void ShowPreview(bool buildedByPlayer = true)
     {
         //show preview only if is alive
         if (IsAlive == false)
@@ -229,7 +229,7 @@ public class Cell : MonoBehaviour
         else
             turret.gameObject.SetActive(true);
 
-        turret.ShowPreview();
+        turret.ShowPreview(buildedByPlayer);
 
         //show cost to create turret
         GameManager.instance.uiManager.SetCostText(true, true, resourcesToCreateTurret);
