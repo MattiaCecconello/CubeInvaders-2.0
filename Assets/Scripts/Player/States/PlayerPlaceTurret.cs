@@ -15,6 +15,9 @@ public class PlayerPlaceTurret : PlayerState
     {
         base.Enter();
 
+        //set build mode
+        GameManager.instance.levelManager.SetBuildMode(true);
+
         //show preview
         GameManager.instance.world.Cells[coordinates].ShowPreview();
     }
@@ -43,6 +46,9 @@ public class PlayerPlaceTurret : PlayerState
     public override void Exit()
     {
         base.Exit();
+
+        //set build mode
+        GameManager.instance.levelManager.SetBuildMode(false);
 
         //be sure to remove preview
         GameManager.instance.world.Cells[coordinates].HidePreview();

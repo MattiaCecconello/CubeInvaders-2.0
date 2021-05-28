@@ -241,10 +241,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7756657623923859071, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8707160549755384060, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: explosionCellPrefab
       value: 
       objectReference: {fileID: 9122411620624451906, guid: eb56d0c3940de0f4bac61c59a0066813, type: 3}
+    - target: {fileID: 8707160549755384060, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: spriteToShow
+      value: 
+      objectReference: {fileID: 5868651069258375064}
     - target: {fileID: 9070205934930220605, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_RootOrder
       value: 8

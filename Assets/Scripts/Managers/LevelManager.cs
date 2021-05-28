@@ -20,6 +20,9 @@ public class LevelManager : MonoBehaviour
     public System.Action onEndAssaultPhase;
     public System.Action<bool> onEndGame;
 
+    public System.Action<bool> onSetBuildMode;
+    public bool InBuildMode { get; private set; }
+
     [Header("Debug")]
     [ReadOnly] public EPhase CurrentPhase = EPhase.strategic;
 
@@ -138,6 +141,15 @@ public class LevelManager : MonoBehaviour
     {
         //save using scene name
         MenuSystem.Save(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, true, noDamage);    //this level is ended, because player killed boss
+    }
+
+    public void SetBuildMode(bool isOpening)
+    {
+        //on open or close build mode
+        InBuildMode = isOpening;
+
+        //call event
+        onSetBuildMode?.Invoke(isOpening);
     }
 
     #endregion

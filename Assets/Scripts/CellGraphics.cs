@@ -14,6 +14,9 @@ public class CellGraphics : MonoBehaviour
     [SerializeField] SpriteRenderer enemyDestinationObject = default;
     [SerializeField] float flickSpeed = 1;
 
+    [Header("Show Sprites")]
+    [SerializeField] GameObject spriteToShow = default;
+
     Cell cell;
 
     Enemy nearestEnemy;
@@ -22,6 +25,7 @@ public class CellGraphics : MonoBehaviour
     {
         cell = GetComponent<Cell>();
 
+        //add events
         if (cell)
         {
             cell.onWorldRotate += OnWorldRotate;
@@ -30,12 +34,19 @@ public class CellGraphics : MonoBehaviour
             cell.onHideEnemyDestination += OnHideEnemyDestination;
         }
 
+        GameManager.instance.levelManager.onSetBuildMode += OnSetBuildMode;
+
         //by default, hide enemy destination
         OnHideEnemyDestination();
+
+        //by default, hide sprite
+        if (spriteToShow)
+            spriteToShow.SetActive(false);
     }
 
     private void OnDisable()
     {
+        //remove events
         if(cell)
         {
             cell.onWorldRotate -= OnWorldRotate;
@@ -43,6 +54,8 @@ public class CellGraphics : MonoBehaviour
             cell.onShowEnemyDestination -= OnShowEnemyDestination;
             cell.onHideEnemyDestination -= OnHideEnemyDestination;
         }
+
+        GameManager.instance.levelManager.onSetBuildMode -= OnSetBuildMode;
     }
 
     void Update()
@@ -90,6 +103,17 @@ public class CellGraphics : MonoBehaviour
 
         //remove nearest enemy
         nearestEnemy = null;
+    }
+
+    void OnSetBuildMode(bool isOpening)
+    {
+        //show or hide sprites
+        if(spriteToShow)
+        {
+            //show only if is opening and option is on
+            if(spriteToShow.activeInHierarchy != (isOpening && GameManager.instance.ShowSpritesOption))
+                spriteToShow.SetActive(!spriteToShow.activeInHierarchy);
+        }
     }
 
     #endregion

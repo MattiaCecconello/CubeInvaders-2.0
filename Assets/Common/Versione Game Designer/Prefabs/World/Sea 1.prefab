@@ -221,6 +221,10 @@ PrefabInstance:
       propertyPath: explosionCellPrefab
       value: 
       objectReference: {fileID: 9122411620624451906, guid: 4c9ed61a53dd60f48aecd245ff17b305, type: 3}
+    - target: {fileID: 8707160549755384060, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: spriteToShow
+      value: 
+      objectReference: {fileID: 4994048950720174176}
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: turretToCreate
       value: 

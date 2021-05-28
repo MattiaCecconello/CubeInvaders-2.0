@@ -18,6 +18,8 @@ public class GameManager : Singleton<GameManager>
     public CameraShake cameraShake { get; private set; }
     public TutorialManager tutorialManager { get; private set; }
 
+    [ReadOnly] public bool ShowSpritesOption;
+
     protected override void SetDefaults()
     {
         //get references
@@ -92,9 +94,11 @@ public class GameManager : Singleton<GameManager>
         //set default options
         if (optionsSave != null)
         {
-            AudioListener.volume = optionsSave.volume;
+            AudioListener.volume = optionsSave.volume;                                                                      //set volume
 
-            Screen.fullScreenMode = optionsSave.fullScreen ? FullScreenMode.MaximizedWindow : FullScreenMode.Windowed;
+            Screen.fullScreenMode = optionsSave.fullScreen ? FullScreenMode.MaximizedWindow : FullScreenMode.Windowed;      //set full screen or window
+
+            ShowSpritesOption = optionsSave.showSprites;                                                                    //set show sprites option
         }
     }
 
@@ -115,6 +119,16 @@ public class GameManager : Singleton<GameManager>
 
         //save
         SaveLoadJSON.Save(world.worldConfig.name, new WorldSave(cellsToSave));
+    }
+
+    public void SetShowSpritesOption(bool value)
+    {
+        //set show sprites option
+        ShowSpritesOption = value;
+
+        //recall event to show sprites, if in build mode
+        if (levelManager && levelManager.InBuildMode)
+            levelManager.SetBuildMode(true);
     }
 
     #endregion

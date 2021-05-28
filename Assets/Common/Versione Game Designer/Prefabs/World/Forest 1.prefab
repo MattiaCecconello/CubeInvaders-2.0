@@ -245,6 +245,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8707160549755384060, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: spriteToShow
+      value: 
+      objectReference: {fileID: 6805878606203556548}
     - target: {fileID: 9070205934930220605, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_RootOrder
       value: 8

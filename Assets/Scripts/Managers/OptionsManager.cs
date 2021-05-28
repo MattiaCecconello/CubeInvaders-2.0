@@ -12,10 +12,11 @@ public class OptionsSave
     public float mouseY;
     public float gamepadX;
     public float gamepadY;
-    public bool invertY;
+    public bool invertY = false;
+    public bool showSprites = false;
     public bool fullScreen = true;
 
-    public OptionsSave(float volume, float mouseX, float mouseY, float gamepadX, float gamepadY, bool invertY, bool fullScreen)
+    public OptionsSave(float volume, float mouseX, float mouseY, float gamepadX, float gamepadY, bool invertY, bool showSprites, bool fullScreen)
     {
         this.volume = volume;
         this.mouseX = mouseX;
@@ -23,6 +24,7 @@ public class OptionsSave
         this.gamepadX = gamepadX;
         this.gamepadY = gamepadY;
         this.invertY = invertY;
+        this.showSprites = showSprites;
         this.fullScreen = fullScreen;
     }
 }
@@ -39,6 +41,7 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] float gamepadX = 150;
     [SerializeField] float gamepadY = 1;
     [SerializeField] bool invertY = false;
+    [SerializeField] bool showSprites = false;
     [SerializeField] bool fullScreen = true;
 
     [Header("Volume")]
@@ -64,6 +67,9 @@ public class OptionsManager : MonoBehaviour
     [Header("Invert Y")]
     [SerializeField] Toggle invertYToggle = default;
 
+    [Header("Show Sprites")]
+    [SerializeField] Toggle showSpritesToggle = default;
+
     [Header("Full Screen")]
     [SerializeField] Toggle fullScreenToggle = default;
 
@@ -75,7 +81,7 @@ public class OptionsManager : MonoBehaviour
         loaded = SaveLoadJSON.Load<OptionsSave>("Options");
         if (loaded == null)
         {
-            loaded = new OptionsSave(volume, mouseX, mouseY, gamepadX, gamepadY, invertY, fullScreen);
+            loaded = new OptionsSave(volume, mouseX, mouseY, gamepadX, gamepadY, invertY, showSprites, fullScreen);
             SaveLoadJSON.Save("Options", loaded);
         }
 
@@ -105,6 +111,9 @@ public class OptionsManager : MonoBehaviour
 
         if (invertYToggle)
             invertYToggle.isOn = loaded.invertY;
+
+        if (showSpritesToggle)
+            showSpritesToggle.isOn = loaded.showSprites;
 
         if (fullScreenToggle)
             fullScreenToggle.isOn = loaded.fullScreen;
@@ -202,6 +211,19 @@ public class OptionsManager : MonoBehaviour
         SaveLoadJSON.Save("Options", loaded);
     }
 
+    public void SetShowSprites(bool value)
+    {
+        //update options
+        loaded.showSprites = value;
+
+        //set in game
+        if (GameManager.instance)
+            GameManager.instance.SetShowSpritesOption(loaded.showSprites);
+
+        //save
+        SaveLoadJSON.Save("Options", loaded);
+    }
+
     public void SetFullScreen(bool value)
     {
         //update options
@@ -217,7 +239,7 @@ public class OptionsManager : MonoBehaviour
     public void ResetOptions()
     {
         //reset options
-        loaded = new OptionsSave(volume, mouseX, mouseY, gamepadX, gamepadY, invertY, fullScreen);
+        loaded = new OptionsSave(volume, mouseX, mouseY, gamepadX, gamepadY, invertY, showSprites, fullScreen);
 
         //set in game
         SetEverythingInGame();
