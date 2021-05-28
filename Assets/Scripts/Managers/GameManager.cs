@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     public CameraShake cameraShake { get; private set; }
     public TutorialManager tutorialManager { get; private set; }
 
-    [ReadOnly] public bool ShowSpritesOption;
+    public bool ShowSpritesOption = false;
 
     protected override void SetDefaults()
     {
