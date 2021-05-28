@@ -242,8 +242,8 @@ public class BuildableGraphics : MonoBehaviour
 
     void OnBuildTurret()
     {
-        //lerp to correct height - only if not must to be on air for this strategic phase
-        if (GameManager.instance.levelManager.generalConfig.TurretsOnAirFirstStrategicPhase == false)
+        //lerp to correct height - only if not must to be on air for this strategic phase, or if is not first wave (cause is builded at start)
+        if (GameManager.instance.levelManager.generalConfig.TurretsOnAirFirstStrategicPhase == false || buildableObject.isFirstWave == false)
         {
             if (lerpHeightCoroutine != null)
                 StopCoroutine(lerpHeightCoroutine);

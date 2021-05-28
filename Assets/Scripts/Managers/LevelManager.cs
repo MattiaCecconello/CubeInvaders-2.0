@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
     public System.Action<bool> onEndGame;
 
     [Header("Debug")]
-    [ReadOnly] public EPhase CurrentPhase;
+    [ReadOnly] public EPhase CurrentPhase = EPhase.strategic;
 
     public bool GameEnded { get; private set; }
 
