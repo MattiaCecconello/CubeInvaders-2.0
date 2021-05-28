@@ -1829,6 +1829,9 @@ MonoBehaviour:
   readySlider: {fileID: 4158868890447647262}
   percentageWarningApparition: 0.1
   warningObject: {fileID: 6075132247467310460}
+  turretsToCheck:
+  - {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
+  - {fileID: 9098219464794578569, guid: ddd7503b70bc3ed4da90cc48fd5ebaff, type: 3}
 --- !u!1 &4158868890670846078
 GameObject:
   m_ObjectHideFlags: 0

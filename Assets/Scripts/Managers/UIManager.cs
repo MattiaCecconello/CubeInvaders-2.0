@@ -29,8 +29,11 @@ public class UIManager : MonoBehaviour
     [Header("Strategic")]
     [SerializeField] GameObject strategicCanvas = default;
     [SerializeField] Slider readySlider = default;
+
+    [Header("Warning When no Turrets Builded")]
     [SerializeField] [Range(0, 1)] float percentageWarningApparition = 0.1f;
     [SerializeField] GameObject warningObject = default;
+    [SerializeField] BuildableObject[] turretsToCheck = default;
 
     //selector
     GameObject selector;
@@ -218,9 +221,12 @@ public class UIManager : MonoBehaviour
                 foreach (BuildableObject buildableObject in GameManager.instance.turretsManager.TurretsOnFace(face))
                 {
                     //if there is at least one, no warning to show
-                    if (buildableObject is TurretShooter)
+                    foreach(BuildableObject turret in turretsToCheck)
                     {
-                        return;
+                        if(buildableObject.CellOwner && buildableObject.CellOwner.TurretToCreate == turret)
+                        {
+                            return;
+                        }
                     }
                 }
             }
