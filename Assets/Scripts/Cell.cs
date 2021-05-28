@@ -273,10 +273,11 @@ public class Cell : MonoBehaviour
         //if there is already a turret, try remove it
         if (turret != null && turret.IsPreview == false)
         {
-            if (canRemoveTurret)
+            //do only if can remove - or can remove turrets first wave, and this is the first wave for this turret
+            if (canRemoveTurret || (GameManager.instance.levelManager.generalConfig.CanSellTurretsBuildedInThisWave && turret.isFirstWave))
             {
                 RemoveBuildOnCell();
-                GameManager.instance.player.CurrentResources += resourcesOnSellTurret;      //give resources from sell turret
+                GameManager.instance.player.CurrentResources += (canRemoveTurret ? resourcesOnSellTurret : resourcesToCreateTurret);      //give resources from sell turret (or regain used to create turret)
                 return true;
             }
 

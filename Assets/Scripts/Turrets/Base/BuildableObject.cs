@@ -15,9 +15,23 @@ public class BuildableObject : MonoBehaviour
             return !IsPreview && isActive;
         }
     }
+    public bool isFirstWave { get; private set; } = true;   //is first wave for this turret
 
     public System.Action onShowPreview;
     public System.Action onBuildTurret;
+    public System.Action onFinishFirstWave;
+
+    protected virtual void OnEnable()
+    {
+        //add events
+        GameManager.instance.levelManager.onEndStrategicPhase += OnEndStrategicPhase;
+    }
+
+    protected virtual void OnDisable()
+    {
+        //remove events
+        GameManager.instance.levelManager.onEndStrategicPhase -= OnEndStrategicPhase;
+    }
 
     #region on world rotate
 
@@ -41,6 +55,21 @@ public class BuildableObject : MonoBehaviour
         TryActivateTurret();
 
         GameManager.instance.turretsManager.AddTurretToDictionary(this);  //add to dictionary
+    }
+
+    #endregion
+
+    #region on start assault phase
+
+    void OnEndStrategicPhase()
+    {
+        //if is first wave for this turret
+        if (isFirstWave)
+        {
+            //now is not first wave, and call event
+            isFirstWave = false;
+            onFinishFirstWave?.Invoke();
+        }
     }
 
     #endregion

@@ -47,6 +47,7 @@ public class BuildableGraphics : MonoBehaviour
             buildableObject.onDeactivateStart += OnDeactivateStart;
             buildableObject.onBuildTurret += OnBuildTurret;
             buildableObject.onShowPreview += OnShowPreview;
+            buildableObject.onFinishFirstWave += OnFinishFirstWave;
         }
 
         //save default rotations
@@ -61,6 +62,7 @@ public class BuildableGraphics : MonoBehaviour
             buildableObject.onDeactivateStart -= OnDeactivateStart;
             buildableObject.onBuildTurret -= OnBuildTurret;
             buildableObject.onShowPreview -= OnShowPreview;
+            buildableObject.onFinishFirstWave -= OnFinishFirstWave;
         }
     }
 
@@ -228,7 +230,7 @@ public class BuildableGraphics : MonoBehaviour
 
     #endregion
 
-    #region on preview and on build turret
+    #region on preview and on build turret - and on finish first wave
 
     void OnShowPreview()
     {
@@ -240,15 +242,30 @@ public class BuildableGraphics : MonoBehaviour
 
     void OnBuildTurret()
     {
-        //lerp to correct height
-        if (lerpHeightCoroutine != null)
-            StopCoroutine(lerpHeightCoroutine);
+        //lerp to correct height - only if not must to be on air for this strategic phase
+        if (GameManager.instance.levelManager.generalConfig.TurretsOnAirFirstStrategicPhase == false)
+        {
+            if (lerpHeightCoroutine != null)
+                StopCoroutine(lerpHeightCoroutine);
 
-        lerpHeightCoroutine = StartCoroutine(LerpHeightCoroutine());
+            lerpHeightCoroutine = StartCoroutine(LerpHeightCoroutine());
+        }
 
         //vfx and sound
         ParticlesManager.instance.Play(buildVFX, transform.position, transform.rotation);
         SoundManager.instance.Play(buildAudio.audioClip, transform.position, buildAudio.volume);
+    }
+
+    void OnFinishFirstWave()
+    {
+        //lerp to correct height - only if not already lerpes on build turret
+        if (GameManager.instance.levelManager.generalConfig.TurretsOnAirFirstStrategicPhase)
+        {
+            if (lerpHeightCoroutine != null)
+                StopCoroutine(lerpHeightCoroutine);
+
+            lerpHeightCoroutine = StartCoroutine(LerpHeightCoroutine());
+        }
     }
 
     IEnumerator LerpHeightCoroutine()

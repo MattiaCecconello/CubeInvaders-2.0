@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour
             StartStrategicPhase();
         //or start in assault
         else
-            StartAssaultPhase();
+            EndStrategicPhase();
     }
 
     public void EndGame(bool win)

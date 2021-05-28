@@ -20,6 +20,10 @@ public class GeneralConfig : ScriptableObject
     public bool showEnemiesDestination = true;
     [CanShow("showEnemiesDestination")] public float minDistanceToShowDestination = 10;
 
+    [Header("Sell Turrets Builded on this Wave")]
+    public bool CanSellTurretsBuildedInThisWave = true;
+    public bool TurretsOnAirFirstStrategicPhase = true;
+
     [Header("Helpers")]
     public HelperBase[] Helpers = default;
 }
