@@ -242,14 +242,8 @@ public static class WorldUtility
     /// <summary>
     /// In possible cells, remove everyone where overlap
     /// </summary>
-    /// <param name="position">current position, used to calculate distance</param>
-    /// <param name="coordinatesToAttackPosition">coordinates to attack, used to calculate distance</param>
-    /// <param name="possibleCells">possible cells to teleport</param>
-    public static void CheckOverlap(Vector3 position, Vector3 coordinatesToAttackPosition, List<Cell> possibleCells)
+    public static void CheckOverlap(float distance, List<Cell> possibleCells)
     {
-        //get distance
-        float distance = Vector3.Distance(position, coordinatesToAttackPosition);
-
         //foreach possible cell
         foreach (Cell cell in possibleCells.CreateCopy())
         {

@@ -114,7 +114,7 @@ public class EnemyTeleport : Enemy
         //removes coordinates where there are already enemies
         if (checkNoHitEnemies)
         {
-            WorldUtility.CheckOverlap(transform.position, CoordinatesToAttack.position, possibleCells);
+            WorldUtility.CheckOverlap(DistanceFromCube, possibleCells);
         }
 
         //return random

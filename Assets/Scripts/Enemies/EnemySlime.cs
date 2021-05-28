@@ -89,7 +89,7 @@ public class EnemySlime : Enemy
         //removes coordinates where there are already enemies
         if (checkNoHitEnemies)
         {
-            WorldUtility.CheckOverlap(transform.position, CoordinatesToAttack.position, cellsAround);
+            WorldUtility.CheckOverlap(DistanceFromCube, cellsAround);
         }
 
         //return random
