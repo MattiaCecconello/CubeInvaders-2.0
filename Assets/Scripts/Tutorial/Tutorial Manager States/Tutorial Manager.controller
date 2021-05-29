@@ -534,7 +534,7 @@ MonoBehaviour:
   nameObjectToReach: Destination to Reach
   approxMin: {x: -1, y: -1.5, z: 0}
   approxMax: {x: 1, y: 1.5, z: 20}
-  howMuchMovesCamera: 100
+  howMuchMovesCamera: 500
 --- !u!1102 &9161020521858424068
 AnimatorState:
   serializedVersion: 5
