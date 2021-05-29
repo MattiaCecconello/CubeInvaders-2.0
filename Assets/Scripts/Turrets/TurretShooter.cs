@@ -87,7 +87,7 @@ public class TurretShooter : Turret
     protected virtual void Attack()
     {
         //create shot (pool, position, rotation, scale, init)
-        TurretShot shot = shots.Instantiate(shotPrefab, shotSpawns[indexSpawn].position, shotSpawns[indexSpawn].rotation);
+        TurretShot shot = shots.Instantiate(shotPrefab, shotSpawns[indexSpawn].position, CellOwner.transform.rotation);
         float size = GameManager.instance.world.worldConfig.CellsSize;
         shot.transform.localScale = new Vector3(size, size, size);
         shot.Init(this, EnemyToAttack);
