@@ -128,6 +128,9 @@ public class EnemyBase : MonoBehaviour
 
     void CheckHelpers()
     {
+        if (GameManager.instance.levelManager.generalConfig.Helpers == null)
+            return;
+
         foreach (HelperHitLastSecond helper in GameManager.instance.levelManager.generalConfig.Helpers)
         {
             //if there are helper hit last second
