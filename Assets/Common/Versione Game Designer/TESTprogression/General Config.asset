@@ -16,8 +16,13 @@ MonoBehaviour:
   Selector: {fileID: 193137624836173334, guid: e251ffa2e344a684d8c8c9684aa3b910, type: 3}
   MultipleSelector: {fileID: 193137624836173334, guid: e251ffa2e344a684d8c8c9684aa3b910, type: 3}
   PortalPrefab: {fileID: 8611625995788095873, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
+  DelaySpawnFirstEnemyWave: 1
   delayReleaseFinishStrategicPhase: 0.1
   delayRotateOrSelectCell: 0.1
   showEnemiesHealth: 1
   showEnemiesDestination: 1
   minDistanceToShowDestination: 20
+  CanSellTurretsBuildedInThisWave: 1
+  TurretsOnAirFirstStrategicPhase: 1
+  Helpers:
+  - {fileID: 11400000, guid: 4f6559363d749d64195c890acb437513, type: 2}
