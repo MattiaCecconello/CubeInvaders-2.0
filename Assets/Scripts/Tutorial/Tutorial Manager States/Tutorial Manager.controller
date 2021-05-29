@@ -118,10 +118,10 @@ MonoBehaviour:
     When in Build Mode
     you can preview the turrets.
 
-    Press {Confirm Turret/0} again to build a
-    turret.
+    Press {Confirm Turret/0} again to build a turret.
 
-    {Deny Turret/0} to exit Build Mode
+    {Deny
+    Turret/0} to exit Build Mode
 
 
     Try build a green turret'
@@ -357,7 +357,7 @@ MonoBehaviour:
   canMove: 1
   canSelectCell: 1
   canRotate: 1
-  textToShow: Enemies incoming, hold {Finish Strategic Phase/0} to start the waves
+  textToShow: Enemies incoming, hold {Finish Strategic Phase/0} to start the wave
   finishStrategicPhase: 1
 --- !u!1102 &3333961152409688546
 AnimatorState:
