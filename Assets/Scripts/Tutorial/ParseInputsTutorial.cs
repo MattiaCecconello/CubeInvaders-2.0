@@ -64,8 +64,9 @@ public class ParseInputsTutorial : MonoBehaviour
     {
         //clear vars
         stringsToReplace.Clear();
-        startIndex = 0;
-        slashIndex = 0;
+        startIndex = -1;
+        slashIndex = -1;
+        endIndex = -1;
 
         for (int i = 0; i < textToShow.Length; i++)
         {
@@ -92,6 +93,9 @@ public class ParseInputsTutorial : MonoBehaviour
 
     void AddToList()
     {
+        //=========================================================================================================================================================
+        //with slash
+
         //14 chars example
         //3 parole inutili  (0 - 2)
         //1 graffa inizio   (3)             start index
@@ -111,10 +115,38 @@ public class ParseInputsTutorial : MonoBehaviour
         //subString(start + 1, slash - start - 1)                   after brace (start +1), length from slash to start (-1 to remove start brace)
         //int.Parse( subString(slash + 1, end - slash - 1) )        after slash (slash +1), length from last brace to slash (-1 to remove slash)
 
-        stringsToReplace.Add(new ParseStruct(
-            textToShow.Substring(startIndex, endIndex - startIndex + 1),                        //text to replace
-            textToShow.Substring(startIndex + 1, slashIndex - startIndex - 1),                  //input name
-            int.Parse(textToShow.Substring(slashIndex + 1, endIndex - slashIndex - 1))));       //input index
+        //=========================================================================================================================================================
+        //without slash
+
+        //11 chars example
+        //3 parole inutili  (0 - 2)
+        //1 graffa inizio   (3)             start index
+        //3 name            (4 - 6)
+        //1 graffa fine     (7)             end index
+        //3 parole inutili  (8 - 10)
+
+        //to parse
+        //subString(3, 5)                   from char 3, long 5 -> text to replace
+        //subString(4, 3)                   from char 4, long 3 -> input name
+
+        //so
+        //subString(start, end - start + 1)                         from start to end (+1, because is length and not char position)
+        //subString(start + 1, end - start - 1)                     after brace (start +1), length from end to start (-1 to remove start brace)
+
+        if (slashIndex >= 0)
+        {
+            stringsToReplace.Add(new ParseStruct(
+                textToShow.Substring(startIndex, endIndex - startIndex + 1),                        //text to replace
+                textToShow.Substring(startIndex + 1, slashIndex - startIndex - 1),                  //input name
+                int.Parse(textToShow.Substring(slashIndex + 1, endIndex - slashIndex - 1))));       //input index
+        }
+        else
+        {
+            stringsToReplace.Add(new ParseStruct(
+                textToShow.Substring(startIndex, endIndex - startIndex + 1),                        //text to replace
+                textToShow.Substring(startIndex + 1, endIndex - startIndex - 1),                    //input name
+                0));                                                                                //input index (0)
+        }
     }
 
     void ReplaceStrings()
@@ -128,7 +160,7 @@ public class ParseInputsTutorial : MonoBehaviour
             foreach(ReplaceNameStruct replaceName in replaceNames)
             {
                 //if this name is to replace
-                if(nameToShow.Equals(replaceName.nameToReplace))
+                if(InputRedd096.GetControlName(s.inputName, s.inputIndex).Equals(replaceName.nameToReplace))
                 {
                     //replace with new one
                     nameToShow = replaceName.nameToShow;
