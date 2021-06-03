@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Helper Hit Last Second
   m_EditorClassIdentifier: 
   EnemyHealth: 10
-  DistanceFromCube: 0.5
-  HelperDamage: 3
+  DistanceFromCube: 0.9
+  HelperDamage: 4

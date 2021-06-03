@@ -3102,11 +3102,19 @@ MonoBehaviour:
   useDisplayName: 1
   replaceNames:
   - nameToReplace: Delta
-    nameToShow: Mouse
+    nameToShow: MOUSE
   - nameToReplace: W
     nameToShow: WASD
   - nameToReplace: Space
     nameToShow: SPACE
+  - nameToReplace: Left Button
+    nameToShow: LEFT CLICK
+  - nameToReplace: D-Pad
+    nameToShow: D-PAD
+  - nameToReplace: Right Stick
+    nameToShow: RIGHT STICK
+  - nameToReplace: Left Shoulder
+    nameToShow: LEFT BUMPER
 --- !u!95 &1425331873
 Animator:
   serializedVersion: 3
@@ -4134,11 +4142,11 @@ RectTransform:
   m_Father: {fileID: 1293219358}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -539.19, y: 0.0000076294}
-  m_SizeDelta: {x: 214.09009, y: 236.53311}
-  m_Pivot: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 48.069824, y: -33.80385}
+  m_SizeDelta: {x: 403.76016, y: 74.81232}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1952130728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4159,27 +4167,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'MOUSE AND KEYBOARD
-
-
-    MOUSE to Rotate Camera
-
-    WASD to Move Selector
-
-
-    Hold
-    MOUSE LEFT + WASD to Rotate
-
-
-    SPACE to Enter Build Mode
-
-    SPACE to Build
-    Turrets
-
-    ESC to Exit Build Mode
-
-
-    Hold E to Start Wave'
+  m_text: Keep Pressed {Keep Pressed To Rotate/0} and use {Rotate Cube/0} to rotate
+    the cube
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4214,7 +4203,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4849,11 +4838,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982990953853281150, guid: ee47df02c05e80748bd577e1fbac0d7a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000003403857
+      value: 0.000000034407073
       objectReference: {fileID: 0}
     - target: {fileID: 3982990953853281150, guid: ee47df02c05e80748bd577e1fbac0d7a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 6.1924676e-10
+      value: 6.2595074e-10
       objectReference: {fileID: 0}
     - target: {fileID: 3982990953853281150, guid: ee47df02c05e80748bd577e1fbac0d7a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4886,7 +4875,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2180346936772018342, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.000000029563207
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2180346936772018342, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5014,23 +5003,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6425525083400809553, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000002001296
+      value: 0.000000017328842
       objectReference: {fileID: 0}
     - target: {fileID: 6425525083400809553, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -7.2744977e-10
+      value: 6.298849e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6425525083400809553, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.036324948
       objectReference: {fileID: 0}
+    - target: {fileID: 6425525083400809553, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99934006
+      objectReference: {fileID: 0}
     - target: {fileID: 8480763397967837811, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000016454166
+      value: 0.000000017203536
       objectReference: {fileID: 0}
     - target: {fileID: 8480763397967837811, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 2.9934236e-10
+      value: 3.1297526e-10
       objectReference: {fileID: 0}
     - target: {fileID: 8480763397967837811, guid: 2a5f2150e77f92c48b1e6faf015e06d1, type: 3}
       propertyPath: m_LocalRotation.x
