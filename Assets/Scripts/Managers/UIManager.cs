@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
         //hide all
         PauseMenu(false);
         EndMenu(false, false);
+        OptionsMenu(false);
         SetCostText(false);
         strategicCanvas.SetActive(false);
         HideWarningObject();
@@ -108,6 +109,18 @@ public class UIManager : MonoBehaviour
     public void PauseMenu(bool active)
     {
         pauseMenu.SetActive(active);
+
+        //hide strategic canvas when pause game
+        if(active)
+        {
+            strategicCanvas.SetActive(false);
+        }
+        //if resume game, if in strategic phase, reopen strategic canvas
+        else
+        {
+            if (GameManager.instance.levelManager.CurrentPhase == EPhase.strategic)
+                strategicCanvas.SetActive(true);
+        }
     }
 
     public void EndMenu(bool active, bool win)
