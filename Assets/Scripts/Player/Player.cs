@@ -193,7 +193,7 @@ public class Player : StateMachine
         if(inputPause)
         {
             //if state is place turret && press escape, doesn't pause (we use it to exit from this state)
-            if (state.GetType() == typeof(PlayerPlaceTurret) && InputRedd096.IsSameInput("Pause Button", "Deny Turret"))
+            if ( (state.GetType() == typeof(PlayerPlaceTurret) || state is PlaceTurretPlayerTutorial) && InputRedd096.IsSameInput("Pause Button", "Deny Turret"))
                 return false;
 
             //if not ended game && time is running && is not end assault phase (showing panel to end level)

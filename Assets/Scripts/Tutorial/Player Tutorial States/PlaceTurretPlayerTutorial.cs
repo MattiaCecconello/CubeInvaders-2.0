@@ -107,6 +107,10 @@ public class PlaceTurretPlayerTutorial : BasePlayerTutorialState
 
     void PlaceTurret()
     {
+        //do only if there are others turrets to build
+        if (turretsToBuild == null || turretsToBuild.Count <= 0)
+            return;
+
         Cell cell = GameManager.instance.world.Cells[player.CurrentCoordinates];
 
         //if this is the turret to build - and is not already builded
@@ -120,7 +124,7 @@ public class PlaceTurretPlayerTutorial : BasePlayerTutorialState
             turretsToBuild.RemoveAt(0);
 
             //back to build turret state
-            player.SetState(new BuildTurretPlayerTutorial(player, turretsToBuild));
+            //player.SetState(new BuildTurretPlayerTutorial(player, turretsToBuild));
         }
     }
 

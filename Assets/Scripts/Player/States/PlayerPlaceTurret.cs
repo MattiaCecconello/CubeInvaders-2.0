@@ -108,7 +108,7 @@ public class PlayerPlaceTurret : PlayerState
         GameManager.instance.world.Cells[coordinates].Interact();
 
         //back to strategic state
-        player.SetState(new PlayerStrategic(player, coordinates));
+        //player.SetState(new PlayerStrategic(player, coordinates));
     }
 
     void StopPlaceTurret()
