@@ -107,6 +107,10 @@ public class PlayerPlaceTurret : PlayerState
         //place turret
         GameManager.instance.world.Cells[coordinates].Interact();
 
+        //if now turret is removed and is preview, show preview
+        if(GameManager.instance.world.Cells[coordinates].turret && GameManager.instance.world.Cells[coordinates].turret.IsPreview)
+            GameManager.instance.world.Cells[coordinates].ShowPreview();
+
         //back to strategic state
         //player.SetState(new PlayerStrategic(player, coordinates));
     }
