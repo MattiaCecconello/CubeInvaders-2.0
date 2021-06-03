@@ -9944,6 +9944,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2578565484713005149, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578565484713005149, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000029504295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578565484713005149, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
     - target: {fileID: 4642578173965684687, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -9959,6 +9971,10 @@ PrefabInstance:
     - target: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5717325815361395223, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5873725972075197134, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       propertyPath: blinkMaterial
