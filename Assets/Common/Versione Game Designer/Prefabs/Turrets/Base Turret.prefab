@@ -1193,6 +1193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 7588032764715299075}
   baseToRotate: {fileID: 199419520702417871}
+  cupolaObject: {fileID: 0}
+  heightOnPreview: 0.5
+  timeLerpOnBuild: 0.2
   effectColor: {r: 0, g: 1, b: 1, a: 1}
   buildVFX: {fileID: 9077197156876236203, guid: efcda9f521d4cac46a21671808dd3bf5, type: 3}
   buildAudio:
