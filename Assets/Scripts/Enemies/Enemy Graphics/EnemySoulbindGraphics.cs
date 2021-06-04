@@ -56,7 +56,7 @@ public class EnemySoulbindGraphics : MonoBehaviour
     void LookAtSoulbind()
     {
         //look at soulbind
-        if (lookAtSoulBind && objectToRotateToSoulbind)
+        if (lookAtSoulBind && objectToRotateToSoulbind && enemy.soulBind)
             objectToRotateToSoulbind.rotation = Quaternion.LookRotation(enemy.soulBind.transform.position - transform.position);
     }
 
