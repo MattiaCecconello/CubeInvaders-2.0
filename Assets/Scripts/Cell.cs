@@ -204,7 +204,7 @@ public class Cell : MonoBehaviour
         //show preview only if is alive
         if (IsAlive == false)
         {
-            //but if can recreate cell, show cost
+            //but if can recreate cell, show cost and description
             if (GameManager.instance.levelManager.levelConfig.CanRecreateCell)
             {
                 GameManager.instance.uiManager.SetCostText(true, true, resourcesToRecreateCell);
@@ -214,20 +214,16 @@ public class Cell : MonoBehaviour
             return;
         }
 
-        //do only if there is a turret to create
-        if (turretToCreate == null)
-            return;
-
-
         //do only if there isn't already a turret builded on it
         if ((turret != null && turret.IsPreview == false))
         {
-            //but if can remove turret, show resources on sell
+            //if can remove turret, show resources on sell + description
             if (canRemoveTurret)
             {
                 GameManager.instance.uiManager.SetCostText(true, false, resourcesOnSellTurret);
                 GameManager.instance.uiManager.SetTurretDescription(true, descriptionToSellTurret);
             }
+            //else only if can sell at first wave
             else if(GameManager.instance.levelManager.generalConfig.CanSellTurretsBuildedInThisWave && turret.isFirstWave)
             {
                 GameManager.instance.uiManager.SetCostText(true, false, resourcesToCreateTurret);
@@ -239,16 +235,22 @@ public class Cell : MonoBehaviour
 
         //else show preview
 
-        //instantiate (with parent) or active it
-        if (turret == null)
-            turret = Instantiate(turretToCreate, transform);
-        else
-            turret.gameObject.SetActive(true);
+        //do only if there is a turret to create
+        if (turretToCreate != null)
+        {
+            //instantiate (with parent) or active it
+            if (turret == null)
+                turret = Instantiate(turretToCreate, transform);
+            else
+                turret.gameObject.SetActive(true);
 
-        turret.ShowPreview(buildedByPlayer);
+            turret.ShowPreview(buildedByPlayer);
 
-        //show cost to create turret
-        GameManager.instance.uiManager.SetCostText(true, true, resourcesToCreateTurret);
+            //show cost to create turret
+            GameManager.instance.uiManager.SetCostText(true, true, resourcesToCreateTurret);
+        }
+
+        //show always description
         GameManager.instance.uiManager.SetTurretDescription(true, descriptionToCreateTurret);
     }
 
