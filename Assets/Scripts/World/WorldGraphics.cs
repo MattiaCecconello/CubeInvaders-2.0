@@ -1,0 +1,56 @@
+﻿using UnityEngine;
+
+[AddComponentMenu("Cube Invaders/World/World Graphics")]
+public class WorldGraphics : MonoBehaviour
+{
+    [Header("Explode only when lose or also win?")]
+    [SerializeField] bool explodeOnlyOnLose = true;
+
+    [Header("Explosion")]
+    [SerializeField] float forceExplosion = 10;
+
+    World world;
+
+    void Awake()
+    {
+        world = GetComponent<World>();
+    }
+
+    void OnEnable()
+    {
+        //add events
+        GameManager.instance.levelManager.onEndGame += OnEndGame;
+    }
+
+    void OnDisable()
+    {
+        //remove events
+        GameManager.instance.levelManager.onEndGame -= OnEndGame;
+    }
+
+    void OnEndGame(bool win)
+    {
+        //if explode only on lose, return when player win
+        if (explodeOnlyOnLose && win)
+            return;
+
+        //foreach cell
+        foreach(Cell cell in world.Cells.Values)
+        {
+            if (cell == null)
+                continue;
+
+            //get rigidbody
+            Rigidbody rb = cell.GetComponent<Rigidbody>();
+            if (rb == null)
+                continue;
+
+            //get direction explosion from center of the world to the cell
+            Vector3 direction = (cell.transform.position - transform.position).normalized;
+
+            //remove kinematic and add explosion force
+            rb.isKinematic = false;
+            rb.AddForce(direction * forceExplosion, ForceMode.Impulse);
+        }
+    }
+}

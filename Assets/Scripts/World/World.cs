@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using redd096;
 
@@ -132,6 +131,10 @@ public class World : MonoBehaviour
         if (GameManager.instance == null || GameManager.instance.levelManager == null)
             if (randomizeCubeIfNoLevelManagerInScene)
                 RandomRotate();
+
+        //add world graphics if not on this object
+        if (GetComponent<WorldGraphics>() == null)
+            gameObject.AddComponent<WorldGraphics>();
     }
 
     void OnDestroy()
