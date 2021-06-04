@@ -32,7 +32,6 @@ public struct MenuStruct
 public class MenuSystem : MonoBehaviour
 {
     [Header("Disabled Buttons")]
-    [SerializeField] bool setNotInteractable = false;
     [SerializeField] bool changeColor = true;
     [CanShow("changeColor")] [SerializeField] Color colorOnDisable = Color.red;
 
@@ -56,42 +55,45 @@ public class MenuSystem : MonoBehaviour
                 //check string is empty or level is won, else lock button
                 if ((string.IsNullOrWhiteSpace(levelButton.necessaryKey) || Load(levelButton.necessaryKey)) == false)
                 {
-                    LockLevel(levelButton);
+                    SetLockStatus(levelButton.button, true);
                 }
             }
             //if boss level
             else
             {
+                int currentAchievements = 0;
                 foreach (MenuStruct levelForBoss in levelButtons)
                 {
-                    //check every level is saved and with achievement completed, else lock button
-                    if (Load(levelForBoss.necessaryKey, true) == false)
+                    //check every level is saved and with achievement completed
+                    if (Load(levelForBoss.necessaryKey, true))
                     {
-                        LockLevel(levelButton);
-                        break;
+                        currentAchievements++;
                     }
                 }
+
+                //if has not every achievement (-1 to remove this button), lock it - boss button has a function more to lock it
+                SetLockStatus(levelButton.button, currentAchievements < levelButtons.Length -1);
+                levelButton.button.GetComponent<LevelButtonGraphics>()?.SetBossLockStatus(currentAchievements < levelButtons.Length -1, currentAchievements);
             }
         }
     }
 
     #region private API
 
-    void LockLevel(MenuStruct levelButton)
+    public void SetLockStatus(Button button, bool locked)
     {
         //set interactable
-        if (setNotInteractable)
-            levelButton.button.interactable = false;
+        button.interactable = !locked;
 
         //change color on disable
         if (changeColor)
         {
-            //ColorBlock colorBlock = levelButton.button.GetComponent<Button>().colors;
+            //ColorBlock colorBlock = button.colors;
             //colorBlock.disabledColor = colorOnDisable;
             //
-            //levelButton.button.GetComponent<Button>().colors = colorBlock;
+            //button.colors = colorBlock;
 
-            levelButton.button.GetComponent<Image>().color = colorOnDisable;
+            button.GetComponent<Image>().color = locked ? colorOnDisable : Color.white;
         }
     }
 
@@ -126,6 +128,10 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public static void Save(string key, bool win, bool noDamage)
     {
+        //do only if there is a key to save
+        if (string.IsNullOrWhiteSpace(key))
+            return;
+
         //try load
         MenuSave load = SaveLoadJSON.Load<MenuSave>(key);
 
@@ -199,20 +205,21 @@ public class MenuSystem : MonoBehaviour
         ////save every necessary key
         //foreach (MenuStruct levelButton in levelButtons)
         //{
-        //    //per sbloccare il livello del boss, è necessario avere tutti gli achievement
+        //    //to unlock boss level, is necessary to have every achievement
         //    Save(levelButton.necessaryKey, true, true);
         //}
         //
         ////then reload scene
         //SceneLoader.instance.RestartGame();
 
-        //set interactable every button
+        //unlock every button
         foreach (MenuStruct levelButton in levelButtons)
         {
-            levelButton.button.interactable = true;
-
-            if(changeColor)
-                levelButton.button.GetComponent<Image>().color = Color.white;
+            SetLockStatus(levelButton.button, false);
+        
+            //if boss level, set lock status false also to boss function
+            if(levelButton.isBossLevel)
+                levelButton.button.GetComponent<LevelButtonGraphics>()?.SetBossLockStatus(false, 0);
         }
     }
 
