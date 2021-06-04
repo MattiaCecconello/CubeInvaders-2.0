@@ -120,6 +120,10 @@ public class PlaceTurretPlayerTutorial : BasePlayerTutorialState
             //place turret
             GameManager.instance.world.Cells[player.CurrentCoordinates].Interact();
 
+            //hide old preview and show new one
+            GameManager.instance.world.Cells[player.CurrentCoordinates].HidePreview();
+            GameManager.instance.world.Cells[player.CurrentCoordinates].ShowPreview();
+
             //remove from the list
             turretsToBuild.RemoveAt(0);
 

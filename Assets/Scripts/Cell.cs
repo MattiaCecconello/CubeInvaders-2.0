@@ -228,6 +228,11 @@ public class Cell : MonoBehaviour
                 GameManager.instance.uiManager.SetCostText(true, false, resourcesOnSellTurret);
                 GameManager.instance.uiManager.SetTurretDescription(true, descriptionToSellTurret);
             }
+            else if(GameManager.instance.levelManager.generalConfig.CanSellTurretsBuildedInThisWave && turret.isFirstWave)
+            {
+                GameManager.instance.uiManager.SetCostText(true, false, resourcesToCreateTurret);
+                GameManager.instance.uiManager.SetTurretDescription(true, descriptionToSellTurret);
+            }
 
             return;
         }
