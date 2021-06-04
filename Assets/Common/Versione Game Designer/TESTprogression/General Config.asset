@@ -23,6 +23,6 @@ MonoBehaviour:
   showEnemiesDestination: 1
   minDistanceToShowDestination: 20
   CanSellTurretsBuildedInThisWave: 1
-  TurretsOnAirFirstStrategicPhase: 1
+  TurretsOnAirFirstStrategicPhase: 0
   Helpers:
   - {fileID: 11400000, guid: 4f6559363d749d64195c890acb437513, type: 2}
