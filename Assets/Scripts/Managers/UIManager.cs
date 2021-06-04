@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Manager/UI Manager")]
 public class UIManager : MonoBehaviour
@@ -21,6 +22,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] string stringBeforeCost = "Cost: ";
     [SerializeField] string stringBeforeSell = "Sell: ";
     [SerializeField] [Min(0)] int decimalsCostText = 0;
+    [SerializeField] bool changeColorText = true;
+    [CanShow("changeColorText")] [SerializeField] Color colorCost = Color.red;
+    [CanShow("changeColorText")] [SerializeField] Color colorSell = Color.green;
 
     [Header("Turret Description")]
     [SerializeField] Text turretText = default;
@@ -192,6 +196,10 @@ public class UIManager : MonoBehaviour
         if(costText)
         {
             string stringBefore = isBuying ? stringBeforeCost : stringBeforeSell;
+
+            //change color if necessary
+            if (changeColorText)
+                costText.color = isBuying ? colorCost : colorSell;
 
             costText.text = stringBefore + cost.ToString($"F{decimalsCostText}");
             costText.gameObject.SetActive(active);
