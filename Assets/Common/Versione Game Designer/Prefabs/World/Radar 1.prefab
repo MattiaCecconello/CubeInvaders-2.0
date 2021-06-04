@@ -265,6 +265,14 @@ PrefabInstance:
       propertyPath: resourcesOnSellTurret
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: descriptionToCreateTurret
+      value: Buy Radar
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: descriptionToSellTurret
+      value: Sell Radar
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
 --- !u!1 &4667952346457895268 stripped

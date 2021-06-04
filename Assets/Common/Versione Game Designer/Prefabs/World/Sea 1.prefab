@@ -253,6 +253,14 @@ PrefabInstance:
       propertyPath: resourcesOnSellTurret
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: descriptionToCreateTurret
+      value: Buy Slow
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: descriptionToSellTurret
+      value: Sell Slow
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
 --- !u!1 &5154872716364680707 stripped
