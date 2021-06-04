@@ -24,6 +24,7 @@ public struct MenuStruct
 {
     public Button button;
     public string necessaryKey;
+    public bool isBossLevel;
     public string[] levelsForNoDamage;
 }
 
@@ -46,16 +47,30 @@ public class MenuSystem : MonoBehaviour
             if (levelButton.button == null)
                 continue;
 
-            //if no key, or load is succesfull
-            bool isActive = string.IsNullOrWhiteSpace(levelButton.necessaryKey) || Load(levelButton.necessaryKey);
-
             //try show achievements if there is a save (call also if there is not, so deactive objects)
             ShowAchievements(levelButton);
 
-            //if not active, lock level
-            if(isActive == false)
+            //if normal level
+            if(levelButton.isBossLevel == false)
             {
-                LockLevel(levelButton);
+                //check string is empty or level is won, else lock button
+                if ((string.IsNullOrWhiteSpace(levelButton.necessaryKey) || Load(levelButton.necessaryKey)) == false)
+                {
+                    LockLevel(levelButton);
+                }
+            }
+            //if boss level
+            else
+            {
+                foreach (MenuStruct levelForBoss in levelButtons)
+                {
+                    //check every level is saved and with achievement completed, else lock button
+                    if (Load(levelForBoss.necessaryKey, true) == false)
+                    {
+                        LockLevel(levelButton);
+                        break;
+                    }
+                }
             }
         }
     }
@@ -82,42 +97,24 @@ public class MenuSystem : MonoBehaviour
 
     void ShowAchievements(MenuStruct levelButton)
     {
+        //check every level in the list, or check button name as level if list is empty
+        string[] levelsToCheck = levelButton.levelsForNoDamage == null || levelButton.levelsForNoDamage.Length <= 0 ? new string[1] { levelButton.button.name } : levelButton.levelsForNoDamage;
+
         //check no damage achievement
         bool noDamage = true;
 
-        //if no levels to load - check this button name as level
-        if (levelButton.levelsForNoDamage == null || levelButton.levelsForNoDamage.Length <= 0)
+        foreach (string levelToCheck in levelsToCheck)
         {
-            //check there is a save and achievement completed, else set it to false
-            MenuSave load = SaveLoadJSON.Load<MenuSave>(levelButton.button.name);
-            if (load == null || load.noDamage == false)
-                noDamage = false;
-        }
-        //else - check every level to load
-        else
-        {
-            foreach(string levelToCheck in levelButton.levelsForNoDamage)
+            //check every level is saved and with achievement completed, else set it to false
+            if (Load(levelToCheck, true) == false)
             {
-                //check there is a save and achievement completed, else set it to false
-                MenuSave load = SaveLoadJSON.Load<MenuSave>(levelToCheck);
-                if(load == null || load.noDamage == false)
-                {
-                    noDamage = false;
-                    break;
-                }
+                noDamage = false;
+                break;
             }
         }
 
-        //if no damage, active object
-        if(noDamage)
-        {
-            levelButton.button.GetComponent<LevelButtonGraphics>()?.SetNoDamage(true);
-        }
-        //else disable object
-        else
-        {
-            levelButton.button.GetComponent<LevelButtonGraphics>()?.SetNoDamage(false);
-        }
+        //if no damage, active object, else disable it
+        levelButton.button.GetComponent<LevelButtonGraphics>()?.SetNoDamage(noDamage);
     }
 
     #endregion
@@ -158,10 +155,16 @@ public class MenuSystem : MonoBehaviour
     /// <summary>
     /// Load data
     /// </summary>
-    public static bool Load(string key)
+    public static bool Load(string key, bool checkAchievement = false)
     {
         MenuSave load = SaveLoadJSON.Load<MenuSave>(key);
-        return load != null && load.win;
+
+        //check if won level
+        if (checkAchievement == false)
+            return load != null && load.win;
+        //or check if level has achievement
+        else
+            return load != null && load.noDamage;
     }
 
     /// <summary>

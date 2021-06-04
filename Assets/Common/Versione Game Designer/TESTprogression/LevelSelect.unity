@@ -2277,82 +2277,102 @@ MonoBehaviour:
   levelButtons:
   - button: {fileID: 1375623694}
     necessaryKey: 
+    isBossLevel: 0
     levelsForNoDamage:
     - Show1
   - button: {fileID: 1258316508}
     necessaryKey: Show1
+    isBossLevel: 0
     levelsForNoDamage:
     - Show2
   - button: {fileID: 1531304838}
     necessaryKey: Show2
+    isBossLevel: 0
     levelsForNoDamage:
     - Show3
   - button: {fileID: 334365855}
     necessaryKey: Show3
+    isBossLevel: 0
     levelsForNoDamage:
     - Show4
   - button: {fileID: 1310524224}
     necessaryKey: Show4
+    isBossLevel: 0
     levelsForNoDamage:
     - Show5
   - button: {fileID: 652553514}
     necessaryKey: Show5
+    isBossLevel: 0
     levelsForNoDamage:
     - Show6
   - button: {fileID: 324243084}
     necessaryKey: Show6
+    isBossLevel: 0
     levelsForNoDamage:
     - Show7
   - button: {fileID: 1538531186}
     necessaryKey: Show7
+    isBossLevel: 0
     levelsForNoDamage:
     - Show8
   - button: {fileID: 1713872740}
     necessaryKey: Show8
+    isBossLevel: 0
     levelsForNoDamage:
     - Show9
   - button: {fileID: 2025866859}
     necessaryKey: Show9
+    isBossLevel: 0
     levelsForNoDamage:
     - Show10
   - button: {fileID: 1439224350}
     necessaryKey: Show10
+    isBossLevel: 0
     levelsForNoDamage:
     - Show11
   - button: {fileID: 196761596}
     necessaryKey: Show11
+    isBossLevel: 0
     levelsForNoDamage:
     - Show12
   - button: {fileID: 799531219}
     necessaryKey: Show12
+    isBossLevel: 0
     levelsForNoDamage:
     - Show13
   - button: {fileID: 1821868822}
     necessaryKey: Show13
+    isBossLevel: 0
     levelsForNoDamage:
     - Show14
   - button: {fileID: 893463086}
     necessaryKey: Show14
+    isBossLevel: 0
     levelsForNoDamage:
     - Show15
   - button: {fileID: 1196457242}
     necessaryKey: Show15
+    isBossLevel: 0
     levelsForNoDamage:
     - Show16
   - button: {fileID: 1623108663}
     necessaryKey: Show16
+    isBossLevel: 0
     levelsForNoDamage:
     - Show17
   - button: {fileID: 39975837}
     necessaryKey: Show17
+    isBossLevel: 0
     levelsForNoDamage:
     - Show18
   - button: {fileID: 1225706948}
     necessaryKey: Show18
+    isBossLevel: 0
     levelsForNoDamage:
     - Show19
   - button: {fileID: 1496963376}
     necessaryKey: Show19
+    isBossLevel: 1
     levelsForNoDamage:
     - BF1
     - BF2
