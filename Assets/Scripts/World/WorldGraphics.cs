@@ -58,6 +58,9 @@ public class WorldGraphics : MonoBehaviour
             if (rb == null)
                 continue;
 
+            //remove parent (because if cube is rotating, it break everything)
+            cell.transform.parent = null;
+
             //get direction explosion from center of the world to the cell
             Vector3 direction = (cell.transform.position - transform.position).normalized;
 
