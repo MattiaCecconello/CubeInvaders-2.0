@@ -381,6 +381,17 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""317ecbed-ae54-4e88-a73b-031769a12db4"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Rotate Cube"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""WASD [Keyboard]"",
                     ""id"": ""f6d4ab7d-ad2d-4a2e-bcb1-56987c5a8892"",
                     ""path"": ""2DVector"",
@@ -619,17 +630,6 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Next Tutorial"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""317ecbed-ae54-4e88-a73b-031769a12db4"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Deny Turret"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
