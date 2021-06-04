@@ -196,20 +196,24 @@ public class MenuSystem : MonoBehaviour
     /// </summary>
     public void UnlockEveryLevel()
     {
-        //save every necessary key
-        foreach (MenuStruct levelButton in levelButtons)
-        {
-            Save(levelButton.necessaryKey, true, false);
-        }
-        
-        //then reload scene
-        SceneLoader.instance.RestartGame();
-
-        //set interactable every button
+        ////save every necessary key
         //foreach (MenuStruct levelButton in levelButtons)
         //{
-        //    levelButton.button.interactable = true;
+        //    //per sbloccare il livello del boss, è necessario avere tutti gli achievement
+        //    Save(levelButton.necessaryKey, true, true);
         //}
+        //
+        ////then reload scene
+        //SceneLoader.instance.RestartGame();
+
+        //set interactable every button
+        foreach (MenuStruct levelButton in levelButtons)
+        {
+            levelButton.button.interactable = true;
+
+            if(changeColor)
+                levelButton.button.GetComponent<Image>().color = Color.white;
+        }
     }
 
     #endregion
