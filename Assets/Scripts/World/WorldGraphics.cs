@@ -68,5 +68,8 @@ public class WorldGraphics : MonoBehaviour
             rb.isKinematic = false;
             rb.AddForce(direction * forceExplosion, ForceMode.Impulse);
         }
+
+        //clear dictionary (or rotation will reset parent)
+        world.Cells.Clear();
     }
 }

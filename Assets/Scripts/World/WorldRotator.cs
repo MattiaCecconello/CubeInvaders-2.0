@@ -169,11 +169,14 @@ public class WorldRotator
 
     void SetCoordinates(Cell oldCell, Coordinates newCoords)
     {
-        //set new cell in dictionary
-        world.Cells[newCoords] = oldCell;
+        if (world.Cells.ContainsKey(newCoords))
+        {
+            //set new cell in dictionary
+            world.Cells[newCoords] = oldCell;
 
-        //and update coordinates in game object
-        world.Cells[newCoords].coordinates = newCoords;
+            //and update coordinates in game object
+            world.Cells[newCoords].coordinates = newCoords;
+        }
     }
 
     Coordinates UpdateCoordinatesCompleteFace(Coordinates coordinates, bool forward)
@@ -201,7 +204,7 @@ public class WorldRotator
     void SelectCell(Coordinates coordinates)
     {
         //only if not already in the lists
-        if (!cellsKeys.Contains(coordinates))
+        if (!cellsKeys.Contains(coordinates) && world.Cells.ContainsKey(coordinates))
         {
             //add cell and coordinates
             cellsToRotate.Add(world.Cells[coordinates]);
