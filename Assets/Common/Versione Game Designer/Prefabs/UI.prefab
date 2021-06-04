@@ -1896,8 +1896,11 @@ MonoBehaviour:
   decimalsResourcesText: 0
   costText: {fileID: 4158868890876295939}
   stringBeforeCost: '- '
-  stringBeforeSell: 
+  stringBeforeSell: '+ '
   decimalsCostText: 0
+  changeColorText: 1
+  colorCost: {r: 1, g: 0, b: 0, a: 1}
+  colorSell: {r: 0, g: 1, b: 0, a: 1}
   turretText: {fileID: 9137803986994578102}
   currentLevelText: {fileID: 4158868891894274619}
   currentLevelString: 'Wave:'
