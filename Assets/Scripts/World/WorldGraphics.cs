@@ -22,13 +22,19 @@ public class WorldGraphics : MonoBehaviour
     void OnEnable()
     {
         //add events
-        GameManager.instance.levelManager.onEndGame += OnEndGame;
+        if (GameManager.instance.levelManager)
+        {
+            GameManager.instance.levelManager.onEndGame += OnEndGame;
+        }
     }
 
     void OnDisable()
     {
         //remove events
-        GameManager.instance.levelManager.onEndGame -= OnEndGame;
+        if (GameManager.instance.levelManager)
+        {
+            GameManager.instance.levelManager.onEndGame -= OnEndGame;
+        }
     }
 
     void OnEndGame(bool win)
