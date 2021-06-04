@@ -6,6 +6,9 @@ public class WorldGraphics : MonoBehaviour
     [Header("Explode only when lose or also win?")]
     [SerializeField] bool explodeOnlyOnLose = true;
 
+    [Header("Destroy every enemy in scene")]
+    [SerializeField] bool destroyEnemiesInScene = true;
+
     [Header("Explosion")]
     [SerializeField] float forceExplosion = 10;
 
@@ -33,6 +36,10 @@ public class WorldGraphics : MonoBehaviour
         //if explode only on lose, return when player win
         if (explodeOnlyOnLose && win)
             return;
+
+        //destroy enemies in scene if necessary
+        if (destroyEnemiesInScene)
+            GameManager.instance.waveManager.ClearEnemies();
 
         //foreach cell
         foreach(Cell cell in world.Cells.Values)

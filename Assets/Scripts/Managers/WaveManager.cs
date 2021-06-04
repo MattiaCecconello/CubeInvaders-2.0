@@ -84,10 +84,6 @@ public class WaveManager : MonoBehaviour
         //if there aren't other waves
         if (waveConfig.Waves == null || CurrentWave >= waveConfig.Waves.Length -1 || CurrentWave < 0)
         {
-            //stop coroutine if still running
-            if (wave_coroutine != null)
-                StopCoroutine(wave_coroutine);
-
             //remove all enemies
             ClearEnemies();
 
@@ -152,27 +148,13 @@ public class WaveManager : MonoBehaviour
 
     void OnEndAssaultPhase()
     {
-        //stop coroutine if still running
-        if (wave_coroutine != null)
-            StopCoroutine(wave_coroutine);
+        //be sure no enemies in scene
+        ClearEnemies();
     }
 
     #endregion
 
     #region private API
-
-    void ClearEnemies()
-    {
-        //remove every child
-        foreach(Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        //clear list
-        enemies.Clear();
-        enemiesOnFace.Clear();
-    }
 
     IEnumerator Wave_Coroutine()
     {
@@ -200,7 +182,7 @@ public class WaveManager : MonoBehaviour
         {
             Enemy enemy = InstantiateNewEnemy(enemyStruct.enemy);   //add also to enemies list
 
-            //add to list enemies to spawn
+            //add to list enemies to spawn (use enemy instantiated instead of prefab)
             enemiesToSpawn.Add(new EnemyStruct(enemy, enemyStruct.enemyTimer));
 
             //if loaded a boss - set type of level (boss level or last phase boss)
@@ -361,6 +343,23 @@ public class WaveManager : MonoBehaviour
             return new List<Enemy>(enemiesOnFace[face]);
 
         return new List<Enemy>();
+    }
+
+    public void ClearEnemies()
+    {
+        //stop coroutine if still running
+        if (wave_coroutine != null)
+            StopCoroutine(wave_coroutine);
+
+        //remove every child
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        //clear list
+        enemies.Clear();
+        enemiesOnFace.Clear();
     }
 
     #endregion
