@@ -72,6 +72,11 @@ public class Cell : MonoBehaviour
     [SerializeField] float resourcesToCreateTurret = 10;
     [SerializeField] float resourcesOnSellTurret = 10;
 
+    [Header("Descriptions")]
+    [SerializeField] [TextArea] string descriptionToRecreateCell = "";
+    [SerializeField] [TextArea] string descriptionToCreateTurret = "";
+    [SerializeField] [TextArea] string descriptionToSellTurret = "";
+
     [Header("Debug")]
     public Coordinates coordinates;
     [ReadOnly] public Coordinates startCoordinates;
@@ -200,8 +205,11 @@ public class Cell : MonoBehaviour
         if (IsAlive == false)
         {
             //but if can recreate cell, show cost
-            if(GameManager.instance.levelManager.levelConfig.CanRecreateCell)
+            if (GameManager.instance.levelManager.levelConfig.CanRecreateCell)
+            {
                 GameManager.instance.uiManager.SetCostText(true, true, resourcesToRecreateCell);
+                GameManager.instance.uiManager.SetTurretDescription(true, descriptionToRecreateCell);
+            }
 
             return;
         }
@@ -215,8 +223,11 @@ public class Cell : MonoBehaviour
         if ((turret != null && turret.IsPreview == false))
         {
             //but if can remove turret, show resources on sell
-            if(canRemoveTurret)
+            if (canRemoveTurret)
+            {
                 GameManager.instance.uiManager.SetCostText(true, false, resourcesOnSellTurret);
+                GameManager.instance.uiManager.SetTurretDescription(true, descriptionToSellTurret);
+            }
 
             return;
         }
@@ -233,6 +244,7 @@ public class Cell : MonoBehaviour
 
         //show cost to create turret
         GameManager.instance.uiManager.SetCostText(true, true, resourcesToCreateTurret);
+        GameManager.instance.uiManager.SetTurretDescription(true, descriptionToCreateTurret);
     }
 
     /// <summary>
@@ -244,8 +256,9 @@ public class Cell : MonoBehaviour
         if (turret != null && turret.IsPreview)
             turret.gameObject.SetActive(false);
 
-        //hide cost
+        //hide cost and description
         GameManager.instance.uiManager.SetCostText(false);
+        GameManager.instance.uiManager.SetTurretDescription(false);
     }
 
     /// <summary>

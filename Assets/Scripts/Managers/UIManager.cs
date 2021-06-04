@@ -22,6 +22,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] string stringBeforeSell = "Sell: ";
     [SerializeField] [Min(0)] int decimalsCostText = 0;
 
+    [Header("Turret Description")]
+    [SerializeField] Text turretText = default;
+
     [Header("Current Level")]
     [SerializeField] Text currentLevelText = default;
     [SerializeField] string currentLevelString = "Level: ";
@@ -51,6 +54,7 @@ public class UIManager : MonoBehaviour
         EndMenu(false, false);
         OptionsMenu(false);
         SetCostText(false);
+        SetTurretDescription(false);
         strategicCanvas.SetActive(false);
         HideWarningObject();
 
@@ -191,6 +195,20 @@ public class UIManager : MonoBehaviour
 
             costText.text = stringBefore + cost.ToString($"F{decimalsCostText}");
             costText.gameObject.SetActive(active);
+        }
+    }
+
+    #endregion
+
+    #region turret description
+
+    public void SetTurretDescription(bool active, string description = "")
+    {
+        //set turret description text + active or deactive
+        if (turretText)
+        {
+            turretText.text = description;
+            turretText.gameObject.SetActive(active);
         }
     }
 
