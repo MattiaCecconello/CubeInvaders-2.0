@@ -45,7 +45,7 @@ MonoBehaviour:
       enemyTimer: -4
     - enemy: {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
       enemyTimer: 6
-    - enemy: {fileID: 4610450171567284364, guid: 9ab13bec40cc6c943a626cd18e922aef, type: 3}
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       enemyTimer: 0
     - enemy: {fileID: 3546078587960261721, guid: c6f55610a1c2087438303fabddff75ab, type: 3}
       enemyTimer: 0
