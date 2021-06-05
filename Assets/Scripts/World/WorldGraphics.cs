@@ -9,8 +9,17 @@ public class WorldGraphics : MonoBehaviour
     [Header("Destroy every enemy in scene")]
     [SerializeField] bool destroyEnemiesInScene = true;
 
-    [Header("Explosion")]
-    [SerializeField] float forceExplosion = 10;
+    [Header("Explosion Force")]
+    [SerializeField] float minRandomizeDirection = -1;
+    [SerializeField] float maxRandomizeDirection = 1;
+    [SerializeField] float minForceExplosion = 1;
+    [SerializeField] float maxForceExplosion = 10;
+
+    [Header("Explosion Torque")]
+    [SerializeField] float minRandomizeTorqueDirection = -1;
+    [SerializeField] float maxRandomizeTorqueDirection = 1;
+    [SerializeField] float minTorqueExplosion = 1;
+    [SerializeField] float maxTorqueExplosion = 10;
 
     World world;
 
@@ -61,15 +70,27 @@ public class WorldGraphics : MonoBehaviour
             //remove parent (because if cube is rotating, it break everything)
             cell.transform.parent = null;
 
-            //get direction explosion from center of the world to the cell
-            Vector3 direction = (cell.transform.position - transform.position).normalized;
-
-            //remove kinematic and add explosion force
-            rb.isKinematic = false;
-            rb.AddForce(direction * forceExplosion, ForceMode.Impulse);
+            ExplosionCell(cell, rb);
         }
 
         //clear dictionary (or rotation will reset parent)
         world.Cells.Clear();
+    }
+
+    void ExplosionCell(Cell cell, Rigidbody rb)
+    {
+        //remove kinematic
+        rb.isKinematic = false;
+
+        //get direction explosion from center of the world to the cell + randomizer
+        Vector3 direction = (cell.transform.position - transform.position).normalized;
+        direction += new Vector3(Random.Range(minRandomizeDirection, maxRandomizeDirection), Random.Range(minRandomizeDirection, maxRandomizeDirection), Random.Range(minRandomizeDirection, maxRandomizeDirection));
+
+        //add explosion force
+        rb.AddForce(direction * Random.Range(minForceExplosion, maxForceExplosion), ForceMode.Impulse);
+
+        //randomize torque direction and add explosion torque
+        Vector3 torqueDirection = new Vector3(Random.Range(minRandomizeTorqueDirection, maxRandomizeTorqueDirection), Random.Range(minRandomizeTorqueDirection, maxRandomizeTorqueDirection), Random.Range(minRandomizeTorqueDirection, maxRandomizeTorqueDirection));
+        rb.AddTorque(torqueDirection * Random.Range(minTorqueExplosion, maxTorqueExplosion), ForceMode.Impulse);
     }
 }
