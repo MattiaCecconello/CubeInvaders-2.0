@@ -659,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533350789285574075, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: THIRD KIND
+      value: DANGER
       objectReference: {fileID: 0}
     - target: {fileID: 8979991919209113023, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1120,7 +1120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533350789285574075, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: DEEP DIVE
+      value: THE SWARM
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
@@ -2011,7 +2011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533350789285574075, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: ?????
+      value: ENCOUNTER
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
@@ -2223,7 +2223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533350789285574075, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: STICKY
+      value: EYESIGHT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
@@ -2590,7 +2590,6 @@ MonoBehaviour:
     - BF2
     - BF3
     - BF4
-  n: 0
 --- !u!4 &1423676350
 Transform:
   m_ObjectHideFlags: 0
@@ -3299,7 +3298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533350789285574075, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: ?????
+      value: U.F.O.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
@@ -3432,7 +3431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533350789285574075, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: ?????
+      value: SURROUNDED
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
@@ -4304,7 +4303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533350789285574075, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: ?????
+      value: DOOMSDAY
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
