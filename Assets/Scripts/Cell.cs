@@ -47,6 +47,17 @@ public class CellEditor : Editor
                 }
             }
         }
+        else if(GUILayout.Button("Esplodi"))
+        {
+            foreach(Object obj in targets)
+            {
+                CellGraphics cell = ((Cell)obj).GetComponent<CellGraphics>();
+                if(cell)
+                {
+                    cell.OnDestroyCell();
+                }
+            }
+        }
     }
 }
 
@@ -215,7 +226,7 @@ public class Cell : MonoBehaviour
         }
 
         //do only if there isn't already a turret builded on it
-        if ((turret != null && turret.IsPreview == false))
+        if (turret != null && turret.IsPreview == false)
         {
             //if can remove turret, show resources on sell + description
             if (canRemoveTurret)

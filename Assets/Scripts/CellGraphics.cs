@@ -7,6 +7,7 @@ public class CellGraphics : MonoBehaviour
     [Header("VFX")]
     [SerializeField] ParticleSystem rotationParticlePrefab = default;
     [SerializeField] AudioStruct rotationSound = default;
+    [SerializeField] GameObject explosionShaderGraph = default;
     [SerializeField] ParticleSystem explosionCellPrefab = default;
     [SerializeField] AudioStruct explosionCellSound = default;
 
@@ -72,9 +73,16 @@ public class CellGraphics : MonoBehaviour
         SoundManager.instance.Play(rotationSound.audioClip, transform.position, rotationSound.volume);
     }
 
-    void OnDestroyCell()
+    public void OnDestroyCell()
     {
-        ParticlesManager.instance.Play(explosionCellPrefab, transform.position, transform.rotation);
+        //esplosione da shader graph
+        if(explosionShaderGraph)
+        {
+            explosionShaderGraph.SetActive(false);
+            explosionShaderGraph.SetActive(true);
+        }
+
+        //ParticlesManager.instance.Play(explosionCellPrefab, transform.position, transform.rotation);
         SoundManager.instance.Play(explosionCellSound.audioClip, transform.position, explosionCellSound.volume);
 
         //do camera shake
