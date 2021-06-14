@@ -659,7 +659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8533350789285574075, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_text
-      value: DANGER
+      value: OVERHEAT
       objectReference: {fileID: 0}
     - target: {fileID: 8979991919209113023, guid: 4d9e9854c2685d24ead5645721605539, type: 3}
       propertyPath: m_AnchoredPosition.x
