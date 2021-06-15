@@ -6,6 +6,7 @@ public class GeneralConfig : ScriptableObject
 {
     [Header("General")]
     [Tooltip("Keep pressed for this time to end strategic phase")] public float TimeToEndStrategic = 1.5f;
+    [Tooltip("Keep pressed for this time to confirm build or sell turret")] public float TimeToConfirmTurret = 0.5f;
     [Tooltip("Cell selector")] public GameObject Selector;
     [Tooltip("Selector when there are more tiles selected at same time")] public GameObject MultipleSelector;
     [Tooltip("Portal to instantiate on enemy spawn")] public GameObject PortalPrefab;
@@ -13,6 +14,7 @@ public class GeneralConfig : ScriptableObject
 
     [Header("Delay Commands")]
     public float delayReleaseFinishStrategicPhase = 0.1f;
+    public float delayReleaseConfirmTurret = 0.1f;
     public float delayRotateOrSelectCell = 0.1f;
 
     [Header("Radar")]

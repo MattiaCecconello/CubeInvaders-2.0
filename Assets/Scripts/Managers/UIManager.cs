@@ -26,8 +26,9 @@ public class UIManager : MonoBehaviour
     [CanShow("changeColorText")] [SerializeField] Color colorCost = Color.red;
     [CanShow("changeColorText")] [SerializeField] Color colorSell = Color.green;
 
-    [Header("Turret Description")]
-    [SerializeField] Text turretText = default;
+    [Header("Build Mode")]
+    [SerializeField] Text turretDescriptionText = default;
+    [SerializeField] Slider holdToConfirmTurretSlider = default;
 
     [Header("Current Level")]
     [SerializeField] Text currentLevelText = default;
@@ -61,6 +62,7 @@ public class UIManager : MonoBehaviour
         SetTurretDescription(false);
         strategicCanvas.SetActive(false);
         HideWarningObject();
+        ShowHoldToConfirmTurret(false);
 
         //show default wave
         UpdateCurrentLevelText(GameManager.instance.waveManager.CurrentWave);
@@ -208,16 +210,34 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    #region turret description
+    #region build mode
 
     public void SetTurretDescription(bool active, string description = "")
     {
         //set turret description text + active or deactive
-        if (turretText)
+        if (turretDescriptionText)
         {
-            turretText.text = description;
-            turretText.gameObject.SetActive(active);
+            turretDescriptionText.text = description;
+            turretDescriptionText.gameObject.SetActive(active);
         }
+    }
+
+    public void UpdateHoldToConfirmTurret(float value)
+    {
+        if (holdToConfirmTurretSlider == null)
+            return;
+
+        //update slider
+        holdToConfirmTurretSlider.value = value;
+    }
+
+    public void ShowHoldToConfirmTurret(bool show)
+    {
+        if (holdToConfirmTurretSlider == null)
+            return;
+
+        //show or hide slider
+        holdToConfirmTurretSlider.gameObject.SetActive(show);
     }
 
     #endregion
