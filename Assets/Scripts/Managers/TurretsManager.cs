@@ -232,7 +232,7 @@ public class TurretsManager : MonoBehaviour
         //update timer
         while (timer < 1)
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime / GameManager.instance.levelManager.levelConfig.TimeBeforeDestroyTurretsOnSameFace;
 
             //update feedback
             UpdateFeedbackTurretsOnSameFace(key, timer);
