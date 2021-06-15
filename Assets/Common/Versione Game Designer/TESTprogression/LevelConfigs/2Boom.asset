@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanRecreateCell: 0
   RandomizeWorldAtStart: 1
+  StartInStrategicPhase: 1
   NumberRotations: 1
   SelectorSize: 1
   DestroyTurretWhenNoMove: 0
+  DisableInsteadOfDestroy: 1
   TurretsNeedGenerator: 0
   GeneratorActiveAllFace: 1
   LimitOfTurretsOnSameFace: 1
   TimeBeforeDestroyTurretsOnSameFace: 5
   OnlyIfSameType: 0
-  CloseLineFeedback: 1
+  line: {fileID: 1408518994515950534, guid: 1ac4076fd79dde74ba1e918ba4bbeed9, type: 3}
+  lineColorWhenExplode: {r: 1, g: 0, b: 0, a: 1}
