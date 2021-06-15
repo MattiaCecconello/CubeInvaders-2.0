@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class DestroyTurretWhenNoMove
 {
-    bool initialized;
-
     Turret turret;
     float timeBeforeDestroy;
 
@@ -23,8 +21,6 @@ public class DestroyTurretWhenNoMove
 
     public void InitTimer(Turret turret, float timeBeforeDestroy)
     {
-        initialized = true;
-
         //get references
         this.turret = turret;
         this.timeBeforeDestroy = timeBeforeDestroy;
@@ -38,14 +34,11 @@ public class DestroyTurretWhenNoMove
         //stop timer
         if (turret && timerBeforeDestroy_coroutine != null)
         {
-            turret.StopCoroutine(timerBeforeDestroy_coroutine);
+            StopTimer();
         }
 
-        //remove events only if initialized
-        if (initialized)
-        {
-            RemoveEvents();
-        }
+        //remove events
+        RemoveEvents();
     }
 
     #region events

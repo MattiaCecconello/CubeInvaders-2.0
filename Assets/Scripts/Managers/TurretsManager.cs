@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using redd096;
 
@@ -134,6 +135,179 @@ public class TurretsManager : MonoBehaviour
 
         //set previous
         previousCellsInRadar = new List<Cell>(cellsInRadar);
+    }
+
+    #endregion
+
+    #region no turrets on same face
+
+    struct KeyNoTurretsOnSameFace
+    {
+        public EFace face;
+        public BuildableObject turret;
+
+        public KeyNoTurretsOnSameFace(EFace face, BuildableObject turret)
+        {
+            this.face = face;
+            this.turret = turret;
+        }
+    }
+    Dictionary<KeyNoTurretsOnSameFace, Coroutine> timerTurretsCoroutine = new Dictionary<KeyNoTurretsOnSameFace, Coroutine>();
+    Dictionary<KeyNoTurretsOnSameFace, LineRenderer> feedbacksNoTurretsOnSameFace = new Dictionary<KeyNoTurretsOnSameFace, LineRenderer>();
+
+    List<Turret> GetOnlyTurretsOnFace(KeyNoTurretsOnSameFace key, Turret turret, bool keepTurretCalled = true)
+    {
+        //get a list of only Turrets on this face
+        List<Turret> turretsOnFace = new List<Turret>();
+        foreach (BuildableObject buildableObject in TurretsOnFace(key.face))
+        {
+            if (buildableObject is Turret)
+            {
+                //not the turret called at least parameter is true
+                if (keepTurretCalled || buildableObject != turret)
+                {
+                    if (key.turret == null                                              //be sure can be every turret
+                        || buildableObject.CellOwner.TurretToCreate == key.turret)      //or are same type
+                    {
+                        turretsOnFace.Add(buildableObject as Turret);
+                    }
+                }
+            }
+        }
+
+        return turretsOnFace;
+    }
+
+    public void TryStartTimer(Turret turret, EFace face)
+    {
+        KeyNoTurretsOnSameFace key = GameManager.instance.levelManager.levelConfig.OnlyIfSameType ?
+            new KeyNoTurretsOnSameFace(face, turret.CellOwner.TurretToCreate) :     //key for this face and this type of turret
+            new KeyNoTurretsOnSameFace(face, null);                                 //key with this face and no difference of turret
+
+        //get a list of only Turrets on this face
+        //if exceed limits on this level, start timer for this face
+        if (GetOnlyTurretsOnFace(key, turret, true).Count > GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace)
+        {
+            //stop coroutine already running, before restart
+            if(timerTurretsCoroutine.ContainsKey(key))
+            {
+                StopCoroutine(timerTurretsCoroutine[key]);
+                timerTurretsCoroutine.Remove(key);
+            }
+
+            timerTurretsCoroutine.Add(key, StartCoroutine(TimerBeforeDestroy_Coroutine(key)));
+        }
+    }
+
+    public void TryStopTimer(Turret turret, EFace face)
+    {
+        KeyNoTurretsOnSameFace key = GameManager.instance.levelManager.levelConfig.OnlyIfSameType ?
+            new KeyNoTurretsOnSameFace(face, turret.CellOwner.TurretToCreate) :     //key for this face and this type of turret
+            new KeyNoTurretsOnSameFace(face, null);                                 //key with this face and no difference of turret
+
+        //only if a coroutine is running
+        if (timerTurretsCoroutine.ContainsKey(key) == false)
+            return;
+
+        //get a list of only Turrets on this face (but not this one calling the function, because is removed or is rotating)
+        //if NOT exceed limits, stop timer on this face
+        if (GetOnlyTurretsOnFace(key, turret, false).Count <= GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace)
+        {
+            //stop coroutine already running
+            if (timerTurretsCoroutine.ContainsKey(key))
+            {
+                StopCoroutine(timerTurretsCoroutine[key]);
+                timerTurretsCoroutine.Remove(key);
+
+                //be sure to remove feedback
+                RemoveFeedbackTurretsOnSameFace(key);
+            }
+        }
+    }
+
+    IEnumerator TimerBeforeDestroy_Coroutine(KeyNoTurretsOnSameFace key)
+    {
+        float timer = 0;
+
+        //update timer
+        while (timer < 1)
+        {
+            timer += Time.deltaTime;
+
+            //update feedback
+            UpdateFeedbackTurretsOnSameFace(key, timer);
+
+            yield return null;
+        }
+
+        //when timer ends, destroy turrets on this face
+        foreach (Turret turret in GetOnlyTurretsOnFace(key, null))
+        {
+            if (turret)
+            {
+                turret.RemoveTurret();
+            }
+        }
+
+        //be sure to remove feedback
+        RemoveFeedbackTurretsOnSameFace(key);
+    }
+
+    void UpdateFeedbackTurretsOnSameFace(KeyNoTurretsOnSameFace key, float timer)
+    {
+        //be sure there is a prefab to instantiate
+        if (GameManager.instance.levelManager.levelConfig.line == null)
+            return;
+
+        //if there is no line, create one
+        if (feedbacksNoTurretsOnSameFace.ContainsKey(key) == false)
+        {
+            feedbacksNoTurretsOnSameFace.Add(key, Instantiate(GameManager.instance.levelManager.levelConfig.line));
+        }
+
+        //be sure to activate
+        feedbacksNoTurretsOnSameFace[key].gameObject.SetActive(true);
+
+        //set color and positions
+        SetColor(feedbacksNoTurretsOnSameFace[key], timer);
+        SetPositions(key);
+    }
+
+    void SetColor(LineRenderer line, float delta)
+    {
+        //change line renderer color
+        line.material.color = Color.Lerp(
+            GameManager.instance.levelManager.levelConfig.line.sharedMaterial.color,    //from prefab
+            GameManager.instance.levelManager.levelConfig.lineColorWhenExplode,         //to level config
+            delta);                                                                     //based on delta
+    }
+
+    void SetPositions(KeyNoTurretsOnSameFace key)
+    {
+        //get turrets on face
+        List<Turret> turretsOnFace = GetOnlyTurretsOnFace(key, null);
+
+        //set positions
+        feedbacksNoTurretsOnSameFace[key].positionCount = turretsOnFace.Count;
+        for(int i = 0; i < turretsOnFace.Count; i++)
+        {
+            if (turretsOnFace[i])
+            {
+                Transform linePosition = turretsOnFace[i].GetComponent<TurretGraphics>().LinePosition;
+                feedbacksNoTurretsOnSameFace[key].SetPosition(i, linePosition != null ? linePosition.position : turretsOnFace[i].transform.position);   //use line position or center of the turret
+            }
+        }
+    }
+
+    void RemoveFeedbackTurretsOnSameFace(KeyNoTurretsOnSameFace key)
+    {
+        //only if there is a line
+        if (feedbacksNoTurretsOnSameFace.ContainsKey(key) == false)
+            return;
+
+        //disable it
+        feedbacksNoTurretsOnSameFace[key].positionCount = 0;
+        feedbacksNoTurretsOnSameFace[key].gameObject.SetActive(false);
     }
 
     #endregion

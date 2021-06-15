@@ -20,6 +20,7 @@ public class BuildableObject : MonoBehaviour
     public System.Action onShowPreview;
     public System.Action onBuildTurret;
     public System.Action onFinishFirstWave;
+    public System.Action onEndRotation;
 
     protected virtual void OnEnable()
     {
@@ -55,6 +56,9 @@ public class BuildableObject : MonoBehaviour
         TryActivateTurret();
 
         GameManager.instance.turretsManager.AddTurretToDictionary(this);  //add to dictionary
+
+        //call event
+        onEndRotation?.Invoke();
     }
 
     #endregion

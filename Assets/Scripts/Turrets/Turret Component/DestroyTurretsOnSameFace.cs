@@ -1,66 +1,70 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class DestroyTurretsOnSameFace
+﻿public class DestroyTurretsOnSameFace
 {
     Turret turret;
-    float timeBeforeDestroy;
 
-    Coroutine timerBeforeDestroy_coroutine;
+    //on build turret, init this script
+    //try to start timer on this face
 
-    //when there are more turrets on same face (end rotation or build new turret), start timer (or restart if already running)
-    //when there are not too much turrets (rotate turrets on other face), stop timer
+    //on rotate, try stop timer for this face
+    //on end rotation try start timer on new face
+
+    //on remove turret, try stop timer for this face
 
     //during timer, update feedback
     //on end timer, destroy turret
 
-    public void StartTimer(Turret turret, float timeBeforeDestroy)
+    public void Init(Turret turret)
     {
         //get references
         this.turret = turret;
-        this.timeBeforeDestroy = timeBeforeDestroy;
 
-        //be sure is not already running (when restart timer)
-        StopTimer();
+        //add events
+        AddEvents();
 
-        //start timer
-        if (turret && turret.gameObject.activeInHierarchy)
-        {
-            timerBeforeDestroy_coroutine = turret.StartCoroutine(TimerBeforeDestroy_Coroutine());
-        }
+        //try start timer on this face
+        GameManager.instance.turretsManager.TryStartTimer(turret, turret.CellOwner.coordinates.face);
     }
 
-    public void StopTimer()
+    public void Remove()
     {
-        //stop timer
-        if (turret && timerBeforeDestroy_coroutine != null)
-        {
-            turret.StopCoroutine(timerBeforeDestroy_coroutine);
-        }
+        //try stop timer on this face
+        GameManager.instance.turretsManager.TryStopTimer(turret, turret.CellOwner.coordinates.face);
+
+        //remove events
+        RemoveEvents();
     }
 
-    IEnumerator TimerBeforeDestroy_Coroutine()
+    #region events
+
+    void AddEvents()
     {
-        float timer = Time.time + timeBeforeDestroy;
-
-        //wait and update timer
-        while (Time.time < timer)
-        {
-            if (turret)
-            {
-                float timeRemaining = timer - Time.time;
-                turret.updateFeedbackTurretsOnSameFace?.Invoke(1 - (timeRemaining / timeBeforeDestroy));  //EVENT from 0 to 1
-            }
-
-            yield return null;
-        }
-
-        //than remove turret
         if (turret)
         {
-            turret.RemoveTurret();
-            turret.stopTimerTurretsOnSameFace?.Invoke(turret.CellOwner.coordinates.face);                   //EVENT stop timer
+            turret.CellOwner.onWorldRotate += OnWorldRotate;
+            turret.onEndRotation += OnEndRotation;
         }
     }
+
+    void RemoveEvents()
+    {
+        if (turret)
+        {
+            turret.CellOwner.onWorldRotate -= OnWorldRotate;
+            turret.onEndRotation -= OnEndRotation;
+        }
+    }
+
+    void OnWorldRotate(Coordinates coordinates)
+    {
+        //try stop timer on this face
+        GameManager.instance.turretsManager.TryStopTimer(turret, coordinates.face);
+    }
+
+    void OnEndRotation()
+    {
+        //try start timer on this face
+        GameManager.instance.turretsManager.TryStartTimer(turret, turret.CellOwner.coordinates.face);
+    }
+
+    #endregion
 }
