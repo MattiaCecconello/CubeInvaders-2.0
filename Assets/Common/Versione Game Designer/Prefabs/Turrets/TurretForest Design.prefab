@@ -219,7 +219,7 @@ PrefabInstance:
     - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: linePosition
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2084581570054128934}
     - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: fireVFX
       value: 
@@ -382,6 +382,11 @@ Transform:
 --- !u!4 &2830213938489731141 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7588032764715299075, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 5623002573002463558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2084581570054128934 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5973181481010093152, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
   m_PrefabInstance: {fileID: 5623002573002463558}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7857129435101091472 stripped

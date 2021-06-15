@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4334ec798e7787438925ec807cfec7f, type: 3}
+  m_Name: Show12.5
+  m_EditorClassIdentifier: 
+  Waves:
+  - LevelConfig: {fileID: 11400000, guid: b91c1985d6db06443867d3feac77d586, type: 2}
+    Resources: 13
+    IgnorePreviousFacesAtSpawn: 4
+    TimeBetweenSpawns: 6
+    DistanceFromWorld: 20
+    Enemies:
+    - enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
+      enemyTimer: -6
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -6
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 3
+    - enemy: {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
+      enemyTimer: -4
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -2
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: -1
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+  - LevelConfig: {fileID: 11400000, guid: b91c1985d6db06443867d3feac77d586, type: 2}
+    Resources: 0
+    IgnorePreviousFacesAtSpawn: 4
+    TimeBetweenSpawns: 6
+    DistanceFromWorld: 20
+    Enemies:
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: -6
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: -6
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: -1
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+    - enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
+      enemyTimer: -2
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: -6
+    - enemy: {fileID: -3069633255875000771, guid: 0f568b49b437f6641838637e69948122, type: 3}
+      enemyTimer: -6
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
+  - LevelConfig: {fileID: 11400000, guid: b91c1985d6db06443867d3feac77d586, type: 2}
+    Resources: 0
+    IgnorePreviousFacesAtSpawn: 4
+    TimeBetweenSpawns: 6
+    DistanceFromWorld: 20
+    Enemies:
+    - enemy: {fileID: 4947171487554195679, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      enemyTimer: 0
